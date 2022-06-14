@@ -7,7 +7,7 @@
 
 import UIKit
 
-class LoginViewController: UIViewController {
+class ViewController: UIViewController {
 
     private lazy var loginInputView: LoginInputView = {
         let view = LoginInputView(frame: view.frame)
@@ -32,7 +32,7 @@ class LoginViewController: UIViewController {
     }
 }
 
-private extension LoginViewController {
+private extension ViewController {
     
     func setViewsConstraint() {
         view.addSubViews(titleLabel, loginInputView)
