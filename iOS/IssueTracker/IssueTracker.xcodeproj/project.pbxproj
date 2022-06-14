@@ -18,6 +18,8 @@
 		D2B7506C2856FCBE0078067A /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2B7506B2856FCBE0078067A /* ViewController.swift */; };
 		D2B750712856FCC00078067A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D2B750702856FCC00078067A /* Assets.xcassets */; };
 		D2B750742856FCC00078067A /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D2B750722856FCC00078067A /* LaunchScreen.storyboard */; };
+		D2D5264C285850A100581C88 /* LoginInputView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2D5264B285850A100581C88 /* LoginInputView.swift */; };
+		D2D5264E2858557700581C88 /* UIView+.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2D5264D2858557700581C88 /* UIView+.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -36,6 +38,8 @@
 		D2B750702856FCC00078067A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		D2B750732856FCC00078067A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		D2B750752856FCC00078067A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		D2D5264B285850A100581C88 /* LoginInputView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginInputView.swift; sourceTree = "<group>"; };
+		D2D5264D2858557700581C88 /* UIView+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -95,6 +99,8 @@
 				D2B750672856FCBE0078067A /* AppDelegate.swift */,
 				D2B750692856FCBE0078067A /* SceneDelegate.swift */,
 				D2B7506B2856FCBE0078067A /* ViewController.swift */,
+				D2D5264B285850A100581C88 /* LoginInputView.swift */,
+				D2D5264D2858557700581C88 /* UIView+.swift */,
 				D2B750702856FCC00078067A /* Assets.xcassets */,
 				D2B750722856FCC00078067A /* LaunchScreen.storyboard */,
 				D2B750752856FCC00078067A /* Info.plist */,
@@ -118,8 +124,8 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = D2B750782856FCC00078067A /* Build configuration list for PBXNativeTarget "IssueTracker" */;
 			buildPhases = (
-				B7A927C628570D2600731798 /* Run Script */,
 				54F209382EE0A7B2E07EE28E /* [CP] Check Pods Manifest.lock */,
+				B7A927C628570D2600731798 /* Run Script */,
 				D2B750602856FCBE0078067A /* Sources */,
 				D2B750612856FCBE0078067A /* Frameworks */,
 				D2B750622856FCBE0078067A /* Resources */,
@@ -234,6 +240,8 @@
 				B7E58B6B28584D1D004C6BE6 /* EndPoint.swift in Sources */,
 				B7E58B7328587482004C6BE6 /* OauthNetworkManager.swift in Sources */,
 				D2B7506A2856FCBE0078067A /* SceneDelegate.swift in Sources */,
+				D2D5264C285850A100581C88 /* LoginInputView.swift in Sources */,
+				D2D5264E2858557700581C88 /* UIView+.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
