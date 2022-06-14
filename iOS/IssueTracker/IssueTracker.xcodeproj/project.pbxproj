@@ -8,6 +8,11 @@
 
 /* Begin PBXBuildFile section */
 		597313D9E43AEAD3AEBBF089 /* Pods_IssueTracker.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A338D214445E7E813AC159EA /* Pods_IssueTracker.framework */; };
+		B7E58B6B28584D1D004C6BE6 /* EndPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7E58B6A28584D1D004C6BE6 /* EndPoint.swift */; };
+		B7E58B6D2858505A004C6BE6 /* ClientKey.plist in Resources */ = {isa = PBXBuildFile; fileRef = B7E58B6C2858505A004C6BE6 /* ClientKey.plist */; };
+		B7E58B6F28586FCE004C6BE6 /* NetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7E58B6E28586FCE004C6BE6 /* NetworkService.swift */; };
+		B7E58B7128587013004C6BE6 /* HTTPMethod.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7E58B7028587013004C6BE6 /* HTTPMethod.swift */; };
+		B7E58B7328587482004C6BE6 /* OauthNetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7E58B7228587482004C6BE6 /* OauthNetworkManager.swift */; };
 		D2B750682856FCBE0078067A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2B750672856FCBE0078067A /* AppDelegate.swift */; };
 		D2B7506A2856FCBE0078067A /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2B750692856FCBE0078067A /* SceneDelegate.swift */; };
 		D2B7506C2856FCBE0078067A /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2B7506B2856FCBE0078067A /* ViewController.swift */; };
@@ -21,6 +26,11 @@
 		881AFF5EE63650736B6FCCB8 /* Pods-IssueTracker.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-IssueTracker.debug.xcconfig"; path = "Target Support Files/Pods-IssueTracker/Pods-IssueTracker.debug.xcconfig"; sourceTree = "<group>"; };
 		A338D214445E7E813AC159EA /* Pods_IssueTracker.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_IssueTracker.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		AA124A5450ECA849D48F4413 /* Pods-IssueTracker.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-IssueTracker.release.xcconfig"; path = "Target Support Files/Pods-IssueTracker/Pods-IssueTracker.release.xcconfig"; sourceTree = "<group>"; };
+		B7E58B6A28584D1D004C6BE6 /* EndPoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EndPoint.swift; sourceTree = "<group>"; };
+		B7E58B6C2858505A004C6BE6 /* ClientKey.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = ClientKey.plist; sourceTree = "<group>"; };
+		B7E58B6E28586FCE004C6BE6 /* NetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkService.swift; sourceTree = "<group>"; };
+		B7E58B7028587013004C6BE6 /* HTTPMethod.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPMethod.swift; sourceTree = "<group>"; };
+		B7E58B7228587482004C6BE6 /* OauthNetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OauthNetworkManager.swift; sourceTree = "<group>"; };
 		D2B750642856FCBE0078067A /* IssueTracker.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = IssueTracker.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D2B750672856FCBE0078067A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		D2B750692856FCBE0078067A /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -53,6 +63,17 @@
 			path = Pods;
 			sourceTree = "<group>";
 		};
+		B7E58B6928584D0C004C6BE6 /* Network */ = {
+			isa = PBXGroup;
+			children = (
+				B7E58B6A28584D1D004C6BE6 /* EndPoint.swift */,
+				B7E58B6E28586FCE004C6BE6 /* NetworkService.swift */,
+				B7E58B7028587013004C6BE6 /* HTTPMethod.swift */,
+				B7E58B7228587482004C6BE6 /* OauthNetworkManager.swift */,
+			);
+			path = Network;
+			sourceTree = "<group>";
+		};
 		D2B7505B2856FCBE0078067A = {
 			isa = PBXGroup;
 			children = (
@@ -74,6 +95,7 @@
 		D2B750662856FCBE0078067A /* IssueTracker */ = {
 			isa = PBXGroup;
 			children = (
+				B7E58B6928584D0C004C6BE6 /* Network */,
 				D2B750672856FCBE0078067A /* AppDelegate.swift */,
 				D2B750692856FCBE0078067A /* SceneDelegate.swift */,
 				D2B7506B2856FCBE0078067A /* ViewController.swift */,
@@ -82,6 +104,7 @@
 				D2B750702856FCC00078067A /* Assets.xcassets */,
 				D2B750722856FCC00078067A /* LaunchScreen.storyboard */,
 				D2B750752856FCC00078067A /* Info.plist */,
+				B7E58B6C2858505A004C6BE6 /* ClientKey.plist */,
 			);
 			path = IssueTracker;
 			sourceTree = "<group>";
@@ -154,6 +177,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B7E58B6D2858505A004C6BE6 /* ClientKey.plist in Resources */,
 				D2B750742856FCC00078067A /* LaunchScreen.storyboard in Resources */,
 				D2B750712856FCC00078067A /* Assets.xcassets in Resources */,
 			);
@@ -209,8 +233,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B7E58B6F28586FCE004C6BE6 /* NetworkService.swift in Sources */,
 				D2B7506C2856FCBE0078067A /* ViewController.swift in Sources */,
+				B7E58B7128587013004C6BE6 /* HTTPMethod.swift in Sources */,
 				D2B750682856FCBE0078067A /* AppDelegate.swift in Sources */,
+				B7E58B6B28584D1D004C6BE6 /* EndPoint.swift in Sources */,
+				B7E58B7328587482004C6BE6 /* OauthNetworkManager.swift in Sources */,
 				D2B7506A2856FCBE0078067A /* SceneDelegate.swift in Sources */,
 				D2D5264C285850A100581C88 /* LoginInputView.swift in Sources */,
 				D2D5264E2858557700581C88 /* UIView+.swift in Sources */,
