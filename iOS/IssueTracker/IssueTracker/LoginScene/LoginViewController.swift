@@ -7,15 +7,8 @@
 
 import UIKit
 
-class ViewController: UIViewController {
+class LoginViewController: UIViewController {
 
-    private lazy var loginInputView: LoginInputView = {
-        let view = LoginInputView(frame: view.frame)
-        view.translatesAutoresizingMaskIntoConstraints = false
-        
-        return view
-    }()
-    
     private let titleLabel: UILabel = {
         let label = UILabel()
         label.font = .italicSystemFont(ofSize: 48)
@@ -25,6 +18,20 @@ class ViewController: UIViewController {
         return label
     }()
     
+    private lazy var loginInputView: LoginInputView = {
+        let view = LoginInputView(frame: view.frame)
+        view.translatesAutoresizingMaskIntoConstraints = false
+        
+        return view
+    }()
+    
+    private lazy var oauthLoginView: OAuthLoginView = {
+        let view = OAuthLoginView(frame: view.frame)
+        view.translatesAutoresizingMaskIntoConstraints = false
+        
+        return view
+    }()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = UIColor(red: 0.898, green: 0.898, blue: 0.898, alpha: 1)
@@ -32,10 +39,10 @@ class ViewController: UIViewController {
     }
 }
 
-private extension ViewController {
+private extension LoginViewController {
     
     func setViewsConstraint() {
-        view.addSubViews(titleLabel, loginInputView)
+        view.addSubViews(titleLabel, loginInputView, oauthLoginView)
         
         NSLayoutConstraint.activate([
             titleLabel.centerXAnchor.constraint(equalTo: self.view.centerXAnchor),
@@ -45,7 +52,12 @@ private extension ViewController {
             loginInputView.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 72),
             loginInputView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor),
             loginInputView.trailingAnchor.constraint(equalTo: self.view.trailingAnchor),
-            loginInputView.heightAnchor.constraint(equalToConstant: self.view.frame.height * 0.2)
+            loginInputView.heightAnchor.constraint(equalToConstant: self.view.frame.height * 0.2),
+            
+            oauthLoginView.topAnchor.constraint(equalTo: loginInputView.bottomAnchor),
+            oauthLoginView.bottomAnchor.constraint(equalTo: self.view.bottomAnchor),
+            oauthLoginView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor),
+            oauthLoginView.trailingAnchor.constraint(equalTo: self.view.trailingAnchor)
         ])
     }
 }
