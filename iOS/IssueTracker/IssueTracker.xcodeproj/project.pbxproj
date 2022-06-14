@@ -95,8 +95,8 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = D2B750782856FCC00078067A /* Build configuration list for PBXNativeTarget "IssueTracker" */;
 			buildPhases = (
-				B7A927C628570D2600731798 /* Run Script */,
 				54F209382EE0A7B2E07EE28E /* [CP] Check Pods Manifest.lock */,
+				B7A927C628570D2600731798 /* Run Script */,
 				D2B750602856FCBE0078067A /* Sources */,
 				D2B750612856FCBE0078067A /* Frameworks */,
 				D2B750622856FCBE0078067A /* Resources */,
