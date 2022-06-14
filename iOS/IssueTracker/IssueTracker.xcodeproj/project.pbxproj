@@ -22,6 +22,7 @@
 		D2D5264E2858557700581C88 /* UIView+.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2D5264D2858557700581C88 /* UIView+.swift */; };
 		D2D5265528588B3A00581C88 /* OAuthLoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2D5265428588B3A00581C88 /* OAuthLoginView.swift */; };
 		D2D526592858CF5000581C88 /* UIImage+.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2D526582858CF5000581C88 /* UIImage+.swift */; };
+		D2D5265E2858D98400581C88 /* OAuthLoginButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2D5265D2858D98400581C88 /* OAuthLoginButton.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -44,6 +45,7 @@
 		D2D5264D2858557700581C88 /* UIView+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+.swift"; sourceTree = "<group>"; };
 		D2D5265428588B3A00581C88 /* OAuthLoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OAuthLoginView.swift; sourceTree = "<group>"; };
 		D2D526582858CF5000581C88 /* UIImage+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+.swift"; sourceTree = "<group>"; };
+		D2D5265D2858D98400581C88 /* OAuthLoginButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OAuthLoginButton.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -115,9 +117,8 @@
 		D2D5265128588A1000581C88 /* LoginScene */ = {
 			isa = PBXGroup;
 			children = (
+				D2D5265F2858DB6100581C88 /* View */,
 				D2B7506B2856FCBE0078067A /* LoginViewController.swift */,
-				D2D5264B285850A100581C88 /* LoginInputView.swift */,
-				D2D5265428588B3A00581C88 /* OAuthLoginView.swift */,
 			);
 			path = LoginScene;
 			sourceTree = "<group>";
@@ -129,6 +130,16 @@
 				D2D526582858CF5000581C88 /* UIImage+.swift */,
 			);
 			path = Extension;
+			sourceTree = "<group>";
+		};
+		D2D5265F2858DB6100581C88 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				D2D5264B285850A100581C88 /* LoginInputView.swift */,
+				D2D5265428588B3A00581C88 /* OAuthLoginView.swift */,
+				D2D5265D2858D98400581C88 /* OAuthLoginButton.swift */,
+			);
+			path = View;
 			sourceTree = "<group>";
 		};
 		E2FB1D76746F812B8F6700CC /* Frameworks */ = {
@@ -262,6 +273,7 @@
 				D2D5265528588B3A00581C88 /* OAuthLoginView.swift in Sources */,
 				B7E58B6B28584D1D004C6BE6 /* EndPoint.swift in Sources */,
 				B7E58B7328587482004C6BE6 /* OauthNetworkManager.swift in Sources */,
+				D2D5265E2858D98400581C88 /* OAuthLoginButton.swift in Sources */,
 				D2B7506A2856FCBE0078067A /* SceneDelegate.swift in Sources */,
 				D2D526592858CF5000581C88 /* UIImage+.swift in Sources */,
 				D2D5264C285850A100581C88 /* LoginInputView.swift in Sources */,
