@@ -6,39 +6,75 @@
 //
 
 import Foundation
-enum Authentication {
-    static let clientID = "d"
-    static let scope = "d"
+
+protocol Authenticatable {
+    static var host: String {get}
+    static var path: String {get}
+    static var clientID: String {get}
+}
+enum GitAuthentication: Authenticatable {
+
+    static var host = "github.com"
+
+    static var path = "/login/oauth/authorize"
+
+    static var clientID: String {
+        guard let filePath = Bundle.main.path(forResource: "ClientKey", ofType: "plist") else {return
+            ""}
+
+        let plist = NSDictionary(contentsOfFile: filePath)
+
+        guard let value = plist?.object(forKey: "gitClient_ID") as? String else {return
+            ""}
+        return value
+    }
+}
+
+enum AppleAuthentication: Authenticatable {
+
+    static var host = "github.com"
+
+    static var path = "/login/oauth/"
+
+    static var clientID: String {
+        guard let filePath = Bundle.main.path(forResource: "ClientKey", ofType: "plist") else {return
+            ""}
+
+        let plist = NSDictionary(contentsOfFile: filePath)
+
+        guard let value = plist?.object(forKey: "appleClient_ID") as? String else {return
+            ""}
+        return value
+    }
 }
 
 protocol EndPoint {
-    associatedtype Item
-    var path: String {get}
     var queryItems: [URLQueryItem] {get}
     var url: URL {get}
     static func getFullPath() -> Self
 }
 
-struct OauthEndPoint: EndPoint {
-    typealias Item = Authentication
-    var path: String
+struct OauthEndPoint<Authentication: Authenticatable>: EndPoint {
+
     var queryItems: [URLQueryItem]
     var url: URL {
         var components = URLComponents()
         components.scheme = "https"
-        components.host = "github.com"
-        components.path = "login/oauth/" + path
+        components.host = Authentication.host
+        components.path = Authentication.path
         components.queryItems = queryItems
         guard let url = components.url else {
             preconditionFailure("Invalid URL components: \(components)"
             )}
         return url
     }
+
 }
 
 extension OauthEndPoint {
+
     static func getFullPath() -> OauthEndPoint {
-        return OauthEndPoint(path: "authorize", queryItems: [URLQueryItem(name: "client_id", value: "\(Item.clientID)"),
-                                                             URLQueryItem(name: "scope", value: "\(Item.scope)")])
+        return OauthEndPoint(queryItems: [URLQueryItem(name: "client_id", value: "\(Authentication.clientID)")])
     }
+
 }
