@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		597313D9E43AEAD3AEBBF089 /* Pods_IssueTracker.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A338D214445E7E813AC159EA /* Pods_IssueTracker.framework */; };
+		B71A0A01285981980030D3ED /* NotificationCenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = B71A0A00285981980030D3ED /* NotificationCenter.swift */; };
 		B7E58B6B28584D1D004C6BE6 /* EndPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7E58B6A28584D1D004C6BE6 /* EndPoint.swift */; };
 		B7E58B6D2858505A004C6BE6 /* ClientKey.plist in Resources */ = {isa = PBXBuildFile; fileRef = B7E58B6C2858505A004C6BE6 /* ClientKey.plist */; };
 		B7E58B6F28586FCE004C6BE6 /* NetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7E58B6E28586FCE004C6BE6 /* NetworkService.swift */; };
@@ -30,6 +31,7 @@
 		881AFF5EE63650736B6FCCB8 /* Pods-IssueTracker.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-IssueTracker.debug.xcconfig"; path = "Target Support Files/Pods-IssueTracker/Pods-IssueTracker.debug.xcconfig"; sourceTree = "<group>"; };
 		A338D214445E7E813AC159EA /* Pods_IssueTracker.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_IssueTracker.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		AA124A5450ECA849D48F4413 /* Pods-IssueTracker.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-IssueTracker.release.xcconfig"; path = "Target Support Files/Pods-IssueTracker/Pods-IssueTracker.release.xcconfig"; sourceTree = "<group>"; };
+		B71A0A00285981980030D3ED /* NotificationCenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationCenter.swift; sourceTree = "<group>"; };
 		B7E58B6A28584D1D004C6BE6 /* EndPoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EndPoint.swift; sourceTree = "<group>"; };
 		B7E58B6C2858505A004C6BE6 /* ClientKey.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = ClientKey.plist; sourceTree = "<group>"; };
 		B7E58B6E28586FCE004C6BE6 /* NetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkService.swift; sourceTree = "<group>"; };

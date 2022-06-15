@@ -11,19 +11,12 @@ class OauthNetworkManager {
     var endPoint: EndPoint
     var networkService: OauthNetworkService
 
-    init(endPoint: EndPoint, networkService: OauthNetworkService){
+    init(endPoint: OauthEndPoint<GitAuthentication>, serivce: OauthNetworkService) {
         self.endPoint = endPoint
-        self.networkService = networkService
+        self.networkService = serivce
     }
 
-//    func enquireForeGrant() -> String {
-//        
-//        let url = endPoint.url
-//        
-//        networkService
-//    }
-
+    func enquireForGrant(handler: @escaping (_ url: URL) -> Void) {
+       handler(endPoint.url)
+    }
 }
-
-
-

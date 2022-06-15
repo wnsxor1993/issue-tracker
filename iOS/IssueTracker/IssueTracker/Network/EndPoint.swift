@@ -51,12 +51,11 @@ enum AppleAuthentication: Authenticatable {
 protocol EndPoint {
     var queryItems: [URLQueryItem] {get}
     var url: URL {get}
-    static func getFullPath() -> Self
 }
 
 struct OauthEndPoint<Authentication: Authenticatable>: EndPoint {
 
-    var queryItems: [URLQueryItem]
+    var queryItems: [URLQueryItem] = [URLQueryItem(name: "client_id", value: "\(Authentication.clientID)")]
     var url: URL {
         var components = URLComponents()
         components.scheme = "https"
@@ -68,13 +67,4 @@ struct OauthEndPoint<Authentication: Authenticatable>: EndPoint {
             )}
         return url
     }
-
-}
-
-extension OauthEndPoint {
-
-    static func getFullPath() -> OauthEndPoint {
-        return OauthEndPoint(queryItems: [URLQueryItem(name: "client_id", value: "\(Authentication.clientID)")])
-    }
-
 }
