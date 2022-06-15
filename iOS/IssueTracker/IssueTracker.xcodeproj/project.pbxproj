@@ -25,6 +25,7 @@
 		D2D526592858CF5000581C88 /* UIImage+.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2D526582858CF5000581C88 /* UIImage+.swift */; };
 		D2D5265E2858D98400581C88 /* OAuthLoginButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2D5265D2858D98400581C88 /* OAuthLoginButton.swift */; };
 		D2D526612858DF7B00581C88 /* UIColor+.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2D526602858DF7B00581C88 /* UIColor+.swift */; };
+		D2D526632859A65600581C88 /* OAuthButtonDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2D526622859A65600581C88 /* OAuthButtonDelegate.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -50,6 +51,8 @@
 		D2D526582858CF5000581C88 /* UIImage+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+.swift"; sourceTree = "<group>"; };
 		D2D5265D2858D98400581C88 /* OAuthLoginButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OAuthLoginButton.swift; sourceTree = "<group>"; };
 		D2D526602858DF7B00581C88 /* UIColor+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+.swift"; sourceTree = "<group>"; };
+		D2D526622859A65600581C88 /* OAuthButtonDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OAuthButtonDelegate.swift; sourceTree = "<group>"; };
+		D2D526642859AA9D00581C88 /* IssueTracker.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = IssueTracker.entitlements; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -105,6 +108,7 @@
 		D2B750662856FCBE0078067A /* IssueTracker */ = {
 			isa = PBXGroup;
 			children = (
+				D2D526642859AA9D00581C88 /* IssueTracker.entitlements */,
 				D2D5265128588A1000581C88 /* LoginScene */,
 				B7E58B6928584D0C004C6BE6 /* Network */,
 				D2D5265A2858D4C000581C88 /* Extension */,
@@ -144,6 +148,7 @@
 				D2D5264B285850A100581C88 /* LoginInputView.swift */,
 				D2D5265428588B3A00581C88 /* OAuthLoginView.swift */,
 				D2D5265D2858D98400581C88 /* OAuthLoginButton.swift */,
+				D2D526622859A65600581C88 /* OAuthButtonDelegate.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -280,6 +285,7 @@
 				B7E58B6B28584D1D004C6BE6 /* EndPoint.swift in Sources */,
 				B7E58B7328587482004C6BE6 /* OauthNetworkManager.swift in Sources */,
 				D2D5265E2858D98400581C88 /* OAuthLoginButton.swift in Sources */,
+				D2D526632859A65600581C88 /* OAuthButtonDelegate.swift in Sources */,
 				D2B7506A2856FCBE0078067A /* SceneDelegate.swift in Sources */,
 				B71A0A032859B8FF0030D3ED /* NotificationCenter.swift in Sources */,
 				D2D526592858CF5000581C88 /* UIImage+.swift in Sources */,
@@ -423,6 +429,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = IssueTracker/IssueTracker.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = B3PWYBKFUK;
@@ -452,6 +459,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = IssueTracker/IssueTracker.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = B3PWYBKFUK;

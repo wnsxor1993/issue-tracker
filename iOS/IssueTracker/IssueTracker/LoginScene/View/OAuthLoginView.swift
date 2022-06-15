@@ -9,6 +9,8 @@ import UIKit
 
 class OAuthLoginView: UIView {
     
+    var delegate: OAuthButtonDelegate?
+    
     private let githubLoginButton: OAuthLoginButton = {
         let button = OAuthLoginButton()
         button.setImageWithTitle(imageName: .gitImage, title: .gitTitle)
@@ -27,6 +29,7 @@ class OAuthLoginView: UIView {
         super.init(frame: frame)
         backgroundColor = .clear
         setConstraints()
+        setOAuthButtonAction()
     }
 
     @available(*, unavailable)
@@ -51,5 +54,32 @@ private extension OAuthLoginView {
             githubLoginButton.bottomAnchor.constraint(equalTo: appleLoginButton.topAnchor, constant: -14),
             githubLoginButton.heightAnchor.constraint(equalToConstant: 56)
         ])
+    }
+    
+    func setOAuthButtonAction() {
+        let appleAction = UIAction(handler: { _ in
+            self.delegate?.didClickAppleButton()
+        })
+        let gitHubAction = UIAction(handler: { _ in
+            self.delegate?.didClickGitHubButton()
+        })
+        
+        if #available(iOS 14.0, *) {
+            appleLoginButton.addAction(appleAction, for: .touchDown)
+            githubLoginButton.addAction(gitHubAction, for: .touchDown)
+        } else {
+            appleLoginButton.addTarget(self, action: #selector(touchedAppleButton), for: .touchDown)
+            githubLoginButton.addTarget(self, action: #selector(touchedGitHubButton), for: .touchDown)
+        }
+    }
+    
+    @objc
+    func touchedAppleButton() {
+        self.delegate?.didClickAppleButton()
+    }
+    
+    @objc
+    func touchedGitHubButton() {
+        self.delegate?.didClickGitHubButton()
     }
 }
