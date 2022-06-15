@@ -67,11 +67,15 @@ extension LoginViewController: ASAuthorizationControllerDelegate {
             let fullName = appleIDCredential.fullName
             let email = appleIDCredential.email
             
-            print("userIdentifier: \(userIdentifier), name: \(String(describing: fullName)), email: \(String(describing: email))")
+            // apple 로그인 성공 관련 로직 필요
             
         default:
             break
         }
+    }
+    
+    func authorizationController(controller: ASAuthorizationController, didCompleteWithError error: Error) {
+        // apple 로그인 실패 관련 로직 필요
     }
 }
 
