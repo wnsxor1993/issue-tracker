@@ -56,21 +56,29 @@ private extension OAuthLoginView {
     }
     
     func setOAuthButtonAction() {
-        let uiAction = UIAction(handler: { _ in
-            self.delegate?.didClickButton()
+        let appleAction = UIAction(handler: { _ in
+            self.delegate?.didClickAppleButton()
+        })
+        let gitHubAction = UIAction(handler: { _ in
+            self.delegate?.didClickGitHubButton()
         })
         
         if #available(iOS 14.0, *) {
-            appleLoginButton.addAction(uiAction, for: .touchDown)
-            githubLoginButton.addAction(uiAction, for: .touchDown)
+            appleLoginButton.addAction(appleAction, for: .touchDown)
+            githubLoginButton.addAction(gitHubAction, for: .touchDown)
         } else {
-            appleLoginButton.addTarget(self, action: #selector(touchedOAuthButton), for: .touchDown)
-            githubLoginButton.addTarget(self, action: #selector(touchedOAuthButton), for: .touchDown)
+            appleLoginButton.addTarget(self, action: #selector(touchedAppleButton), for: .touchDown)
+            githubLoginButton.addTarget(self, action: #selector(touchedGitHubButton), for: .touchDown)
         }
     }
     
     @objc
-    func touchedOAuthButton() {
-        self.delegate?.didClickButton()
+    func touchedAppleButton() {
+        self.delegate?.didClickAppleButton()
+    }
+    
+    @objc
+    func touchedGitHubButton() {
+        self.delegate?.didClickGitHubButton()
     }
 }

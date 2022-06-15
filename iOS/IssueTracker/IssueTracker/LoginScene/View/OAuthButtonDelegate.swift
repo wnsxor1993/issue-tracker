@@ -8,5 +8,6 @@
 import Foundation
 
 protocol OAuthButtonDelegate {
-    func didClickButton()
+    func didClickGitHubButton()
+    func didClickAppleButton()
 }
