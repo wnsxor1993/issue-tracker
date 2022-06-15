@@ -4,5 +4,7 @@
 <dict>
 	<key>gitClient_ID</key>
 	<string>9f97f370efb1f931a165</string>
+	<key>gitClient_Secrete</key>
+	<string>cc90c06abbdd942e52fb85702dd96289d257cc84</string>
 </dict>
 </plist>
