@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import AuthenticationServices
 
 class LoginViewController: UIViewController {
 
@@ -36,6 +37,54 @@ class LoginViewController: UIViewController {
         super.viewDidLoad()
         view.backgroundColor = .loginBackground
         setViewsConstraint()
+        oauthLoginView.delegate = self
+    }
+}
+
+extension LoginViewController: OAuthButtonDelegate {
+    func didClickGitHubButton() {
+        
+    }
+    
+    func didClickAppleButton() {
+        let appleIDProvider = ASAuthorizationAppleIDProvider()
+        let request = appleIDProvider.createRequest()
+        request.requestedScopes = [.fullName, .email]
+        
+        let authorizationController = ASAuthorizationController(authorizationRequests: [request])
+        authorizationController.delegate = self
+        authorizationController.presentationContextProvider = self
+        authorizationController.performRequests()
+    }
+}
+
+extension LoginViewController: ASAuthorizationControllerDelegate {
+    
+    func authorizationController(controller: ASAuthorizationController, didCompleteWithAuthorization authorization: ASAuthorization) {
+        switch authorization.credential {
+        case let appleIDCredential as ASAuthorizationAppleIDCredential:
+            let userIdentifier = appleIDCredential.user
+            let fullName = appleIDCredential.fullName
+            let email = appleIDCredential.email
+            
+            // apple 로그인 성공 관련 로직 필요
+            
+        default:
+            break
+        }
+    }
+    
+    func authorizationController(controller: ASAuthorizationController, didCompleteWithError error: Error) {
+        // apple 로그인 실패 관련 로직 필요
+    }
+}
+
+extension LoginViewController: ASAuthorizationControllerPresentationContextProviding {
+    
+    func presentationAnchor(for controller: ASAuthorizationController) -> ASPresentationAnchor {
+        guard let returnWindow = self.view.window else { return ASPresentationAnchor() }
+        
+        return returnWindow
     }
 }
 
