@@ -11,6 +11,8 @@ protocol Authenticatable {
     static var host: String {get}
     static var path: String {get}
     static var clientID: String {get}
+    static var clientSecrete: String {get}
+
 }
 
 enum GitAuthentication: Authenticatable {
@@ -26,6 +28,17 @@ enum GitAuthentication: Authenticatable {
         let plist = NSDictionary(contentsOfFile: filePath)
 
         guard let value = plist?.object(forKey: "gitClient_ID") as? String else {return
+            ""}
+        return value
+    }
+
+    static var clientSecrete: String {
+        guard let filePath = Bundle.main.path(forResource: "ClientKey", ofType: "plist") else {return
+            ""}
+
+        let plist = NSDictionary(contentsOfFile: filePath)
+
+        guard let value = plist?.object(forKey: "gitClient_Secrete") as? String else {return
             ""}
         return value
     }

@@ -44,7 +44,7 @@ class LoginViewController: UIViewController {
 
 //MARK: GitOath
 private extension LoginViewController {
-    
+
     private func setNotificationObserver() {
         NotificationCenter.default.addObserver(self, selector: #selector(didRecieveGrandCode(notification:)), name: .recievedGrantCode, object: nil)
     }
@@ -54,13 +54,13 @@ private extension LoginViewController {
         //TODO: Network Manager request to server for token
         print("grant code : \(grantCode)")
     }
-    
+
     enum ResourceServer {
         case gitHub
         case apple
     }
 
-    private func proceedOauthLogin(for resourceServer : ResourceServer) {
+    private func proceedOauthLogin(for resourceServer: ResourceServer) {
         switch resourceServer {
         case .gitHub:
             oauthNetworkManager.enquireForGrant { url in
