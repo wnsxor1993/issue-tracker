@@ -11,7 +11,7 @@ class OauthNetworkManager {
     var endPoint: EndPoint
     var networkService: OauthNetworkService
 
-    init(endPoint: OauthEndPoint<GitAuthentication>, serivce: OauthNetworkService) {
+    init(endPoint: EndPoint, serivce: OauthNetworkService) {
         self.endPoint = endPoint
         self.networkService = serivce
     }
