@@ -64,7 +64,7 @@ class LoginInputView: UIView {
     private let loginButton: UIButton = {
         let button = UIButton()
         button.setTitle("로그인", for: .normal)
-        button.setTitleColor(UIColor(red: 0, green: 0.478, blue: 1, alpha: 1), for: .normal)
+        button.setTitleColor(UIColor.logSignInButton, for: .normal)
         button.titleLabel?.font = .systemFont(ofSize: 16, weight: .semibold)
         button.titleLabel?.textAlignment = .center
         button.translatesAutoresizingMaskIntoConstraints = false
@@ -75,7 +75,7 @@ class LoginInputView: UIView {
     private let signupButton: UIButton = {
         let button = UIButton()
         button.setTitle("회원가입", for: .normal)
-        button.setTitleColor(UIColor(red: 0, green: 0.478, blue: 1, alpha: 1), for: .normal)
+        button.setTitleColor(UIColor.logSignInButton, for: .normal)
         button.titleLabel?.font = .systemFont(ofSize: 16, weight: .semibold)
         button.titleLabel?.textAlignment = .center
         button.translatesAutoresizingMaskIntoConstraints = false
