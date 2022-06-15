@@ -39,16 +39,18 @@ class LoginViewController: UIViewController {
         super.viewDidLoad()
         view.backgroundColor = .loginBackground
         setViewsConstraint()
-
         setNotificationObserver()
-
         oauthLoginView.delegate = self
     }
 }
 
 extension LoginViewController: OAuthButtonDelegate {
     func didClickGitHubButton() {
-        
+        oauthNetworkManager.enquireForGrant { url in
+            if UIApplication.shared.canOpenURL(url) {
+                UIApplication.shared.open(url)
+            }
+        }
     }
     
     func didClickAppleButton() {
@@ -104,29 +106,7 @@ private extension LoginViewController {
     @objc func didRecieveGrandCode(notification: Notification) {
         guard var grantCode = notification.userInfo?[NotificationKey.grantCode]as? String else {return}
         //TODO: Network Manager request to server for token
-        print("grant code : \(grantCode)")
     }
-
-    enum ResourceServer {
-        case gitHub
-        case apple
-    }
-
-    private func proceedOauthLogin(for resourceServer: ResourceServer) {
-        switch resourceServer {
-        case .gitHub:
-            oauthNetworkManager.enquireForGrant { url in
-                if UIApplication.shared.canOpenURL(url) {
-                    UIApplication.shared.open(url)
-                }
-            }
-        case .apple:
-            //TODO: appl Oauth
-            break
-        }
-    }
-
-
 }
 
 
