@@ -9,6 +9,8 @@ import UIKit
 
 class LoginViewController: UIViewController {
 
+    private let oauthNetworkManager = OauthNetworkManager(endPoint: OauthEndPoint<GitAuthentication>(), serivce: OauthNetworkService())
+    
     private let titleLabel: UILabel = {
         let label = UILabel()
         label.font = .italicSystemFont(ofSize: 48)
@@ -28,7 +30,7 @@ class LoginViewController: UIViewController {
     private lazy var oauthLoginView: OAuthLoginView = {
         let view = OAuthLoginView(frame: view.frame)
         view.translatesAutoresizingMaskIntoConstraints = false
-        
+
         return view
     }()
     
@@ -36,8 +38,47 @@ class LoginViewController: UIViewController {
         super.viewDidLoad()
         view.backgroundColor = .loginBackground
         setViewsConstraint()
+        setNotificationObserver()
     }
 }
+
+//MARK: GitOath
+private extension LoginViewController {
+    
+    private func setNotificationObserver() {
+        NotificationCenter.default.addObserver(self, selector: #selector(didRecieveGrandCode(notification:)), name: .recievedGrantCode, object: nil)
+    }
+    
+    @objc func didRecieveGrandCode(notification: Notification) {
+        guard var grantCode = notification.userInfo?[NotificationKey.grantCode]as? String else {return}
+        //TODO: Network Manager request to server for token
+        print("grant code : \(grantCode)")
+    }
+    
+    enum ResourceServer {
+        case gitHub
+        case apple
+    }
+
+    private func proceedOauthLogin(for resourceServer : ResourceServer) {
+        switch resourceServer {
+        case .gitHub:
+            oauthNetworkManager.enquireForGrant { url in
+                if UIApplication.shared.canOpenURL(url) {
+                    UIApplication.shared.open(url)
+                }
+            }
+        case .apple:
+            //TODO: appl Oauth
+            break
+        }
+    }
+
+
+}
+
+
+
 
 private extension LoginViewController {
     
