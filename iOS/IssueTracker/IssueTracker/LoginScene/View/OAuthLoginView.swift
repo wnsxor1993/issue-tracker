@@ -29,6 +29,7 @@ class OAuthLoginView: UIView {
         super.init(frame: frame)
         backgroundColor = .clear
         setConstraints()
+        setOAuthButtonAction()
     }
 
     @available(*, unavailable)
