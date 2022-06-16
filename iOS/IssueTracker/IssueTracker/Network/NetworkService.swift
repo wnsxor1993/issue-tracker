@@ -22,9 +22,9 @@ protocol NetworkService {
 }
 
 struct OauthNetworkService: NetworkService {
-    
+
     typealias Model = String
-    
+
     func request(url: URL, method: HTTPMethod, encodedData: Data?, completion: @escaping CompletionHandler) {
         URLSession.shared.dataTask(with: url) { (data, response, error) in
             if let error = error {
