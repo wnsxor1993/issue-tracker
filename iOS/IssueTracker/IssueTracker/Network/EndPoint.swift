@@ -7,12 +7,14 @@
 
 import Foundation
 
-protocol Authenticatable {
-    static var host: String {get}
-    static var path: String {get}
-    static var clientID: String? {get}
-    static var clientSecrete: String? {get}
+protocol URLConfigurable {
+    var host: String {get}
+    var path: String {get}
+}
 
+protocol Authenticatable: URLConfigurable {
+    var clientID: String? {get}
+    var clientSecrete: String? {get}
 }
 
 extension Bundle {
@@ -26,18 +28,17 @@ extension Bundle {
 
 }
 
-enum GitAuthentication: Authenticatable {
+struct GitAuthentication: Authenticatable {
 
-    static var host = "github.com"
+    var host = "github.com"
+    var path = "/login/oauth/authorize"
 
-    static var path = "/login/oauth/authorize"
-
-    static var clientID: String? {
+    var clientID: String? {
         guard let clientID = Bundle.searchObject(from: "ClientKey", key: "gitClient_ID") else {return nil}
         return clientID
     }
 
-    static var clientSecrete: String? {
+    var clientSecrete: String? {
         guard let clientSecrete = Bundle.searchObject(from: "ClientKey", key: "gitClient_Secrete") else {return nil}
         return clientSecrete
     }
@@ -48,21 +49,27 @@ protocol EndPoint {
     var url: URL {get}
 }
 
-struct OauthEndPoint<Authentication: Authenticatable>: EndPoint {
+struct OauthEndPoint: EndPoint {
+
+    let urlConfigure: URLConfigurable
 
     var queryItems: [URLQueryItem]? {
-        guard let clientID =  Authentication.clientID else {return nil}
+        guard let authenticatable =  urlConfigure as? Authenticatable, let clientID = authenticatable.clientID else {return nil}
         return [URLQueryItem(name: "client_id", value: "\(clientID)")]
     }
     var url: URL {
         var components = URLComponents()
         components.scheme = "https"
-        components.host = Authentication.host
-        components.path = Authentication.path
+        components.host = urlConfigure.host
+        components.path = urlConfigure.path
         components.queryItems = queryItems
         guard let url = components.url else {
             preconditionFailure("Invalid URL components: \(components)"
             )}
         return url
+    }
+
+    init(urlConfigure: URLConfigurable) {
+        self.urlConfigure = urlConfigure
     }
 }
