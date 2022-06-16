@@ -7,19 +7,6 @@
 
 import Foundation
 
-enum NetworkError: Error {
-    case transportError(Error)
-    case serverError(statusCode: Int)
-    case noData
-    case decodingError(Error)
-    case encodingError(Error)
-}
-
-protocol NetworkServiceable {
-    typealias CompletionHandler = (Result<Data, NetworkError>) -> Void
-    static func request(endPoint: EndPoint, completion: @escaping CompletionHandler)
-}
-
 struct NetworkService: NetworkServiceable {
 
     static func request(endPoint: EndPoint, completion: @escaping CompletionHandler) {
