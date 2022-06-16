@@ -38,7 +38,7 @@ class OAuthLoginButton: UIButton {
     }
     
     func setImageWithTitle(imageName: ButtonImage, title: ButtonTitle) {
-        let image = UIImage(named: imageName.getRawValue())?.resizeImage(height: 24)
+        let image = UIImage(named: imageName.getRawValue())?.resizeWithHeighScale(height: 24)
         self.setTitle(title.getRawValue(), for: .normal)
         self.setImage(image, for: .normal)
     }
