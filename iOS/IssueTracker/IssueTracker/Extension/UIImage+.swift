@@ -8,7 +8,7 @@
 import UIKit
 
 extension UIImage {
-    func resizeImage(height: CGFloat) -> UIImage? {
+    func resizeWithHeighScale(height: CGFloat) -> UIImage? {
         let scale = height / self.size.height
         let width = self.size.width * scale
         
