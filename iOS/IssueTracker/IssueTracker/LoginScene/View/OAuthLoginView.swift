@@ -40,19 +40,25 @@ class OAuthLoginView: UIView {
 
 private extension OAuthLoginView {
 
+    func getStackViewAttributes(subviews: [UIView]) -> UIStackView {
+        let stackView = UIStackView(arrangedSubviews: subviews)
+        stackView.distribution = .fillEqually
+        stackView.axis = .vertical
+        stackView.spacing = 14
+        stackView.translatesAutoresizingMaskIntoConstraints = false
+
+        return stackView
+    }
+
     func setConstraints() {
-        addSubViews(githubLoginButton, appleLoginButton)
+        let buttonStack = getStackViewAttributes(subviews: [appleLoginButton, githubLoginButton])
+        addSubview(buttonStack)
 
         NSLayoutConstraint.activate([
-            appleLoginButton.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 16),
-            appleLoginButton.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -16),
-            appleLoginButton.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: -60),
-            appleLoginButton.heightAnchor.constraint(equalToConstant: 56),
-
-            githubLoginButton.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 16),
-            githubLoginButton.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -16),
-            githubLoginButton.bottomAnchor.constraint(equalTo: appleLoginButton.topAnchor, constant: -14),
-            githubLoginButton.heightAnchor.constraint(equalToConstant: 56)
+            buttonStack.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 16),
+            buttonStack.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -16),
+            buttonStack.heightAnchor.constraint(equalToConstant: 126),
+            buttonStack.centerYAnchor.constraint(equalTo: self.centerYAnchor)
         ])
     }
 
