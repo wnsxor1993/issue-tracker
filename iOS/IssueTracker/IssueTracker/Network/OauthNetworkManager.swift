@@ -7,7 +7,7 @@
 
 import Foundation
 
-class OauthNetworkManager {
+final class OauthNetworkManager {
     var endPoint: EndPoint
     var networkService: OauthNetworkService
 
@@ -19,9 +19,9 @@ class OauthNetworkManager {
     func enquireForGrant(handler: @escaping (_ url: URL) -> Void) {
        handler(endPoint.url)
     }
-    
+
 //    func requestForAccessToken(grantCode : String, ) {
 //        
 //    }
-    
+
 }
