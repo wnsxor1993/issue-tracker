@@ -7,24 +7,25 @@
 
 import Foundation
 
-struct EndPoint: EndPointable, HTTPPackageable{
-    
+struct EndPoint: EndPointable, HTTPPackageable {
+
     let mehtod: HTTPMethod
-    let header: [String : String] = ["Content-Type":"application/json"]
-    let body: [String : Any]?
+    let headerType: String = "Content-Type"
+    let headerValue: String = "application/json"
+    let body: Data?
     let urlConfigure: URLConfigurable
 
-    init(urlConfigure: URLConfigurable, method: HTTPMethod, body: [String: Any]?) {
+    init(urlConfigure: URLConfigurable, method: HTTPMethod, body: Data?) {
         self.urlConfigure = urlConfigure
         self.mehtod = method
         self.body = body
     }
-    
+
     var queryItems: [URLQueryItem]? {
         guard let authenticatable =  urlConfigure as? Authenticatable, let clientID = authenticatable.clientID else {return nil}
         return [URLQueryItem(name: "client_id", value: "\(clientID)")]
     }
-    
+
     var url: URL {
         var components = URLComponents()
         components.scheme = "https"

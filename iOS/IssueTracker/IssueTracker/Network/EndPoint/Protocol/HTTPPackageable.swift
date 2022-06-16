@@ -9,6 +9,7 @@ import Foundation
 
 protocol HTTPPackageable {
     var mehtod: HTTPMethod {get}
-    var header: [String: String] {get}
-    var body: [String: Any]? {get}
+    var headerType: String {get}
+    var headerValue: String {get}
+    var body: Data? {get}
 }

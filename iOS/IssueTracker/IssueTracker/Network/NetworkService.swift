@@ -15,18 +15,20 @@ enum NetworkError: Error {
     case encodingError(Error)
 }
 
-protocol NetworkService {
-    associatedtype Model
-    typealias CompletionHandler = (Result<Model?, NetworkError>) -> Void
-    func request(url: URL, method: HTTPMethod, encodedData: Data?, completion: @escaping CompletionHandler)
+protocol NetworkServiceable {
+    typealias CompletionHandler = (Result<Data, NetworkError>) -> Void
+    static func request(endPoint: EndPoint, completion: @escaping CompletionHandler)
 }
 
-struct OauthNetworkService: NetworkService {
+struct NetworkService: NetworkServiceable {
 
-    typealias Model = String
+    static func request(endPoint: EndPoint, completion: @escaping CompletionHandler) {
+        var urlRequest = URLRequest(url: endPoint.url)
+        urlRequest.httpMethod = endPoint.mehtod.rawValue
+        urlRequest.setValue(endPoint.headerValue, forHTTPHeaderField: endPoint.headerType)
+        urlRequest.httpBody = endPoint.body
 
-    func request(url: URL, method: HTTPMethod, encodedData: Data?, completion: @escaping CompletionHandler) {
-        URLSession.shared.dataTask(with: url) { (data, response, error) in
+        URLSession.shared.dataTask(with: urlRequest) { (data, response, error) in
             if let error = error {
                 completion(.failure(.transportError(error)))
                 return
@@ -42,13 +44,7 @@ struct OauthNetworkService: NetworkService {
                 return
             }
 
-            do {
-                let decoder = JSONDecoder()
-                let value = try decoder.decode(Model.self, from: data)
-                completion(.success(value))
-            } catch {
-                completion(.failure(.decodingError(error)))
-            }
+            completion(.success(data))
 
         }.resume()
     }

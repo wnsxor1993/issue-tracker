@@ -11,4 +11,3 @@ protocol EndPointable {
     var queryItems: [URLQueryItem]? {get}
     var url: URL {get}
 }
-
