@@ -61,24 +61,16 @@ class LoginInputView: UIView {
         return textField
     }()
 
-    private let loginButton: UIButton = {
-        let button = UIButton()
+    private lazy var loginButton: UIButton = {
+        let button = getButtonAttributes()
         button.setTitle("로그인", for: .normal)
-        button.setTitleColor(UIColor.logSignInButton, for: .normal)
-        button.titleLabel?.font = .systemFont(ofSize: 16, weight: .semibold)
-        button.titleLabel?.textAlignment = .center
-        button.translatesAutoresizingMaskIntoConstraints = false
-        
+
         return button
     }()
     
-    private let signupButton: UIButton = {
-        let button = UIButton()
+    private lazy var signupButton: UIButton = {
+        let button = getButtonAttributes()
         button.setTitle("회원가입", for: .normal)
-        button.setTitleColor(UIColor.logSignInButton, for: .normal)
-        button.titleLabel?.font = .systemFont(ofSize: 16, weight: .semibold)
-        button.titleLabel?.textAlignment = .center
-        button.translatesAutoresizingMaskIntoConstraints = false
         
         return button
     }()
@@ -96,6 +88,16 @@ class LoginInputView: UIView {
 }
 
 private extension LoginInputView {
+    
+    func getButtonAttributes() -> UIButton {
+        let button = UIButton()
+        button.setTitleColor(UIColor.logSignInButton, for: .normal)
+        button.titleLabel?.font = .systemFont(ofSize: 16, weight: .semibold)
+        button.titleLabel?.textAlignment = .center
+        button.translatesAutoresizingMaskIntoConstraints = false
+        
+        return button
+    }
     
     func setViewConstraints() {
         addSubViews(textFieldBackView, loginButton, signupButton)
