@@ -9,21 +9,23 @@ import UIKit
 
 class OAuthLoginButton: UIButton {
 
-    enum ButtonImage: String {
-        case gitImage = "github"
-        case appleImage = "apple"
+    enum ButtonName {
+        case gitImage
+        case gitTitle
+        case appleImage
+        case appleTitle
 
-        func getRawValue() -> String {
-            return self.rawValue
-        }
-    }
-
-    enum ButtonTitle: String {
-        case gitTitle = "GitHub 계정으로 로그인"
-        case appleTitle = "Apple 계정으로 로그인"
-
-        func getRawValue() -> String {
-            return self.rawValue
+        var description: String {
+            switch self {
+            case .gitImage:
+                return "github"
+            case .gitTitle:
+                return "GitHub 계정으로 로그인"
+            case .appleImage:
+                return "apple"
+            case .appleTitle:
+                return "Apple 계정으로 로그인"
+            }
         }
     }
 
@@ -37,9 +39,9 @@ class OAuthLoginButton: UIButton {
         fatalError()
     }
 
-    func setImageWithTitle(imageName: ButtonImage, title: ButtonTitle) {
-        let image = UIImage(named: imageName.getRawValue())?.resizeWithHeighScale(height: 24)
-        self.setTitle(title.getRawValue(), for: .normal)
+    func setImageWithTitle(imageName: ButtonName, title: ButtonName) {
+        let image = UIImage(named: imageName.description)?.resizeWithHeighScale(height: 24)
+        self.setTitle(title.description, for: .normal)
         self.setImage(image, for: .normal)
     }
 }
