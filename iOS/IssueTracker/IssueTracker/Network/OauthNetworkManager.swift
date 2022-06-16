@@ -7,7 +7,7 @@
 
 import Foundation
 
-class OauthNetworkManager {
+final class OauthNetworkManager {
     var endPoint: EndPoint
     var networkService: OauthNetworkService
 
