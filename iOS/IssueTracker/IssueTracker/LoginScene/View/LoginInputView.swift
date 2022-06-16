@@ -19,7 +19,7 @@ class LoginInputView: UIView {
     
     private let textFieldDividedLine: UIView = {
         let dividedLine = UIView()
-        dividedLine.backgroundColor = UIColor(red: 0.898, green: 0.898, blue: 0.918, alpha: 1)
+        dividedLine.backgroundColor = .dividedLine
         dividedLine.translatesAutoresizingMaskIntoConstraints = false
         
         return dividedLine
