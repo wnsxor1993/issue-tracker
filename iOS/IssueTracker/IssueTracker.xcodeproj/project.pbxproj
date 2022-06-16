@@ -22,6 +22,8 @@
 		B7E58B7328587482004C6BE6 /* OauthNetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7E58B7228587482004C6BE6 /* OauthNetworkManager.swift */; };
 		D291537A285B6B3300B5CDA8 /* NetworkServiceable.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2915379285B6B3300B5CDA8 /* NetworkServiceable.swift */; };
 		D291537C285B6B6500B5CDA8 /* NetworkError.swift in Sources */ = {isa = PBXBuildFile; fileRef = D291537B285B6B6500B5CDA8 /* NetworkError.swift */; };
+		D291537E285B6D7F00B5CDA8 /* AppleManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D291537D285B6D7F00B5CDA8 /* AppleManager.swift */; };
+		D2915381285B740500B5CDA8 /* OAuthManageable.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2915380285B740500B5CDA8 /* OAuthManageable.swift */; };
 		D2B750682856FCBE0078067A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2B750672856FCBE0078067A /* AppDelegate.swift */; };
 		D2B7506A2856FCBE0078067A /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2B750692856FCBE0078067A /* SceneDelegate.swift */; };
 		D2B7506C2856FCBE0078067A /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2B7506B2856FCBE0078067A /* LoginViewController.swift */; };
@@ -54,6 +56,8 @@
 		B7E58B7228587482004C6BE6 /* OauthNetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OauthNetworkManager.swift; sourceTree = "<group>"; };
 		D2915379285B6B3300B5CDA8 /* NetworkServiceable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkServiceable.swift; sourceTree = "<group>"; };
 		D291537B285B6B6500B5CDA8 /* NetworkError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkError.swift; sourceTree = "<group>"; };
+		D291537D285B6D7F00B5CDA8 /* AppleManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppleManager.swift; sourceTree = "<group>"; };
+		D2915380285B740500B5CDA8 /* OAuthManageable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OAuthManageable.swift; sourceTree = "<group>"; };
 		D2B750642856FCBE0078067A /* IssueTracker.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = IssueTracker.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D2B750672856FCBE0078067A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		D2B750692856FCBE0078067A /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -136,7 +140,6 @@
 				D2915377285B436000B5CDA8 /* Service */,
 				B7E58B7028587013004C6BE6 /* HTTPMethod.swift */,
 				D291537B285B6B6500B5CDA8 /* NetworkError.swift */,
-				B7E58B7228587482004C6BE6 /* OauthNetworkManager.swift */,
 			);
 			path = Network;
 			sourceTree = "<group>";
@@ -156,6 +159,16 @@
 				D2915379285B6B3300B5CDA8 /* NetworkServiceable.swift */,
 			);
 			path = Protocol;
+			sourceTree = "<group>";
+		};
+		D291537F285B72E200B5CDA8 /* Manager */ = {
+			isa = PBXGroup;
+			children = (
+				D2915380285B740500B5CDA8 /* OAuthManageable.swift */,
+				D291537D285B6D7F00B5CDA8 /* AppleManager.swift */,
+				B7E58B7228587482004C6BE6 /* OauthNetworkManager.swift */,
+			);
+			path = Manager;
 			sourceTree = "<group>";
 		};
 		D2B7505B2856FCBE0078067A = {
@@ -179,7 +192,7 @@
 		D2B750662856FCBE0078067A /* IssueTracker */ = {
 			isa = PBXGroup;
 			children = (
-				D2D526642859AA9D00581C88 /* IssueTracker.entitlements */,
+				D291537F285B72E200B5CDA8 /* Manager */,
 				D2D5265128588A1000581C88 /* LoginScene */,
 				B7E58B6928584D0C004C6BE6 /* Network */,
 				D2D5265A2858D4C000581C88 /* Extension */,
@@ -190,6 +203,7 @@
 				D2B750722856FCC00078067A /* LaunchScreen.storyboard */,
 				D2B750752856FCC00078067A /* Info.plist */,
 				B7E58B6C2858505A004C6BE6 /* ClientKey.plist */,
+				D2D526642859AA9D00581C88 /* IssueTracker.entitlements */,
 			);
 			path = IssueTracker;
 			sourceTree = "<group>";
@@ -367,7 +381,9 @@
 				D2D526592858CF5000581C88 /* UIImage+.swift in Sources */,
 				D2D526612858DF7B00581C88 /* UIColor+.swift in Sources */,
 				B7A836F5285B330900A06C77 /* Authenticable.swift in Sources */,
+				D291537E285B6D7F00B5CDA8 /* AppleManager.swift in Sources */,
 				B7A836F0285B322000A06C77 /* URLConfigurable.swift in Sources */,
+				D2915381285B740500B5CDA8 /* OAuthManageable.swift in Sources */,
 				B7A836EE285B319500A06C77 /* Bundle+.swift in Sources */,
 				D2D5264C285850A100581C88 /* LoginInputView.swift in Sources */,
 				B7A836F3285B32C900A06C77 /* GitURLConfiguration.swift in Sources */,
