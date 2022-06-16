@@ -20,13 +20,10 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     }
 
     func scene(_ scene: UIScene, openURLContexts URLContexts: Set<UIOpenURLContext>) {
-        if let url = URLContexts.first?.url {
-            if url.absoluteString.starts(with: "issuetracker://") {
-                if let code = url.absoluteString.split(separator: "=").last.map({ String($0) }) {
-                    NotificationCenter.default.post(name: .recievedGrantCode, object: nil,
-                                                    userInfo: [NotificationKey.grantCode: code])
-                }
-            }
+        guard let url = URLContexts.first?.url, url.absoluteString.starts(with: "issuetracker://") else {return}
+        if let code = url.absoluteString.split(separator: "=").last.map({ String($0) }) {
+            NotificationCenter.default.post(name: .recievedGrantCode, object: nil,
+                                            userInfo: [NotificationKey.grantCode: code])
         }
     }
 }
