@@ -99,6 +99,15 @@ private extension LoginInputView {
         return button
     }
 
+    func getStackViewAttributes(subviews: [UIView]) -> UIStackView {
+        let stackView = UIStackView(arrangedSubviews: subviews)
+        stackView.distribution = .fillEqually
+        stackView.axis = .vertical
+        stackView.translatesAutoresizingMaskIntoConstraints = false
+
+        return stackView
+    }
+
     func setViewConstraints() {
         addSubViews(textFieldBackView, loginButton, signupButton)
 
@@ -124,7 +133,10 @@ private extension LoginInputView {
     }
 
     func setBackViewConstraint() {
-        self.textFieldBackView.addSubViews(idLabel, idTextField, textFieldDividedLine, pswLabel, pswTextField)
+        let labelStack = getStackViewAttributes(subviews: [idLabel, pswLabel])
+        let textFieldStack = getStackViewAttributes(subviews: [idTextField, pswTextField])
+
+        self.textFieldBackView.addSubViews(labelStack, textFieldStack, textFieldDividedLine)
 
         NSLayoutConstraint.activate([
             textFieldDividedLine.centerYAnchor.constraint(equalTo: textFieldBackView.centerYAnchor),
@@ -132,25 +144,15 @@ private extension LoginInputView {
             textFieldDividedLine.trailingAnchor.constraint(equalTo: textFieldBackView.trailingAnchor),
             textFieldDividedLine.heightAnchor.constraint(equalToConstant: 1),
 
-            idLabel.leadingAnchor.constraint(equalTo: textFieldBackView.leadingAnchor, constant: 20),
-            idLabel.topAnchor.constraint(equalTo: textFieldBackView.topAnchor, constant: 11),
-            idLabel.bottomAnchor.constraint(equalTo: textFieldDividedLine.topAnchor, constant: -10.5),
-            idLabel.widthAnchor.constraint(equalToConstant: 60),
+            labelStack.leadingAnchor.constraint(equalTo: textFieldBackView.leadingAnchor, constant: 20),
+            labelStack.topAnchor.constraint(equalTo: textFieldBackView.topAnchor),
+            labelStack.bottomAnchor.constraint(equalTo: textFieldBackView.bottomAnchor),
+            labelStack.widthAnchor.constraint(equalToConstant: 60),
 
-            idTextField.leadingAnchor.constraint(equalTo: idLabel.trailingAnchor, constant: 20),
-            idTextField.trailingAnchor.constraint(equalTo: textFieldBackView.trailingAnchor),
-            idTextField.topAnchor.constraint(equalTo: textFieldBackView.topAnchor, constant: 11),
-            idTextField.bottomAnchor.constraint(equalTo: textFieldDividedLine.topAnchor, constant: -10.5),
-
-            pswLabel.leadingAnchor.constraint(equalTo: textFieldBackView.leadingAnchor, constant: 20),
-            pswLabel.topAnchor.constraint(equalTo: textFieldDividedLine.bottomAnchor, constant: 10.5),
-            pswLabel.bottomAnchor.constraint(equalTo: textFieldBackView.bottomAnchor, constant: -10),
-            pswLabel.widthAnchor.constraint(equalToConstant: 60),
-
-            pswTextField.leadingAnchor.constraint(equalTo: pswLabel.trailingAnchor, constant: 20),
-            pswTextField.trailingAnchor.constraint(equalTo: textFieldBackView.trailingAnchor),
-            pswTextField.topAnchor.constraint(equalTo: textFieldDividedLine.bottomAnchor, constant: 10.5),
-            pswTextField.bottomAnchor.constraint(equalTo: textFieldBackView.bottomAnchor, constant: -10)
+            textFieldStack.leadingAnchor.constraint(equalTo: labelStack.trailingAnchor, constant: 20),
+            textFieldStack.trailingAnchor.constraint(equalTo: textFieldBackView.trailingAnchor),
+            textFieldStack.topAnchor.constraint(equalTo: textFieldBackView.topAnchor),
+            textFieldStack.bottomAnchor.constraint(equalTo: textFieldBackView.bottomAnchor)
         ])
     }
 }
