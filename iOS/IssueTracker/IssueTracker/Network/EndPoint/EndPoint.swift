@@ -2,25 +2,29 @@
 //  EndPoint.swift
 //  IssueTracker
 //
-//  Created by Kai Kim on 2022/06/14.
+//  Created by Kai Kim on 2022/06/16.
 //
 
 import Foundation
 
-protocol EndPoint {
-    var queryItems: [URLQueryItem]? {get}
-    var url: URL {get}
-}
-
-
-struct OauthEndPoint: EndPoint {
-
+struct EndPoint: EndPointable, HTTPPackageable{
+    
+    let mehtod: HTTPMethod
+    let header: [String : String] = ["Content-Type":"application/json"]
+    let body: [String : Any]?
     let urlConfigure: URLConfigurable
 
+    init(urlConfigure: URLConfigurable, method: HTTPMethod, body: [String: Any]?) {
+        self.urlConfigure = urlConfigure
+        self.mehtod = method
+        self.body = body
+    }
+    
     var queryItems: [URLQueryItem]? {
         guard let authenticatable =  urlConfigure as? Authenticatable, let clientID = authenticatable.clientID else {return nil}
         return [URLQueryItem(name: "client_id", value: "\(clientID)")]
     }
+    
     var url: URL {
         var components = URLComponents()
         components.scheme = "https"
@@ -31,9 +35,5 @@ struct OauthEndPoint: EndPoint {
             preconditionFailure("Invalid URL components: \(components)"
             )}
         return url
-    }
-
-    init(urlConfigure: URLConfigurable) {
-        self.urlConfigure = urlConfigure
     }
 }

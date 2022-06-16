@@ -11,4 +11,3 @@ protocol URLConfigurable {
     var host: String {get}
     var path: String {get}
 }
-
