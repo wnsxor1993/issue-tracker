@@ -9,6 +9,10 @@
 /* Begin PBXBuildFile section */
 		597313D9E43AEAD3AEBBF089 /* Pods_IssueTracker.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A338D214445E7E813AC159EA /* Pods_IssueTracker.framework */; };
 		B71A0A032859B8FF0030D3ED /* NotificationCenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = B71A0A022859B8FF0030D3ED /* NotificationCenter.swift */; };
+		B7A836EE285B319500A06C77 /* Bundle+.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7A836ED285B319500A06C77 /* Bundle+.swift */; };
+		B7A836F0285B322000A06C77 /* URLConfigurable.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7A836EF285B322000A06C77 /* URLConfigurable.swift */; };
+		B7A836F3285B32C900A06C77 /* GitURLConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7A836F2285B32C900A06C77 /* GitURLConfiguration.swift */; };
+		B7A836F5285B330900A06C77 /* Authenticable.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7A836F4285B330900A06C77 /* Authenticable.swift */; };
 		B7E58B6B28584D1D004C6BE6 /* EndPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7E58B6A28584D1D004C6BE6 /* EndPoint.swift */; };
 		B7E58B6D2858505A004C6BE6 /* ClientKey.plist in Resources */ = {isa = PBXBuildFile; fileRef = B7E58B6C2858505A004C6BE6 /* ClientKey.plist */; };
 		B7E58B6F28586FCE004C6BE6 /* NetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7E58B6E28586FCE004C6BE6 /* NetworkService.swift */; };
@@ -33,6 +37,10 @@
 		A338D214445E7E813AC159EA /* Pods_IssueTracker.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_IssueTracker.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		AA124A5450ECA849D48F4413 /* Pods-IssueTracker.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-IssueTracker.release.xcconfig"; path = "Target Support Files/Pods-IssueTracker/Pods-IssueTracker.release.xcconfig"; sourceTree = "<group>"; };
 		B71A0A022859B8FF0030D3ED /* NotificationCenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotificationCenter.swift; sourceTree = "<group>"; };
+		B7A836ED285B319500A06C77 /* Bundle+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Bundle+.swift"; sourceTree = "<group>"; };
+		B7A836EF285B322000A06C77 /* URLConfigurable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLConfigurable.swift; sourceTree = "<group>"; };
+		B7A836F2285B32C900A06C77 /* GitURLConfiguration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GitURLConfiguration.swift; sourceTree = "<group>"; };
+		B7A836F4285B330900A06C77 /* Authenticable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Authenticable.swift; sourceTree = "<group>"; };
 		B7E58B6A28584D1D004C6BE6 /* EndPoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EndPoint.swift; sourceTree = "<group>"; };
 		B7E58B6C2858505A004C6BE6 /* ClientKey.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = ClientKey.plist; sourceTree = "<group>"; };
 		B7E58B6E28586FCE004C6BE6 /* NetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkService.swift; sourceTree = "<group>"; };
@@ -76,9 +84,28 @@
 			path = Pods;
 			sourceTree = "<group>";
 		};
+		B7A836EC285B30EA00A06C77 /* Protocol */ = {
+			isa = PBXGroup;
+			children = (
+				B7A836EF285B322000A06C77 /* URLConfigurable.swift */,
+				B7A836F4285B330900A06C77 /* Authenticable.swift */,
+			);
+			path = Protocol;
+			sourceTree = "<group>";
+		};
+		B7A836F1285B32BE00A06C77 /* URLComponent */ = {
+			isa = PBXGroup;
+			children = (
+				B7A836F2285B32C900A06C77 /* GitURLConfiguration.swift */,
+				B7A836EC285B30EA00A06C77 /* Protocol */,
+			);
+			path = URLComponent;
+			sourceTree = "<group>";
+		};
 		B7E58B6928584D0C004C6BE6 /* Network */ = {
 			isa = PBXGroup;
 			children = (
+				B7A836F1285B32BE00A06C77 /* URLComponent */,
 				B7E58B6A28584D1D004C6BE6 /* EndPoint.swift */,
 				B7E58B6E28586FCE004C6BE6 /* NetworkService.swift */,
 				B7E58B7028587013004C6BE6 /* HTTPMethod.swift */,
@@ -138,6 +165,7 @@
 				D2D5264D2858557700581C88 /* UIView+.swift */,
 				D2D526582858CF5000581C88 /* UIImage+.swift */,
 				D2D526602858DF7B00581C88 /* UIColor+.swift */,
+				B7A836ED285B319500A06C77 /* Bundle+.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -290,7 +318,11 @@
 				B71A0A032859B8FF0030D3ED /* NotificationCenter.swift in Sources */,
 				D2D526592858CF5000581C88 /* UIImage+.swift in Sources */,
 				D2D526612858DF7B00581C88 /* UIColor+.swift in Sources */,
+				B7A836F5285B330900A06C77 /* Authenticable.swift in Sources */,
+				B7A836F0285B322000A06C77 /* URLConfigurable.swift in Sources */,
+				B7A836EE285B319500A06C77 /* Bundle+.swift in Sources */,
 				D2D5264C285850A100581C88 /* LoginInputView.swift in Sources */,
+				B7A836F3285B32C900A06C77 /* GitURLConfiguration.swift in Sources */,
 				D2D5264E2858557700581C88 /* UIView+.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

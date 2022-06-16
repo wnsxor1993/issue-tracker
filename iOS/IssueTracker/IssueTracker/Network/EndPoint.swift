@@ -7,47 +7,11 @@
 
 import Foundation
 
-protocol URLConfigurable {
-    var host: String {get}
-    var path: String {get}
-}
-
-protocol Authenticatable: URLConfigurable {
-    var clientID: String? {get}
-    var clientSecrete: String? {get}
-}
-
-extension Bundle {
-
-    static func searchObject(from plist: String, key: String) -> String? {
-        guard let filePath = main.path(forResource: plist, ofType: "plist") else {return nil}
-        let plist = NSDictionary(contentsOfFile: filePath)
-        let value = plist?.object(forKey: "gitClient_ID") as? String
-        return  value == nil ? nil : value
-    }
-
-}
-
-struct GitAuthentication: Authenticatable {
-
-    var host = "github.com"
-    var path = "/login/oauth/authorize"
-
-    var clientID: String? {
-        guard let clientID = Bundle.searchObject(from: "ClientKey", key: "gitClient_ID") else {return nil}
-        return clientID
-    }
-
-    var clientSecrete: String? {
-        guard let clientSecrete = Bundle.searchObject(from: "ClientKey", key: "gitClient_Secrete") else {return nil}
-        return clientSecrete
-    }
-}
-
 protocol EndPoint {
     var queryItems: [URLQueryItem]? {get}
     var url: URL {get}
 }
+
 
 struct OauthEndPoint: EndPoint {
 
