@@ -10,7 +10,9 @@ import AuthenticationServices
 
 class LoginViewController: UIViewController {
 
-    private let oauthNetworkManager = OauthNetworkManager(endPoint: OauthEndPoint<GitAuthentication>(), serivce: OauthNetworkService())
+    private lazy var appleManager: OAuthManageable = AppleManager(endPoint: EndPoint(urlConfigure: GitURLConfiguration(), method: .POST, body: nil), presentationAnchor: self.view.window)
+
+    private var githubManager = GitHubManager(endPoint: EndPoint(urlConfigure: GitURLConfiguration(), method: .POST, body: nil))
 
     private let titleLabel: UILabel = {
         let label = UILabel()
@@ -46,7 +48,7 @@ class LoginViewController: UIViewController {
 
 extension LoginViewController: OAuthButtonDelegate {
     func didClickGitHubButton() {
-        oauthNetworkManager.enquireForGrant { url in
+        githubManager.enquireForGrant { url in
             if UIApplication.shared.canOpenURL(url) {
                 UIApplication.shared.open(url)
             }
@@ -54,45 +56,8 @@ extension LoginViewController: OAuthButtonDelegate {
     }
 
     func didClickAppleButton() {
-        let appleIDProvider = ASAuthorizationAppleIDProvider()
-        let request = appleIDProvider.createRequest()
-        request.requestedScopes = [.fullName, .email]
-
-        let authorizationController = ASAuthorizationController(authorizationRequests: [request])
-        authorizationController.delegate = self
-        authorizationController.presentationContextProvider = self
-        authorizationController.performRequests()
-    }
-}
-
-extension LoginViewController: ASAuthorizationControllerDelegate {
-
-    func authorizationController(controller: ASAuthorizationController, didCompleteWithAuthorization authorization: ASAuthorization) {
-        switch authorization.credential {
-        case let appleIDCredential as ASAuthorizationAppleIDCredential:
-            let userIdentifier = appleIDCredential.user
-            let fullName = appleIDCredential.fullName
-            let email = appleIDCredential.email
-
-            // apple 로그인 성공 관련 로직 필요
-
-        default:
-            break
-        }
-    }
-
-    func authorizationController(controller: ASAuthorizationController, didCompleteWithError error: Error) {
-        // apple 로그인 실패 관련 로직 필요
-    }
-}
-
-extension LoginViewController: ASAuthorizationControllerPresentationContextProviding {
-
-    func presentationAnchor(for controller: ASAuthorizationController) -> ASPresentationAnchor {
-        guard let returnWindow = self.view.window else { return ASPresentationAnchor() }
-
-        return returnWindow
-
+        guard let manager = appleManager as? AppleManager else { return }
+        manager.sendRequest()
     }
 }
 
