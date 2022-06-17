@@ -10,8 +10,9 @@ import AuthenticationServices
 
 class LoginViewController: UIViewController {
 
-//    private let oauthNetworkManager = OauthNetworkManager(endPoint: OauthEndPoint<GitAuthentication>(), serivce: OauthNetworkService())
     private lazy var appleManager: OAuthManageable = AppleManager(endPoint: EndPoint(urlConfigure: GitURLConfiguration(), method: .POST, body: nil), presentationAnchor: self.view.window)
+
+    private var githubManager = GitHubManager(endPoint: EndPoint(urlConfigure: GitURLConfiguration(), method: .POST, body: nil))
 
     private let titleLabel: UILabel = {
         let label = UILabel()
@@ -47,11 +48,11 @@ class LoginViewController: UIViewController {
 
 extension LoginViewController: OAuthButtonDelegate {
     func didClickGitHubButton() {
-//        oauthNetworkManager.enquireForGrant { url in
-//            if UIApplication.shared.canOpenURL(url) {
-//                UIApplication.shared.open(url)
-//            }
-//        }
+        githubManager.enquireForGrant { url in
+            if UIApplication.shared.canOpenURL(url) {
+                UIApplication.shared.open(url)
+            }
+        }
     }
 
     func didClickAppleButton() {

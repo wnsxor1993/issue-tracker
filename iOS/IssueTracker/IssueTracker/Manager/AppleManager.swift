@@ -7,7 +7,7 @@
 
 import AuthenticationServices
 
-class AppleManager: NSObject, OAuthManageable {
+final class AppleManager: NSObject, OAuthManageable {
 
     let endPoint: EndPoint
     private var presentationAnchor: UIWindow?
