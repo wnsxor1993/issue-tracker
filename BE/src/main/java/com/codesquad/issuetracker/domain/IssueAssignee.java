@@ -26,7 +26,7 @@ public class IssueAssignee {
     @JoinColumn(name = "issue_id")
     private Issue issue;
 
-    IssueAssignee(Member member, Issue issue) {
+    public IssueAssignee(Member member, Issue issue) {
         this.member = member;
         this.issue = issue;
     }

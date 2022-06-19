@@ -20,7 +20,7 @@ public class Issue {
     @Column(name = "issue_id")
     private Long id;
 
-    @ManyToOne
+    @ManyToOne(fetch = LAZY)
     private Member author;
 
     @OneToMany(mappedBy = "issue", cascade = CascadeType.ALL, orphanRemoval = true)
@@ -35,7 +35,6 @@ public class Issue {
 
     private boolean isOpened;
 
-    //TODO: issue 생성 시의 연관관계 주인 고민, assginee 등록의 주체를 issue로 할 때 어떻게 초기화하고 변경할 지
     public Issue(Member author, Set<IssueAssignee> assignees, Milestone milestone, String title, String content, boolean isOpened) {
         this.author = author;
         this.assignees = assignees;

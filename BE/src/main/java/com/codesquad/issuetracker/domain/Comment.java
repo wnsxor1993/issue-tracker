@@ -6,7 +6,8 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 
-import static javax.persistence.FetchType.*;
+import static javax.persistence.FetchType.LAZY;
+
 
 @Entity
 @Getter
@@ -21,16 +22,16 @@ public class Comment {
     private String content;
 
     @ManyToOne(fetch = LAZY)
-    @JoinColumn(name = "member_id")
-    private Member member;
+    @JoinColumn(name = "author_id")
+    private Member author;
 
     @ManyToOne(fetch = LAZY)
     @JoinColumn(name = "issue_id")
     private Issue issue;
 
-    public Comment(String content, Member member, Issue issue) {
+    public Comment(String content, Member author, Issue issue) {
         this.content = content;
-        this.member = member;
+        this.author = author;
         this.issue = issue;
     }
 
