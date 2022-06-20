@@ -232,8 +232,8 @@
 			isa = PBXGroup;
 			children = (
 				D2D5264B285850A100581C88 /* LoginInputView.swift */,
-				D2D5265D2858D98400581C88 /* OAuthLoginButton.swift */,
 				D2D5265428588B3A00581C88 /* OAuthLoginView.swift */,
+				D2D5265D2858D98400581C88 /* OAuthLoginButton.swift */,
 				D2D526622859A65600581C88 /* OAuthButtonDelegate.swift */,
 			);
 			path = View;
