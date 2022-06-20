@@ -24,6 +24,7 @@
 		D291537C285B6B6500B5CDA8 /* NetworkError.swift in Sources */ = {isa = PBXBuildFile; fileRef = D291537B285B6B6500B5CDA8 /* NetworkError.swift */; };
 		D291537E285B6D7F00B5CDA8 /* AppleManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D291537D285B6D7F00B5CDA8 /* AppleManager.swift */; };
 		D2915381285B740500B5CDA8 /* OAuthManageable.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2915380285B740500B5CDA8 /* OAuthManageable.swift */; };
+		D2915385286013DB00B5CDA8 /* OAuthButtonType.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2915384286013DB00B5CDA8 /* OAuthButtonType.swift */; };
 		D2B750682856FCBE0078067A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2B750672856FCBE0078067A /* AppDelegate.swift */; };
 		D2B7506A2856FCBE0078067A /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2B750692856FCBE0078067A /* SceneDelegate.swift */; };
 		D2B7506C2856FCBE0078067A /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2B7506B2856FCBE0078067A /* LoginViewController.swift */; };
@@ -58,6 +59,7 @@
 		D291537B285B6B6500B5CDA8 /* NetworkError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkError.swift; sourceTree = "<group>"; };
 		D291537D285B6D7F00B5CDA8 /* AppleManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppleManager.swift; sourceTree = "<group>"; };
 		D2915380285B740500B5CDA8 /* OAuthManageable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OAuthManageable.swift; sourceTree = "<group>"; };
+		D2915384286013DB00B5CDA8 /* OAuthButtonType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OAuthButtonType.swift; sourceTree = "<group>"; };
 		D2B750642856FCBE0078067A /* IssueTracker.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = IssueTracker.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D2B750672856FCBE0078067A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		D2B750692856FCBE0078067A /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -135,11 +137,10 @@
 		B7E58B6928584D0C004C6BE6 /* Network */ = {
 			isa = PBXGroup;
 			children = (
+				D2915382286013B500B5CDA8 /* EnumTypes */,
 				B7A836F6285B390700A06C77 /* EndPoint */,
 				B7A836F1285B32BE00A06C77 /* URLComponent */,
 				D2915377285B436000B5CDA8 /* Service */,
-				B7E58B7028587013004C6BE6 /* HTTPMethod.swift */,
-				D291537B285B6B6500B5CDA8 /* NetworkError.swift */,
 			);
 			path = Network;
 			sourceTree = "<group>";
@@ -169,6 +170,23 @@
 				D291537D285B6D7F00B5CDA8 /* AppleManager.swift */,
 			);
 			path = Manager;
+			sourceTree = "<group>";
+		};
+		D2915382286013B500B5CDA8 /* EnumTypes */ = {
+			isa = PBXGroup;
+			children = (
+				B7E58B7028587013004C6BE6 /* HTTPMethod.swift */,
+				D291537B285B6B6500B5CDA8 /* NetworkError.swift */,
+			);
+			path = EnumTypes;
+			sourceTree = "<group>";
+		};
+		D2915383286013D400B5CDA8 /* EnumTypes */ = {
+			isa = PBXGroup;
+			children = (
+				D2915384286013DB00B5CDA8 /* OAuthButtonType.swift */,
+			);
+			path = EnumTypes;
 			sourceTree = "<group>";
 		};
 		D2B7505B2856FCBE0078067A = {
@@ -211,6 +229,7 @@
 		D2D5265128588A1000581C88 /* LoginScene */ = {
 			isa = PBXGroup;
 			children = (
+				D2915383286013D400B5CDA8 /* EnumTypes */,
 				D2D5265F2858DB6100581C88 /* View */,
 				D2B7506B2856FCBE0078067A /* LoginViewController.swift */,
 			);
@@ -232,8 +251,8 @@
 			isa = PBXGroup;
 			children = (
 				D2D5264B285850A100581C88 /* LoginInputView.swift */,
-				D2D5265D2858D98400581C88 /* OAuthLoginButton.swift */,
 				D2D5265428588B3A00581C88 /* OAuthLoginView.swift */,
+				D2D5265D2858D98400581C88 /* OAuthLoginButton.swift */,
 				D2D526622859A65600581C88 /* OAuthButtonDelegate.swift */,
 			);
 			path = View;
@@ -386,6 +405,7 @@
 				B7A836EE285B319500A06C77 /* Bundle+.swift in Sources */,
 				B7A83710285C1A1300A06C77 /* GitHubManager.swift in Sources */,
 				D2D5264C285850A100581C88 /* LoginInputView.swift in Sources */,
+				D2915385286013DB00B5CDA8 /* OAuthButtonType.swift in Sources */,
 				B7A836F3285B32C900A06C77 /* GitURLConfiguration.swift in Sources */,
 				D2D5264E2858557700581C88 /* UIView+.swift in Sources */,
 			);
