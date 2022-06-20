@@ -5,7 +5,10 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import static javax.persistence.FetchType.LAZY;
@@ -20,6 +23,10 @@ public class Issue {
     @Column(name = "issue_id")
     private Long id;
 
+    private LocalDateTime createdAt;
+
+    private LocalDateTime lastModifiedAt;
+
     @ManyToOne(fetch = LAZY)
     private Member author;
 
@@ -29,6 +36,12 @@ public class Issue {
     @ManyToOne(fetch = LAZY)
     @JoinColumn(name = "milestone_id")
     private Milestone milestone;
+
+    @OneToMany(mappedBy = "issue", cascade = CascadeType.ALL, orphanRemoval = true)
+    private Set<IssueLabel> issueLabels = new HashSet<>();
+
+    @OneToMany(mappedBy = "issue", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Comment> comments = new ArrayList<>();
 
     private String title;
     private String content;
