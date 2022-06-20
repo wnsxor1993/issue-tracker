@@ -98,7 +98,7 @@ private extension LoginInputView {
         return button
     }
 
-    func stackView(withSubvies subviews: [UIView]) -> UIStackView {
+    func stackView(withSubviews subviews: [UIView]) -> UIStackView {
         let stackView = UIStackView(arrangedSubviews: subviews)
         stackView.distribution = .fillEqually
         stackView.axis = .vertical
@@ -132,8 +132,8 @@ private extension LoginInputView {
     }
 
     func setBackViewConstraint() {
-        let labelStack = stackView(withSubvies: [idLabel, pswLabel])
-        let textFieldStack = stackView(withSubvies: [idTextField, pswTextField])
+        let labelStack = stackView(withSubviews: [idLabel, pswLabel])
+        let textFieldStack = stackView(withSubviews: [idTextField, pswTextField])
 
         self.textFieldBackView.addSubViews(labelStack, textFieldStack, textFieldDividedLine)
 

@@ -40,7 +40,7 @@ class OAuthLoginView: UIView {
 
 private extension OAuthLoginView {
 
-    func getStackViewAttributes(subviews: [UIView]) -> UIStackView {
+    func stackView(withSubviews subviews: [UIView]) -> UIStackView {
         let stackView = UIStackView(arrangedSubviews: subviews)
         stackView.distribution = .fillEqually
         stackView.axis = .vertical
@@ -51,7 +51,7 @@ private extension OAuthLoginView {
     }
 
     func setConstraints() {
-        let buttonStack = getStackViewAttributes(subviews: [appleLoginButton, githubLoginButton])
+        let buttonStack = stackView(withSubviews: [appleLoginButton, githubLoginButton])
         addSubview(buttonStack)
 
         NSLayoutConstraint.activate([
