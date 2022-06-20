@@ -47,7 +47,16 @@ class LoginViewController: UIViewController {
 }
 
 extension LoginViewController: OAuthButtonDelegate {
-    func didClickGitHubButton() {
+    func didClick(buttonType: OAuthButtonType) {
+        switch buttonType {
+        case .git:
+            didClickGitOAuthButton()
+        case .apple:
+            didClickAppleOAuthButton()
+        }
+    }
+
+    func didClickGitOAuthButton() {
         githubManager.enquireForGrant { url in
             if UIApplication.shared.canOpenURL(url) {
                 UIApplication.shared.open(url)
@@ -55,7 +64,7 @@ extension LoginViewController: OAuthButtonDelegate {
         }
     }
 
-    func didClickAppleButton() {
+    func didClickAppleOAuthButton() {
         guard let manager = appleManager as? AppleManager else { return }
         manager.sendRequest()
     }

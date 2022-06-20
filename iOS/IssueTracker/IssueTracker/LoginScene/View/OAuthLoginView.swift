@@ -13,14 +13,14 @@ class OAuthLoginView: UIView {
 
     private let githubLoginButton: OAuthLoginButton = {
         let button = OAuthLoginButton()
-        button.setImageWithTitle(imageName: .gitImage, title: .gitTitle)
+        button.configureOAuthButton(with: .git)
 
         return button
     }()
 
     private let appleLoginButton: OAuthLoginButton = {
         let button = OAuthLoginButton()
-        button.setImageWithTitle(imageName: .appleImage, title: .appleTitle)
+        button.configureOAuthButton(with: .apple)
 
         return button
     }()
@@ -64,28 +64,24 @@ private extension OAuthLoginView {
 
     func setOAuthButtonAction() {
         let appleAction = UIAction(handler: { _ in
-            self.delegate?.didClickAppleButton()
+            self.delegate?.didClick(buttonType: .apple)
         })
         let gitHubAction = UIAction(handler: { _ in
-            self.delegate?.didClickGitHubButton()
+            self.delegate?.didClick(buttonType: .git)
         })
 
         if #available(iOS 14.0, *) {
             appleLoginButton.addAction(appleAction, for: .touchDown)
             githubLoginButton.addAction(gitHubAction, for: .touchDown)
         } else {
-            appleLoginButton.addTarget(self, action: #selector(touchedAppleButton), for: .touchDown)
-            githubLoginButton.addTarget(self, action: #selector(touchedGitHubButton), for: .touchDown)
+            appleLoginButton.addTarget(self, action: #selector(touchedOAuthButton), for: .touchDown)
+            githubLoginButton.addTarget(self, action: #selector(touchedOAuthButton), for: .touchDown)
         }
     }
 
     @objc
-    func touchedAppleButton() {
-        self.delegate?.didClickAppleButton()
-    }
-
-    @objc
-    func touchedGitHubButton() {
-        self.delegate?.didClickGitHubButton()
+    func touchedOAuthButton(_ sender: OAuthLoginButton) {
+        guard let type = sender.oauthButtonType else { return }
+        self.delegate?.didClick(buttonType: type)
     }
 }

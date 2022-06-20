@@ -9,25 +9,7 @@ import UIKit
 
 class OAuthLoginButton: UIButton {
 
-    enum ButtonName {
-        case gitImage
-        case gitTitle
-        case appleImage
-        case appleTitle
-
-        var description: String {
-            switch self {
-            case .gitImage:
-                return "github"
-            case .gitTitle:
-                return "GitHub 계정으로 로그인"
-            case .appleImage:
-                return "apple"
-            case .appleTitle:
-                return "Apple 계정으로 로그인"
-            }
-        }
-    }
+    private(set) var oauthButtonType: OAuthButtonType?
 
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -39,9 +21,10 @@ class OAuthLoginButton: UIButton {
         fatalError()
     }
 
-    func setImageWithTitle(imageName: ButtonName, title: ButtonName) {
-        let image = UIImage(named: imageName.description)?.resizeWithHeighScale(height: 24)
-        self.setTitle(title.description, for: .normal)
+    func configureOAuthButton(with buttonType: OAuthButtonType) {
+        self.oauthButtonType = buttonType
+        let image = UIImage(named: buttonType.image)?.resizeWithHeighScale(height: 24)
+        self.setTitle(buttonType.title, for: .normal)
         self.setImage(image, for: .normal)
     }
 }
