@@ -21,10 +21,12 @@ final class AppleManager: NSObject, OAuthManageable {
         self.prepareToRequest()
     }
 
-    func sendRequest() {
+    func enquireForGrant(handler: @escaping (URL?) -> Void) {
         guard let controller = authorizationController else { return }
         controller.performRequests()
+        handler(nil)
     }
+
 }
 
 private extension AppleManager {
