@@ -8,7 +8,8 @@
 import UIKit
 
 extension UIColor {
-    class var loginBackground: UIColor? { return UIColor(named: "LoginBackground")}
-    class var logSignInButton: UIColor? { return UIColor(named: "LogSignInButton")}
-    class var oauthLoginButton: UIColor? { return UIColor(named: "OAuthLoginButton")}
+    class var loginBackground: UIColor? { return UIColor(named: "LoginBackground") ?? UIColor.systemGray }
+    class var logSignInButton: UIColor? { return UIColor(named: "LogSignInButton") ?? UIColor.systemBlue }
+    class var oauthLoginButton: UIColor? { return UIColor(named: "OAuthLoginButton") ?? UIColor.black }
+    class var dividedLine: UIColor? { return UIColor(named: "DividedLine") ?? UIColor.systemGray2 }
 }

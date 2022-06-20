@@ -8,23 +8,23 @@
 import UIKit
 
 class OAuthLoginView: UIView {
-    
+
     var delegate: OAuthButtonDelegate?
-    
+
     private let githubLoginButton: OAuthLoginButton = {
         let button = OAuthLoginButton()
         button.setImageWithTitle(imageName: .gitImage, title: .gitTitle)
-        
+
         return button
     }()
-    
+
     private let appleLoginButton: OAuthLoginButton = {
         let button = OAuthLoginButton()
         button.setImageWithTitle(imageName: .appleImage, title: .appleTitle)
-        
+
         return button
     }()
-    
+
     override init(frame: CGRect) {
         super.init(frame: frame)
         backgroundColor = .clear
@@ -39,23 +39,29 @@ class OAuthLoginView: UIView {
 }
 
 private extension OAuthLoginView {
-    
+
+    func getStackViewAttributes(subviews: [UIView]) -> UIStackView {
+        let stackView = UIStackView(arrangedSubviews: subviews)
+        stackView.distribution = .fillEqually
+        stackView.axis = .vertical
+        stackView.spacing = 14
+        stackView.translatesAutoresizingMaskIntoConstraints = false
+
+        return stackView
+    }
+
     func setConstraints() {
-        addSubViews(githubLoginButton, appleLoginButton)
-        
+        let buttonStack = getStackViewAttributes(subviews: [appleLoginButton, githubLoginButton])
+        addSubview(buttonStack)
+
         NSLayoutConstraint.activate([
-            appleLoginButton.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 16),
-            appleLoginButton.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -16),
-            appleLoginButton.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: -60),
-            appleLoginButton.heightAnchor.constraint(equalToConstant: 56),
-            
-            githubLoginButton.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 16),
-            githubLoginButton.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -16),
-            githubLoginButton.bottomAnchor.constraint(equalTo: appleLoginButton.topAnchor, constant: -14),
-            githubLoginButton.heightAnchor.constraint(equalToConstant: 56)
+            buttonStack.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 16),
+            buttonStack.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -16),
+            buttonStack.heightAnchor.constraint(equalToConstant: 126),
+            buttonStack.centerYAnchor.constraint(equalTo: self.centerYAnchor)
         ])
     }
-    
+
     func setOAuthButtonAction() {
         let appleAction = UIAction(handler: { _ in
             self.delegate?.didClickAppleButton()
@@ -63,7 +69,7 @@ private extension OAuthLoginView {
         let gitHubAction = UIAction(handler: { _ in
             self.delegate?.didClickGitHubButton()
         })
-        
+
         if #available(iOS 14.0, *) {
             appleLoginButton.addAction(appleAction, for: .touchDown)
             githubLoginButton.addAction(gitHubAction, for: .touchDown)
@@ -72,12 +78,12 @@ private extension OAuthLoginView {
             githubLoginButton.addTarget(self, action: #selector(touchedGitHubButton), for: .touchDown)
         }
     }
-    
+
     @objc
     func touchedAppleButton() {
         self.delegate?.didClickAppleButton()
     }
-    
+
     @objc
     func touchedGitHubButton() {
         self.delegate?.didClickGitHubButton()
