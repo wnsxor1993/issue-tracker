@@ -9,15 +9,48 @@ import Foundation
 
 final class GitHubManager: OAuthManageable {
 
-    var endPoint: EndPoint
+    private(set) var endPoint: EndPoint
+    var responseHandler: ((Bool) -> Void)?
 
     init(endPoint: EndPoint) {
         self.endPoint = endPoint
+        self.setNotificationObserver()
     }
 
     func enquireForGrant(handler: @escaping (URL?) -> Void) {
         handler(endPoint.url)
-
     }
 
+    func observe(responseHandler: @escaping (Bool) -> Void) {
+        self.responseHandler = responseHandler
+    }
+}
+
+private extension GitHubManager {
+    func setNotificationObserver() {
+        NotificationCenter.default.addObserver(self, selector: #selector(didRecieveGrantCode(notification:)), name: .recievedGrantCode, object: nil)
+    }
+
+    @objc func didRecieveGrantCode(notification: Notification) {
+        guard var grantCode = notification.userInfo?[NotificationKey.grantCode]as? String else {return}
+
+        let endPoint = EndPoint(urlConfigure: GitURLConfiguration(), method: .POST, body: nil)
+        self.requestAPI(with: endPoint)
+
+        print(grantCode)
+    }
+
+    func requestAPI(with endPoint: EndPoint) {
+        NetworkService.request(endPoint: endPoint, completion: { result in
+            switch result {
+            case .success(let data):
+                // TODO: Decode response data
+                print(data)
+                self.responseHandler?(true)
+            case .failure(let error):
+                print(error)
+                self.responseHandler?(false)
+            }
+        })
+    }
 }
