@@ -16,4 +16,9 @@ extension Bundle {
         return  value == nil ? nil : value
     }
 
+    static var targetName: String {
+        let targetName = main.bundleURL.lastPathComponent.replacingOccurrences(of: ".app", with: "").lowercased()
+        return targetName
+    }
+
 }

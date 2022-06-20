@@ -50,36 +50,30 @@ extension LoginViewController: OAuthButtonDelegate {
     func didClick(buttonType: OAuthButtonType) {
         switch buttonType {
         case .git:
-            didClickGitOAuthButton()
-        case .apple:
-            didClickAppleOAuthButton()
-        }
-    }
+            githubManager.enquireForGrant { url in
+                guard let url = url else {return }
+                if UIApplication.shared.canOpenURL(url) {
+                    UIApplication.shared.open(url)
+                }
+            }
 
-    func didClickGitOAuthButton() {
-        githubManager.enquireForGrant { url in
-            if UIApplication.shared.canOpenURL(url) {
-                UIApplication.shared.open(url)
+        case .apple:
+            appleManager.enquireForGrant {_ in}
             }
         }
-    }
-
-    func didClickAppleOAuthButton() {
-        guard let manager = appleManager as? AppleManager else { return }
-        manager.sendRequest()
-    }
 }
 
 // MARK: GitOath
 private extension LoginViewController {
 
     private func setNotificationObserver() {
-        NotificationCenter.default.addObserver(self, selector: #selector(didRecieveGrandCode(notification:)), name: .recievedGrantCode, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(didRecieveGrantCode(notification:)), name: .recievedGrantCode, object: nil)
     }
 
-    @objc func didRecieveGrandCode(notification: Notification) {
+    @objc func didRecieveGrantCode(notification: Notification) {
         guard var grantCode = notification.userInfo?[NotificationKey.grantCode]as? String else {return}
         // TODO: Network Manager request to server for token
+        print(grantCode)
     }
 }
 
