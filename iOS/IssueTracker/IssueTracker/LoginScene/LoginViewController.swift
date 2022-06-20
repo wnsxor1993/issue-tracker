@@ -12,7 +12,7 @@ class LoginViewController: UIViewController {
 
     private lazy var appleManager: OAuthManageable = AppleManager(endPoint: EndPoint(urlConfigure: GitURLConfiguration(), method: .POST, body: nil), presentationAnchor: self.view.window)
 
-    private var githubManager = GitHubManager(endPoint: EndPoint(urlConfigure: GitURLConfiguration(), method: .POST, body: nil))
+    private var githubManager: OAuthManageable = GitHubManager(endPoint: EndPoint(urlConfigure: GitURLConfiguration(), method: .POST, body: nil))
 
     private let titleLabel: UILabel = {
         let label = UILabel()
@@ -41,7 +41,7 @@ class LoginViewController: UIViewController {
         super.viewDidLoad()
         view.backgroundColor = .loginBackground
         setViewsConstraint()
-        setNotificationObserver()
+        setOAuthObserver()
         oauthLoginView.delegate = self
     }
 }
@@ -61,20 +61,6 @@ extension LoginViewController: OAuthButtonDelegate {
             appleManager.enquireForGrant {_ in}
             }
         }
-}
-
-// MARK: GitOath
-private extension LoginViewController {
-
-    private func setNotificationObserver() {
-        NotificationCenter.default.addObserver(self, selector: #selector(didRecieveGrantCode(notification:)), name: .recievedGrantCode, object: nil)
-    }
-
-    @objc func didRecieveGrantCode(notification: Notification) {
-        guard var grantCode = notification.userInfo?[NotificationKey.grantCode]as? String else {return}
-        // TODO: Network Manager request to server for token
-        print(grantCode)
-    }
 }
 
 private extension LoginViewController {
@@ -97,5 +83,15 @@ private extension LoginViewController {
             oauthLoginView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor),
             oauthLoginView.trailingAnchor.constraint(equalTo: self.view.trailingAnchor)
         ])
+    }
+
+    func setOAuthObserver() {
+        let responseHandler: ((Bool) -> Void) = { isVerified in
+            guard isVerified == true else { return }
+            print(isVerified)
+        }
+
+        self.appleManager.observe(responseHandler: responseHandler)
+        self.githubManager.observe(responseHandler: responseHandler)
     }
 }
