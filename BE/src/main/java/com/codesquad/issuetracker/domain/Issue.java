@@ -82,4 +82,9 @@ public class Issue {
         labels.forEach(label -> putLabelToIssue(label, issue));
     }
 
+    public void changeIssueState(boolean isOpened) {
+        this.isOpened = isOpened;
+        lastModifiedAt = LocalDateTime.now();
+    }
+
 }

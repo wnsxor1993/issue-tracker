@@ -4,6 +4,7 @@ import com.codesquad.issuetracker.domain.Issue;
 import com.codesquad.issuetracker.domain.Label;
 import com.codesquad.issuetracker.domain.Member;
 import com.codesquad.issuetracker.domain.Milestone;
+import com.codesquad.issuetracker.excption.IssueNotFoundException;
 import com.codesquad.issuetracker.excption.MemberNotFoundException;
 import com.codesquad.issuetracker.excption.MilestoneNotFoundException;
 import com.codesquad.issuetracker.repository.issue.IssueRepository;
@@ -55,6 +56,20 @@ public class IssueCommandService {
     private Member findMember(Long memberId) {
         return memberRepository.findById(memberId)
                 .orElseThrow(() -> new MemberNotFoundException("일치하는 식별자의 회원이 존재하지 않습니다."));
+    }
+
+    public void changeState(Long issueId, boolean isOpened) {
+        Issue issue = findIssue(issueId);
+        issue.changeIssueState(isOpened);
+    }
+
+    private Issue findIssue(Long issueId) {
+        return issueRepository.findById(issueId)
+                .orElseThrow(() -> new IssueNotFoundException("일치하는 식별자의 이슈가 존재하지 않습니다."));
+    }
+
+    public void changeStates(List<Long> issueIds, boolean isOpened) {
+
     }
 
 }

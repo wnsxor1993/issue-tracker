@@ -1,5 +1,6 @@
 package com.codesquad.issuetracker.web;
 
+import com.codesquad.issuetracker.domain.Issue;
 import com.codesquad.issuetracker.service.issue.IssueCommandService;
 import com.codesquad.issuetracker.service.issue.IssueQueryService;
 import com.codesquad.issuetracker.web.dto.*;
@@ -68,9 +69,12 @@ public class IssueController {
      * 이슈 상태변경(open, close)
      */
     @PatchMapping("/issue-tracker/api/issues/{issueId}")
-    public IssueStateChangeResponse stateChange(@RequestBody IssueStateChangeRequest stateChangeRequest) {
+    public IssueStateChangeResponse stateChange(@PathVariable Long issueId, @RequestBody IssueStateChangeRequest stateChangeRequest) {
         log.info("Issue StateChange Request = {}", stateChangeRequest);
-        return null;
+        issueCommandService.changeState(issueId, stateChangeRequest.isOpened());
+        Issue issue = issueQueryService.findIssue(issueId);
+
+        return IssueStateChangeResponse.create(issue);
     }
 
     /**
