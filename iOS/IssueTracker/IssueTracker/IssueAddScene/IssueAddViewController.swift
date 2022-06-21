@@ -16,6 +16,7 @@ final class IssueAddViewController: UIViewController {
         super.viewDidLoad()
         setNavigationBar()
         setConstraints()
+        setInnerPropertyDelegate()
     }
 }
 
@@ -43,16 +44,24 @@ private extension IssueAddViewController {
     }
 
     func setInnerPropertyDelegate() {
-        self.listView.listCollectionView.delegate = self
+        self.listView.listTableView.delegate = self
+        self.listView.listTableView.dataSource = self
     }
 }
 
-extension IssueAddViewController: UICollectionViewDelegate, UICollectionViewDataSource {
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+extension IssueAddViewController: UITableViewDelegate, UITableViewDataSource {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return 3
     }
 
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        <#code#>
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: ListCell.cellIdentifier) as? ListCell else { return UITableViewCell()}
+
+        cell.configureCellText(title: "AAA", value: "nothing")
+        return cell
+    }
+
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 44
     }
 }

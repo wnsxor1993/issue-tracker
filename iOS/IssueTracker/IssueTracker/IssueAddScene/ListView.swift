@@ -18,16 +18,17 @@ class ListView: UIView {
         return label
     }()
 
-    private(set) var listCollectionView: UICollectionView = {
-        let collectionView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewLayout())
-        collectionView.translatesAutoresizingMaskIntoConstraints = false
+    private(set) var listTableView: UITableView = {
+        let tableView = UITableView()
+        tableView.translatesAutoresizingMaskIntoConstraints = false
 
-        return collectionView
+        return tableView
     }()
 
     override init(frame: CGRect) {
         super.init(frame: frame)
         backgroundColor = .white
+        registerTableView()
         setConstraints()
     }
 
@@ -39,19 +40,23 @@ class ListView: UIView {
 
 private extension ListView {
 
+    func registerTableView() {
+        listTableView.register(ListCell.self, forCellReuseIdentifier: ListCell.cellIdentifier)
+    }
+
     func setConstraints() {
         self.translatesAutoresizingMaskIntoConstraints = false
-        self.addSubViews(titleLabel, listCollectionView)
+        self.addSubViews(titleLabel, listTableView)
 
         NSLayoutConstraint.activate([
             titleLabel.topAnchor.constraint(equalTo: self.topAnchor, constant: 18),
             titleLabel.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 16),
             titleLabel.trailingAnchor.constraint(equalTo: self.trailingAnchor),
 
-            listCollectionView.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 8),
-            listCollectionView.bottomAnchor.constraint(equalTo: self.bottomAnchor),
-            listCollectionView.leadingAnchor.constraint(equalTo: self.leadingAnchor),
-            listCollectionView.trailingAnchor.constraint(equalTo: self.trailingAnchor)
+            listTableView.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 8),
+            listTableView.bottomAnchor.constraint(equalTo: self.bottomAnchor),
+            listTableView.leadingAnchor.constraint(equalTo: self.leadingAnchor),
+            listTableView.trailingAnchor.constraint(equalTo: self.trailingAnchor)
         ])
     }
 }
