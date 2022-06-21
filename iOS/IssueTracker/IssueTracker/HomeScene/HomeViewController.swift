@@ -13,6 +13,7 @@ class HomeViewController: UIViewController {
         super.viewDidLoad()
         view.backgroundColor = .secondarySystemBackground
         setNavigation()
+        setDataSource()
     }
 
 }
@@ -26,13 +27,14 @@ private extension HomeViewController {
         navigationItem.rightBarButtonItem = selectBarItem
         navigationItem.title = "이슈"
         navigationController?.navigationBar.prefersLargeTitles = true
-        var navigationBarAppearance = UINavigationBarAppearance()
+        let navigationBarAppearance = UINavigationBarAppearance()
         navigationBarAppearance.shadowColor = .black
         navigationController?.navigationBar.scrollEdgeAppearance = navigationBarAppearance
     }
 
-    @objc func filterIssue() {
+    func setDataSource() {
+        CollectionViewDataSource<String, UICollectionViewCell>(["d", "d"], reuseIdentifier: "d") { _, _ in
 
+        }
     }
-
 }
