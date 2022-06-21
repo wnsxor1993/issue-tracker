@@ -3,7 +3,8 @@ name: issuetracker-system
 
 # 배포 조건 : Actions에서 수동으로 실행 시 배포(push하자마자 바로 자동으로 배포되는 것은 위험성이 큼)
 on:
-  workflow_dispatch:
+  push:
+    branches: [ BE-deploy ]
   
 env:
   S3_BUCKET_NAME: issuetracker-deploy-bucket
