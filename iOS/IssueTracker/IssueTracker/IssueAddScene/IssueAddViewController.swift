@@ -10,6 +10,7 @@ import UIKit
 final class IssueAddViewController: UIViewController {
 
     private var commentView = CommentView()
+    private var listView = ListView()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -26,13 +27,18 @@ private extension IssueAddViewController {
     }
 
     func setConstraints() {
-        self.view.addSubViews(commentView)
+        self.view.addSubViews(commentView, listView)
 
         NSLayoutConstraint.activate([
             commentView.topAnchor.constraint(equalTo: self.view.topAnchor),
             commentView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor),
             commentView.trailingAnchor.constraint(equalTo: self.view.trailingAnchor),
-            commentView.heightAnchor.constraint(equalTo: self.view.heightAnchor, multiplier: 0.7)
+            commentView.heightAnchor.constraint(equalTo: self.view.heightAnchor, multiplier: 0.7),
+
+            listView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor),
+            listView.trailingAnchor.constraint(equalTo: self.view.trailingAnchor),
+            listView.topAnchor.constraint(equalTo: commentView.bottomAnchor),
+            listView.bottomAnchor.constraint(equalTo: self.view.bottomAnchor)
         ])
     }
 }
