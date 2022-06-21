@@ -59,6 +59,8 @@ extension LoginViewController: OAuthButtonDelegate {
 
         case .apple:
             appleManager.enquireForGrant {_ in}
+                let vc = IssueAddViewController()
+                self.present(vc, animated: true)
             }
         }
 }

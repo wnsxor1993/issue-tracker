@@ -14,6 +14,7 @@ final class IssueAddViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setNavigationBar()
+        setConstraints()
     }
 }
 

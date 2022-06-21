@@ -60,26 +60,25 @@ private extension CommentView {
         self.addSubViews(titleLabel, titleTextField, commentTextView, heightDividedLine, widthDividedLine)
 
         NSLayoutConstraint.activate([
-            widthDividedLine.heightAnchor.constraint(equalToConstant: 1),
-            widthDividedLine.leftAnchor.constraint(equalTo: self.leadingAnchor, constant: 20),
-            widthDividedLine.trailingAnchor.constraint(equalTo: self.trailingAnchor),
-            widthDividedLine.topAnchor.constraint(equalToSystemSpacingBelow: self.centerYAnchor, multiplier: 0.1),
-            widthDividedLine.bottomAnchor.constraint(equalToSystemSpacingBelow: self.centerYAnchor, multiplier: -0.9),
-
             titleLabel.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 16),
             titleLabel.topAnchor.constraint(equalTo: self.topAnchor, constant: 11),
-            titleLabel.bottomAnchor.constraint(equalTo: widthDividedLine.topAnchor, constant: -10),
             titleLabel.widthAnchor.constraint(equalToConstant: 30),
+            titleLabel.heightAnchor.constraint(equalToConstant: 22),
 
             heightDividedLine.widthAnchor.constraint(equalToConstant: 2),
             heightDividedLine.leadingAnchor.constraint(equalTo: titleLabel.trailingAnchor, constant: 17),
             heightDividedLine.topAnchor.constraint(equalTo: self.topAnchor, constant: 11),
-            heightDividedLine.bottomAnchor.constraint(equalTo: widthDividedLine.topAnchor, constant: -10),
+            heightDividedLine.heightAnchor.constraint(equalToConstant: 20),
 
             titleTextField.topAnchor.constraint(equalTo: self.topAnchor, constant: 11),
-            titleTextField.bottomAnchor.constraint(equalTo: widthDividedLine.topAnchor, constant: -10),
+            titleTextField.heightAnchor.constraint(equalToConstant: 22),
             titleTextField.leadingAnchor.constraint(equalTo: heightDividedLine.trailingAnchor, constant: 10),
             titleTextField.trailingAnchor.constraint(equalTo: self.trailingAnchor),
+
+            widthDividedLine.heightAnchor.constraint(equalToConstant: 1),
+            widthDividedLine.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 20),
+            widthDividedLine.trailingAnchor.constraint(equalTo: self.trailingAnchor),
+            widthDividedLine.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 10),
 
             commentTextView.topAnchor.constraint(equalTo: widthDividedLine.bottomAnchor),
             commentTextView.bottomAnchor.constraint(equalTo: self.bottomAnchor),
