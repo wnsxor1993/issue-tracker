@@ -11,18 +11,28 @@ class HomeViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
+        view.backgroundColor = .secondarySystemBackground
+        setNavigation()
     }
 
-    /*
-    // MARK: - Navigation
+}
 
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+private extension HomeViewController {
+
+    func setNavigation() {
+        let filterBarItem = UIBarButtonItem(customView: NavigationButtonItem("필터", .filter))
+        let selectBarItem = UIBarButtonItem(customView: NavigationButtonItem("선택", .select))
+        navigationItem.leftBarButtonItem = filterBarItem
+        navigationItem.rightBarButtonItem = selectBarItem
+        navigationItem.title = "이슈"
+        navigationController?.navigationBar.prefersLargeTitles = true
+        var navigationBarAppearance = UINavigationBarAppearance()
+        navigationBarAppearance.shadowColor = .black
+        navigationController?.navigationBar.scrollEdgeAppearance = navigationBarAppearance
     }
-    */
+
+    @objc func filterIssue() {
+
+    }
 
 }

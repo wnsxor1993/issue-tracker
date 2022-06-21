@@ -11,6 +11,7 @@
 		B71A0A032859B8FF0030D3ED /* NotificationCenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = B71A0A022859B8FF0030D3ED /* NotificationCenter.swift */; };
 		B724DC92286058C3007DAC1A /* TabBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B724DC91286058C3007DAC1A /* TabBarViewController.swift */; };
 		B724DC9528605915007DAC1A /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B724DC9428605915007DAC1A /* HomeViewController.swift */; };
+		B724DC9928615FC4007DAC1A /* NavigationButtonItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = B724DC9828615FC4007DAC1A /* NavigationButtonItem.swift */; };
 		B7A836EE285B319500A06C77 /* Bundle+.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7A836ED285B319500A06C77 /* Bundle+.swift */; };
 		B7A836F0285B322000A06C77 /* URLConfigurable.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7A836EF285B322000A06C77 /* URLConfigurable.swift */; };
 		B7A836F3285B32C900A06C77 /* GitURLConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7A836F2285B32C900A06C77 /* GitURLConfiguration.swift */; };
@@ -48,6 +49,7 @@
 		B71A0A022859B8FF0030D3ED /* NotificationCenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotificationCenter.swift; sourceTree = "<group>"; };
 		B724DC91286058C3007DAC1A /* TabBarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarViewController.swift; sourceTree = "<group>"; };
 		B724DC9428605915007DAC1A /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
+		B724DC9828615FC4007DAC1A /* NavigationButtonItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationButtonItem.swift; sourceTree = "<group>"; };
 		B7A836ED285B319500A06C77 /* Bundle+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Bundle+.swift"; sourceTree = "<group>"; };
 		B7A836EF285B322000A06C77 /* URLConfigurable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLConfigurable.swift; sourceTree = "<group>"; };
 		B7A836F2285B32C900A06C77 /* GitURLConfiguration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GitURLConfiguration.swift; sourceTree = "<group>"; };
@@ -114,6 +116,7 @@
 			isa = PBXGroup;
 			children = (
 				B724DC9428605915007DAC1A /* HomeViewController.swift */,
+				B724DC9828615FC4007DAC1A /* NavigationButtonItem.swift */,
 			);
 			path = HomeScene;
 			sourceTree = "<group>";
@@ -414,6 +417,7 @@
 				B7A836FD285B3A1200A06C77 /* EndPoint.swift in Sources */,
 				B7A836FB285B39B500A06C77 /* HTTPPackageable.swift in Sources */,
 				D2B750682856FCBE0078067A /* AppDelegate.swift in Sources */,
+				B724DC9928615FC4007DAC1A /* NavigationButtonItem.swift in Sources */,
 				D2D5265528588B3A00581C88 /* OAuthLoginView.swift in Sources */,
 				D2D5265E2858D98400581C88 /* OAuthLoginButton.swift in Sources */,
 				D2D526632859A65600581C88 /* OAuthButtonDelegate.swift in Sources */,

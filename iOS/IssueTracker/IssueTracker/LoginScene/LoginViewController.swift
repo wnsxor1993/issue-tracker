@@ -89,6 +89,9 @@ private extension LoginViewController {
         let responseHandler: ((Bool) -> Void) = { isVerified in
             guard isVerified == true else { return }
             print(isVerified)
+            let nextViewController = TabBarViewController()
+            nextViewController.modalPresentationStyle = .fullScreen
+            self.present(nextViewController, animated: true)
         }
 
         self.appleManager.observe(responseHandler: responseHandler)
