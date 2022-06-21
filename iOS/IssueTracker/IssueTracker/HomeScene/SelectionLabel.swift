@@ -7,23 +7,23 @@
 
 import UIKit
 
-class SelectionLabel: UILabel {
+class SelectionImageView: UIImageView {
 
     var isSelected: Bool = false {
         didSet {
-            selectionImageView.isHidden = isSelected
+            self.isHidden = !isSelected
         }
     }
 
-    private var selectionImageView: UIImageView = {
-        var imageView = UIImageView()
-        let image = UIImage(systemName: "checkmark.circle.fill")
-        imageView.isHidden = false
-        return imageView
-    }()
-
     override init(frame: CGRect) {
         super.init(frame: frame)
+        setDisplay()
+    }
+
+    private func setDisplay() {
+        let image = UIImage(systemName: "checkmark.circle.fill")
+        self.contentMode = .scaleAspectFit
+        self.image = image
     }
 
     required init?(coder: NSCoder) {

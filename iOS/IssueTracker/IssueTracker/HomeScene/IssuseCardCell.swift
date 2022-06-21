@@ -7,24 +7,24 @@
 
 import UIKit
 
-class IssuseCardCell: UICollectionViewCell {
+class IssuseCardCell: UITableViewCell {
+
+    static let id = "IssuseCardCell"
 
     private var title: UILabel = {
         let label = UILabel()
         label.font = .mediumBold
-        label.text = "test 이슈 타이틀"
         return label
     }()
 
-    private var selectionLabel: SelectionLabel = {
-        let label = SelectionLabel()
+    private var selectionImageView: SelectionImageView = {
+        let label = SelectionImageView(frame: .zero)
         return label
     }()
 
     private lazy var titleStackView: UIStackView = {
-        let stackView = UIStackView(arrangedSubviews: [title, selectionLabel])
+        let stackView = UIStackView(arrangedSubviews: [title, selectionImageView])
         stackView.axis = .horizontal
-        stackView.distribution = .equalCentering
         return stackView
     }()
 
@@ -32,7 +32,7 @@ class IssuseCardCell: UICollectionViewCell {
         let label = UILabel()
         label.font = .smallRegular
         label.textColor = .systemGray
-        label.text = "issue 내용입니다"
+        label.numberOfLines = 2
         return label
     }()
 
@@ -47,30 +47,31 @@ class IssuseCardCell: UICollectionViewCell {
         let label = UILabel()
         label.font = .smallRegular
         label.textColor = .systemGray
-        label.text = "mileStoneTextTest"
         return label
     }()
 
     private lazy var mileStoneStackView: UIStackView = {
         let stackView = UIStackView(arrangedSubviews: [mileStoneImageView, mileStoneLabel])
         stackView.axis = .horizontal
-//        stackView.isHidden = true
         return stackView
     }()
 
     private var badgeLabel: BadgeLabel = {
         let badge = BadgeLabel()
+        badge.translatesAutoresizingMaskIntoConstraints = false
         return badge
     }()
 
     private lazy var cellContianerStackView: UIStackView = {
-       let stackView = UIStackView(arrangedSubviews: [titleStackView, content, mileStoneStackView, badgeLabel])
+       let stackView = UIStackView(arrangedSubviews: [titleStackView, content, mileStoneStackView])
         stackView.axis = .vertical
+        stackView.spacing = 16
+        stackView.translatesAutoresizingMaskIntoConstraints = false
         return stackView
     }()
 
-    override init(frame: CGRect) {
-        super.init(frame: frame)
+    override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
+        super.init(style: style, reuseIdentifier: reuseIdentifier)
         setConstraints()
     }
 
@@ -79,18 +80,35 @@ class IssuseCardCell: UICollectionViewCell {
     }
 
     private func setConstraints() {
+        contentView.addSubview(cellContianerStackView)
+        contentView.addSubview(badgeLabel)
         NSLayoutConstraint.activate([
             cellContianerStackView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 24),
-            cellContianerStackView.leftAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 16),
-            cellContianerStackView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -16)
+            cellContianerStackView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 16),
+            cellContianerStackView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -16),
+
+            badgeLabel.topAnchor.constraint(equalTo: cellContianerStackView.bottomAnchor, constant: 16),
+            badgeLabel.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -24),
+            badgeLabel.leadingAnchor.constraint(equalTo: cellContianerStackView.leadingAnchor)
         ])
     }
+
+}
+
+extension IssuseCardCell {
 
     func configure(model: IssueCard) {
         title.text = model.title
         content.text =  model.content
-        selectionLabel.isSelected =  model.isSelected
-        
+        selectionImageView.isSelected =  model.isSelected
+        mileStoneLabel.text =  model.mileStone
+        badgeLabel.configure(model.label, hexColor: model.labelColor)
+        if mileStoneLabel.text == nil {
+            mileStoneStackView.isHidden = true
+        }
     }
 
+    func selected() {
+        selectionImageView.isSelected = !selectionImageView.isSelected
+    }
 }

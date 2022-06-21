@@ -9,11 +9,16 @@ import UIKit
 
 class HomeViewController: UIViewController {
 
+    private var homeTableView: UITableView?
+    private var dataSource: TableViewDataSource<IssueCard, IssuseCardCell>?
+
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .secondarySystemBackground
         setNavigation()
+        setTableView()
         setDataSource()
+        setConstraints()
     }
 
 }
@@ -32,9 +37,49 @@ private extension HomeViewController {
         navigationController?.navigationBar.scrollEdgeAppearance = navigationBarAppearance
     }
 
-    func setDataSource() {
-        CollectionViewDataSource<String, UICollectionViewCell>(["d", "d"], reuseIdentifier: "d") { _, _ in
+    func setTableView() {
+        let tableView = UITableView(frame: .zero, style: .plain)
+        tableView.register(IssuseCardCell.self, forCellReuseIdentifier: IssuseCardCell.id)
+        homeTableView = tableView
+        homeTableView?.translatesAutoresizingMaskIntoConstraints = false
+        homeTableView?.delegate = self
 
-        }
+    }
+
+    func setDataSource() {
+        let mockEntity = IssueCard(title: "야호", content: "너와나의 연결고리 이건 우리안의 소리 너와나의 연결고리 이건 우리안의 소리 연결고리 이건 우리안의 소리 ", isSelected: false, mileStone: "dsds", label: "이것의 끝은 어디인가", labelColor: "#020070")
+        let mockEntity2 = IssueCard(title: "야호", content: "이건 우리안의 소리  연결고리연결고리연결고리연결고리연결고리연결고리 이건 우리안의 소리 ", isSelected: true, mileStone: nil, label: "북치고 장구치기 낄낄", labelColor: "#FF3B30")
+        var testData = [mockEntity, mockEntity2, mockEntity, mockEntity2, mockEntity]
+        issueCardsDidLoad(model: testData)
+    }
+
+    func setConstraints() {
+        guard let homeTableView = homeTableView else {return}
+        homeTableView.rowHeight = UITableView.automaticDimension
+        homeTableView.estimatedRowHeight = 130
+        view.addSubview(homeTableView)
+        NSLayoutConstraint.activate([
+            homeTableView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+            homeTableView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            homeTableView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            homeTableView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
+        ])
+    }
+
+    func issueCardsDidLoad(model: [IssueCard]) {
+
+        let dataSource = TableViewDataSource(model, reuseIdentifier: IssuseCardCell.id, cellConfigurator: { (model: IssueCard, cell: IssuseCardCell) in
+            cell.configure(model: model)
+        })
+        self.dataSource = dataSource
+        homeTableView?.dataSource = dataSource
+
+    }
+
+}
+
+extension HomeViewController: UITableViewDelegate {
+    func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
+        return UITableView.automaticDimension
     }
 }

@@ -13,4 +13,5 @@ struct IssueCard {
     let isSelected: Bool
     let mileStone: String?
     let label: String?
+    let labelColor: String?
 }
