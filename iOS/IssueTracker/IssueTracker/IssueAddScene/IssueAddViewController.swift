@@ -41,4 +41,18 @@ private extension IssueAddViewController {
             listView.bottomAnchor.constraint(equalTo: self.view.bottomAnchor)
         ])
     }
+
+    func setInnerPropertyDelegate() {
+        self.listView.listCollectionView.delegate = self
+    }
+}
+
+extension IssueAddViewController: UICollectionViewDelegate, UICollectionViewDataSource {
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return 3
+    }
+
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        <#code#>
+    }
 }
