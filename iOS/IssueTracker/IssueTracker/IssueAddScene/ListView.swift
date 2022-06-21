@@ -19,7 +19,7 @@ class ListView: UIView {
     }()
 
     private(set) var listCollectionView: UICollectionView = {
-        let collectionView = UICollectionView()
+        let collectionView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewLayout())
         collectionView.translatesAutoresizingMaskIntoConstraints = false
 
         return collectionView
@@ -28,6 +28,7 @@ class ListView: UIView {
     override init(frame: CGRect) {
         super.init(frame: frame)
         backgroundColor = .white
+        setConstraints()
     }
 
     @available(*, unavailable)
@@ -39,6 +40,7 @@ class ListView: UIView {
 private extension ListView {
 
     func setConstraints() {
+        self.translatesAutoresizingMaskIntoConstraints = false
         self.addSubViews(titleLabel, listCollectionView)
 
         NSLayoutConstraint.activate([
