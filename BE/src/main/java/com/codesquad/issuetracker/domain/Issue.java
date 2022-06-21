@@ -10,8 +10,8 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
-import static com.codesquad.issuetracker.domain.IssueAssignee.*;
-import static com.codesquad.issuetracker.domain.IssueLabel.*;
+import static com.codesquad.issuetracker.domain.IssueAssignee.assignMemberToIssue;
+import static com.codesquad.issuetracker.domain.IssueLabel.putLabelToIssue;
 import static javax.persistence.FetchType.LAZY;
 
 @Entity
@@ -61,9 +61,7 @@ public class Issue {
     }
 
     public static Issue create(Member author, List<Member> assigneeMembers, Milestone milestone, List<Label> labels, String title, String content) {
-
         LocalDateTime createdTime = LocalDateTime.now();
-
         Issue issue = Issue.builder()
                 .author(author)
                 .milestone(milestone)
@@ -73,20 +71,17 @@ public class Issue {
                 .lastModifiedAt(createdTime)
                 .isOpened(true)
                 .build();
-
-        initAssigneeMembers(assigneeMembers, issue);
-        initLabels(labels, issue);
+        initAssignees(assigneeMembers, issue);
+        initIssueLabels(labels, issue);
         return issue;
     }
 
-    private static void initAssigneeMembers(List<Member> assigneeMembers, Issue issue) {
-        assigneeMembers.stream()
-                .forEach(member -> assignMemberToIssue(member, issue));
+    private static void initAssignees(List<Member> assigneeMembers, Issue issue) {
+        assigneeMembers.forEach(member -> assignMemberToIssue(member, issue));
     }
 
-    private static void initLabels(List<Label> labels, Issue issue) {
-        labels.stream()
-                .forEach(label -> putLabelToIssue(label, issue));
+    private static void initIssueLabels(List<Label> labels, Issue issue) {
+        labels.forEach(label -> putLabelToIssue(label, issue));
     }
 
 }
