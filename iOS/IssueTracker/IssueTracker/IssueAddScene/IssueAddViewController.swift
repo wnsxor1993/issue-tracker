@@ -18,6 +18,10 @@ final class IssueAddViewController: UIViewController {
         setConstraints()
         setInnerPropertyDelegate()
     }
+
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        self.view.endEditing(true)
+    }
 }
 
 private extension IssueAddViewController {
@@ -46,6 +50,23 @@ private extension IssueAddViewController {
     func setInnerPropertyDelegate() {
         self.listView.listTableView.delegate = self
         self.listView.listTableView.dataSource = self
+        self.commentView.commentTextView.delegate = self
+    }
+}
+
+extension IssueAddViewController: UITextViewDelegate {
+    func textViewDidBeginEditing(_ textView: UITextView) {
+        guard textView.text == commentView.commentTextHolder else { return }
+
+        textView.text = nil
+        textView.textColor = .black
+    }
+
+    func textViewDidEndEditing(_ textView: UITextView) {
+        guard textView.text.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty else { return }
+
+        textView.text = commentView.commentTextHolder
+        textView.textColor = UIColor(red: 0.529, green: 0.529, blue: 0.553, alpha: 1)
     }
 }
 
