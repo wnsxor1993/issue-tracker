@@ -37,19 +37,21 @@ public class IssueCommandService {
         Milestone milestone = findMilestone(milestondId);
         List<Label> labels = labelRepository.findAllById(labelIds);
 
-        Issue issue = Issue.create(author, assigneeMembers, milestone,labels,title, content);
+        Issue issue = Issue.create(author, assigneeMembers, milestone, labels, title, content);
         issueRepository.save(issue);
         return issue.getId();
     }
 
     private Milestone findMilestone(Long milestoneId) {
-        return milestoneRepository.findById(milestoneId)
-                .orElseThrow(() -> new MilestoneNotFoundException("일치하는 식별자의 마일스톤이 존재하지 않습니다."));
+        return (milestoneId == null)
+                ? null
+                : milestoneRepository.findById(milestoneId)
+                        .orElseThrow(() -> new MilestoneNotFoundException("일치하는 식별자의 마일스톤이 존재하지 않습니다."));
     }
 
     private Member findMember(Long memberId) {
         return memberRepository.findById(memberId)
-                .orElseThrow(()-> new MemberNotFoundException("일치하는 식별자의 회원이 존재하지 않습니다."));
+                .orElseThrow(() -> new MemberNotFoundException("일치하는 식별자의 회원이 존재하지 않습니다."));
     }
 
 }
