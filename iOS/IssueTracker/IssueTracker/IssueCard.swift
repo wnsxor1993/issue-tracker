@@ -7,4 +7,10 @@
 
 import Foundation
 
-
+struct IssueCard {
+    let title: String
+    let content: String
+    let isSelected: Bool
+    let mileStone: String?
+    let label: String?
+}

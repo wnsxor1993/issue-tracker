@@ -17,6 +17,7 @@
 		B7A56D9728618F6800EA639D /* UIFont+.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7A56D9628618F6800EA639D /* UIFont+.swift */; };
 		B7A56D992861913300EA639D /* BadgeLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7A56D982861913300EA639D /* BadgeLabel.swift */; };
 		B7A56D9B2861C5E600EA639D /* IssueCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7A56D9A2861C5E600EA639D /* IssueCard.swift */; };
+		B7A56D9D2861C79D00EA639D /* SelectionLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7A56D9C2861C79D00EA639D /* SelectionLabel.swift */; };
 		B7A836EE285B319500A06C77 /* Bundle+.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7A836ED285B319500A06C77 /* Bundle+.swift */; };
 		B7A836F0285B322000A06C77 /* URLConfigurable.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7A836EF285B322000A06C77 /* URLConfigurable.swift */; };
 		B7A836F3285B32C900A06C77 /* GitURLConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7A836F2285B32C900A06C77 /* GitURLConfiguration.swift */; };
@@ -60,6 +61,7 @@
 		B7A56D9628618F6800EA639D /* UIFont+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIFont+.swift"; sourceTree = "<group>"; };
 		B7A56D982861913300EA639D /* BadgeLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BadgeLabel.swift; sourceTree = "<group>"; };
 		B7A56D9A2861C5E600EA639D /* IssueCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IssueCard.swift; sourceTree = "<group>"; };
+		B7A56D9C2861C79D00EA639D /* SelectionLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectionLabel.swift; sourceTree = "<group>"; };
 		B7A836ED285B319500A06C77 /* Bundle+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Bundle+.swift"; sourceTree = "<group>"; };
 		B7A836EF285B322000A06C77 /* URLConfigurable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLConfigurable.swift; sourceTree = "<group>"; };
 		B7A836F2285B32C900A06C77 /* GitURLConfiguration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GitURLConfiguration.swift; sourceTree = "<group>"; };
@@ -129,6 +131,7 @@
 				B724DC9828615FC4007DAC1A /* NavigationButtonItem.swift */,
 				B7A56D922861835B00EA639D /* CollectionViewDataSource.swift */,
 				B7A56D9428618E0900EA639D /* IssuseCardCell.swift */,
+				B7A56D9C2861C79D00EA639D /* SelectionLabel.swift */,
 				B7A56D982861913300EA639D /* BadgeLabel.swift */,
 			);
 			path = HomeScene;
@@ -451,6 +454,7 @@
 				D2915381285B740500B5CDA8 /* OAuthManageable.swift in Sources */,
 				B7A836EE285B319500A06C77 /* Bundle+.swift in Sources */,
 				B7A83710285C1A1300A06C77 /* GitHubManager.swift in Sources */,
+				B7A56D9D2861C79D00EA639D /* SelectionLabel.swift in Sources */,
 				B7A56D932861835B00EA639D /* CollectionViewDataSource.swift in Sources */,
 				D2D5264C285850A100581C88 /* LoginInputView.swift in Sources */,
 				D2915385286013DB00B5CDA8 /* OAuthButtonType.swift in Sources */,
