@@ -1,0 +1,57 @@
+name: issuetracker-system
+
+
+# 배포 조건 : Actions에서 수동으로 실행 시 배포(push하자마자 바로 자동으로 배포되는 것은 위험성이 큼)
+on:
+  workflow_dispatch:
+  
+env:
+  S3_BUCKET_NAME: issuetracker-deploy-bucket
+  PROJECT_NAME: issuetracker
+
+jobs:
+  build:
+    defaults:
+      run:
+        working-directory: ./BE
+    runs-on: ubuntu-latest
+
+    steps:
+      # 체크아웃
+      - name: Checkout
+        uses: actions/checkout@v3
+      
+      # JDK 설치
+      - name: Set up JDK 11
+        uses: actions/setup-java@v3
+        with:
+          java-version: '11'
+          distribution: 'temurin'
+      
+      # 권한 부여
+      - name: Grant execute permission for gradlew
+        run: chmod +x gradlew
+        shell: bash
+      
+      # 빌드
+      - name: Build with Gradle
+        uses: gradle/gradle-build-action@0d13054264b0bb894ded474f08ebb30921341cee
+        with:
+          arguments: build
+      
+      # 압축
+      - name: Make zip file
+        run: zip -r ./$GITHUB_SHA.zip .
+        shell: bash
+      
+      # AWS deploy 유저 인증
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v1
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: ${{ secrets.AWS_REGION }}
+      
+      # S3에 zip파일 업로드
+      - name: Upload to S3
+        run: aws s3 cp --region ap-northeast-2 ./$GITHUB_SHA.zip s3://$S3_BUCKET_NAME/$PROJECT_NAME/$GITHUB_SHA.zip
