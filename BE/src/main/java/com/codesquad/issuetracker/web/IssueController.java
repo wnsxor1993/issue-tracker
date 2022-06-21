@@ -8,6 +8,8 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @Slf4j
 @RestController
 @RequiredArgsConstructor
@@ -92,7 +94,10 @@ public class IssueController {
     @PatchMapping("/issue-tracker/api/issues")
     public MultipleIssueStateChangeResponse multipleStateChange(@RequestBody MultipleIssueStateChangeRequest multipleStateCahngeRequest) {
         log.info("Multiple Issue StateChange Request = {}", multipleStateCahngeRequest);
-        return null;
+        issueCommandService.changeStates(multipleStateCahngeRequest.getIssueIds(), multipleStateCahngeRequest.isOpened());
+        List<Issue> issues = issueQueryService.findIssues(multipleStateCahngeRequest.getIssueIds());
+
+        return MultipleIssueStateChangeResponse.create(issues);
     }
 
 }

@@ -8,6 +8,8 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+
 @Slf4j
 @Service
 @Transactional(readOnly = true)
@@ -19,5 +21,9 @@ public class IssueQueryService {
     public Issue findIssue(Long issueId) {
         return issueRepository.findById(issueId)
                 .orElseThrow(() -> new IssueNotFoundException("일치하는 식별자의 이슈를 찾을 수 없습니다."));
+    }
+
+    public List<Issue> findIssues(List<Long> issueIds) {
+        return issueRepository.findAllById(issueIds);
     }
 }

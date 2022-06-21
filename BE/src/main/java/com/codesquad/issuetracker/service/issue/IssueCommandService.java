@@ -69,7 +69,10 @@ public class IssueCommandService {
     }
 
     public void changeStates(List<Long> issueIds, boolean isOpened) {
+        List<Issue> issues = issueRepository.findAllById(issueIds);
 
+        issues.stream()
+                .forEach(issue -> issue.changeIssueState(isOpened));
     }
 
 }
