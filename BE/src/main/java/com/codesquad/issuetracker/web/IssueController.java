@@ -23,7 +23,18 @@ public class IssueController {
     @PostMapping("/issue-tracker/api/issues")
     public IssueCreateResponse create(@RequestBody IssueCreateRequest createRequest) {
         log.info("Issue Create Request = {}", createRequest);
-        return null;
+        Long authorId = SAMPLE_MEMBER_ID;
+
+        Long createdIssueId = issueCommandService.createIssue(
+                authorId,
+                createRequest.getAssigneeIds(),
+                createRequest.getMilestoneId(),
+                createRequest.getLabelIds(),
+                createRequest.getTitle(),
+                createRequest.getContent());
+        
+        log.info("Created Issue Id = {}", createdIssueId);
+        return new IssueCreateResponse(createdIssueId);
     }
 
     /**
