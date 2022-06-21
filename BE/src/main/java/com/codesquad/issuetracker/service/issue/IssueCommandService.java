@@ -39,6 +39,9 @@ public class IssueCommandService {
 
         Issue issue = Issue.create(author, assigneeMembers, milestone, labels, title, content);
         issueRepository.save(issue);
+
+        log.info("created Issue = {}", issue);
+
         return issue.getId();
     }
 
