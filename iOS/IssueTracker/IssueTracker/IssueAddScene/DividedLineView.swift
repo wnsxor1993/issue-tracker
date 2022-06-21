@@ -7,7 +7,7 @@
 
 import UIKit
 
-class DividedLineView: UIView {
+final class DividedLineView: UIView {
 
     override init(frame: CGRect) {
         super.init(frame: frame)
