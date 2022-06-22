@@ -36,13 +36,15 @@ private extension IssueAddViewController {
     }
 
     func setConstraints() {
+        let commentViewHeightRatio = 0.7
+
         self.view.addSubViews(commentView, listView)
 
         NSLayoutConstraint.activate([
             commentView.topAnchor.constraint(equalTo: self.view.topAnchor),
             commentView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor),
             commentView.trailingAnchor.constraint(equalTo: self.view.trailingAnchor),
-            commentView.heightAnchor.constraint(equalTo: self.view.heightAnchor, multiplier: 0.7),
+            commentView.heightAnchor.constraint(equalTo: self.view.heightAnchor, multiplier: commentViewHeightRatio),
 
             listView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor),
             listView.trailingAnchor.constraint(equalTo: self.view.trailingAnchor),
@@ -124,6 +126,8 @@ extension IssueAddViewController: UITextViewDelegate {
 extension IssueAddViewController: UITableViewDelegate {
 
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 44
+        let tableCellHeight: CGFloat = 44
+
+        return tableCellHeight
     }
 }

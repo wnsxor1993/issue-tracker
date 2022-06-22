@@ -60,18 +60,24 @@ final class ListCell: UITableViewCell {
 private extension ListCell {
 
     func setConstraints() {
+        let titleLeadingConstant: CGFloat = 16
+        let titleWidthRation: CGFloat = 0.3
+
+        let arrowTrailingConstant: CGFloat = -16
+        let arrowWidhtHeightConstant: CGFloat = 30
+
         self.addSubViews(titleLabel, valueLabel, arrowLabel)
 
         NSLayoutConstraint.activate([
-            titleLabel.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 16),
-            titleLabel.widthAnchor.constraint(equalTo: self.widthAnchor, multiplier: 0.3),
+            titleLabel.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: titleLeadingConstant),
+            titleLabel.widthAnchor.constraint(equalTo: self.widthAnchor, multiplier: titleWidthRation),
             titleLabel.topAnchor.constraint(equalTo: self.topAnchor),
             titleLabel.bottomAnchor.constraint(equalTo: self.bottomAnchor),
 
             arrowLabel.centerYAnchor.constraint(equalTo: self.centerYAnchor),
-            arrowLabel.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -16),
-            arrowLabel.heightAnchor.constraint(equalToConstant: 30),
-            arrowLabel.widthAnchor.constraint(equalToConstant: 30),
+            arrowLabel.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: arrowTrailingConstant),
+            arrowLabel.heightAnchor.constraint(equalToConstant: arrowWidhtHeightConstant),
+            arrowLabel.widthAnchor.constraint(equalToConstant: arrowWidhtHeightConstant),
 
             valueLabel.leadingAnchor.constraint(equalTo: titleLabel.trailingAnchor),
             valueLabel.trailingAnchor.constraint(equalTo: arrowLabel.leadingAnchor),
