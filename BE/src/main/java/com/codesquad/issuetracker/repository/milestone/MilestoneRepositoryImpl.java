@@ -1,14 +1,14 @@
-package com.codesquad.issuetracker.repository.comment;
+package com.codesquad.issuetracker.repository.milestone;
 
 import com.querydsl.jpa.impl.JPAQueryFactory;
 
 import javax.persistence.EntityManager;
 
-public class CommentQuerydslRepository implements CommentCustomRepository {
+public class MilestoneRepositoryImpl implements MilestoneCustomRepository {
 
     private final JPAQueryFactory queryFactory;
 
-    public CommentQuerydslRepository(EntityManager em) {
+    public MilestoneRepositoryImpl(EntityManager em) {
         this.queryFactory = new JPAQueryFactory(em);
     }
 }

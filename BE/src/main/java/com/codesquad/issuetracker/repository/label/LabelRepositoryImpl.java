@@ -1,14 +1,14 @@
-package com.codesquad.issuetracker.repository.milestone;
+package com.codesquad.issuetracker.repository.label;
 
 import com.querydsl.jpa.impl.JPAQueryFactory;
 
 import javax.persistence.EntityManager;
 
-public class MilestoneQuerydslRepository implements MilestoneCustomRepository {
+public class LabelRepositoryImpl implements LabelCustomRepository {
 
     private final JPAQueryFactory queryFactory;
 
-    public MilestoneQuerydslRepository(EntityManager em) {
+    public LabelRepositoryImpl(EntityManager em) {
         this.queryFactory = new JPAQueryFactory(em);
     }
 }
