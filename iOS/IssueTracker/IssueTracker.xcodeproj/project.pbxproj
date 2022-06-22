@@ -11,6 +11,13 @@
 		B71A0A032859B8FF0030D3ED /* NotificationCenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = B71A0A022859B8FF0030D3ED /* NotificationCenter.swift */; };
 		B724DC92286058C3007DAC1A /* TabBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B724DC91286058C3007DAC1A /* TabBarViewController.swift */; };
 		B724DC9528605915007DAC1A /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B724DC9428605915007DAC1A /* HomeViewController.swift */; };
+		B724DC9928615FC4007DAC1A /* NavigationButtonItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = B724DC9828615FC4007DAC1A /* NavigationButtonItem.swift */; };
+		B7A56D932861835B00EA639D /* CollectionViewDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7A56D922861835B00EA639D /* CollectionViewDataSource.swift */; };
+		B7A56D9528618E0900EA639D /* IssuseCardCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7A56D9428618E0900EA639D /* IssuseCardCell.swift */; };
+		B7A56D9728618F6800EA639D /* UIFont+.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7A56D9628618F6800EA639D /* UIFont+.swift */; };
+		B7A56D992861913300EA639D /* BadgeLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7A56D982861913300EA639D /* BadgeLabel.swift */; };
+		B7A56D9B2861C5E600EA639D /* IssueCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7A56D9A2861C5E600EA639D /* IssueCard.swift */; };
+		B7A56D9D2861C79D00EA639D /* SelectionLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7A56D9C2861C79D00EA639D /* SelectionLabel.swift */; };
 		B7A836EE285B319500A06C77 /* Bundle+.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7A836ED285B319500A06C77 /* Bundle+.swift */; };
 		B7A836F0285B322000A06C77 /* URLConfigurable.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7A836EF285B322000A06C77 /* URLConfigurable.swift */; };
 		B7A836F3285B32C900A06C77 /* GitURLConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7A836F2285B32C900A06C77 /* GitURLConfiguration.swift */; };
@@ -53,6 +60,13 @@
 		B71A0A022859B8FF0030D3ED /* NotificationCenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotificationCenter.swift; sourceTree = "<group>"; };
 		B724DC91286058C3007DAC1A /* TabBarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarViewController.swift; sourceTree = "<group>"; };
 		B724DC9428605915007DAC1A /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
+		B724DC9828615FC4007DAC1A /* NavigationButtonItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationButtonItem.swift; sourceTree = "<group>"; };
+		B7A56D922861835B00EA639D /* CollectionViewDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionViewDataSource.swift; sourceTree = "<group>"; };
+		B7A56D9428618E0900EA639D /* IssuseCardCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IssuseCardCell.swift; sourceTree = "<group>"; };
+		B7A56D9628618F6800EA639D /* UIFont+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIFont+.swift"; sourceTree = "<group>"; };
+		B7A56D982861913300EA639D /* BadgeLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BadgeLabel.swift; sourceTree = "<group>"; };
+		B7A56D9A2861C5E600EA639D /* IssueCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IssueCard.swift; sourceTree = "<group>"; };
+		B7A56D9C2861C79D00EA639D /* SelectionLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectionLabel.swift; sourceTree = "<group>"; };
 		B7A836ED285B319500A06C77 /* Bundle+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Bundle+.swift"; sourceTree = "<group>"; };
 		B7A836EF285B322000A06C77 /* URLConfigurable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLConfigurable.swift; sourceTree = "<group>"; };
 		B7A836F2285B32C900A06C77 /* GitURLConfiguration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GitURLConfiguration.swift; sourceTree = "<group>"; };
@@ -124,6 +138,11 @@
 			isa = PBXGroup;
 			children = (
 				B724DC9428605915007DAC1A /* HomeViewController.swift */,
+				B724DC9828615FC4007DAC1A /* NavigationButtonItem.swift */,
+				B7A56D922861835B00EA639D /* CollectionViewDataSource.swift */,
+				B7A56D9428618E0900EA639D /* IssuseCardCell.swift */,
+				B7A56D9C2861C79D00EA639D /* SelectionLabel.swift */,
+				B7A56D982861913300EA639D /* BadgeLabel.swift */,
 			);
 			path = HomeScene;
 			sourceTree = "<group>";
@@ -253,6 +272,7 @@
 			isa = PBXGroup;
 			children = (
 				D2A9996F286159BF00910F7D /* IssueAddScene */,
+				B7A56D9A2861C5E600EA639D /* IssueCard.swift */,
 				B724DC9328605902007DAC1A /* HomeScene */,
 				B724DC9028605890007DAC1A /* TabBar */,
 				D291537F285B72E200B5CDA8 /* Manager */,
@@ -288,6 +308,7 @@
 				D2D526582858CF5000581C88 /* UIImage+.swift */,
 				D2D526602858DF7B00581C88 /* UIColor+.swift */,
 				B7A836ED285B319500A06C77 /* Bundle+.swift */,
+				B7A56D9628618F6800EA639D /* UIFont+.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -431,6 +452,7 @@
 				B7E58B6F28586FCE004C6BE6 /* NetworkService.swift in Sources */,
 				D2B7506C2856FCBE0078067A /* LoginViewController.swift in Sources */,
 				D291537C285B6B6500B5CDA8 /* NetworkError.swift in Sources */,
+				B7A56D9B2861C5E600EA639D /* IssueCard.swift in Sources */,
 				B7A836F9285B392800A06C77 /* EndPointable.swift in Sources */,
 				D2A99973286159ED00910F7D /* IssueAddViewController.swift in Sources */,
 				D2A9997B28618D0E00910F7D /* ListCell.swift in Sources */,
@@ -438,8 +460,11 @@
 				B7E58B7128587013004C6BE6 /* HTTPMethod.swift in Sources */,
 				D291537A285B6B3300B5CDA8 /* NetworkServiceable.swift in Sources */,
 				B7A836FD285B3A1200A06C77 /* EndPoint.swift in Sources */,
+				B7A56D9728618F6800EA639D /* UIFont+.swift in Sources */,
+				B7A56D992861913300EA639D /* BadgeLabel.swift in Sources */,
 				B7A836FB285B39B500A06C77 /* HTTPPackageable.swift in Sources */,
 				D2B750682856FCBE0078067A /* AppDelegate.swift in Sources */,
+				B724DC9928615FC4007DAC1A /* NavigationButtonItem.swift in Sources */,
 				D2D5265528588B3A00581C88 /* OAuthLoginView.swift in Sources */,
 				D2D5265E2858D98400581C88 /* OAuthLoginButton.swift in Sources */,
 				D2D526632859A65600581C88 /* OAuthButtonDelegate.swift in Sources */,
@@ -451,11 +476,14 @@
 				D2A99977286160BF00910F7D /* DividedLineView.swift in Sources */,
 				B7A836F5285B330900A06C77 /* Authenticable.swift in Sources */,
 				D291537E285B6D7F00B5CDA8 /* AppleManager.swift in Sources */,
+				B7A56D9528618E0900EA639D /* IssuseCardCell.swift in Sources */,
 				B724DC9528605915007DAC1A /* HomeViewController.swift in Sources */,
 				B7A836F0285B322000A06C77 /* URLConfigurable.swift in Sources */,
 				D2915381285B740500B5CDA8 /* OAuthManageable.swift in Sources */,
 				B7A836EE285B319500A06C77 /* Bundle+.swift in Sources */,
 				B7A83710285C1A1300A06C77 /* GitHubManager.swift in Sources */,
+				B7A56D9D2861C79D00EA639D /* SelectionLabel.swift in Sources */,
+				B7A56D932861835B00EA639D /* CollectionViewDataSource.swift in Sources */,
 				D2D5264C285850A100581C88 /* LoginInputView.swift in Sources */,
 				D2915385286013DB00B5CDA8 /* OAuthButtonType.swift in Sources */,
 				B7A836F3285B32C900A06C77 /* GitURLConfiguration.swift in Sources */,

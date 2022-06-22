@@ -19,9 +19,9 @@ class TabBarViewController: UITabBarController {
         let homeViewController =  UINavigationController(rootViewController: HomeViewController())
         let labelViewController = UIViewController()
         let mileStoneViewController = UIViewController()
-        let issueTabItem = UITabBarItem(title: "이슈", image: UIImage(named: "exclamationmark.circle"), tag: 0)
-        let labelTabItem = UITabBarItem(title: "레이블", image: UIImage(named: "tag.fill"), tag: 1)
-        let mileStoneTabItem = UITabBarItem(title: "마일스톤", image: UIImage(named: "signpost.right"), tag: 2)
+        let issueTabItem = UITabBarItem(title: "이슈", image: UIImage(systemName: "exclamationmark.circle"), tag: 0)
+        let labelTabItem = UITabBarItem(title: "레이블", image: UIImage(systemName: "tag.fill"), tag: 1)
+        let mileStoneTabItem = UITabBarItem(title: "마일스톤", image: UIImage(systemName: "signpost.right"), tag: 2)
 
         labelViewController.view.backgroundColor = .lightGray
         mileStoneViewController.view.backgroundColor = .systemGreen
@@ -30,7 +30,7 @@ class TabBarViewController: UITabBarController {
         mileStoneViewController.tabBarItem = mileStoneTabItem
         setViewControllers([homeViewController, labelViewController, mileStoneViewController], animated: false)
         tabBar.backgroundColor = .white
-        tabBar.tintColor = .secondarySystemBackground
+
     }
 
     private func configureLayout() {
