@@ -11,19 +11,25 @@ class HomeViewController: UIViewController {
 
     private var homeTableView: UITableView?
     private var dataSource: TableViewDataSource<IssueCard, IssuseCardCell>?
+    private var issueAddButton: IssueAddButton?
 
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .secondarySystemBackground
-        setNavigation()
-        setTableView()
-        setDataSource()
-        setConstraints()
+        configureDisplay()
     }
 
 }
 
 private extension HomeViewController {
+
+    func configureDisplay() {
+        setNavigation()
+        setTableView()
+        setDataSource()
+        setAddButton()
+        setConstraints()
+    }
 
     func setNavigation() {
         let filterBarItem = UIBarButtonItem(customView: NavigationButtonItem("필터", .filter))
@@ -53,16 +59,28 @@ private extension HomeViewController {
         issueCardsDidLoad(model: testData)
     }
 
+    func setAddButton() {
+        let button = IssueAddButton(frame: CGRect(x: 0, y: 0, width: 64, height: 64))
+        issueAddButton = button
+    }
+
     func setConstraints() {
-        guard let homeTableView = homeTableView else {return}
+        guard let homeTableView = homeTableView, let issueAddButton = issueAddButton else {return}
         homeTableView.rowHeight = UITableView.automaticDimension
         homeTableView.estimatedRowHeight = 130
         view.addSubview(homeTableView)
+        view.addSubview(issueAddButton)
+
         NSLayoutConstraint.activate([
             homeTableView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
             homeTableView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             homeTableView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            homeTableView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
+            homeTableView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
+
+            issueAddButton.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -issueAddButton.frame.height),
+            issueAddButton.leadingAnchor.constraint(equalTo: view.trailingAnchor, constant: -issueAddButton.frame.width),
+            issueAddButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -16),
+            issueAddButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16)
         ])
     }
 
