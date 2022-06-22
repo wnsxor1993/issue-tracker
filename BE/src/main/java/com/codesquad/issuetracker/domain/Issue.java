@@ -27,6 +27,7 @@ public class Issue {
     private LocalDateTime lastModifiedAt;
 
     @ManyToOne(fetch = LAZY)
+    @JoinColumn(name = "author_id")
     private Member author;
 
     @OneToMany(mappedBy = "issue", cascade = CascadeType.ALL, orphanRemoval = true)
