@@ -34,6 +34,11 @@
 		D291537E285B6D7F00B5CDA8 /* AppleManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D291537D285B6D7F00B5CDA8 /* AppleManager.swift */; };
 		D2915381285B740500B5CDA8 /* OAuthManageable.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2915380285B740500B5CDA8 /* OAuthManageable.swift */; };
 		D2915385286013DB00B5CDA8 /* OAuthButtonType.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2915384286013DB00B5CDA8 /* OAuthButtonType.swift */; };
+		D2A99973286159ED00910F7D /* IssueAddViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2A99972286159ED00910F7D /* IssueAddViewController.swift */; };
+		D2A9997528615F3600910F7D /* CommentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2A9997428615F3600910F7D /* CommentView.swift */; };
+		D2A99977286160BF00910F7D /* DividedLineView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2A99976286160BF00910F7D /* DividedLineView.swift */; };
+		D2A999792861876A00910F7D /* ListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2A999782861876A00910F7D /* ListView.swift */; };
+		D2A9997B28618D0E00910F7D /* ListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2A9997A28618D0E00910F7D /* ListCell.swift */; };
 		D2B750682856FCBE0078067A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2B750672856FCBE0078067A /* AppDelegate.swift */; };
 		D2B7506A2856FCBE0078067A /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2B750692856FCBE0078067A /* SceneDelegate.swift */; };
 		D2B7506C2856FCBE0078067A /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2B7506B2856FCBE0078067A /* LoginViewController.swift */; };
@@ -78,6 +83,11 @@
 		D291537D285B6D7F00B5CDA8 /* AppleManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppleManager.swift; sourceTree = "<group>"; };
 		D2915380285B740500B5CDA8 /* OAuthManageable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OAuthManageable.swift; sourceTree = "<group>"; };
 		D2915384286013DB00B5CDA8 /* OAuthButtonType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OAuthButtonType.swift; sourceTree = "<group>"; };
+		D2A99972286159ED00910F7D /* IssueAddViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IssueAddViewController.swift; sourceTree = "<group>"; };
+		D2A9997428615F3600910F7D /* CommentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentView.swift; sourceTree = "<group>"; };
+		D2A99976286160BF00910F7D /* DividedLineView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DividedLineView.swift; sourceTree = "<group>"; };
+		D2A999782861876A00910F7D /* ListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListView.swift; sourceTree = "<group>"; };
+		D2A9997A28618D0E00910F7D /* ListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListCell.swift; sourceTree = "<group>"; };
 		D2B750642856FCBE0078067A /* IssueTracker.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = IssueTracker.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D2B750672856FCBE0078067A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		D2B750692856FCBE0078067A /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -228,6 +238,18 @@
 			path = EnumTypes;
 			sourceTree = "<group>";
 		};
+		D2A9996F286159BF00910F7D /* IssueAddScene */ = {
+			isa = PBXGroup;
+			children = (
+				D2A99972286159ED00910F7D /* IssueAddViewController.swift */,
+				D2A9997428615F3600910F7D /* CommentView.swift */,
+				D2A999782861876A00910F7D /* ListView.swift */,
+				D2A9997A28618D0E00910F7D /* ListCell.swift */,
+				D2A99976286160BF00910F7D /* DividedLineView.swift */,
+			);
+			path = IssueAddScene;
+			sourceTree = "<group>";
+		};
 		D2B7505B2856FCBE0078067A = {
 			isa = PBXGroup;
 			children = (
@@ -249,6 +271,7 @@
 		D2B750662856FCBE0078067A /* IssueTracker */ = {
 			isa = PBXGroup;
 			children = (
+				D2A9996F286159BF00910F7D /* IssueAddScene */,
 				B7A56D9A2861C5E600EA639D /* IssueCard.swift */,
 				B724DC9328605902007DAC1A /* HomeScene */,
 				B724DC9028605890007DAC1A /* TabBar */,
@@ -425,11 +448,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D2A999792861876A00910F7D /* ListView.swift in Sources */,
 				B7E58B6F28586FCE004C6BE6 /* NetworkService.swift in Sources */,
 				D2B7506C2856FCBE0078067A /* LoginViewController.swift in Sources */,
 				D291537C285B6B6500B5CDA8 /* NetworkError.swift in Sources */,
 				B7A56D9B2861C5E600EA639D /* IssueCard.swift in Sources */,
 				B7A836F9285B392800A06C77 /* EndPointable.swift in Sources */,
+				D2A99973286159ED00910F7D /* IssueAddViewController.swift in Sources */,
+				D2A9997B28618D0E00910F7D /* ListCell.swift in Sources */,
 				B724DC92286058C3007DAC1A /* TabBarViewController.swift in Sources */,
 				B7E58B7128587013004C6BE6 /* HTTPMethod.swift in Sources */,
 				D291537A285B6B3300B5CDA8 /* NetworkServiceable.swift in Sources */,
@@ -446,6 +472,8 @@
 				B71A0A032859B8FF0030D3ED /* NotificationCenter.swift in Sources */,
 				D2D526592858CF5000581C88 /* UIImage+.swift in Sources */,
 				D2D526612858DF7B00581C88 /* UIColor+.swift in Sources */,
+				D2A9997528615F3600910F7D /* CommentView.swift in Sources */,
+				D2A99977286160BF00910F7D /* DividedLineView.swift in Sources */,
 				B7A836F5285B330900A06C77 /* Authenticable.swift in Sources */,
 				D291537E285B6D7F00B5CDA8 /* AppleManager.swift in Sources */,
 				B7A56D9528618E0900EA639D /* IssuseCardCell.swift in Sources */,
