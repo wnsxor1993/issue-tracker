@@ -12,11 +12,14 @@ final class IssueAddViewController: UIViewController {
     private var commentView = CommentView()
     private var listView = ListView()
 
+    private var dataSource: TableViewDataSource<AdditionalInfo, ListCell>?
+
     override func viewDidLoad() {
         super.viewDidLoad()
         setNavigationBar()
         setConstraints()
         setInnerPropertyDelegate()
+        setDatasource()
         setObservingKeyboardNotification()
     }
 
@@ -50,8 +53,24 @@ private extension IssueAddViewController {
 
     func setInnerPropertyDelegate() {
         self.listView.listTableView.delegate = self
-        self.listView.listTableView.dataSource = self
         self.commentView.commentTextView.delegate = self
+    }
+
+    func setDatasource() {
+        let label = AdditionalInfo(title: "레이블", value: nil)
+        let milestone = AdditionalInfo(title: "마일스톤", value: nil)
+        let assignee = AdditionalInfo(title: "담당자", value: nil)
+        let models = [label, milestone, assignee]
+        issueCardsDidLoad(model: models)
+    }
+
+    func issueCardsDidLoad(model: [AdditionalInfo]) {
+        let dataSource = TableViewDataSource(model, reuseIdentifier: ListCell.cellIdentifier, cellConfigurator: { (model: AdditionalInfo, cell: ListCell) in
+            cell.configureCellText(title: model.title, value: model.value)
+        })
+
+        self.dataSource = dataSource
+        listView.listTableView.dataSource = dataSource
     }
 }
 
@@ -102,17 +121,7 @@ extension IssueAddViewController: UITextViewDelegate {
     }
 }
 
-extension IssueAddViewController: UITableViewDelegate, UITableViewDataSource {
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 3
-    }
-
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: ListCell.cellIdentifier) as? ListCell else { return UITableViewCell()}
-
-        cell.configureCellText(title: "AAA", value: "nothing")
-        return cell
-    }
+extension IssueAddViewController: UITableViewDelegate {
 
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 44

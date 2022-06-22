@@ -51,7 +51,7 @@ final class ListCell: UITableViewCell {
         fatalError()
     }
 
-    func configureCellText(title: String, value: String) {
+    func configureCellText(title: String, value: String?) {
         self.titleLabel.text = title
         self.valueLabel.text = value
     }
