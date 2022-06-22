@@ -11,7 +11,7 @@ final class DividedLineView: UIView {
 
     override init(frame: CGRect) {
         super.init(frame: frame)
-        backgroundColor = .dividedLine
+        backgroundColor = .issueTrackerGray2
         self.translatesAutoresizingMaskIntoConstraints = false
     }
 

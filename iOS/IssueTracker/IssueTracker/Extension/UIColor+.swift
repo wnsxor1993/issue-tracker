@@ -8,10 +8,11 @@
 import UIKit
 
 extension UIColor {
-    class var loginBackground: UIColor? { return UIColor(named: "LoginBackground") ?? UIColor.systemGray }
-    class var logSignInButton: UIColor? { return UIColor(named: "LogSignInButton") ?? UIColor.systemBlue }
-    class var oauthLoginButton: UIColor? { return UIColor(named: "OAuthLoginButton") ?? UIColor.black }
-    class var dividedLine: UIColor? { return UIColor(named: "DividedLine") ?? UIColor.systemGray2 }
+    class var issueTrackerGray1: UIColor? { return UIColor(named: "LoginBackground") ?? UIColor.systemGray }
+    class var issueTrackerGray2: UIColor? { return UIColor(named: "DividedLine") ?? UIColor.systemGray2 }
+    class var issueTrackerGray3: UIColor? { return UIColor(named: "IssueAddText") ?? UIColor.gray }
+    class var issueTrackerBlue: UIColor? { return UIColor(named: "LogSignInButton") ?? UIColor.systemBlue }
+    class var issueTrackerWhite: UIColor? { return UIColor(named: "OAuthLoginButton") ?? UIColor.black }
 }
 
 extension UIColor {

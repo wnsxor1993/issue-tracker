@@ -19,7 +19,7 @@ class LoginInputView: UIView {
 
     private let textFieldDividedLine: UIView = {
         let dividedLine = UIView()
-        dividedLine.backgroundColor = .dividedLine
+        dividedLine.backgroundColor = .issueTrackerGray2
         dividedLine.translatesAutoresizingMaskIntoConstraints = false
 
         return dividedLine
@@ -90,7 +90,7 @@ private extension LoginInputView {
     func button(from title: String) -> UIButton {
         let button = UIButton()
         button.setTitle(title, for: .normal)
-        button.setTitleColor(UIColor.logSignInButton, for: .normal)
+        button.setTitleColor(UIColor.issueTrackerBlue, for: .normal)
         button.titleLabel?.font = .systemFont(ofSize: 16, weight: .semibold)
         button.titleLabel?.textAlignment = .center
         button.translatesAutoresizingMaskIntoConstraints = false

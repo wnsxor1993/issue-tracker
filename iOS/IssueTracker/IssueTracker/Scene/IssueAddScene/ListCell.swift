@@ -22,7 +22,7 @@ final class ListCell: UITableViewCell {
     private var valueLabel: UILabel = {
         let label = UILabel()
         label.font = UIFont.systemFont(ofSize: 17, weight: .regular)
-        label.textColor = UIColor(red: 0.529, green: 0.529, blue: 0.553, alpha: 1)
+        label.textColor = .issueTrackerGray3
         label.textAlignment = .right
         label.translatesAutoresizingMaskIntoConstraints = false
 
@@ -32,7 +32,7 @@ final class ListCell: UITableViewCell {
     private var arrowLabel: UILabel = {
         let label = UILabel()
         label.font = UIFont.systemFont(ofSize: 17, weight: .regular)
-        label.textColor = UIColor(red: 0.529, green: 0.529, blue: 0.553, alpha: 1)
+        label.textColor = .issueTrackerGray3
         label.text = ">"
         label.textAlignment = .right
         label.translatesAutoresizingMaskIntoConstraints = false

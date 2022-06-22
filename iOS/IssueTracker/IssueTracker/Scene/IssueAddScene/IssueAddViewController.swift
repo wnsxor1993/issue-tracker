@@ -117,7 +117,7 @@ extension IssueAddViewController: UITextViewDelegate {
         guard textView.text.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty else { return }
 
         textView.text = commentView.commentTextHolder
-        textView.textColor = UIColor(red: 0.529, green: 0.529, blue: 0.553, alpha: 1)
+        textView.textColor = .issueTrackerGray3
     }
 }
 

@@ -31,7 +31,7 @@ final class CommentView: UIView {
     private(set) lazy var commentTextView: UITextView = {
         let textView = UITextView()
         textView.font = UIFont.systemFont(ofSize: 17, weight: .regular)
-        textView.textColor = UIColor(red: 0.529, green: 0.529, blue: 0.553, alpha: 1)
+        textView.textColor = .issueTrackerGray3
         textView.text = commentTextHolder
         textView.translatesAutoresizingMaskIntoConstraints = false
 
