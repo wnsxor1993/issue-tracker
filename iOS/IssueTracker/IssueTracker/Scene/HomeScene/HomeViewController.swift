@@ -11,7 +11,7 @@ class HomeViewController: UIViewController {
 
     private var homeTableView: UITableView?
     private var dataSource: TableViewDataSource<IssueCard, IssuseCardCell>?
-    private var issueAddButton: IssueAddButton?
+    private var issueCreateButton: IssueAddButton?
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -61,11 +61,18 @@ private extension HomeViewController {
 
     func setAddButton() {
         let button = IssueAddButton(frame: CGRect(x: 0, y: 0, width: 64, height: 64))
-        issueAddButton = button
+        issueCreateButton = button
+        issueCreateButton?.addTarget(self, action: #selector(didTabIssueCreateButton), for: .touchUpInside)
+    }
+
+    @objc func didTabIssueCreateButton() {
+        let issueAddVC = IssueAddViewController()
+        issueAddVC.modalPresentationStyle = .fullScreen
+        present(issueAddVC, animated: true)
     }
 
     func setConstraints() {
-        guard let homeTableView = homeTableView, let issueAddButton = issueAddButton else {return}
+        guard let homeTableView = homeTableView, let issueAddButton = issueCreateButton else {return}
         homeTableView.rowHeight = UITableView.automaticDimension
         homeTableView.estimatedRowHeight = 130
         view.addSubview(homeTableView)
