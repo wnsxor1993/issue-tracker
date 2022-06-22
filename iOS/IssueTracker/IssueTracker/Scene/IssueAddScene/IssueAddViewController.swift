@@ -17,6 +17,7 @@ final class IssueAddViewController: UIViewController {
         setNavigationBar()
         setConstraints()
         setInnerPropertyDelegate()
+        setObservingKeyboardNotification()
     }
 
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -51,6 +52,37 @@ private extension IssueAddViewController {
         self.listView.listTableView.delegate = self
         self.listView.listTableView.dataSource = self
         self.commentView.commentTextView.delegate = self
+    }
+}
+
+// MARK: Navigation Button with Keyboard
+private extension IssueAddViewController {
+
+    func setObservingKeyboardNotification() {
+        NotificationCenter.default.addObserver(self, selector: #selector(showKeyboard), name: UIResponder.keyboardWillShowNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(hideKeyboard), name: UIResponder.keyboardWillHideNotification, object: nil)
+    }
+
+    @objc
+    func showKeyboard() {
+        self.navigationController?.navigationItem.rightBarButtonItem?.title = "입력 취소"
+        self.navigationController?.navigationItem.rightBarButtonItem?.action = #selector(dismissKeyboard)
+    }
+
+    @objc
+    func hideKeyboard() {
+        self.navigationController?.navigationItem.rightBarButtonItem?.title = "저장 +"
+        self.navigationController?.navigationItem.rightBarButtonItem?.action = #selector(saveIssue)
+    }
+
+    @objc
+    func dismissKeyboard() {
+        self.view.endEditing(true)
+    }
+
+    @objc
+    func saveIssue() {
+
     }
 }
 
