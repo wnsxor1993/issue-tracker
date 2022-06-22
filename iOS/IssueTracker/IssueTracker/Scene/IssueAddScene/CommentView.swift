@@ -13,7 +13,7 @@ final class CommentView: UIView {
 
     private var titleLabel: UILabel = {
         let label = UILabel()
-        label.font = UIFont.systemFont(ofSize: 17, weight: .regular)
+        label.font = .smallRegular
         label.text = "제목"
         label.translatesAutoresizingMaskIntoConstraints = false
 
@@ -22,7 +22,7 @@ final class CommentView: UIView {
 
     private var titleTextField: UITextField = {
         let textField = UITextField()
-        textField.font = UIFont.systemFont(ofSize: 17, weight: .regular)
+        textField.font = .smallRegular
         textField.translatesAutoresizingMaskIntoConstraints = false
 
         return textField
@@ -30,8 +30,8 @@ final class CommentView: UIView {
 
     private(set) lazy var commentTextView: UITextView = {
         let textView = UITextView()
-        textView.font = UIFont.systemFont(ofSize: 17, weight: .regular)
-        textView.textColor = UIColor(red: 0.529, green: 0.529, blue: 0.553, alpha: 1)
+        textView.font = .smallRegular
+        textView.textColor = .issueTrackerGray3
         textView.text = commentTextHolder
         textView.translatesAutoresizingMaskIntoConstraints = false
 
@@ -56,33 +56,44 @@ final class CommentView: UIView {
 private extension CommentView {
 
     func setConstraints() {
+        let leftSideLeadingConstant: CGFloat = 16
+        let upperSectionTopConstant: CGFloat = 11
+        let upperSectionHeightConstant: CGFloat = 22
+
+        let tenConstant: CGFloat = 10
+        let titleWidthConstant: CGFloat = 30
+        let heightLineWidthConstant: CGFloat = 2
+        let heightLineLeadingConstant: CGFloat = 17
+        let widthLineHeightConstant: CGFloat = 1
+        let widthLineLeadingConstant: CGFloat = 20
+
         self.translatesAutoresizingMaskIntoConstraints = false
         self.addSubViews(titleLabel, titleTextField, commentTextView, heightDividedLine, widthDividedLine)
 
         NSLayoutConstraint.activate([
-            titleLabel.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 16),
-            titleLabel.topAnchor.constraint(equalTo: self.topAnchor, constant: 11),
-            titleLabel.widthAnchor.constraint(equalToConstant: 30),
-            titleLabel.heightAnchor.constraint(equalToConstant: 22),
+            titleLabel.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: leftSideLeadingConstant),
+            titleLabel.topAnchor.constraint(equalTo: self.topAnchor, constant: upperSectionTopConstant),
+            titleLabel.widthAnchor.constraint(equalToConstant: titleWidthConstant),
+            titleLabel.heightAnchor.constraint(equalToConstant: upperSectionHeightConstant),
 
-            heightDividedLine.widthAnchor.constraint(equalToConstant: 2),
-            heightDividedLine.leadingAnchor.constraint(equalTo: titleLabel.trailingAnchor, constant: 17),
-            heightDividedLine.topAnchor.constraint(equalTo: self.topAnchor, constant: 11),
-            heightDividedLine.heightAnchor.constraint(equalToConstant: 20),
+            heightDividedLine.widthAnchor.constraint(equalToConstant: heightLineWidthConstant),
+            heightDividedLine.leadingAnchor.constraint(equalTo: titleLabel.trailingAnchor, constant: heightLineLeadingConstant),
+            heightDividedLine.topAnchor.constraint(equalTo: self.topAnchor, constant: upperSectionTopConstant),
+            heightDividedLine.heightAnchor.constraint(equalToConstant: upperSectionHeightConstant),
 
-            titleTextField.topAnchor.constraint(equalTo: self.topAnchor, constant: 11),
-            titleTextField.heightAnchor.constraint(equalToConstant: 22),
-            titleTextField.leadingAnchor.constraint(equalTo: heightDividedLine.trailingAnchor, constant: 10),
+            titleTextField.topAnchor.constraint(equalTo: self.topAnchor, constant: upperSectionTopConstant),
+            titleTextField.heightAnchor.constraint(equalToConstant: upperSectionHeightConstant),
+            titleTextField.leadingAnchor.constraint(equalTo: heightDividedLine.trailingAnchor, constant: tenConstant),
             titleTextField.trailingAnchor.constraint(equalTo: self.trailingAnchor),
 
-            widthDividedLine.heightAnchor.constraint(equalToConstant: 1),
-            widthDividedLine.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 20),
+            widthDividedLine.heightAnchor.constraint(equalToConstant: widthLineHeightConstant),
+            widthDividedLine.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: widthLineLeadingConstant),
             widthDividedLine.trailingAnchor.constraint(equalTo: self.trailingAnchor),
-            widthDividedLine.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 10),
+            widthDividedLine.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: tenConstant),
 
             commentTextView.topAnchor.constraint(equalTo: widthDividedLine.bottomAnchor),
             commentTextView.bottomAnchor.constraint(equalTo: self.bottomAnchor),
-            commentTextView.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 16),
+            commentTextView.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: leftSideLeadingConstant),
             commentTextView.trailingAnchor.constraint(equalTo: self.trailingAnchor)
         ])
     }

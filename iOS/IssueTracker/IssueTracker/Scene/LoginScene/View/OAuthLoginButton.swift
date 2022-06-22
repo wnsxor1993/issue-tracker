@@ -45,7 +45,7 @@ private extension OAuthLoginButton {
     }
 
     func setTitleViewAttribute() {
-        self.setTitleColor(UIColor.oauthLoginButton, for: .normal)
+        self.setTitleColor(UIColor.issueTrackerWhite, for: .normal)
         self.titleLabel?.font = .systemFont(ofSize: 17, weight: .semibold)
     }
 

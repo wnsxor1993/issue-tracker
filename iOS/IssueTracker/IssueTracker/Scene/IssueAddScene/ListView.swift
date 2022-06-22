@@ -11,7 +11,7 @@ class ListView: UIView {
 
     private var titleLabel: UILabel = {
         let label = UILabel()
-        label.font = UIFont.systemFont(ofSize: 22, weight: .bold)
+        label.font = .mediumBold
         label.text = "추가 정보"
         label.translatesAutoresizingMaskIntoConstraints = false
 
@@ -45,15 +45,19 @@ private extension ListView {
     }
 
     func setConstraints() {
+        let titleTopConstant: CGFloat = 18
+        let titleLeadingConstant: CGFloat = 16
+        let listTopConstant: CGFloat = 8
+
         self.translatesAutoresizingMaskIntoConstraints = false
         self.addSubViews(titleLabel, listTableView)
 
         NSLayoutConstraint.activate([
-            titleLabel.topAnchor.constraint(equalTo: self.topAnchor, constant: 18),
-            titleLabel.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 16),
+            titleLabel.topAnchor.constraint(equalTo: self.topAnchor, constant: titleTopConstant),
+            titleLabel.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: titleLeadingConstant),
             titleLabel.trailingAnchor.constraint(equalTo: self.trailingAnchor),
 
-            listTableView.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 8),
+            listTableView.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: listTopConstant),
             listTableView.bottomAnchor.constraint(equalTo: self.bottomAnchor),
             listTableView.leadingAnchor.constraint(equalTo: self.leadingAnchor),
             listTableView.trailingAnchor.constraint(equalTo: self.trailingAnchor)

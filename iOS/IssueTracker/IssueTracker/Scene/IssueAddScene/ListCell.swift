@@ -13,7 +13,7 @@ final class ListCell: UITableViewCell {
 
     private var titleLabel: UILabel = {
         let label = UILabel()
-        label.font = UIFont.systemFont(ofSize: 17, weight: .regular)
+        label.font = .smallRegular
         label.translatesAutoresizingMaskIntoConstraints = false
 
         return label
@@ -21,8 +21,8 @@ final class ListCell: UITableViewCell {
 
     private var valueLabel: UILabel = {
         let label = UILabel()
-        label.font = UIFont.systemFont(ofSize: 17, weight: .regular)
-        label.textColor = UIColor(red: 0.529, green: 0.529, blue: 0.553, alpha: 1)
+        label.font = .smallRegular
+        label.textColor = .issueTrackerGray3
         label.textAlignment = .right
         label.translatesAutoresizingMaskIntoConstraints = false
 
@@ -31,8 +31,8 @@ final class ListCell: UITableViewCell {
 
     private var arrowLabel: UILabel = {
         let label = UILabel()
-        label.font = UIFont.systemFont(ofSize: 17, weight: .regular)
-        label.textColor = UIColor(red: 0.529, green: 0.529, blue: 0.553, alpha: 1)
+        label.font = .smallRegular
+        label.textColor = .issueTrackerGray3
         label.text = ">"
         label.textAlignment = .right
         label.translatesAutoresizingMaskIntoConstraints = false
@@ -51,7 +51,7 @@ final class ListCell: UITableViewCell {
         fatalError()
     }
 
-    func configureCellText(title: String, value: String) {
+    func configureCellText(title: String, value: String?) {
         self.titleLabel.text = title
         self.valueLabel.text = value
     }
@@ -60,18 +60,24 @@ final class ListCell: UITableViewCell {
 private extension ListCell {
 
     func setConstraints() {
+        let titleLeadingConstant: CGFloat = 16
+        let titleWidthRation: CGFloat = 0.3
+
+        let arrowTrailingConstant: CGFloat = -16
+        let arrowWidhtHeightConstant: CGFloat = 30
+
         self.addSubViews(titleLabel, valueLabel, arrowLabel)
 
         NSLayoutConstraint.activate([
-            titleLabel.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 16),
-            titleLabel.widthAnchor.constraint(equalTo: self.widthAnchor, multiplier: 0.3),
+            titleLabel.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: titleLeadingConstant),
+            titleLabel.widthAnchor.constraint(equalTo: self.widthAnchor, multiplier: titleWidthRation),
             titleLabel.topAnchor.constraint(equalTo: self.topAnchor),
             titleLabel.bottomAnchor.constraint(equalTo: self.bottomAnchor),
 
             arrowLabel.centerYAnchor.constraint(equalTo: self.centerYAnchor),
-            arrowLabel.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -16),
-            arrowLabel.heightAnchor.constraint(equalToConstant: 30),
-            arrowLabel.widthAnchor.constraint(equalToConstant: 30),
+            arrowLabel.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: arrowTrailingConstant),
+            arrowLabel.heightAnchor.constraint(equalToConstant: arrowWidhtHeightConstant),
+            arrowLabel.widthAnchor.constraint(equalToConstant: arrowWidhtHeightConstant),
 
             valueLabel.leadingAnchor.constraint(equalTo: titleLabel.trailingAnchor),
             valueLabel.trailingAnchor.constraint(equalTo: arrowLabel.leadingAnchor),
