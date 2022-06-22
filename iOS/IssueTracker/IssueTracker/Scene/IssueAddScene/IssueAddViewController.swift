@@ -32,7 +32,8 @@ private extension IssueAddViewController {
 
     func setNavigationBar() {
         let rightBarButton = UIBarButtonItem(title: "저장 +", style: .plain, target: self, action: nil)
-        self.navigationController?.navigationItem.rightBarButtonItem = rightBarButton
+        navigationItem.rightBarButtonItem = rightBarButton
+        self.navigationController?.navigationBar.backgroundColor = .white
     }
 
     func setConstraints() {
@@ -41,15 +42,15 @@ private extension IssueAddViewController {
         self.view.addSubViews(commentView, listView)
 
         NSLayoutConstraint.activate([
-            commentView.topAnchor.constraint(equalTo: self.view.topAnchor),
+            commentView.topAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.topAnchor),
             commentView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor),
             commentView.trailingAnchor.constraint(equalTo: self.view.trailingAnchor),
-            commentView.heightAnchor.constraint(equalTo: self.view.heightAnchor, multiplier: commentViewHeightRatio),
+            commentView.heightAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.heightAnchor, multiplier: commentViewHeightRatio),
 
             listView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor),
             listView.trailingAnchor.constraint(equalTo: self.view.trailingAnchor),
             listView.topAnchor.constraint(equalTo: commentView.bottomAnchor),
-            listView.bottomAnchor.constraint(equalTo: self.view.bottomAnchor)
+            listView.bottomAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.bottomAnchor)
         ])
     }
 
@@ -86,14 +87,14 @@ private extension IssueAddViewController {
 
     @objc
     func showKeyboard() {
-        self.navigationController?.navigationItem.rightBarButtonItem?.title = "입력 취소"
-        self.navigationController?.navigationItem.rightBarButtonItem?.action = #selector(dismissKeyboard)
+        self.navigationItem.rightBarButtonItem?.title = "입력 취소"
+        self.navigationItem.rightBarButtonItem?.action = #selector(dismissKeyboard)
     }
 
     @objc
     func hideKeyboard() {
-        self.navigationController?.navigationItem.rightBarButtonItem?.title = "저장 +"
-        self.navigationController?.navigationItem.rightBarButtonItem?.action = #selector(saveIssue)
+        self.navigationItem.rightBarButtonItem?.title = "저장 +"
+        self.navigationItem.rightBarButtonItem?.action = #selector(saveIssue)
     }
 
     @objc

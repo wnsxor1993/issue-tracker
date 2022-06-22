@@ -19,6 +19,13 @@ class HomeViewController: UIViewController {
         configureDisplay()
     }
 
+    override func viewWillAppear(_ animated: Bool) {
+        navigationController?.navigationBar.prefersLargeTitles = true
+    }
+
+    override func viewWillDisappear(_ animated: Bool) {
+        navigationController?.navigationBar.prefersLargeTitles = false
+    }
 }
 
 private extension HomeViewController {
@@ -37,7 +44,7 @@ private extension HomeViewController {
         navigationItem.leftBarButtonItem = filterBarItem
         navigationItem.rightBarButtonItem = selectBarItem
         navigationItem.title = "이슈"
-        navigationController?.navigationBar.prefersLargeTitles = true
+        navigationItem.backButtonTitle = "취소"
         let navigationBarAppearance = UINavigationBarAppearance()
         navigationBarAppearance.shadowColor = .black
         navigationController?.navigationBar.scrollEdgeAppearance = navigationBarAppearance
@@ -67,8 +74,7 @@ private extension HomeViewController {
 
     @objc func didTabIssueCreateButton() {
         let issueAddVC = IssueAddViewController()
-        issueAddVC.modalPresentationStyle = .fullScreen
-        present(issueAddVC, animated: true)
+        self.navigationController?.pushViewController(issueAddVC, animated: true)
     }
 
     func setConstraints() {
