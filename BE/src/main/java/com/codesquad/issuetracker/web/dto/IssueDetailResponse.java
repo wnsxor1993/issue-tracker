@@ -14,7 +14,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
-@Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class IssueDetailResponse {
 
@@ -132,5 +131,57 @@ public class IssueDetailResponse {
                     .commentLastModifiedTime(comment.getLastModifiedAt())
                     .build();
         }
+    }
+
+    public Long getIssueId() {
+        return issueId;
+    }
+
+    public Long getAuthorId() {
+        return authorId;
+    }
+
+    public String getAuthorName() {
+        return authorName;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public String getContent() {
+        return content;
+    }
+
+    public List<IssueAssigneeDto> getAssignees() {
+        return assignees;
+    }
+
+    public Long getMilestoneId() {
+        return milestoneId;
+    }
+
+    public String getMilestoneName() {
+        return milestoneName;
+    }
+
+    public boolean getIsOpened() {
+        return isOpened;
+    }
+
+    public LocalDateTime getCreatedAt() {
+        return createdAt;
+    }
+
+    public LocalDateTime getLastModifiedAt() {
+        return lastModifiedAt;
+    }
+
+    public List<LabelDto> getLabels() {
+        return labels;
+    }
+
+    public List<CommentListElement> getComments() {
+        return comments;
     }
 }
