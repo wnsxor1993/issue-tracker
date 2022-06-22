@@ -36,21 +36,20 @@ private extension GitHubManager {
 
         let endPoint = EndPoint(urlConfigure: GitURLConfiguration(), method: .POST, body: nil)
         self.requestAPI(with: endPoint)
-
-        print(grantCode)
     }
 
     func requestAPI(with endPoint: EndPoint) {
-        NetworkService.request(endPoint: endPoint, completion: { result in
-            switch result {
-            case .success(let data):
-                // TODO: Decode response data
-                print(data)
-                self.responseHandler?(true)
-            case .failure(let error):
-                print(error)
-                self.responseHandler?(false)
-            }
-        })
+        self.responseHandler?(true)
+//        NetworkService.request(endPoint: endPoint, completion: { result in
+//            switch result {
+//            case .success(let data):
+//                // TODO: Decode response data
+//                print(data)
+//                self.responseHandler?(true)
+//            case .failure(let error):
+//                print(error)
+//                self.responseHandler?(false)
+//            }
+//        })
     }
 }
