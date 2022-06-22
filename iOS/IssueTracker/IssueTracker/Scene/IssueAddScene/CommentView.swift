@@ -13,7 +13,7 @@ final class CommentView: UIView {
 
     private var titleLabel: UILabel = {
         let label = UILabel()
-        label.font = UIFont.systemFont(ofSize: 17, weight: .regular)
+        label.font = .smallRegular
         label.text = "제목"
         label.translatesAutoresizingMaskIntoConstraints = false
 
@@ -22,7 +22,7 @@ final class CommentView: UIView {
 
     private var titleTextField: UITextField = {
         let textField = UITextField()
-        textField.font = UIFont.systemFont(ofSize: 17, weight: .regular)
+        textField.font = .smallRegular
         textField.translatesAutoresizingMaskIntoConstraints = false
 
         return textField
@@ -30,7 +30,7 @@ final class CommentView: UIView {
 
     private(set) lazy var commentTextView: UITextView = {
         let textView = UITextView()
-        textView.font = UIFont.systemFont(ofSize: 17, weight: .regular)
+        textView.font = .smallRegular
         textView.textColor = .issueTrackerGray3
         textView.text = commentTextHolder
         textView.translatesAutoresizingMaskIntoConstraints = false

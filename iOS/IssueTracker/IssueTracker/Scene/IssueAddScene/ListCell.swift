@@ -13,7 +13,7 @@ final class ListCell: UITableViewCell {
 
     private var titleLabel: UILabel = {
         let label = UILabel()
-        label.font = UIFont.systemFont(ofSize: 17, weight: .regular)
+        label.font = .smallRegular
         label.translatesAutoresizingMaskIntoConstraints = false
 
         return label
@@ -21,7 +21,7 @@ final class ListCell: UITableViewCell {
 
     private var valueLabel: UILabel = {
         let label = UILabel()
-        label.font = UIFont.systemFont(ofSize: 17, weight: .regular)
+        label.font = .smallRegular
         label.textColor = .issueTrackerGray3
         label.textAlignment = .right
         label.translatesAutoresizingMaskIntoConstraints = false
@@ -31,7 +31,7 @@ final class ListCell: UITableViewCell {
 
     private var arrowLabel: UILabel = {
         let label = UILabel()
-        label.font = UIFont.systemFont(ofSize: 17, weight: .regular)
+        label.font = .smallRegular
         label.textColor = .issueTrackerGray3
         label.text = ">"
         label.textAlignment = .right

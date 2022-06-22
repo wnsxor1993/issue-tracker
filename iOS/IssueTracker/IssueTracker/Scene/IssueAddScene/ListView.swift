@@ -11,7 +11,7 @@ class ListView: UIView {
 
     private var titleLabel: UILabel = {
         let label = UILabel()
-        label.font = UIFont.systemFont(ofSize: 22, weight: .bold)
+        label.font = .mediumBold
         label.text = "추가 정보"
         label.translatesAutoresizingMaskIntoConstraints = false
 
