@@ -6,7 +6,6 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
-@Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class IssueStateChangeResponse {
 
@@ -24,5 +23,13 @@ public class IssueStateChangeResponse {
                 .issueId(issue.getId())
                 .isOpened(issue.isOpened())
                 .build();
+    }
+
+    public Long getIssueId() {
+        return issueId;
+    }
+
+    public boolean getIsOpened() {
+        return isOpened;
     }
 }

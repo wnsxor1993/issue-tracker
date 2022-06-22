@@ -73,7 +73,7 @@ public class IssueController {
     @PatchMapping("/issue-tracker/api/issues/{issueId}")
     public IssueStateChangeResponse stateChange(@PathVariable Long issueId, @RequestBody IssueStateChangeRequest stateChangeRequest) {
         log.info("Issue StateChange Request = {}", stateChangeRequest);
-        issueCommandService.changeState(issueId, stateChangeRequest.isOpened());
+        issueCommandService.changeState(issueId, stateChangeRequest.getIsOpened());
         Issue issue = issueQueryService.findIssue(issueId);
 
         return IssueStateChangeResponse.create(issue);
@@ -94,7 +94,7 @@ public class IssueController {
     @PatchMapping("/issue-tracker/api/issues")
     public MultipleIssueStateChangeResponse multipleStateChange(@RequestBody MultipleIssueStateChangeRequest multipleStateCahngeRequest) {
         log.info("Multiple Issue StateChange Request = {}", multipleStateCahngeRequest);
-        issueCommandService.changeStates(multipleStateCahngeRequest.getIssueIds(), multipleStateCahngeRequest.isOpened());
+        issueCommandService.changeStates(multipleStateCahngeRequest.getIssueIds(), multipleStateCahngeRequest.getIsOpened());
         List<Issue> issues = issueQueryService.findIssues(multipleStateCahngeRequest.getIssueIds());
 
         return MultipleIssueStateChangeResponse.create(issues);
