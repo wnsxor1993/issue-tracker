@@ -250,6 +250,25 @@
 			path = IssueAddScene;
 			sourceTree = "<group>";
 		};
+		D2A9997C2862B52900910F7D /* Scene */ = {
+			isa = PBXGroup;
+			children = (
+				D2D5265128588A1000581C88 /* LoginScene */,
+				B724DC9028605890007DAC1A /* TabBar */,
+				B724DC9328605902007DAC1A /* HomeScene */,
+				D2A9996F286159BF00910F7D /* IssueAddScene */,
+			);
+			path = Scene;
+			sourceTree = "<group>";
+		};
+		D2A9997D2862B55E00910F7D /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				B7A56D9A2861C5E600EA639D /* IssueCard.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
 		D2B7505B2856FCBE0078067A = {
 			isa = PBXGroup;
 			children = (
@@ -271,12 +290,9 @@
 		D2B750662856FCBE0078067A /* IssueTracker */ = {
 			isa = PBXGroup;
 			children = (
-				D2A9996F286159BF00910F7D /* IssueAddScene */,
-				B7A56D9A2861C5E600EA639D /* IssueCard.swift */,
-				B724DC9328605902007DAC1A /* HomeScene */,
-				B724DC9028605890007DAC1A /* TabBar */,
+				D2A9997C2862B52900910F7D /* Scene */,
+				D2A9997D2862B55E00910F7D /* Model */,
 				D291537F285B72E200B5CDA8 /* Manager */,
-				D2D5265128588A1000581C88 /* LoginScene */,
 				B7E58B6928584D0C004C6BE6 /* Network */,
 				D2D5265A2858D4C000581C88 /* Extension */,
 				D2B750672856FCBE0078067A /* AppDelegate.swift */,
