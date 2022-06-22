@@ -85,7 +85,12 @@ public class IssueController {
     @DeleteMapping("/issue-tracker/api/issues/{issueId}")
     public IssueDeleteResponse delete(@PathVariable Long issueId) {
         log.info("Issue Delete Request - issueId = {}", issueId);
-        return null;
+        issueCommandService.deleteIssue(issueId);
+
+        boolean isDeleted = !issueQueryService.checkIssueExistence(issueId);
+        log.info("Is issue deleted? = {}", isDeleted);
+
+        return new IssueDeleteResponse(isDeleted);
     }
 
     /**

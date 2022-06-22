@@ -74,4 +74,8 @@ public class IssueCommandService {
         issues.forEach(issue -> issue.changeIssueState(isOpened));
     }
 
+    public void deleteIssue(Long issueId) {
+        issueRepository.deleteById(issueId);
+
+    }
 }
