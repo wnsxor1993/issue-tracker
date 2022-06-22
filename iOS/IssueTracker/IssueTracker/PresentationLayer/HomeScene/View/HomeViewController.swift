@@ -10,7 +10,7 @@ import UIKit
 class HomeViewController: UIViewController {
 
     private var homeTableView: UITableView?
-    private var dataSource: TableViewDataSource<IssueCard, IssuseCardCell>?
+    private var dataSource: TableViewDataSource<IssueCardDTO, IssuseCardCell>?
     private var issueCreateButton: IssueAddButton?
 
     override func viewDidLoad() {
@@ -60,8 +60,8 @@ private extension HomeViewController {
     }
 
     func setDataSource() {
-        let mockEntity = IssueCard(title: "야호", content: "너와나의 연결고리 이건 우리안의 소리 너와나의 연결고리 이건 우리안의 소리 연결고리 이건 우리안의 소리 ", isSelected: false, mileStone: "dsds", label: "이것의 끝은 어디인가", labelColor: "#020070")
-        let mockEntity2 = IssueCard(title: "야호", content: "이건 우리안의 소리  연결고리연결고리연결고리연결고리연결고리연결고리 이건 우리안의 소리 ", isSelected: true, mileStone: nil, label: "북치고 장구치기 낄낄", labelColor: "#FF3B30")
+        let mockEntity = IssueCardDTO(title: "야호", content: "너와나의 연결고리 이건 우리안의 소리 너와나의 연결고리 이건 우리안의 소리 연결고리 이건 우리안의 소리 ", isSelected: false, mileStone: "dsds", label: "이것의 끝은 어디인가", labelColor: "#020070")
+        let mockEntity2 = IssueCardDTO(title: "야호", content: "이건 우리안의 소리  연결고리연결고리연결고리연결고리연결고리연결고리 이건 우리안의 소리 ", isSelected: true, mileStone: nil, label: "북치고 장구치기 낄낄", labelColor: "#FF3B30")
         var testData = [mockEntity, mockEntity2, mockEntity, mockEntity2, mockEntity]
         issueCardsDidLoad(model: testData)
     }
@@ -97,9 +97,9 @@ private extension HomeViewController {
         ])
     }
 
-    func issueCardsDidLoad(model: [IssueCard]) {
+    func issueCardsDidLoad(model: [IssueCardDTO]) {
 
-        let dataSource = TableViewDataSource(model, reuseIdentifier: IssuseCardCell.id, cellConfigurator: { (model: IssueCard, cell: IssuseCardCell) in
+        let dataSource = TableViewDataSource(model, reuseIdentifier: IssuseCardCell.id, cellConfigurator: { (model: IssueCardDTO, cell: IssuseCardCell) in
             cell.configure(model: model)
         })
         self.dataSource = dataSource

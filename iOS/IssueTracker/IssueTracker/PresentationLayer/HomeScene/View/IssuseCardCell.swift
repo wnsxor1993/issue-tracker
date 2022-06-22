@@ -97,7 +97,7 @@ class IssuseCardCell: UITableViewCell {
 
 extension IssuseCardCell {
 
-    func configure(model: IssueCard) {
+    func configure(model: IssueCardDTO) {
         title.text = model.title
         content.text =  model.content
         selectionImageView.isSelected =  model.isSelected

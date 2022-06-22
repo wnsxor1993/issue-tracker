@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct AdditionalInfo {
+struct AdditionalInfoEntity {
     let title: String
     let value: String?
 }

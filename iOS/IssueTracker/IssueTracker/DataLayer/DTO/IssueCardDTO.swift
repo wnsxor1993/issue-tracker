@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct IssueCard {
+struct IssueCardDTO {
     let title: String
     let content: String
     let isSelected: Bool

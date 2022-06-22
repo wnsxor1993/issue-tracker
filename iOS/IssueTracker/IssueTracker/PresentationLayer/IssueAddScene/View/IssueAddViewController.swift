@@ -12,7 +12,7 @@ final class IssueAddViewController: UIViewController {
     private var commentView = CommentView()
     private var listView = ListView()
 
-    private var dataSource: TableViewDataSource<AdditionalInfo, ListCell>?
+    private var dataSource: TableViewDataSource<AdditionalInfoEntity, ListCell>?
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -60,15 +60,15 @@ private extension IssueAddViewController {
     }
 
     func setDatasource() {
-        let label = AdditionalInfo(title: "레이블", value: nil)
-        let milestone = AdditionalInfo(title: "마일스톤", value: nil)
-        let assignee = AdditionalInfo(title: "담당자", value: nil)
+        let label = AdditionalInfoEntity(title: "레이블", value: nil)
+        let milestone = AdditionalInfoEntity(title: "마일스톤", value: nil)
+        let assignee = AdditionalInfoEntity(title: "담당자", value: nil)
         let models = [label, milestone, assignee]
         issueCardsDidLoad(model: models)
     }
 
-    func issueCardsDidLoad(model: [AdditionalInfo]) {
-        let dataSource = TableViewDataSource(model, reuseIdentifier: ListCell.cellIdentifier, cellConfigurator: { (model: AdditionalInfo, cell: ListCell) in
+    func issueCardsDidLoad(model: [AdditionalInfoEntity]) {
+        let dataSource = TableViewDataSource(model, reuseIdentifier: ListCell.cellIdentifier, cellConfigurator: { (model: AdditionalInfoEntity, cell: ListCell) in
             cell.configureCellText(title: model.title, value: model.value)
         })
 
