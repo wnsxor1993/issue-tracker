@@ -26,4 +26,8 @@ public class IssueQueryService {
     public List<Issue> findIssues(List<Long> issueIds) {
         return issueRepository.findAllById(issueIds);
     }
+
+    public boolean checkIssueExistence(Long issueId) {
+        return issueRepository.existsById(issueId);
+    }
 }
