@@ -17,6 +17,10 @@ class SelectionImageView: UIImageView {
 
     override init(frame: CGRect) {
         super.init(frame: frame)
+        setDisplay()
+    }
+
+    private func setDisplay() {
         let image = UIImage(systemName: "checkmark.circle.fill")
         self.contentMode = .scaleAspectFit
         self.image = image

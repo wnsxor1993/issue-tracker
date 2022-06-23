@@ -7,17 +7,11 @@
 
 import Foundation
 
-struct IssueCardDTO: Identifiable {
-    let id: Int
+struct IssueCardDTO {
     let title: String
     let content: String
     let isSelected: Bool
     let mileStone: String?
-    let labels: [Label]
-}
-
-struct Label: Identifiable {
-    let id: Int
-    let labelName: String
-    let labelColor: String
+    let label: String?
+    let labelColor: String?
 }

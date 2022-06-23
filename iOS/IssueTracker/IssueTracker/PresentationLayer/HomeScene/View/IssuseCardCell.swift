@@ -56,20 +56,10 @@ class IssuseCardCell: UITableViewCell {
         return stackView
     }()
 
-//    private var badgeLabel: BadgeLabel = {
-//        let badge = BadgeLabel()
-//        return badge
-//    }()
-
-    private lazy var badgeLabelStackView: UIStackView = {
-        let stackView = UIStackView()
-        stackView.spacing = 4
-        stackView.axis = .horizontal
-        stackView.translatesAutoresizingMaskIntoConstraints = false
-        stackView.alignment = .leading
-        stackView.distribution = .fillProportionally
-
-        return stackView
+    private var badgeLabel: BadgeLabel = {
+        let badge = BadgeLabel()
+        badge.translatesAutoresizingMaskIntoConstraints = false
+        return badge
     }()
 
     private lazy var cellContianerStackView: UIStackView = {
@@ -91,15 +81,15 @@ class IssuseCardCell: UITableViewCell {
 
     private func setConstraints() {
         contentView.addSubview(cellContianerStackView)
-        contentView.addSubview(badgeLabelStackView)
+        contentView.addSubview(badgeLabel)
         NSLayoutConstraint.activate([
             cellContianerStackView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 24),
             cellContianerStackView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 16),
             cellContianerStackView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -16),
 
-            badgeLabelStackView.topAnchor.constraint(equalTo: cellContianerStackView.bottomAnchor, constant: 16),
-            badgeLabelStackView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -24),
-            badgeLabelStackView.leadingAnchor.constraint(equalTo: cellContianerStackView.leadingAnchor)
+            badgeLabel.topAnchor.constraint(equalTo: cellContianerStackView.bottomAnchor, constant: 16),
+            badgeLabel.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -24),
+            badgeLabel.leadingAnchor.constraint(equalTo: cellContianerStackView.leadingAnchor)
         ])
     }
 
@@ -112,12 +102,7 @@ extension IssuseCardCell {
         content.text =  model.content
         selectionImageView.isSelected =  model.isSelected
         mileStoneLabel.text =  model.mileStone
-        model.labels.forEach({
-            let badgeLabel = BadgeLabel()
-            badgeLabel.configure($0.labelName, hexColor: $0.labelColor)
-            badgeLabelStackView.addArrangedSubview(badgeLabel)
-        })
-
+        badgeLabel.configure(model.label, hexColor: model.labelColor)
         if mileStoneLabel.text == nil {
             mileStoneStackView.isHidden = true
         }
