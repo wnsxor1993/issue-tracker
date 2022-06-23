@@ -115,7 +115,7 @@ private extension IssueAddViewController {
 
 extension IssueAddViewController: UITextViewDelegate {
     func textViewDidBeginEditing(_ textView: UITextView) {
-        guard textView.text == commentView.commentTextHolder else { return }
+        guard textView.textColor == .issueTrackerGray3 else { return }
 
         textView.text = nil
         textView.textColor = .black
