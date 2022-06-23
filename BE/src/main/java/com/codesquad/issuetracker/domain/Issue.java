@@ -3,7 +3,6 @@ package com.codesquad.issuetracker.domain;
 import lombok.*;
 
 import javax.persistence.*;
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -14,16 +13,12 @@ import static javax.persistence.FetchType.LAZY;
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @ToString(of = {"id", "title", "content", "isOpened", "createdAt", "lastModifiedAt"})
-public class Issue {
+public class Issue extends BaseTimeEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "issue_id")
     private Long id;
-
-    private LocalDateTime createdAt;
-
-    private LocalDateTime lastModifiedAt;
 
     @ManyToOne(fetch = LAZY)
     @JoinColumn(name = "author_id")
@@ -48,9 +43,7 @@ public class Issue {
     private boolean isOpened;
 
     @Builder(access = AccessLevel.PRIVATE)
-    private Issue(LocalDateTime createdAt, LocalDateTime lastModifiedAt, Member author, Milestone milestone,String title, String content, boolean isOpened) {
-        this.createdAt = createdAt;
-        this.lastModifiedAt = lastModifiedAt;
+    private Issue(Member author, Milestone milestone,String title, String content, boolean isOpened) {
         this.author = author;
         this.milestone = milestone;
         this.title = title;
@@ -59,17 +52,13 @@ public class Issue {
     }
 
     public static Issue create(String title, String content, Member author, Milestone milestone) {
-        LocalDateTime createdTime = LocalDateTime.now();
-        Issue issue = Issue.builder()
+        return Issue.builder()
                 .author(author)
                 .milestone(milestone)
                 .title(title)
                 .content(content)
-                .createdAt(createdTime)
-                .lastModifiedAt(createdTime)
                 .isOpened(true)
                 .build();
-        return issue;
     }
 
     /**
@@ -88,7 +77,6 @@ public class Issue {
      */
     public void changeIssueState(boolean isOpened) {
         this.isOpened = isOpened;
-        lastModifiedAt = LocalDateTime.now();
     }
 
     /**
