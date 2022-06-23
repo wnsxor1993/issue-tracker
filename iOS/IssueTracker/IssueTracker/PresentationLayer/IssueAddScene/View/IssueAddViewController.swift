@@ -9,10 +9,10 @@ import UIKit
 
 final class IssueAddViewController: UIViewController {
 
-    private var commentView = CommentView()
-    private var listView = ListView()
+    private var commentView = CommentContainerView()
+    private var listView = ListContainerView()
 
-    private var dataSource: TableViewDataSource<AdditionalInfoEntity, ListCell>?
+    private var dataSource: TableViewDataSource<IssueAddListEntity, ListCell>?
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -21,6 +21,11 @@ final class IssueAddViewController: UIViewController {
         setInnerPropertyDelegate()
         setDatasource()
         setObservingKeyboardNotification()
+    }
+
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        navigationController?.navigationBar.prefersLargeTitles = false
     }
 
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -55,21 +60,21 @@ private extension IssueAddViewController {
     }
 
     func setInnerPropertyDelegate() {
-        self.listView.listTableView.delegate = self
-        self.commentView.commentTextView.delegate = self
+        self.listView.setDelegate(to: self)
+        self.commentView.setDelegate(to: self)
     }
 
     func setDatasource() {
-        let label = AdditionalInfoEntity(title: "레이블", value: nil)
-        let milestone = AdditionalInfoEntity(title: "마일스톤", value: nil)
-        let assignee = AdditionalInfoEntity(title: "담당자", value: nil)
+        let label = IssueAddListEntity(title: "레이블", selectedValue: nil)
+        let milestone = IssueAddListEntity(title: "마일스톤", selectedValue: nil)
+        let assignee = IssueAddListEntity(title: "담당자", selectedValue: nil)
         let models = [label, milestone, assignee]
         issueCardsDidLoad(model: models)
     }
 
-    func issueCardsDidLoad(model: [AdditionalInfoEntity]) {
-        let dataSource = TableViewDataSource(model, reuseIdentifier: ListCell.cellIdentifier, cellConfigurator: { (model: AdditionalInfoEntity, cell: ListCell) in
-            cell.configureCellText(title: model.title, value: model.value)
+    func issueCardsDidLoad(model: [IssueAddListEntity]) {
+        let dataSource = TableViewDataSource(model, reuseIdentifier: ListCell.cellIdentifier, cellConfigurator: { (model: IssueAddListEntity, cell: ListCell) in
+            cell.configureCellText(title: model.title, value: model.selectedValue)
         })
 
         self.dataSource = dataSource
@@ -110,7 +115,7 @@ private extension IssueAddViewController {
 
 extension IssueAddViewController: UITextViewDelegate {
     func textViewDidBeginEditing(_ textView: UITextView) {
-        guard textView.text == commentView.commentTextHolder else { return }
+        guard textView.textColor == .issueTrackerGray3 else { return }
 
         textView.text = nil
         textView.textColor = .black
