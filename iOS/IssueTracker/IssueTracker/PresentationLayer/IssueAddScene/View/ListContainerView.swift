@@ -7,7 +7,7 @@
 
 import UIKit
 
-class ListView: UIView {
+class ListContainerView: UIView {
 
     private var titleLabel: UILabel = {
         let label = UILabel()
@@ -36,9 +36,15 @@ class ListView: UIView {
     required init?(coder: NSCoder) {
         fatalError()
     }
+
+    func setDelegate(to viewController: UIViewController) {
+        guard let vcDelegate = viewController as? UITableViewDelegate else { return }
+
+        self.listTableView.delegate = vcDelegate
+    }
 }
 
-private extension ListView {
+private extension ListContainerView {
 
     func registerTableView() {
         listTableView.register(ListCell.self, forCellReuseIdentifier: ListCell.cellIdentifier)
