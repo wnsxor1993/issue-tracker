@@ -21,6 +21,7 @@ class HomeViewController: UIViewController {
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        setNavigation()
         navigationController?.navigationBar.prefersLargeTitles = true
     }
 }
@@ -28,7 +29,7 @@ class HomeViewController: UIViewController {
 private extension HomeViewController {
 
     func configureDisplay() {
-        setNavigation()
+
         setTableView()
         setDataSource()
         setAddButton()

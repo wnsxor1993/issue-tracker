@@ -16,7 +16,7 @@ final class IssueAddViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        setNavigationBar()
+
         setConstraints()
         setInnerPropertyDelegate()
         setDatasource()
@@ -25,6 +25,7 @@ final class IssueAddViewController: UIViewController {
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        setNavigationBar()
         navigationController?.navigationBar.prefersLargeTitles = false
     }
 
@@ -60,8 +61,8 @@ private extension IssueAddViewController {
     }
 
     func setInnerPropertyDelegate() {
-        self.listView.listTableView.delegate = self
-        self.commentView.commentTextView.delegate = self
+        self.listView.setDelegate(to: self)
+        self.commentView.setDelegate(to: self)
     }
 
     func setDatasource() {

@@ -36,6 +36,12 @@ class ListContainerView: UIView {
     required init?(coder: NSCoder) {
         fatalError()
     }
+
+    func setDelegate(to viewController: UIViewController) {
+        guard let vcDelegate = viewController as? UITableViewDelegate else { return }
+
+        self.listTableView.delegate = vcDelegate
+    }
 }
 
 private extension ListContainerView {
