@@ -145,4 +145,25 @@ public class Issue extends BaseTimeEntity {
                 .map(newLabel -> new IssueLabel(this, newLabel))
                 .collect(Collectors.toList());
     }
+
+    /**
+     * 제목 변경
+     */
+    public void changeTitle(String title) {
+        this.title = title;
+    }
+
+    /**
+     * 본문 변경
+     */
+    public void changeContent(String content) {
+        this.content = content;
+    }
+
+    /**
+     * 마일스톤 변경
+     */
+    public void changeMilestone(Milestone updateMilestone) {
+        this.milestone = milestone;
+    }
 }
