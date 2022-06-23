@@ -16,7 +16,7 @@ final class IssueAddViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        setNavigationBar()
         setConstraints()
         setInnerPropertyDelegate()
         setDatasource()
@@ -25,7 +25,6 @@ final class IssueAddViewController: UIViewController {
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        setNavigationBar()
         navigationController?.navigationBar.prefersLargeTitles = false
     }
 
