@@ -10,9 +10,8 @@ import AuthenticationServices
 
 class LoginViewController: UIViewController {
 
-    private lazy var appleManager: OAuthManageable = AppleManager(endPoint: EndPoint(urlConfigure: GitURLConfiguration(), method: .POST, body: nil), presentationAnchor: self.view.window)
-
-    private var githubManager: OAuthManageable = GitHubManager(endPoint: EndPoint(urlConfigure: GitURLConfiguration(), method: .POST, body: nil))
+    private var appleManager: OAuthManageable?
+    private var githubManager: OAuthManageable?
 
     private let titleLabel: UILabel = {
         let label = UILabel()
@@ -41,13 +40,16 @@ class LoginViewController: UIViewController {
         super.viewDidLoad()
         view.backgroundColor = .issueTrackerGray1
         setViewsConstraint()
-        setOAuthObserver()
+        setOAuthManagers()
         oauthLoginView.delegate = self
     }
 }
 
 extension LoginViewController: OAuthButtonDelegate {
     func didClick(buttonType: OAuthButtonType) {
+
+        guard let githubManager = githubManager, let appleManager = appleManager else {return}
+
         switch buttonType {
         case .git:
             githubManager.enquireForGrant { url in
@@ -59,11 +61,28 @@ extension LoginViewController: OAuthButtonDelegate {
 
         case .apple:
             appleManager.enquireForGrant {_ in}
-            }
         }
+    }
 }
 
 private extension LoginViewController {
+
+    func setOAuthManagers() {
+        appleManager = AppleManager(endPoint: EndPoint(urlConfigure: GitURLConfiguration(), method: .POST, body: nil), presentationAnchor: self.view.window) { [weak self] isVerified in
+            guard isVerified == true else { return }
+            self?.presentNextScene()
+        }
+        githubManager = GitHubManager(endPoint: EndPoint(urlConfigure: GitURLConfiguration(), method: .POST, body: nil)) {[weak self]  isVerified in
+            guard isVerified == true else { return }
+            self?.presentNextScene()
+        }
+    }
+
+    func presentNextScene() {
+        let nextViewController = TabBarViewController()
+        nextViewController.modalPresentationStyle = .fullScreen
+        self.present(nextViewController, animated: true)
+    }
 
     func setViewsConstraint() {
         view.addSubViews(titleLabel, loginInputView, oauthLoginView)
@@ -85,16 +104,4 @@ private extension LoginViewController {
         ])
     }
 
-    func setOAuthObserver() {
-        let responseHandler: ((Bool) -> Void) = { isVerified in
-            guard isVerified == true else { return }
-            print(isVerified)
-            let nextViewController = TabBarViewController()
-            nextViewController.modalPresentationStyle = .fullScreen
-            self.present(nextViewController, animated: true)
-        }
-
-        self.appleManager.observe(responseHandler: responseHandler)
-        self.githubManager.observe(responseHandler: responseHandler)
-    }
 }
