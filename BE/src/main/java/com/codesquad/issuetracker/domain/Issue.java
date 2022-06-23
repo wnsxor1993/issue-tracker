@@ -25,17 +25,17 @@ public class Issue extends BaseTimeEntity {
     private Member author;
 
     @OneToMany(mappedBy = "issue", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<IssueAssignee> assignees = new ArrayList<>();
+    private final List<IssueAssignee> assignees = new ArrayList<>();
 
     @ManyToOne(fetch = LAZY)
     @JoinColumn(name = "milestone_id")
     private Milestone milestone;
 
     @OneToMany(mappedBy = "issue", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<IssueLabel> issueLabels = new ArrayList<>();
+    private final List<IssueLabel> issueLabels = new ArrayList<>();
 
     @OneToMany(mappedBy = "issue", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<Comment> comments = new ArrayList<>();
+    private final List<Comment> comments = new ArrayList<>();
 
     private String title;
     private String content;
