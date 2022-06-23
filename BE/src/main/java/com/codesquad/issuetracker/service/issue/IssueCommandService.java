@@ -49,7 +49,7 @@ public class IssueCommandService {
         return (milestoneId == null)
                 ? null
                 : milestoneRepository.findById(milestoneId)
-                        .orElseThrow(() -> new MilestoneNotFoundException("일치하는 식별자의 마일스톤이 존재하지 않습니다."));
+                .orElseThrow(() -> new MilestoneNotFoundException("일치하는 식별자의 마일스톤이 존재하지 않습니다."));
     }
 
     private Member findMember(Long memberId) {

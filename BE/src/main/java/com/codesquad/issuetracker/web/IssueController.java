@@ -35,7 +35,7 @@ public class IssueController {
                 createRequest.getLabelIds(),
                 createRequest.getTitle(),
                 createRequest.getContent());
-        
+
         log.info("Created Issue Id = {}", createdIssueId);
         return new IssueCreateResponse(createdIssueId);
     }

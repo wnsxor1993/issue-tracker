@@ -43,7 +43,7 @@ public class Issue extends BaseTimeEntity {
     private boolean isOpened;
 
     @Builder(access = AccessLevel.PRIVATE)
-    private Issue(Member author, Milestone milestone,String title, String content, boolean isOpened) {
+    private Issue(Member author, Milestone milestone, String title, String content, boolean isOpened) {
         this.author = author;
         this.milestone = milestone;
         this.title = title;
