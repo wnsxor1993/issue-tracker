@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct AdditionalInfoEntity {
+struct IssueAddListEntity {
     let title: String
-    let value: String?
+    let selectedValue: String?
 }
