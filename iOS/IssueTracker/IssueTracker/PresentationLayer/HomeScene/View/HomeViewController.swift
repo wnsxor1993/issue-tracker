@@ -61,8 +61,15 @@ private extension HomeViewController {
     }
 
     func setDataSource() {
-        let mockEntity = IssueCardDTO(title: "야호", content: "너와나의 연결고리 이건 우리안의 소리 너와나의 연결고리 이건 우리안의 소리 연결고리 이건 우리안의 소리 ", isSelected: false, mileStone: "dsds", label: "이것의 끝은 어디인가", labelColor: "#020070")
-        let mockEntity2 = IssueCardDTO(title: "야호", content: "이건 우리안의 소리  연결고리연결고리연결고리연결고리연결고리연결고리 이건 우리안의 소리 ", isSelected: true, mileStone: nil, label: "북치고 장구치기 낄낄", labelColor: "#FF3B30")
+
+        let labels1 = [Label(id: 2, labelName: "이것의 끝은 어디인가", labelColor: "#020070"), Label(id: 3, labelName: "북치고 장구치기 낄낄", labelColor: "#FF3B30")]
+
+        let labels2 = [Label(id: 2, labelName: "이것의 끝은 어디인가", labelColor: "#020070"), Label(id: 3, labelName: "북치고 장구치기 낄낄", labelColor: "#FF3B30"), Label(id: 3, labelName: "이것의 끝은 dddd어디인가", labelColor: "#020070"), Label(id: 3, labelName: "북치고 장구치기 낄낄", labelColor: "#FF3B30"), Label(id: 4, labelName: "이것의 끝은 어디ds인가", labelColor: "#020070"), Label(id: 3, labelName: "북치고 장구치기 낄낄", labelColor: "#FF3B30")]
+
+        let mockEntity = IssueCardDTO(id: 1, title: "야호", content: "너와나의 연결고리 이건 우리안의 소리 너와나의 연결고리 이건 우리안의 소리 연결고리 이건 우리안의 소리 ", isSelected: false, mileStone: "dsds", labels: labels1)
+
+        let mockEntity2 = IssueCardDTO(id: 2, title: "야호", content: "이건 우리안의 소리  연결고리연결고리연결고리연결고리연결고리연결고리 이건 우리안의 소리 ", isSelected: true, mileStone: nil, labels: labels2)
+
         var testData = [mockEntity, mockEntity2, mockEntity, mockEntity2, mockEntity]
 
         let dataSource = TableViewDataSource(testData, reuseIdentifier: IssuseCardCell.id, cellConfigurator: { (model: IssueCardDTO, cell: IssuseCardCell) in
