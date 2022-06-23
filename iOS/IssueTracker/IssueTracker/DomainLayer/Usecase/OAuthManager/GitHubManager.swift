@@ -10,11 +10,10 @@ import Foundation
 final class GitHubManager: OAuthManageable {
 
     private(set) var endPoint: EndPoint
-    var responseHandler: (Bool) -> Void
+    var responseHandler: ((Bool) -> Void)?
 
-    init(endPoint: EndPoint, observe responseHandler: @escaping (Bool) -> Void) {
+    init(endPoint: EndPoint) {
         self.endPoint = endPoint
-        self.responseHandler = responseHandler
         self.setNotificationObserver()
     }
 
@@ -40,7 +39,7 @@ private extension GitHubManager {
     }
 
     func requestAPI(with endPoint: EndPoint) {
-        self.responseHandler(true)
+        self.responseHandler?(true)
 //        NetworkService.request(endPoint: endPoint, completion: { result in
 //            switch result {
 //            case .success(let data):

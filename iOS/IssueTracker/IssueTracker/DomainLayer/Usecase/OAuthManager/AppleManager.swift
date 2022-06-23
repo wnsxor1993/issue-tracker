@@ -10,15 +10,14 @@ import AuthenticationServices
 final class AppleManager: NSObject, OAuthManageable {
 
     private(set) var endPoint: EndPoint
-    var responseHandler: (Bool) -> Void
+    var responseHandler: ((Bool) -> Void)?
 
     private var presentationAnchor: UIWindow?
     private var authorizationController: ASAuthorizationController?
 
-    init(endPoint: EndPoint, presentationAnchor: UIWindow?, observe responseHandler: @escaping (Bool) -> Void) {
+    init(endPoint: EndPoint, presentationAnchor: UIWindow?) {
         self.endPoint = endPoint
         self.presentationAnchor = presentationAnchor
-        self.responseHandler = responseHandler
         super.init()
 
         self.prepareToRequest()
@@ -53,9 +52,9 @@ private extension AppleManager {
             switch result {
             case .success(let data):
                 // TODO: Decode response data
-                self.responseHandler(true)
+                self.responseHandler?(true)
             case .failure(let error):
-                self.responseHandler(false)
+                self.responseHandler?(false)
             }
         })
     }

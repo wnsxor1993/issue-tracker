@@ -7,10 +7,10 @@
 
 import UIKit
 
-final class TableViewDataSource<Model, Cell: UITableViewCell>: NSObject, UITableViewDataSource {
+class TableViewDataSource<Model, Cell: UITableViewCell>: NSObject, UITableViewDataSource {
 
     typealias CellConfigurator =  (Model, Cell) -> Void
-    private(set) var models: [Model]
+    private let models: [Model]
     private let reuseIdentifier: String
     private let cellConfigurator: CellConfigurator
 
@@ -28,13 +28,6 @@ final class TableViewDataSource<Model, Cell: UITableViewCell>: NSObject, UITable
         guard let cell = tableView.dequeueReusableCell(withIdentifier: reuseIdentifier) as? Cell else {return UITableViewCell()}
         cellConfigurator(models[indexPath.row], cell)
         return cell
-    }
-}
-
-extension TableViewDataSource {
-
-    func updateData(_ models: [Model]) {
-        self.models = models
     }
 
 }
