@@ -19,7 +19,7 @@ class LoginInputView: UIView {
 
     private let textFieldDividedLine: UIView = {
         let dividedLine = UIView()
-        dividedLine.backgroundColor = .dividedLine
+        dividedLine.backgroundColor = .issueTrackerGray2
         dividedLine.translatesAutoresizingMaskIntoConstraints = false
 
         return dividedLine
@@ -62,17 +62,15 @@ class LoginInputView: UIView {
     }()
 
     private lazy var loginButton: UIButton = {
-        let button = getButtonAttributes()
-        button.setTitle("로그인", for: .normal)
+        let customButton = button(from: "로그인")
 
-        return button
+        return customButton
     }()
 
     private lazy var signupButton: UIButton = {
-        let button = getButtonAttributes()
-        button.setTitle("회원가입", for: .normal)
+        let customButton = button(from: "회원가입")
 
-        return button
+        return customButton
     }()
 
     override init(frame: CGRect) {
@@ -89,9 +87,10 @@ class LoginInputView: UIView {
 
 private extension LoginInputView {
 
-    func getButtonAttributes() -> UIButton {
+    func button(from title: String) -> UIButton {
         let button = UIButton()
-        button.setTitleColor(UIColor.logSignInButton, for: .normal)
+        button.setTitle(title, for: .normal)
+        button.setTitleColor(UIColor.issueTrackerBlue, for: .normal)
         button.titleLabel?.font = .systemFont(ofSize: 16, weight: .semibold)
         button.titleLabel?.textAlignment = .center
         button.translatesAutoresizingMaskIntoConstraints = false
@@ -99,7 +98,7 @@ private extension LoginInputView {
         return button
     }
 
-    func getStackViewAttributes(subviews: [UIView]) -> UIStackView {
+    func stackView(withSubviews subviews: [UIView]) -> UIStackView {
         let stackView = UIStackView(arrangedSubviews: subviews)
         stackView.distribution = .fillEqually
         stackView.axis = .vertical
@@ -133,8 +132,8 @@ private extension LoginInputView {
     }
 
     func setBackViewConstraint() {
-        let labelStack = getStackViewAttributes(subviews: [idLabel, pswLabel])
-        let textFieldStack = getStackViewAttributes(subviews: [idTextField, pswTextField])
+        let labelStack = stackView(withSubviews: [idLabel, pswLabel])
+        let textFieldStack = stackView(withSubviews: [idTextField, pswTextField])
 
         self.textFieldBackView.addSubViews(labelStack, textFieldStack, textFieldDividedLine)
 

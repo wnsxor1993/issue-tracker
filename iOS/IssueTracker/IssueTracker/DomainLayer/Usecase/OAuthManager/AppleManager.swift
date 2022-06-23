@@ -9,21 +9,29 @@ import AuthenticationServices
 
 final class AppleManager: NSObject, OAuthManageable {
 
-    let endPoint: EndPoint
+    private(set) var endPoint: EndPoint
+    var responseHandler: (Bool) -> Void
+
     private var presentationAnchor: UIWindow?
     private var authorizationController: ASAuthorizationController?
 
-    init(endPoint: EndPoint, presentationAnchor: UIWindow?) {
+    init(endPoint: EndPoint, presentationAnchor: UIWindow?, observe responseHandler: @escaping (Bool) -> Void) {
         self.endPoint = endPoint
         self.presentationAnchor = presentationAnchor
+        self.responseHandler = responseHandler
         super.init()
 
         self.prepareToRequest()
     }
 
-    func sendRequest() {
+    func enquireForGrant(handler: @escaping (URL?) -> Void) {
         guard let controller = authorizationController else { return }
         controller.performRequests()
+        handler(nil)
+    }
+
+    func observe(responseHandler: @escaping (Bool) -> Void) {
+        self.responseHandler = responseHandler
     }
 }
 
@@ -39,6 +47,18 @@ private extension AppleManager {
         controller.presentationContextProvider = self
         authorizationController = controller
     }
+
+    func requestAPI() {
+        NetworkService.request(endPoint: endPoint, completion: { result in
+            switch result {
+            case .success(let data):
+                // TODO: Decode response data
+                self.responseHandler(true)
+            case .failure(let error):
+                self.responseHandler(false)
+            }
+        })
+    }
 }
 
 extension AppleManager: ASAuthorizationControllerDelegate {
@@ -46,8 +66,8 @@ extension AppleManager: ASAuthorizationControllerDelegate {
     func authorizationController(controller: ASAuthorizationController, didCompleteWithAuthorization authorization: ASAuthorization) {
         switch authorization.credential {
         case let appleIDCredential as ASAuthorizationAppleIDCredential:
-            // apple 로그인 성공 관련 로직 필요
-            break
+            // TODO: BE API request 호출 클로저 내부에 해당 작업 넣기
+            requestAPI()
 
         default:
             break

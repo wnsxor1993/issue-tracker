@@ -9,4 +9,7 @@ import Foundation
 
 protocol OAuthManageable {
     var endPoint: EndPoint {get}
+    var responseHandler: (Bool) -> Void {get set}
+
+    func enquireForGrant(handler: @escaping (_ url: URL?) -> Void)
 }
