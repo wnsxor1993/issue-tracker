@@ -1,4 +1,4 @@
-package com.codesquad.issuetracker.web.dto;
+package com.codesquad.issuetracker.web.dto.label;
 
 import com.codesquad.issuetracker.domain.Label;
 import lombok.AccessLevel;

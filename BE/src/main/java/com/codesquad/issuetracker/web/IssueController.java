@@ -3,7 +3,7 @@ package com.codesquad.issuetracker.web;
 import com.codesquad.issuetracker.domain.Issue;
 import com.codesquad.issuetracker.service.issue.IssueCommandService;
 import com.codesquad.issuetracker.service.issue.IssueQueryService;
-import com.codesquad.issuetracker.web.dto.*;
+import com.codesquad.issuetracker.web.dto.issue.*;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;

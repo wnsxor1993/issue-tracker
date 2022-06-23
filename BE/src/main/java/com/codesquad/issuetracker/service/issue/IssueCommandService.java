@@ -11,7 +11,7 @@ import com.codesquad.issuetracker.repository.issue.IssueRepository;
 import com.codesquad.issuetracker.repository.label.LabelRepository;
 import com.codesquad.issuetracker.repository.member.MemberRepository;
 import com.codesquad.issuetracker.repository.milestone.MilestoneRepository;
-import com.codesquad.issuetracker.web.dto.IssueUpdateRequest;
+import com.codesquad.issuetracker.web.dto.issue.IssueUpdateRequest;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
