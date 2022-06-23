@@ -73,14 +73,11 @@ public class IssueCommandService {
     }
 
     public void changeStates(List<Long> issueIds, boolean isOpened) {
-        List<Issue> issues = issueRepository.findAllById(issueIds);
-
-        issues.forEach(issue -> issue.changeIssueState(isOpened));
+        issueRepository.updateBulkStates(issueIds, isOpened);
     }
 
     public void deleteIssue(Long issueId) {
         issueRepository.deleteById(issueId);
-
     }
 
     /**

@@ -6,6 +6,7 @@ import com.querydsl.jpa.impl.JPAQueryFactory;
 
 import javax.persistence.EntityManager;
 
+import java.util.List;
 import java.util.Optional;
 
 import static com.codesquad.issuetracker.domain.QIssue.*;
@@ -20,6 +21,7 @@ public class IssueRepositoryImpl implements IssueCustomRepository {
         this.queryFactory = new JPAQueryFactory(em);
     }
 
+    @Override
     public Optional<Issue> findByIdWithAuthorAndMilestone(Long issueId) {
         QMember author = new QMember("author");
 
@@ -31,5 +33,13 @@ public class IssueRepositoryImpl implements IssueCustomRepository {
                 .fetchOne();
 
         return Optional.ofNullable(findIssue);
+    }
+
+    @Override
+    public void updateBulkStates(List<Long> issueIds, boolean isOpened) {
+        queryFactory.update(issue)
+                .set(issue.isOpened, isOpened)
+                .where(issue.id.in(issueIds))
+                .execute();
     }
 }
