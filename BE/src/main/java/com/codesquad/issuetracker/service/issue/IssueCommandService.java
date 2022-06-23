@@ -1,9 +1,6 @@
 package com.codesquad.issuetracker.service.issue;
 
-import com.codesquad.issuetracker.domain.Issue;
-import com.codesquad.issuetracker.domain.Label;
-import com.codesquad.issuetracker.domain.Member;
-import com.codesquad.issuetracker.domain.Milestone;
+import com.codesquad.issuetracker.domain.*;
 import com.codesquad.issuetracker.excption.IssueNotFoundException;
 import com.codesquad.issuetracker.excption.MemberNotFoundException;
 import com.codesquad.issuetracker.excption.MilestoneNotFoundException;
@@ -38,7 +35,9 @@ public class IssueCommandService {
         Milestone milestone = findMilestone(milestondId);
         List<Label> labels = labelRepository.findAllById(labelIds);
 
-        Issue issue = Issue.create(author, assigneeMembers, milestone, labels, title, content);
+        Issue issue = Issue.create(title, content, author, milestone);
+        issue.changeIssueAssignees(assigneeMembers);
+
         issueRepository.save(issue);
 
         log.info("created Issue = {}", issue);
