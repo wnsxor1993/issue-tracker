@@ -20,7 +20,7 @@ public class IssueRepositoryImpl implements IssueCustomRepository {
         this.queryFactory = new JPAQueryFactory(em);
     }
 
-    public Optional<Issue> findDetailIssueById(Long issueId) {
+    public Optional<Issue> findByIdWithAuthorAndMilestone(Long issueId) {
         QMember author = new QMember("author");
 
         Issue findIssue = queryFactory.select(issue)

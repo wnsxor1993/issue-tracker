@@ -35,7 +35,7 @@ public class IssueQueryService {
     }
 
     public Issue findDetailIssue(Long issueId) {
-        Issue detailIssue = issueRepository.findDetailIssueById(issueId)
+        Issue detailIssue = issueRepository.findByIdWithAuthorAndMilestone(issueId)
                 .orElseThrow(() -> new IssueNotFoundException("일치하는 식별자의 이슈를 찾을 수 없습니다."));
 
 

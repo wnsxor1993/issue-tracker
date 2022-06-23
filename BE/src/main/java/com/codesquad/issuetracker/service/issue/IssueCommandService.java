@@ -1,6 +1,9 @@
 package com.codesquad.issuetracker.service.issue;
 
-import com.codesquad.issuetracker.domain.*;
+import com.codesquad.issuetracker.domain.Issue;
+import com.codesquad.issuetracker.domain.Label;
+import com.codesquad.issuetracker.domain.Member;
+import com.codesquad.issuetracker.domain.Milestone;
 import com.codesquad.issuetracker.excption.IssueNotFoundException;
 import com.codesquad.issuetracker.excption.MemberNotFoundException;
 import com.codesquad.issuetracker.excption.MilestoneNotFoundException;
@@ -8,6 +11,7 @@ import com.codesquad.issuetracker.repository.issue.IssueRepository;
 import com.codesquad.issuetracker.repository.label.LabelRepository;
 import com.codesquad.issuetracker.repository.member.MemberRepository;
 import com.codesquad.issuetracker.repository.milestone.MilestoneRepository;
+import com.codesquad.issuetracker.web.dto.IssueUpdateRequest;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -77,5 +81,22 @@ public class IssueCommandService {
     public void deleteIssue(Long issueId) {
         issueRepository.deleteById(issueId);
 
+    }
+
+    /**
+     * 이슈 수정
+     */
+    public void updateIssue(Long issueId, IssueUpdateRequest updateRequest) {
+        Issue issue = issueRepository.findByIdWithAuthorAndMilestone(issueId)
+                .orElseThrow(() -> new IssueNotFoundException("일치하는 식별자의 이슈를 찾을 수 없습니다."));
+        Milestone updateMilestone = findMilestone(updateRequest.getMilestoneId());
+        List<Label> labels = labelRepository.findAllById(updateRequest.getLabelIds());
+        List<Member> assigneeMembers = memberRepository.findAllById(updateRequest.getAssigneeIds());
+
+        issue.changeTitle(updateRequest.getTitle());
+        issue.changeContent(updateRequest.getContent());
+        issue.changeMilestone(updateMilestone);
+        issue.changeIssueAssignees(assigneeMembers);
+        issue.changeIssueLabels(labels);
     }
 }

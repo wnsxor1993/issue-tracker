@@ -52,10 +52,11 @@ public class IssueController {
     /**
      * 이슈 수정(제목, 본문, 레이블, 마일스톤)
      */
-    @PutMapping("/issue-tracker/api/issues")
-    public IssueUpdateResponse update(@RequestBody IssueUpdateRequest updateRequest) {
-        log.info("Issue Create Request = {}", updateRequest);
-        return null;
+    @PutMapping("/issue-tracker/api/issues/{issueId}")
+    public IssueUpdateResponse update(@PathVariable Long issueId, @RequestBody IssueUpdateRequest updateRequest) {
+        log.info("Issue update Request = {}", updateRequest);
+        issueCommandService.updateIssue(issueId, updateRequest);
+        return new IssueUpdateResponse(issueId);
     }
 
     /**

@@ -7,5 +7,5 @@ import java.util.Optional;
 
 public interface IssueRepository extends JpaRepository<Issue, Long>, IssueCustomRepository {
 
-    Optional<Issue> findDetailIssueById(Long issueId);
+    Optional<Issue> findByIdWithAuthorAndMilestone(Long issueId);
 }
