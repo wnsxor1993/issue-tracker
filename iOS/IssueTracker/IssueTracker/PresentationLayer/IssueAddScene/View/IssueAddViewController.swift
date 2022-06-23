@@ -9,8 +9,8 @@ import UIKit
 
 final class IssueAddViewController: UIViewController {
 
-    private var commentView = CommentView()
-    private var listView = ListView()
+    private var commentView = CommentContainerView()
+    private var listView = ListContainerView()
 
     private var dataSource: TableViewDataSource<IssueAddListEntity, ListCell>?
 
