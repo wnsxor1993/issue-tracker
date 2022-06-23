@@ -37,6 +37,7 @@ public class IssueCommandService {
 
         Issue issue = Issue.create(title, content, author, milestone);
         issue.changeIssueAssignees(assigneeMembers);
+        issue.changeIssueLabels(labels);
 
         issueRepository.save(issue);
 

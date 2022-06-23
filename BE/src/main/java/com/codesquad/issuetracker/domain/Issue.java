@@ -89,7 +89,7 @@ public class Issue extends BaseTimeEntity {
     }
 
     /**
-     * 기존에 추가되지 않은 회원들을 할당
+     * 기존에 추가되지 않은 회원들로 IssueAssignee 생성
      */
     private List<IssueAssignee> createNewAssignees(List<Member> changeMembers) {
         return changeMembers.stream()
@@ -107,4 +107,42 @@ public class Issue extends BaseTimeEntity {
         changeMembers.removeIf(beforeMembers::contains);
     }
 
+    /**
+     * 지정 Label들로 현재 이슈를 교체(포함되지 않은 라벨들 제거)
+     */
+    public void changeIssueLabels(List<Label> changeLabels) {
+        removeIssueLabelsNotIn(changeLabels);
+        removeDuplicateLabelFrom(changeLabels);
+
+        List<IssueLabel> newLabels = createNewIssueLabels(changeLabels);
+        issueLabels.addAll(newLabels);
+    }
+
+    /**
+     * 리스트에 없는 라벨을 제거
+     */
+    private void removeIssueLabelsNotIn(List<Label> changeLabels) {
+        this.issueLabels.removeIf(
+                issueLabel -> !issueLabel.isLabelBelongTo(changeLabels)
+        );
+    }
+
+    /**
+     * 리스트에 존재하는 라벨이 이미 존재하면 changeLabels에서 제거
+     */
+    private void removeDuplicateLabelFrom(List<Label> changeLabels) {
+        List<Label> beforeLabels = issueLabels.stream()
+                .map(IssueLabel::getLabel)
+                .collect(Collectors.toList());
+        changeLabels.removeIf(beforeLabels::contains);
+    }
+
+    /**
+     * 기존에 추가되지 않은 라벨들로 이슈라벨을 생성
+     */
+    private List<IssueLabel> createNewIssueLabels(List<Label> changeLabels) {
+        return changeLabels.stream()
+                .map(newLabel -> new IssueLabel(this, newLabel))
+                .collect(Collectors.toList());
+    }
 }
