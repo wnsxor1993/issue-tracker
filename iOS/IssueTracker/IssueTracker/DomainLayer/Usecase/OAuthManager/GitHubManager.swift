@@ -21,10 +21,6 @@ final class GitHubManager: OAuthManageable {
     func enquireForGrant(handler: @escaping (URL?) -> Void) {
         handler(endPoint.url)
     }
-
-    func observe(responseHandler: @escaping (Bool) -> Void) {
-        self.responseHandler = responseHandler
-    }
 }
 
 private extension GitHubManager {

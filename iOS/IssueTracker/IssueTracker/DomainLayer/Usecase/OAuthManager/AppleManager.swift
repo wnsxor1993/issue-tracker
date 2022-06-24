@@ -29,10 +29,6 @@ final class AppleManager: NSObject, OAuthManageable {
         controller.performRequests()
         handler(nil)
     }
-
-    func observe(responseHandler: @escaping (Bool) -> Void) {
-        self.responseHandler = responseHandler
-    }
 }
 
 private extension AppleManager {
