@@ -6,6 +6,7 @@ import com.codesquad.issuetracker.service.issue.IssueQueryService;
 import com.codesquad.issuetracker.web.dto.issue.*;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -24,6 +25,7 @@ public class IssueController {
      * 이슈 생성
      */
     @PostMapping("/issue-tracker/api/issues")
+    @ResponseStatus(HttpStatus.CREATED)
     public IssueCreateResponse create(@RequestBody IssueCreateRequest createRequest) {
         log.info("Issue Create Request = {}", createRequest);
         Long authorId = SAMPLE_MEMBER_ID;
@@ -84,6 +86,7 @@ public class IssueController {
      * 이슈 삭제
      */
     @DeleteMapping("/issue-tracker/api/issues/{issueId}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
     public IssueDeleteResponse delete(@PathVariable Long issueId) {
         log.info("Issue Delete Request - issueId = {}", issueId);
         issueCommandService.deleteIssue(issueId);
