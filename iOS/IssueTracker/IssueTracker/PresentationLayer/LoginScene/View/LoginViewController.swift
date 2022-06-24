@@ -10,8 +10,9 @@ import AuthenticationServices
 
 class LoginViewController: UIViewController {
 
-    private var appleManager: OAuthManageable?
-    private var githubManager: OAuthManageable?
+    private var appleManager: DefaultRequestGrantCodeUsecase?
+    private var githubManager: DefaultRequestGrantCodeUsecase?
+    let loginVM = LoginViewModel()
 
     private let titleLabel: UILabel = {
         let label = UILabel()
@@ -42,6 +43,12 @@ class LoginViewController: UIViewController {
         setViewsConstraint()
         setOAuthManagers()
         oauthLoginView.delegate = self
+        
+        loginVM.userInfo.bind { info in
+            guard let userInfo = info else { return }
+            print(userInfo)
+            self.presentNextScene()
+        }
     }
 }
 
@@ -68,11 +75,12 @@ extension LoginViewController: OAuthButtonDelegate {
 private extension LoginViewController {
 
     func setOAuthManagers() {
-        appleManager = AppleManager(endPoint: EndPoint(urlConfigure: GitURLConfiguration(), method: .POST, body: nil), presentationAnchor: self.view.window) { [weak self] isVerified in
+        //TODO: OAuth BE 연결되면 presentNextScene 삭제 및 로직 변경 필요
+        appleManager = RequestAppleGrantCodeUseCase(endPoint: EndPoint(urlConfigure: GitURLConfiguration(), method: .POST, body: nil), presentationAnchor: self.view.window) { [weak self] isVerified in
             guard isVerified == true else { return }
             self?.presentNextScene()
         }
-        githubManager = GitHubManager(endPoint: EndPoint(urlConfigure: GitURLConfiguration(), method: .POST, body: nil)) {[weak self]  isVerified in
+        githubManager = RequestGithubGrantCodeUseCase(endPoint: EndPoint(urlConfigure: GitURLConfiguration(), method: .POST, body: nil)) {[weak self]  isVerified in
             guard isVerified == true else { return }
             self?.presentNextScene()
         }

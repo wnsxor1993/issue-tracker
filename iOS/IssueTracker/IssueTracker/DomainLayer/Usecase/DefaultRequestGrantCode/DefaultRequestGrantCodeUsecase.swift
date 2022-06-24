@@ -7,7 +7,7 @@
 
 import Foundation
 
-protocol OAuthManageable {
+protocol DefaultRequestGrantCodeUsecase {
     var endPoint: EndPoint {get}
     var responseHandler: (Bool) -> Void {get set}
 

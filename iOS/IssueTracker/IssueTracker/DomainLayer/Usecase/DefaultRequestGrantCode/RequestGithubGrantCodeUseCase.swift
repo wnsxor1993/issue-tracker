@@ -7,7 +7,7 @@
 
 import Foundation
 
-final class GitHubManager: OAuthManageable {
+final class RequestGithubGrantCodeUseCase: DefaultRequestGrantCodeUsecase {
 
     private(set) var endPoint: EndPoint
     var responseHandler: (Bool) -> Void
@@ -23,7 +23,7 @@ final class GitHubManager: OAuthManageable {
     }
 }
 
-private extension GitHubManager {
+private extension RequestGithubGrantCodeUseCase {
     func setNotificationObserver() {
         NotificationCenter.default.addObserver(self, selector: #selector(didRecieveGrantCode(notification:)), name: .recievedGrantCode, object: nil)
     }
