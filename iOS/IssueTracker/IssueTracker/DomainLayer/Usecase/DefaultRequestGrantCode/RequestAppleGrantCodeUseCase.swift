@@ -29,10 +29,6 @@ final class RequestAppleGrantCodeUseCase: NSObject, DefaultRequestGrantCodeUseca
         controller.performRequests()
         handler(nil)
     }
-
-    func observe(responseHandler: @escaping (Bool) -> Void) {
-        self.responseHandler = responseHandler
-    }
 }
 
 private extension RequestAppleGrantCodeUseCase {

@@ -69,16 +69,17 @@ private extension IssueAddViewController {
         let milestone = IssueAddListEntity(title: "마일스톤", selectedValue: nil)
         let assignee = IssueAddListEntity(title: "담당자", selectedValue: nil)
         let models = [label, milestone, assignee]
-        issueCardsDidLoad(model: models)
-    }
-
-    func issueCardsDidLoad(model: [IssueAddListEntity]) {
-        let dataSource = TableViewDataSource(model, reuseIdentifier: ListCell.cellIdentifier, cellConfigurator: { (model: IssueAddListEntity, cell: ListCell) in
+        
+        let dataSource = TableViewDataSource(models, reuseIdentifier: ListCell.cellIdentifier, cellConfigurator: { (model: IssueAddListEntity, cell: ListCell) in
             cell.configureCellText(title: model.title, value: model.selectedValue)
         })
 
         self.dataSource = dataSource
         listView.listTableView.dataSource = dataSource
+    }
+
+    func setDataBinding() {
+        // MARK: TO BE IMPLEMENTED WITH VIEWMODEL
     }
 }
 
