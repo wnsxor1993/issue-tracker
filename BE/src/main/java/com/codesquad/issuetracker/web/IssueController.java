@@ -73,11 +73,11 @@ public class IssueController {
      */
     @PatchMapping("/issue-tracker/api/issues/{issueId}")
     public IssueStateChangeResponse stateChange(@PathVariable Long issueId, @RequestBody IssueStateChangeRequest stateChangeRequest) {
-        log.info("Issue StateChange Request = {}", stateChangeRequest);
-        issueCommandService.changeState(issueId, stateChangeRequest.getIsOpened());
-        Issue issue = issueQueryService.findIssue(issueId);
+        boolean isOpened = stateChangeRequest.getIsOpened();
+        log.info("Issue StateChange Request = {}", isOpened);
 
-        return IssueStateChangeResponse.create(issue);
+        issueCommandService.changeState(issueId, isOpened);
+        return new IssueStateChangeResponse(issueId, isOpened);
     }
 
     /**
