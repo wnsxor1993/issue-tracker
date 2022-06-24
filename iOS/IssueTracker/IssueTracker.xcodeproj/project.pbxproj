@@ -27,14 +27,14 @@
 		B7A836F9285B392800A06C77 /* EndPointable.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7A836F8285B392800A06C77 /* EndPointable.swift */; };
 		B7A836FB285B39B500A06C77 /* HTTPPackageable.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7A836FA285B39B500A06C77 /* HTTPPackageable.swift */; };
 		B7A836FD285B3A1200A06C77 /* EndPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7A836FC285B3A1200A06C77 /* EndPoint.swift */; };
-		B7A83710285C1A1300A06C77 /* GitHubManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7A8370F285C1A1300A06C77 /* GitHubManager.swift */; };
+		B7A83710285C1A1300A06C77 /* RequestGithubGrantCodeUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7A8370F285C1A1300A06C77 /* RequestGithubGrantCodeUseCase.swift */; };
 		B7E58B6D2858505A004C6BE6 /* ClientKey.plist in Resources */ = {isa = PBXBuildFile; fileRef = B7E58B6C2858505A004C6BE6 /* ClientKey.plist */; };
 		B7E58B6F28586FCE004C6BE6 /* NetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7E58B6E28586FCE004C6BE6 /* NetworkService.swift */; };
 		B7E58B7128587013004C6BE6 /* HTTPMethod.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7E58B7028587013004C6BE6 /* HTTPMethod.swift */; };
 		D291537A285B6B3300B5CDA8 /* NetworkServiceable.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2915379285B6B3300B5CDA8 /* NetworkServiceable.swift */; };
 		D291537C285B6B6500B5CDA8 /* NetworkError.swift in Sources */ = {isa = PBXBuildFile; fileRef = D291537B285B6B6500B5CDA8 /* NetworkError.swift */; };
-		D291537E285B6D7F00B5CDA8 /* AppleManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D291537D285B6D7F00B5CDA8 /* AppleManager.swift */; };
-		D2915381285B740500B5CDA8 /* OAuthManageable.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2915380285B740500B5CDA8 /* OAuthManageable.swift */; };
+		D291537E285B6D7F00B5CDA8 /* RequestAppleGrantCodeUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = D291537D285B6D7F00B5CDA8 /* RequestAppleGrantCodeUseCase.swift */; };
+		D2915381285B740500B5CDA8 /* DefaultRequestGrantCodeUsecase.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2915380285B740500B5CDA8 /* DefaultRequestGrantCodeUsecase.swift */; };
 		D2915385286013DB00B5CDA8 /* OAuthButtonType.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2915384286013DB00B5CDA8 /* OAuthButtonType.swift */; };
 		D2A99973286159ED00910F7D /* IssueAddViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2A99972286159ED00910F7D /* IssueAddViewController.swift */; };
 		D2A9997528615F3600910F7D /* CommentContainerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2A9997428615F3600910F7D /* CommentContainerView.swift */; };
@@ -80,14 +80,14 @@
 		B7A836F8285B392800A06C77 /* EndPointable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EndPointable.swift; sourceTree = "<group>"; };
 		B7A836FA285B39B500A06C77 /* HTTPPackageable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPPackageable.swift; sourceTree = "<group>"; };
 		B7A836FC285B3A1200A06C77 /* EndPoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EndPoint.swift; sourceTree = "<group>"; };
-		B7A8370F285C1A1300A06C77 /* GitHubManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GitHubManager.swift; sourceTree = "<group>"; };
+		B7A8370F285C1A1300A06C77 /* RequestGithubGrantCodeUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestGithubGrantCodeUseCase.swift; sourceTree = "<group>"; };
 		B7E58B6C2858505A004C6BE6 /* ClientKey.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = ClientKey.plist; sourceTree = "<group>"; };
 		B7E58B6E28586FCE004C6BE6 /* NetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkService.swift; sourceTree = "<group>"; };
 		B7E58B7028587013004C6BE6 /* HTTPMethod.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPMethod.swift; sourceTree = "<group>"; };
 		D2915379285B6B3300B5CDA8 /* NetworkServiceable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkServiceable.swift; sourceTree = "<group>"; };
 		D291537B285B6B6500B5CDA8 /* NetworkError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkError.swift; sourceTree = "<group>"; };
-		D291537D285B6D7F00B5CDA8 /* AppleManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppleManager.swift; sourceTree = "<group>"; };
-		D2915380285B740500B5CDA8 /* OAuthManageable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OAuthManageable.swift; sourceTree = "<group>"; };
+		D291537D285B6D7F00B5CDA8 /* RequestAppleGrantCodeUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestAppleGrantCodeUseCase.swift; sourceTree = "<group>"; };
+		D2915380285B740500B5CDA8 /* DefaultRequestGrantCodeUsecase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultRequestGrantCodeUsecase.swift; sourceTree = "<group>"; };
 		D2915384286013DB00B5CDA8 /* OAuthButtonType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OAuthButtonType.swift; sourceTree = "<group>"; };
 		D2A99972286159ED00910F7D /* IssueAddViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IssueAddViewController.swift; sourceTree = "<group>"; };
 		D2A9997428615F3600910F7D /* CommentContainerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentContainerView.swift; sourceTree = "<group>"; };
@@ -233,14 +233,14 @@
 			path = Protocol;
 			sourceTree = "<group>";
 		};
-		D291537F285B72E200B5CDA8 /* OAuthManager */ = {
+		D291537F285B72E200B5CDA8 /* DefaultRequestGrantCode */ = {
 			isa = PBXGroup;
 			children = (
-				D2915380285B740500B5CDA8 /* OAuthManageable.swift */,
-				B7A8370F285C1A1300A06C77 /* GitHubManager.swift */,
-				D291537D285B6D7F00B5CDA8 /* AppleManager.swift */,
+				D2915380285B740500B5CDA8 /* DefaultRequestGrantCodeUsecase.swift */,
+				B7A8370F285C1A1300A06C77 /* RequestGithubGrantCodeUseCase.swift */,
+				D291537D285B6D7F00B5CDA8 /* RequestAppleGrantCodeUseCase.swift */,
 			);
-			path = OAuthManager;
+			path = DefaultRequestGrantCode;
 			sourceTree = "<group>";
 		};
 		D2915382286013B500B5CDA8 /* EnumTypes */ = {
@@ -305,7 +305,7 @@
 		D2A999832862F58D00910F7D /* Usecase */ = {
 			isa = PBXGroup;
 			children = (
-				D291537F285B72E200B5CDA8 /* OAuthManager */,
+				D291537F285B72E200B5CDA8 /* DefaultRequestGrantCode */,
 			);
 			path = Usecase;
 			sourceTree = "<group>";
@@ -584,14 +584,14 @@
 				D2A9997528615F3600910F7D /* CommentContainerView.swift in Sources */,
 				D2A99977286160BF00910F7D /* DividedLineView.swift in Sources */,
 				B7A836F5285B330900A06C77 /* Authenticable.swift in Sources */,
-				D291537E285B6D7F00B5CDA8 /* AppleManager.swift in Sources */,
+				D291537E285B6D7F00B5CDA8 /* RequestAppleGrantCodeUseCase.swift in Sources */,
 				B7A56D9528618E0900EA639D /* IssuseCardCell.swift in Sources */,
 				B724DC9528605915007DAC1A /* HomeViewController.swift in Sources */,
 				B7A836F0285B322000A06C77 /* URLConfigurable.swift in Sources */,
 				D2A9997F2862BE9500910F7D /* IssueAddListEntity.swift in Sources */,
-				D2915381285B740500B5CDA8 /* OAuthManageable.swift in Sources */,
+				D2915381285B740500B5CDA8 /* DefaultRequestGrantCodeUsecase.swift in Sources */,
 				B7A836EE285B319500A06C77 /* Bundle+.swift in Sources */,
-				B7A83710285C1A1300A06C77 /* GitHubManager.swift in Sources */,
+				B7A83710285C1A1300A06C77 /* RequestGithubGrantCodeUseCase.swift in Sources */,
 				B7A56D9D2861C79D00EA639D /* SelectionLabel.swift in Sources */,
 				B7A56DA02862B8B300EA639D /* IssueAddButton.swift in Sources */,
 				B7A56D932861835B00EA639D /* TableViewDataSource.swift in Sources */,

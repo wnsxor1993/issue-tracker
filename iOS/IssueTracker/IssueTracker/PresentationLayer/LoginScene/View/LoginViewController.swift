@@ -10,8 +10,8 @@ import AuthenticationServices
 
 class LoginViewController: UIViewController {
 
-    private var appleManager: OAuthManageable?
-    private var githubManager: OAuthManageable?
+    private var appleManager: DefaultRequestGrantCodeUsecase?
+    private var githubManager: DefaultRequestGrantCodeUsecase?
 
     private let titleLabel: UILabel = {
         let label = UILabel()
@@ -68,11 +68,11 @@ extension LoginViewController: OAuthButtonDelegate {
 private extension LoginViewController {
 
     func setOAuthManagers() {
-        appleManager = AppleManager(endPoint: EndPoint(urlConfigure: GitURLConfiguration(), method: .POST, body: nil), presentationAnchor: self.view.window) { [weak self] isVerified in
+        appleManager = RequestAppleGrantCodeUseCase(endPoint: EndPoint(urlConfigure: GitURLConfiguration(), method: .POST, body: nil), presentationAnchor: self.view.window) { [weak self] isVerified in
             guard isVerified == true else { return }
             self?.presentNextScene()
         }
-        githubManager = GitHubManager(endPoint: EndPoint(urlConfigure: GitURLConfiguration(), method: .POST, body: nil)) {[weak self]  isVerified in
+        githubManager = RequestGithubGrantCodeUseCase(endPoint: EndPoint(urlConfigure: GitURLConfiguration(), method: .POST, body: nil)) {[weak self]  isVerified in
             guard isVerified == true else { return }
             self?.presentNextScene()
         }
