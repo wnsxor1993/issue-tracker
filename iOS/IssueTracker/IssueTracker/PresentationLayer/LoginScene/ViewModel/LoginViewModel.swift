@@ -12,11 +12,11 @@ final class LoginViewModel {
     private var requestGithubGrantCodeUseCase: DefaultRequestGrantCodeUsecase
     private var requestAppleGrantCodeUseCase: DefaultRequestGrantCodeUsecase
     private var requestOAuthUserInfoUsecase: DefaultUserInfoUseCase
-    var userInfo: Observable<UserInfo>
+    var userInfo: Observable<UserInfo?> = Observable(nil)
     
     private var grantResource: GrantResource? {
         didSet{
-            enquireForGrant()
+            enquireForUserInfo()
         }
     }
     
@@ -60,7 +60,7 @@ private extension LoginViewModel {
         requestOAuthUserInfoUsecase.execute(bodyParameter: grantResource) {[weak self] result in
             switch result in {
             case .success(let userInfo):
-                self?.userInfo = userInfo
+                self?.userInfo.updateValue(value: userInfo)
             case .failure(let error):
                 //TODO: ERROR HANDELING REQUIRED
                 print(error)
