@@ -1,31 +1,20 @@
 package com.codesquad.issuetracker.web.dto.label;
 
-import com.codesquad.issuetracker.domain.Label;
-import lombok.AccessLevel;
-import lombok.Builder;
+import com.codesquad.issuetracker.domain.LabelColor;
+import com.querydsl.core.annotations.QueryProjection;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 
 @Getter
-@NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class LabelDto {
 
     private Long labelId;
     private String labelName;
     private String labelColor;
 
-    @Builder(access = AccessLevel.PRIVATE)
-    private LabelDto(Long labelId, String labelName, String labelColor) {
+    @QueryProjection
+    public LabelDto(Long labelId, String labelName, LabelColor labelColor) {
         this.labelId = labelId;
         this.labelName = labelName;
-        this.labelColor = labelColor;
-    }
-
-    public static LabelDto create(Label label) {
-        return LabelDto.builder()
-                .labelId(label.getId())
-                .labelName(label.getName())
-                .labelColor(label.getLabelColor().getColorCode())
-                .build();
+        this.labelColor = labelColor.getColorCode();
     }
 }

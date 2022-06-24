@@ -1,21 +1,13 @@
 package com.codesquad.issuetracker.web.dto.issue;
 
-import com.codesquad.issuetracker.domain.Comment;
-import com.codesquad.issuetracker.domain.Issue;
-import com.codesquad.issuetracker.domain.IssueAssignee;
-import com.codesquad.issuetracker.domain.IssueLabel;
 import com.codesquad.issuetracker.web.dto.label.LabelDto;
-import lombok.AccessLevel;
-import lombok.Builder;
+import com.querydsl.core.annotations.QueryProjection;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
-@NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class IssueDetailResponse {
 
     private Long issueId;
@@ -23,87 +15,47 @@ public class IssueDetailResponse {
     private String authorName;
     private String title;
     private String content;
-    private List<IssueAssigneeDto> assignees = new ArrayList<>();
+    private final List<IssueAssigneeDto> assignees = new ArrayList<>();
     private Long milestoneId;
     private String milestoneName;
     private boolean isOpened;
     private LocalDateTime createdAt;
     private LocalDateTime lastModifiedAt;
-    private List<LabelDto> labels = new ArrayList<>();
-    private List<CommentListElement> comments = new ArrayList<>();
+    private final List<LabelDto> labels = new ArrayList<>();
+    private final List<CommentListElement> comments = new ArrayList<>();
 
-    @Builder(access = AccessLevel.PRIVATE)
-    private IssueDetailResponse(Long issueId, Long authorId, String authorName, String title, String content, List<IssueAssigneeDto> assignees, Long milestoneId, String milestoneName, boolean isOpened, LocalDateTime createdAt, LocalDateTime lastModifiedAt, List<LabelDto> labels, List<CommentListElement> comments) {
+    @QueryProjection
+    public IssueDetailResponse(
+            Long issueId, Long authorId, String authorName,
+            String title, String content, Long milestoneId, String milestoneName,
+            boolean isOpened, LocalDateTime createdAt, LocalDateTime lastModifiedAt) {
         this.issueId = issueId;
         this.authorId = authorId;
         this.authorName = authorName;
         this.title = title;
         this.content = content;
-        this.assignees = assignees;
         this.milestoneId = milestoneId;
         this.milestoneName = milestoneName;
         this.isOpened = isOpened;
         this.createdAt = createdAt;
         this.lastModifiedAt = lastModifiedAt;
-        this.labels = labels;
-        this.comments = comments;
-    }
-
-    public static IssueDetailResponse create(Issue issue) {
-        return IssueDetailResponse.builder()
-                .issueId(issue.getId())
-                .authorId(issue.getAuthor().getId())
-                .authorName(issue.getAuthor().getName())
-                .title(issue.getTitle())
-                .content(issue.getContent())
-                .assignees(initAssignees(issue))
-                .milestoneId(issue.getMilestone().getId())
-                .milestoneName(issue.getMilestone().getTitle())
-                .isOpened(issue.isOpened())
-                .createdAt(issue.getCreatedAt())
-                .lastModifiedAt(issue.getLastModifiedAt())
-                .labels(initLabels(issue))
-                .comments(initComments(issue))
-                .build();
-    }
-
-    private static List<IssueAssigneeDto> initAssignees(Issue issue) {
-        return issue.getAssignees().stream()
-                .map(IssueAssigneeDto::create)
-                .collect(Collectors.toList());
-    }
-
-    private static List<LabelDto> initLabels(Issue issue) {
-        return issue.getIssueLabels().stream()
-                .map(IssueLabel::getLabel)
-                .map(LabelDto::create)
-                .collect(Collectors.toList());
-    }
-
-    private static List<CommentListElement> initComments(Issue issue) {
-        return issue.getComments().stream()
-                .map(CommentListElement::create)
-                .collect(Collectors.toList());
     }
 
     @Getter
-    private static class IssueAssigneeDto {
+    public static class IssueAssigneeDto {
 
         private Long assigneeId;
         private String assigneeName;
 
-        private IssueAssigneeDto(Long assigneeId, String assigneeName) {
+        @QueryProjection
+        public IssueAssigneeDto(Long assigneeId, String assigneeName) {
             this.assigneeId = assigneeId;
             this.assigneeName = assigneeName;
-        }
-
-        public static IssueAssigneeDto create(IssueAssignee issueAssignee) {
-            return new IssueAssigneeDto(issueAssignee.getId(), issueAssignee.getMember().getName());
         }
     }
 
     @Getter
-    private static class CommentListElement {
+    public static class CommentListElement {
 
         private Long commentId;
         private Long commentAuthorId;
@@ -112,8 +64,8 @@ public class IssueDetailResponse {
         private LocalDateTime commentCreatedTime;
         private LocalDateTime commentLastModifiedTime;
 
-        @Builder(access = AccessLevel.PRIVATE)
-        private CommentListElement(Long commentId, Long commentAuthorId, String commentAuthorName, String commentContent, LocalDateTime commentCreatedTime, LocalDateTime commentLastModifiedTime) {
+        @QueryProjection
+        public CommentListElement(Long commentId, Long commentAuthorId, String commentAuthorName, String commentContent, LocalDateTime commentCreatedTime, LocalDateTime commentLastModifiedTime) {
             this.commentId = commentId;
             this.commentAuthorId = commentAuthorId;
             this.commentAuthorName = commentAuthorName;
@@ -122,16 +74,6 @@ public class IssueDetailResponse {
             this.commentLastModifiedTime = commentLastModifiedTime;
         }
 
-        public static CommentListElement create(Comment comment) {
-            return CommentListElement.builder()
-                    .commentId(comment.getId())
-                    .commentAuthorId(comment.getAuthor().getId())
-                    .commentAuthorName(comment.getAuthor().getName())
-                    .commentContent(comment.getContent())
-                    .commentCreatedTime(comment.getCreatedAt())
-                    .commentLastModifiedTime(comment.getLastModifiedAt())
-                    .build();
-        }
     }
 
     public Long getIssueId() {

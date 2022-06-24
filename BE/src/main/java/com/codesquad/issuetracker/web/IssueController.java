@@ -65,8 +65,7 @@ public class IssueController {
     @GetMapping("/issue-tracker/api/issues/{issueId}")
     public IssueDetailResponse issueDetail(@PathVariable Long issueId) {
         log.info("Issue Detail Request - issueId = {}", issueId);
-        Issue issue = issueQueryService.findDetailIssue(issueId);
-        return IssueDetailResponse.create(issue);
+        return issueQueryService.findDetailIssue(issueId);
     }
 
     /**

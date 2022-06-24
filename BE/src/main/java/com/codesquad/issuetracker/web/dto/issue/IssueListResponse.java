@@ -62,7 +62,7 @@ public class IssueListResponse {
         private static List<LabelDto> initLabels(Issue issue) {
             return issue.getIssueLabels().stream()
                     .map(IssueLabel::getLabel)
-                    .map(LabelDto::create)
+                    .map(label -> new LabelDto(label.getId(), label.getName(), label.getLabelColor()))
                     .collect(Collectors.toList());
         }
     }
