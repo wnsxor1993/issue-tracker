@@ -44,6 +44,8 @@
 		D2A9997F2862BE9500910F7D /* IssueAddListEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2A9997E2862BE9500910F7D /* IssueAddListEntity.swift */; };
 		D2A9998B2864055400910F7D /* CommentTitleContainerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2A9998A2864055400910F7D /* CommentTitleContainerView.swift */; };
 		D2A9998E2865584700910F7D /* Observable.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2A9998D2865584700910F7D /* Observable.swift */; };
+		D2A9999028655CE200910F7D /* UserInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2A9998F28655CE200910F7D /* UserInfo.swift */; };
+		D2A9999228655D0900910F7D /* GrantResource.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2A9999128655D0900910F7D /* GrantResource.swift */; };
 		D2B750682856FCBE0078067A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2B750672856FCBE0078067A /* AppDelegate.swift */; };
 		D2B7506A2856FCBE0078067A /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2B750692856FCBE0078067A /* SceneDelegate.swift */; };
 		D2B7506C2856FCBE0078067A /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2B7506B2856FCBE0078067A /* LoginViewController.swift */; };
@@ -98,6 +100,8 @@
 		D2A9997E2862BE9500910F7D /* IssueAddListEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IssueAddListEntity.swift; sourceTree = "<group>"; };
 		D2A9998A2864055400910F7D /* CommentTitleContainerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentTitleContainerView.swift; sourceTree = "<group>"; };
 		D2A9998D2865584700910F7D /* Observable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Observable.swift; sourceTree = "<group>"; };
+		D2A9998F28655CE200910F7D /* UserInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInfo.swift; sourceTree = "<group>"; };
+		D2A9999128655D0900910F7D /* GrantResource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GrantResource.swift; sourceTree = "<group>"; };
 		D2B750642856FCBE0078067A /* IssueTracker.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = IssueTracker.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D2B750672856FCBE0078067A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		D2B750692856FCBE0078067A /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -291,6 +295,8 @@
 			isa = PBXGroup;
 			children = (
 				D2A9997E2862BE9500910F7D /* IssueAddListEntity.swift */,
+				D2A9998F28655CE200910F7D /* UserInfo.swift */,
+				D2A9999128655D0900910F7D /* GrantResource.swift */,
 			);
 			path = Entity;
 			sourceTree = "<group>";
@@ -573,6 +579,7 @@
 				D291537C285B6B6500B5CDA8 /* NetworkError.swift in Sources */,
 				B7A56D9B2861C5E600EA639D /* IssueCardDTO.swift in Sources */,
 				B7A836F9285B392800A06C77 /* EndPointable.swift in Sources */,
+				D2A9999028655CE200910F7D /* UserInfo.swift in Sources */,
 				D2A99973286159ED00910F7D /* IssueAddViewController.swift in Sources */,
 				D2A9997B28618D0E00910F7D /* ListCell.swift in Sources */,
 				B724DC92286058C3007DAC1A /* TabBarViewController.swift in Sources */,
@@ -592,6 +599,7 @@
 				D2D526592858CF5000581C88 /* UIImage+.swift in Sources */,
 				D2D526612858DF7B00581C88 /* UIColor+.swift in Sources */,
 				B7A56DA8286470CF00EA639D /* LoginViewModel.swift in Sources */,
+				D2A9999228655D0900910F7D /* GrantResource.swift in Sources */,
 				D2A9997528615F3600910F7D /* CommentContainerView.swift in Sources */,
 				D2A99977286160BF00910F7D /* DividedLineView.swift in Sources */,
 				B7A836F5285B330900A06C77 /* Authenticable.swift in Sources */,
