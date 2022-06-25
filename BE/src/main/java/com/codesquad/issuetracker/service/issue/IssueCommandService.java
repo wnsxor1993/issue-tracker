@@ -5,11 +5,10 @@ import com.codesquad.issuetracker.domain.Label;
 import com.codesquad.issuetracker.domain.Member;
 import com.codesquad.issuetracker.domain.Milestone;
 import com.codesquad.issuetracker.excption.IssueNotFoundException;
-import com.codesquad.issuetracker.excption.MilestoneNotFoundException;
 import com.codesquad.issuetracker.repository.issue.IssueRepository;
 import com.codesquad.issuetracker.repository.label.LabelRepository;
-import com.codesquad.issuetracker.repository.milestone.MilestoneRepository;
 import com.codesquad.issuetracker.service.member.MemberQueryService;
+import com.codesquad.issuetracker.service.milestone.MilestoneQueryService;
 import com.codesquad.issuetracker.web.dto.issue.IssueUpdateRequest;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -28,7 +27,7 @@ public class IssueCommandService {
 
     private final IssueQueryService issueQueryService;
     private final MemberQueryService memberQueryService;
-    private final MilestoneRepository milestoneRepository;
+    private final MilestoneQueryService milestoneQueryService;
     private final LabelRepository labelRepository;
 
     /**
@@ -37,7 +36,7 @@ public class IssueCommandService {
     public Long createIssue(Long authorId, List<Long> assigneeIds, Long milestondId, List<Long> labelIds, String title, String content) {
         Member author = memberQueryService.findMemberById(authorId);
         List<Member> assigneeMembers = memberQueryService.findAllById(assigneeIds);
-        Milestone milestone = findMilestone(milestondId);
+        Milestone milestone = milestoneQueryService.findMilestoneById(milestondId);
         List<Label> labels = labelRepository.findAllById(labelIds);
 
         Issue issue = Issue.create(title, content, author, milestone);
@@ -49,13 +48,6 @@ public class IssueCommandService {
         log.info("created Issue = {}", issue);
 
         return issue.getId();
-    }
-
-    private Milestone findMilestone(Long milestoneId) {
-        return (milestoneId == null)
-                ? null
-                : milestoneRepository.findById(milestoneId)
-                .orElseThrow(() -> new MilestoneNotFoundException("일치하는 식별자의 마일스톤이 존재하지 않습니다."));
     }
 
     public void changeState(Long issueId, boolean isOpened) {
@@ -77,7 +69,7 @@ public class IssueCommandService {
     public void updateIssue(Long issueId, IssueUpdateRequest updateRequest) {
         Issue issue = issueRepository.findByIdWithAuthorAndMilestone(issueId)
                 .orElseThrow(() -> new IssueNotFoundException("일치하는 식별자의 이슈를 찾을 수 없습니다."));
-        Milestone updateMilestone = findMilestone(updateRequest.getMilestoneId());
+        Milestone updateMilestone = milestoneQueryService.findMilestoneById(updateRequest.getMilestoneId());
         List<Label> labels = labelRepository.findAllById(updateRequest.getLabelIds());
         List<Member> assigneeMembers = memberQueryService.findAllById(updateRequest.getAssigneeIds());
 
