@@ -11,6 +11,7 @@ import com.codesquad.issuetracker.repository.issue.IssueRepository;
 import com.codesquad.issuetracker.repository.label.LabelRepository;
 import com.codesquad.issuetracker.repository.member.MemberRepository;
 import com.codesquad.issuetracker.repository.milestone.MilestoneRepository;
+import com.codesquad.issuetracker.web.dto.issue.IssueUpdateRequest;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -38,7 +39,10 @@ public class IssueCommandService {
         Milestone milestone = findMilestone(milestondId);
         List<Label> labels = labelRepository.findAllById(labelIds);
 
-        Issue issue = Issue.create(author, assigneeMembers, milestone, labels, title, content);
+        Issue issue = Issue.create(title, content, author, milestone);
+        issue.changeIssueAssignees(assigneeMembers);
+        issue.changeIssueLabels(labels);
+
         issueRepository.save(issue);
 
         log.info("created Issue = {}", issue);
@@ -50,7 +54,7 @@ public class IssueCommandService {
         return (milestoneId == null)
                 ? null
                 : milestoneRepository.findById(milestoneId)
-                        .orElseThrow(() -> new MilestoneNotFoundException("일치하는 식별자의 마일스톤이 존재하지 않습니다."));
+                .orElseThrow(() -> new MilestoneNotFoundException("일치하는 식별자의 마일스톤이 존재하지 않습니다."));
     }
 
     private Member findMember(Long memberId) {
@@ -69,13 +73,27 @@ public class IssueCommandService {
     }
 
     public void changeStates(List<Long> issueIds, boolean isOpened) {
-        List<Issue> issues = issueRepository.findAllById(issueIds);
-
-        issues.forEach(issue -> issue.changeIssueState(isOpened));
+        issueRepository.updateBulkStates(issueIds, isOpened);
     }
 
     public void deleteIssue(Long issueId) {
         issueRepository.deleteById(issueId);
+    }
 
+    /**
+     * 이슈 수정
+     */
+    public void updateIssue(Long issueId, IssueUpdateRequest updateRequest) {
+        Issue issue = issueRepository.findByIdWithAuthorAndMilestone(issueId)
+                .orElseThrow(() -> new IssueNotFoundException("일치하는 식별자의 이슈를 찾을 수 없습니다."));
+        Milestone updateMilestone = findMilestone(updateRequest.getMilestoneId());
+        List<Label> labels = labelRepository.findAllById(updateRequest.getLabelIds());
+        List<Member> assigneeMembers = memberRepository.findAllById(updateRequest.getAssigneeIds());
+
+        issue.changeTitle(updateRequest.getTitle());
+        issue.changeContent(updateRequest.getContent());
+        issue.changeMilestone(updateMilestone);
+        issue.changeIssueAssignees(assigneeMembers);
+        issue.changeIssueLabels(labels);
     }
 }

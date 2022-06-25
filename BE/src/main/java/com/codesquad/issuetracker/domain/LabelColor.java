@@ -2,10 +2,7 @@ package com.codesquad.issuetracker.domain;
 
 import com.codesquad.issuetracker.excption.InvalidColorCodeException;
 import com.codesquad.issuetracker.excption.InvalidColorValueRangeException;
-import lombok.AccessLevel;
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import javax.persistence.Embeddable;
 
@@ -13,6 +10,7 @@ import javax.persistence.Embeddable;
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @EqualsAndHashCode
+@ToString
 public class LabelColor {
 
     private static final int COLOR_RADIX = 16;
