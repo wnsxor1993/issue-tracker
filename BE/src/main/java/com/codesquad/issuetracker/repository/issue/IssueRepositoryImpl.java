@@ -2,10 +2,12 @@ package com.codesquad.issuetracker.repository.issue;
 
 import com.codesquad.issuetracker.domain.Issue;
 import com.codesquad.issuetracker.domain.QMember;
+import com.codesquad.issuetracker.web.dto.comment.CommentListElement;
+import com.codesquad.issuetracker.web.dto.comment.QCommentListElement;
+import com.codesquad.issuetracker.web.dto.issue.IssueAssigneeDto;
 import com.codesquad.issuetracker.web.dto.issue.IssueDetailResponse;
+import com.codesquad.issuetracker.web.dto.issue.QIssueAssigneeDto;
 import com.codesquad.issuetracker.web.dto.issue.QIssueDetailResponse;
-import com.codesquad.issuetracker.web.dto.issue.QIssueDetailResponse_CommentListElement;
-import com.codesquad.issuetracker.web.dto.issue.QIssueDetailResponse_IssueAssigneeDto;
 import com.codesquad.issuetracker.web.dto.label.LabelDto;
 import com.codesquad.issuetracker.web.dto.label.QLabelDto;
 import com.querydsl.jpa.impl.JPAQueryFactory;
@@ -62,9 +64,9 @@ public class IssueRepositoryImpl implements IssueCustomRepository {
             return Optional.empty();
         }
 
-        List<IssueDetailResponse.IssueAssigneeDto> assigneeDtos = findIssueAssigneeDtos(issueId);
+        List<IssueAssigneeDto> assigneeDtos = findIssueAssigneeDtos(issueId);
         List<LabelDto> labelDtos = findLabelDtos(issueId);
-        List<IssueDetailResponse.CommentListElement> commentDtos = findCommentDtos(issueId);
+        List<CommentListElement> commentDtos = findCommentDtos(issueId);
 
         issueDetailResponse.getAssignees().addAll(assigneeDtos);
         issueDetailResponse.getLabels().addAll(labelDtos);
@@ -73,12 +75,11 @@ public class IssueRepositoryImpl implements IssueCustomRepository {
         return Optional.of(issueDetailResponse);
     }
 
-    private List<IssueDetailResponse.CommentListElement> findCommentDtos(Long issueId) {
+    private List<CommentListElement> findCommentDtos(Long issueId) {
         QMember author = new QMember("author");
-
         return queryFactory
                 .select(
-                        new QIssueDetailResponse_CommentListElement(
+                        new QCommentListElement(
                                 comment.id, author.id, author.name,
                                 comment.content, comment.createdAt, comment.lastModifiedAt))
                 .from(comment)
@@ -97,9 +98,9 @@ public class IssueRepositoryImpl implements IssueCustomRepository {
 
 
 
-    private List<IssueDetailResponse.IssueAssigneeDto> findIssueAssigneeDtos(Long issueId) {
+    private List<IssueAssigneeDto> findIssueAssigneeDtos(Long issueId) {
         return queryFactory
-                .select(new QIssueDetailResponse_IssueAssigneeDto(member.id, member.name))
+                .select(new QIssueAssigneeDto(member.id, member.name))
                 .from(issueAssignee)
                 .join(issueAssignee.member, member)
                 .where(issueAssignee.issue.id.eq(issueId))
