@@ -19,6 +19,11 @@ public class IssueQueryService {
 
     private final IssueRepository issueRepository;
 
+    public Issue findIssueById(Long issueId) {
+        return issueRepository.findById(issueId)
+                .orElseThrow(() -> new IssueNotFoundException("일치하는 식별자의 이슈가 존재하지 않습니다."));
+    }
+
     public List<Issue> findIssues(List<Long> issueIds) {
         return issueRepository.findAllById(issueIds);
     }
