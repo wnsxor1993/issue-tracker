@@ -22,7 +22,7 @@ public class MultipleIssueStateChangeResponse {
     public static MultipleIssueStateChangeResponse create(List<Issue> issues) {
 
         List<IssueStateChangeResponse> patchedIssues = issues.stream()
-                .map(IssueStateChangeResponse::create)
+                .map(issue -> new IssueStateChangeResponse(issue.getId(), issue.isOpened()))
                 .collect(Collectors.toList());
 
         return new MultipleIssueStateChangeResponse(patchedIssues);
