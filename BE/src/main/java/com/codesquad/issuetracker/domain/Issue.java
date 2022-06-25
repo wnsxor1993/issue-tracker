@@ -1,10 +1,13 @@
 package com.codesquad.issuetracker.domain;
 
+import com.codesquad.issuetracker.excption.InvalidIssueAssigneeAddException;
 import lombok.*;
 
 import javax.persistence.*;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 import static javax.persistence.FetchType.LAZY;
@@ -25,7 +28,7 @@ public class Issue extends BaseTimeEntity {
     private Member author;
 
     @OneToMany(mappedBy = "issue", cascade = CascadeType.ALL, orphanRemoval = true)
-    private final List<IssueAssignee> assignees = new ArrayList<>();
+    private final Set<IssueAssignee> assignees = new HashSet<>();
 
     @ManyToOne(fetch = LAZY)
     @JoinColumn(name = "milestone_id")
@@ -62,49 +65,34 @@ public class Issue extends BaseTimeEntity {
     }
 
     /**
-     * 지정 member들로 현재 이슈의 할당자 교체(포함되지 않은 회원들 제거)
-     */
-    public void changeIssueAssignees(List<Member> changeMembers) {
-        removeAssigneesNotIn(changeMembers);
-        removeDuplicateMemberFrom(changeMembers);
-
-        List<IssueAssignee> newAssignees = createNewAssignees(changeMembers);
-        assignees.addAll(newAssignees);
-    }
-
-    /**
      * 이슈의 상태를 변경
      */
     public void changeIssueState(boolean isOpened) {
         this.isOpened = isOpened;
     }
 
+    public void addIssueAssignee(IssueAssignee issueAssignee) {
+        validateIssueAssignee(issueAssignee);
+        assignees.add(issueAssignee);
+    }
+
+    private void validateIssueAssignee(IssueAssignee issueAssignee) {
+        if (issueAssignee.hasDifferentIssue(this)) {
+            throw new InvalidIssueAssigneeAddException("다른 이슈에 할당된 IssueAssignee를 추가할 수 없습니다.");
+        }
+    }
+
+    public void addIssueAssignees(List<IssueAssignee> assignees) {
+        assignees.forEach(this::addIssueAssignee);
+    }
+
     /**
-     * 리스트에 없는 회원을 기존의 할당자에서 제거
+     * 리스트에 없는 이슈 할당자들을 기존의 할당자에서 제거
      */
-    private void removeAssigneesNotIn(List<Member> changeMembers) {
+    public void removeAssigneesNotIn(List<IssueAssignee> otherAssignees) {
         this.assignees.removeIf(
-                assignee -> !assignee.isMemberBelongTo(changeMembers)
+                assignee -> !otherAssignees.contains(assignee)
         );
-    }
-
-    /**
-     * 기존에 추가되지 않은 회원들로 IssueAssignee 생성
-     */
-    private List<IssueAssignee> createNewAssignees(List<Member> changeMembers) {
-        return changeMembers.stream()
-                .map(newMember -> new IssueAssignee(newMember, this))
-                .collect(Collectors.toList());
-    }
-
-    /**
-     * 리스트에 존재하는 할당자가 이미 존재하면 changeMembers에서 제거
-     */
-    private void removeDuplicateMemberFrom(List<Member> changeMembers) {
-        List<Member> beforeMembers = assignees.stream()
-                .map(IssueAssignee::getMember)
-                .collect(Collectors.toList());
-        changeMembers.removeIf(beforeMembers::contains);
     }
 
     /**

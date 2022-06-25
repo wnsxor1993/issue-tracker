@@ -1,9 +1,6 @@
 package com.codesquad.issuetracker.service.issue;
 
-import com.codesquad.issuetracker.domain.Issue;
-import com.codesquad.issuetracker.domain.Label;
-import com.codesquad.issuetracker.domain.Member;
-import com.codesquad.issuetracker.domain.Milestone;
+import com.codesquad.issuetracker.domain.*;
 import com.codesquad.issuetracker.excption.IssueNotFoundException;
 import com.codesquad.issuetracker.repository.issue.IssueRepository;
 import com.codesquad.issuetracker.service.label.LabelQueryService;
@@ -40,7 +37,10 @@ public class IssueCommandService {
         List<Label> labels = labelQueryService.findAllById(labelIds);
 
         Issue issue = Issue.create(title, content, author, milestone);
-        issue.changeIssueAssignees(assigneeMembers);
+
+        List<IssueAssignee> assignees = IssueAssignee.createIssueAssignees(issue, assigneeMembers);
+        issue.addIssueAssignees(assignees);
+
         issue.changeIssueLabels(labels);
 
         issueRepository.save(issue);
@@ -73,10 +73,15 @@ public class IssueCommandService {
         List<Label> labels = labelQueryService.findAllById(updateRequest.getLabelIds());
         List<Member> assigneeMembers = memberQueryService.findAllById(updateRequest.getAssigneeIds());
 
+
         issue.changeTitle(updateRequest.getTitle());
         issue.changeContent(updateRequest.getContent());
         issue.changeMilestone(updateMilestone);
-        issue.changeIssueAssignees(assigneeMembers);
+
+        List<IssueAssignee> issueAssignees = IssueAssignee.createIssueAssignees(issue, assigneeMembers);
+        issue.removeAssigneesNotIn(issueAssignees);
+        issue.addIssueAssignees(issueAssignees);
+
         issue.changeIssueLabels(labels);
     }
 }
