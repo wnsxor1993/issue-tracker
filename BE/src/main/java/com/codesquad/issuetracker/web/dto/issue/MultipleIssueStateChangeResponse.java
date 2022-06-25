@@ -15,16 +15,16 @@ public class MultipleIssueStateChangeResponse {
 
     private List<IssueStateChangeResponse> patchedIssues = new ArrayList<>();
 
-    private MultipleIssueStateChangeResponse(List<IssueStateChangeResponse> patchedIssues) {
-        this.patchedIssues = patchedIssues;
-    }
-
     public static MultipleIssueStateChangeResponse create(List<Issue> issues) {
-
         List<IssueStateChangeResponse> patchedIssues = issues.stream()
-                .map(issue -> new IssueStateChangeResponse(issue.getId(), issue.isOpened()))
+                .map(IssueStateChangeResponse::create)
                 .collect(Collectors.toList());
 
         return new MultipleIssueStateChangeResponse(patchedIssues);
     }
+
+    private MultipleIssueStateChangeResponse(List<IssueStateChangeResponse> patchedIssues) {
+        this.patchedIssues = patchedIssues;
+    }
+
 }
