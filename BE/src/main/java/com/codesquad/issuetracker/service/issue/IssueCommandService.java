@@ -26,6 +26,8 @@ import java.util.List;
 public class IssueCommandService {
 
     private final IssueRepository issueRepository;
+
+    private final IssueQueryService issueQueryService;
     private final MemberRepository memberRepository;
     private final MilestoneRepository milestoneRepository;
     private final LabelRepository labelRepository;
@@ -63,13 +65,8 @@ public class IssueCommandService {
     }
 
     public void changeState(Long issueId, boolean isOpened) {
-        Issue issue = findIssue(issueId);
+        Issue issue = issueQueryService.findIssueById(issueId);
         issue.changeIssueState(isOpened);
-    }
-
-    private Issue findIssue(Long issueId) {
-        return issueRepository.findById(issueId)
-                .orElseThrow(() -> new IssueNotFoundException("일치하는 식별자의 이슈가 존재하지 않습니다."));
     }
 
     public void changeStates(List<Long> issueIds, boolean isOpened) {
