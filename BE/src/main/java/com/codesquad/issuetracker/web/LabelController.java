@@ -1,6 +1,5 @@
 package com.codesquad.issuetracker.web;
 
-import com.codesquad.issuetracker.domain.Label;
 import com.codesquad.issuetracker.service.label.LabelCommandService;
 import com.codesquad.issuetracker.service.label.LabelQueryService;
 import com.codesquad.issuetracker.web.dto.label.LabelCreateRequest;
@@ -24,11 +23,8 @@ public class LabelController {
     @PostMapping("/issue-tracker/api/labels")
     @ResponseStatus(HttpStatus.CREATED)
     public LabelCreateResponse createLabel(@RequestBody LabelCreateRequest labelCreateRequest) {
-        Label label = labelCreateRequest.toEntity();
-        Long labelId = labelCommandService.enrollLabel(label);
-
-        log.info("create Label = {}", label);
-
+        Long labelId = labelCommandService.createLabel(labelCreateRequest);
+        log.info("create Label = {}", labelId);
         return new LabelCreateResponse(labelId);
     }
 }
