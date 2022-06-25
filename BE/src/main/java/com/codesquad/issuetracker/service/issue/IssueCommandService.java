@@ -39,9 +39,10 @@ public class IssueCommandService {
         Issue issue = Issue.create(title, content, author, milestone);
 
         List<IssueAssignee> assignees = IssueAssignee.createIssueAssignees(issue, assigneeMembers);
-        issue.addIssueAssignees(assignees);
+        List<IssueLabel> issueLabels = IssueLabel.createIssueLabels(issue, labels);
 
-        issue.changeIssueLabels(labels);
+        issue.addIssueAssignees(assignees);
+        issue.addIssueLabels(issueLabels);
 
         issueRepository.save(issue);
 
@@ -73,7 +74,6 @@ public class IssueCommandService {
         List<Label> labels = labelQueryService.findAllById(updateRequest.getLabelIds());
         List<Member> assigneeMembers = memberQueryService.findAllById(updateRequest.getAssigneeIds());
 
-
         issue.changeTitle(updateRequest.getTitle());
         issue.changeContent(updateRequest.getContent());
         issue.changeMilestone(updateMilestone);
@@ -82,6 +82,8 @@ public class IssueCommandService {
         issue.removeAssigneesNotIn(issueAssignees);
         issue.addIssueAssignees(issueAssignees);
 
-        issue.changeIssueLabels(labels);
+        List<IssueLabel> issueLabels = IssueLabel.createIssueLabels(issue, labels);
+        issue.removeIssueLabelsNotIn(issueLabels);
+        issue.addIssueLabels(issueLabels);
     }
 }

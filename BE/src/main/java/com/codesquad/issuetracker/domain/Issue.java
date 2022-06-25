@@ -1,6 +1,7 @@
 package com.codesquad.issuetracker.domain;
 
 import com.codesquad.issuetracker.excption.InvalidIssueAssigneeAddException;
+import com.codesquad.issuetracker.excption.InvalidIssueLabelAddException;
 import lombok.*;
 
 import javax.persistence.*;
@@ -8,7 +9,6 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
-import java.util.stream.Collectors;
 
 import static javax.persistence.FetchType.LAZY;
 
@@ -95,43 +95,28 @@ public class Issue extends BaseTimeEntity {
         );
     }
 
-    /**
-     * 지정 Label들로 현재 이슈를 교체(포함되지 않은 라벨들 제거)
-     */
-    public void changeIssueLabels(List<Label> changeLabels) {
-        removeIssueLabelsNotIn(changeLabels);
-        removeDuplicateLabelFrom(changeLabels);
+    public void addIssueLabel(IssueLabel issueLabel) {
+        validateIssueLabel(issueLabel);
+        issueLabels.add(issueLabel);
+    }
 
-        List<IssueLabel> newLabels = createNewIssueLabels(changeLabels);
-        issueLabels.addAll(newLabels);
+    private void validateIssueLabel(IssueLabel issueLabel) {
+        if (issueLabel.hasDifferentIssue(this)) {
+            throw new InvalidIssueLabelAddException("다른 이슈에 할당된 IssueLabel를 추가할 수 없습니다.");
+        }
+    }
+
+    public void addIssueLabels(List<IssueLabel> issueLabels) {
+        issueLabels.forEach(this::addIssueLabel);
     }
 
     /**
-     * 리스트에 없는 라벨을 제거
+     * 리스트에 없는 라벨들을 기존의 issueLabels에서 제거
      */
-    private void removeIssueLabelsNotIn(List<Label> changeLabels) {
+    public void removeIssueLabelsNotIn(List<IssueLabel> otherIssueLabels) {
         this.issueLabels.removeIf(
-                issueLabel -> !issueLabel.isLabelBelongTo(changeLabels)
+                issueLabel -> !issueLabels.contains(issueLabel)
         );
-    }
-
-    /**
-     * 리스트에 존재하는 라벨이 이미 존재하면 changeLabels에서 제거
-     */
-    private void removeDuplicateLabelFrom(List<Label> changeLabels) {
-        List<Label> beforeLabels = issueLabels.stream()
-                .map(IssueLabel::getLabel)
-                .collect(Collectors.toList());
-        changeLabels.removeIf(beforeLabels::contains);
-    }
-
-    /**
-     * 기존에 추가되지 않은 라벨들로 이슈라벨을 생성
-     */
-    private List<IssueLabel> createNewIssueLabels(List<Label> changeLabels) {
-        return changeLabels.stream()
-                .map(newLabel -> new IssueLabel(this, newLabel))
-                .collect(Collectors.toList());
     }
 
     /**
