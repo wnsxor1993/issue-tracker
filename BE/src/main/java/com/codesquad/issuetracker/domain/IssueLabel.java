@@ -1,15 +1,18 @@
 package com.codesquad.issuetracker.domain;
 
 import lombok.AccessLevel;
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Entity
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
+@EqualsAndHashCode(of = {"issue", "label"})
 public class IssueLabel {
 
     @Id
@@ -25,14 +28,18 @@ public class IssueLabel {
     @JoinColumn(name = "label_id")
     private Label label;
 
-    IssueLabel(Issue issue, Label label) {
-        this.issue = issue;
+    public IssueLabel(Label label, Issue issue) {
         this.label = label;
+        this.issue = issue;
     }
 
-
-    public boolean isLabelBelongTo(List<Label> labels) {
-        return labels.contains(label);
+    public static List<IssueLabel> createIssueLabels(Issue issue, List<Label> labels) {
+        return labels.stream()
+                .map(label -> new IssueLabel(label, issue))
+                .collect(Collectors.toList());
     }
 
+    public boolean hasDifferentIssue(Issue otherIssue) {
+        return !(issue.equals(otherIssue));
+    }
 }

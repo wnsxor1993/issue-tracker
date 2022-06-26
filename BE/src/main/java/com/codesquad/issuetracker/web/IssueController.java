@@ -7,8 +7,10 @@ import com.codesquad.issuetracker.web.dto.issue.*;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.constraints.NotNull;
 import java.util.List;
 
 @Slf4j
@@ -67,7 +69,7 @@ public class IssueController {
     @GetMapping("/issue-tracker/api/issues/{issueId}")
     public IssueDetailResponse issueDetail(@PathVariable Long issueId) {
         log.info("Issue Detail Request - issueId = {}", issueId);
-        return issueQueryService.findDetailIssue(issueId);
+        return issueQueryService.findIssueDetail(issueId);
     }
 
     /**
@@ -75,25 +77,22 @@ public class IssueController {
      */
     @PatchMapping("/issue-tracker/api/issues/{issueId}")
     public IssueStateChangeResponse stateChange(@PathVariable Long issueId, @RequestBody IssueStateChangeRequest stateChangeRequest) {
-        boolean isOpened = stateChangeRequest.getIsOpened();
-        log.info("Issue StateChange Request = {}", isOpened);
+        log.info("Issue StateChange Request = {}", stateChangeRequest);
 
-        issueCommandService.changeState(issueId, isOpened);
-        return new IssueStateChangeResponse(issueId, isOpened);
+        issueCommandService.changeState(issueId, stateChangeRequest.getIsOpened());
+
+        Issue afterIssue = issueQueryService.findIssueById(issueId);
+        return IssueStateChangeResponse.create(afterIssue);
     }
 
     /**
      * 이슈 삭제
      */
     @DeleteMapping("/issue-tracker/api/issues/{issueId}")
-    @ResponseStatus(HttpStatus.NO_CONTENT)
-    public IssueDeleteResponse delete(@PathVariable Long issueId) {
+    @ResponseStatus(HttpStatus.OK)
+    public IssueDeleteResponse delete(@PathVariable @NotNull Long issueId) {
         log.info("Issue Delete Request - issueId = {}", issueId);
-        issueCommandService.deleteIssue(issueId);
-
-        boolean isDeleted = !issueQueryService.checkIssueExistence(issueId);
-        log.info("Is issue deleted? = {}", isDeleted);
-
+        boolean isDeleted = issueCommandService.deleteIssue(issueId);
         return new IssueDeleteResponse(isDeleted);
     }
 
@@ -104,10 +103,9 @@ public class IssueController {
     public MultipleIssueStateChangeResponse multipleStateChange(@RequestBody MultipleIssueStateChangeRequest multipleStateCahngeRequest) {
         log.info("Multiple Issue StateChange Request = {}", multipleStateCahngeRequest);
         issueCommandService.changeStates(multipleStateCahngeRequest.getIssueIds(), multipleStateCahngeRequest.getIsOpened());
-        List<Issue> issues = issueQueryService.findIssues(multipleStateCahngeRequest.getIssueIds());
 
-        return MultipleIssueStateChangeResponse.create(issues);
+        List<Issue> afterIssues = issueQueryService.findIssues(multipleStateCahngeRequest.getIssueIds());
+        return MultipleIssueStateChangeResponse.create(afterIssues);
     }
 
 }
-

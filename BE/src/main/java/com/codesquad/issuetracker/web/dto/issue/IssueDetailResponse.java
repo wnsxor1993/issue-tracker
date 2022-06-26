@@ -1,8 +1,7 @@
 package com.codesquad.issuetracker.web.dto.issue;
 
-import com.codesquad.issuetracker.web.dto.label.LabelDto;
+import com.codesquad.issuetracker.web.dto.comment.CommentListElement;
 import com.querydsl.core.annotations.QueryProjection;
-import lombok.Getter;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -21,7 +20,7 @@ public class IssueDetailResponse {
     private boolean isOpened;
     private LocalDateTime createdAt;
     private LocalDateTime lastModifiedAt;
-    private final List<LabelDto> labels = new ArrayList<>();
+    private final List<IssueLabelDto> labels = new ArrayList<>();
     private final List<CommentListElement> comments = new ArrayList<>();
 
     @QueryProjection
@@ -39,41 +38,6 @@ public class IssueDetailResponse {
         this.isOpened = isOpened;
         this.createdAt = createdAt;
         this.lastModifiedAt = lastModifiedAt;
-    }
-
-    @Getter
-    public static class IssueAssigneeDto {
-
-        private Long assigneeId;
-        private String assigneeName;
-
-        @QueryProjection
-        public IssueAssigneeDto(Long assigneeId, String assigneeName) {
-            this.assigneeId = assigneeId;
-            this.assigneeName = assigneeName;
-        }
-    }
-
-    @Getter
-    public static class CommentListElement {
-
-        private Long commentId;
-        private Long commentAuthorId;
-        private String commentAuthorName;
-        private String commentContent;
-        private LocalDateTime commentCreatedTime;
-        private LocalDateTime commentLastModifiedTime;
-
-        @QueryProjection
-        public CommentListElement(Long commentId, Long commentAuthorId, String commentAuthorName, String commentContent, LocalDateTime commentCreatedTime, LocalDateTime commentLastModifiedTime) {
-            this.commentId = commentId;
-            this.commentAuthorId = commentAuthorId;
-            this.commentAuthorName = commentAuthorName;
-            this.commentContent = commentContent;
-            this.commentCreatedTime = commentCreatedTime;
-            this.commentLastModifiedTime = commentLastModifiedTime;
-        }
-
     }
 
     public Long getIssueId() {
@@ -120,7 +84,7 @@ public class IssueDetailResponse {
         return lastModifiedAt;
     }
 
-    public List<LabelDto> getLabels() {
+    public List<IssueLabelDto> getLabels() {
         return labels;
     }
 

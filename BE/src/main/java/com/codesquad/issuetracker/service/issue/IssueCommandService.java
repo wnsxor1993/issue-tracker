@@ -1,9 +1,6 @@
 package com.codesquad.issuetracker.service.issue;
 
-import com.codesquad.issuetracker.domain.Issue;
-import com.codesquad.issuetracker.domain.Label;
-import com.codesquad.issuetracker.domain.Member;
-import com.codesquad.issuetracker.domain.Milestone;
+import com.codesquad.issuetracker.domain.*;
 import com.codesquad.issuetracker.excption.IssueNotFoundException;
 import com.codesquad.issuetracker.repository.issue.IssueRepository;
 import com.codesquad.issuetracker.service.label.LabelQueryService;
@@ -40,8 +37,12 @@ public class IssueCommandService {
         List<Label> labels = labelQueryService.findAllById(labelIds);
 
         Issue issue = Issue.create(title, content, author, milestone);
-        issue.changeIssueAssignees(assigneeMembers);
-        issue.changeIssueLabels(labels);
+
+        List<IssueAssignee> assignees = IssueAssignee.createIssueAssignees(issue, assigneeMembers);
+        List<IssueLabel> issueLabels = IssueLabel.createIssueLabels(issue, labels);
+
+        issue.addIssueAssignees(assignees);
+        issue.addIssueLabels(issueLabels);
 
         issueRepository.save(issue);
 
@@ -59,16 +60,17 @@ public class IssueCommandService {
         issueRepository.updateBulkStates(issueIds, isOpened);
     }
 
-    public void deleteIssue(Long issueId) {
-        issueRepository.deleteById(issueId);
+    public boolean deleteIssue(Long issueId) {
+        Issue issue = issueQueryService.findIssueById(issueId);
+        issueRepository.delete(issue);
+        return true;
     }
 
     /**
      * 이슈 수정
      */
     public void updateIssue(Long issueId, IssueUpdateRequest updateRequest) {
-        Issue issue = issueRepository.findByIdWithAuthorAndMilestone(issueId)
-                .orElseThrow(() -> new IssueNotFoundException("일치하는 식별자의 이슈를 찾을 수 없습니다."));
+        Issue issue = issueQueryService.findByIdWithAuthorAndMilestone(issueId);
         Milestone updateMilestone = milestoneQueryService.findMilestoneById(updateRequest.getMilestoneId());
         List<Label> labels = labelQueryService.findAllById(updateRequest.getLabelIds());
         List<Member> assigneeMembers = memberQueryService.findAllById(updateRequest.getAssigneeIds());
@@ -76,7 +78,13 @@ public class IssueCommandService {
         issue.changeTitle(updateRequest.getTitle());
         issue.changeContent(updateRequest.getContent());
         issue.changeMilestone(updateMilestone);
-        issue.changeIssueAssignees(assigneeMembers);
-        issue.changeIssueLabels(labels);
+
+        List<IssueAssignee> issueAssignees = IssueAssignee.createIssueAssignees(issue, assigneeMembers);
+        issue.removeAssigneesNotIn(issueAssignees);
+        issue.addIssueAssignees(issueAssignees);
+
+        List<IssueLabel> issueLabels = IssueLabel.createIssueLabels(issue, labels);
+        issue.removeIssueLabelsNotIn(issueLabels);
+        issue.addIssueLabels(issueLabels);
     }
 }

@@ -2,7 +2,6 @@ package com.codesquad.issuetracker.web.dto.issue;
 
 import com.codesquad.issuetracker.domain.Issue;
 import com.codesquad.issuetracker.domain.IssueLabel;
-import com.codesquad.issuetracker.web.dto.label.LabelDto;
 import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;
@@ -27,10 +26,10 @@ public class IssueListResponse {
         private String content;
         private Long milestoneId;
         private String milestoneName;
-        private List<LabelDto> labels = new ArrayList<>();
+        private List<IssueLabelDto> labels = new ArrayList<>();
 
         @Builder(access = AccessLevel.PRIVATE)
-        private IssueListElement(Long issueId, String title, String content, Long milestoneId, String milestoneName, List<LabelDto> labels) {
+        private IssueListElement(Long issueId, String title, String content, Long milestoneId, String milestoneName, List<IssueLabelDto> labels) {
             this.issueId = issueId;
             this.title = title;
             this.content = content;
@@ -59,10 +58,10 @@ public class IssueListResponse {
             return issue.getMilestone() == null ? null : issue.getMilestone().getTitle();
         }
 
-        private static List<LabelDto> initLabels(Issue issue) {
+        private static List<IssueLabelDto> initLabels(Issue issue) {
             return issue.getIssueLabels().stream()
                     .map(IssueLabel::getLabel)
-                    .map(label -> new LabelDto(label.getId(), label.getName(), label.getLabelColor()))
+                    .map(label -> new IssueLabelDto(label.getId(), label.getName(), label.getLabelColor()))
                     .collect(Collectors.toList());
         }
     }
