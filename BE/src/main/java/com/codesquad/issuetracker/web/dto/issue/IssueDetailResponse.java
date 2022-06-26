@@ -9,17 +9,17 @@ import java.util.List;
 
 public class IssueDetailResponse {
 
-    private Long issueId;
-    private Long authorId;
-    private String authorName;
-    private String title;
-    private String content;
+    private final Long issueId;
+    private final Long authorId;
+    private final String authorName;
+    private final String title;
+    private final String content;
     private final List<IssueAssigneeDto> assignees = new ArrayList<>();
-    private Long milestoneId;
-    private String milestoneName;
-    private boolean isOpened;
-    private LocalDateTime createdAt;
-    private LocalDateTime lastModifiedAt;
+    private final Long milestoneId;
+    private final String milestoneName;
+    private final boolean isOpened;
+    private final LocalDateTime createdAt;
+    private final LocalDateTime lastModifiedAt;
     private final List<IssueLabelDto> labels = new ArrayList<>();
     private final List<CommentListElement> comments = new ArrayList<>();
 

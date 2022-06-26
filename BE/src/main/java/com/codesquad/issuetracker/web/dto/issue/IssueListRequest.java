@@ -7,7 +7,7 @@ import lombok.ToString;
 @ToString
 public class IssueListRequest {
 
-    private boolean isOpened;
+    private final boolean isOpened;
 
     public IssueListRequest(boolean isOpened) {
         this.isOpened = isOpened;

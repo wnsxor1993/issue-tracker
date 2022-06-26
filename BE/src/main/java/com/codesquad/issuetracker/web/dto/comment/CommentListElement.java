@@ -8,12 +8,12 @@ import java.time.LocalDateTime;
 @Getter
 public class CommentListElement {
 
-    private Long commentId;
-    private Long commentAuthorId;
-    private String commentAuthorName;
-    private String commentContent;
-    private LocalDateTime commentCreatedTime;
-    private LocalDateTime commentLastModifiedTime;
+    private final Long commentId;
+    private final Long commentAuthorId;
+    private final String commentAuthorName;
+    private final String commentContent;
+    private final LocalDateTime commentCreatedTime;
+    private final LocalDateTime commentLastModifiedTime;
 
     @QueryProjection
     public CommentListElement(Long commentId, Long commentAuthorId, String commentAuthorName, String commentContent, LocalDateTime commentCreatedTime, LocalDateTime commentLastModifiedTime) {

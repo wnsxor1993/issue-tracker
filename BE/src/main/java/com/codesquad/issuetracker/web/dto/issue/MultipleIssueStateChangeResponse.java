@@ -13,7 +13,7 @@ import java.util.stream.Collectors;
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class MultipleIssueStateChangeResponse {
 
-    private List<IssueStateChangeResponse> patchedIssues = new ArrayList<>();
+    private final List<IssueStateChangeResponse> patchedIssues = new ArrayList<>();
 
     public static MultipleIssueStateChangeResponse create(List<Issue> issues) {
         List<IssueStateChangeResponse> patchedIssues = issues.stream()
@@ -24,7 +24,7 @@ public class MultipleIssueStateChangeResponse {
     }
 
     private MultipleIssueStateChangeResponse(List<IssueStateChangeResponse> patchedIssues) {
-        this.patchedIssues = patchedIssues;
+        this.patchedIssues.addAll(patchedIssues);
     }
 
 }

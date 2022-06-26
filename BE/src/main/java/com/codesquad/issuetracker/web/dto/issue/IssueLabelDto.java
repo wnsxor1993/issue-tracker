@@ -7,9 +7,9 @@ import lombok.Getter;
 @Getter
 public class IssueLabelDto {
 
-    private Long labelId;
-    private String labelName;
-    private String labelColor;
+    private final Long labelId;
+    private final String labelName;
+    private final String labelColor;
 
     @QueryProjection
     public IssueLabelDto(Long labelId, String labelName, LabelColor labelColor) {

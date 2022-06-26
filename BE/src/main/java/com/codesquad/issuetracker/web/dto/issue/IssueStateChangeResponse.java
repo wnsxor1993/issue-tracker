@@ -4,8 +4,8 @@ import com.codesquad.issuetracker.domain.Issue;
 
 public class IssueStateChangeResponse {
 
-    private Long issueId;
-    private boolean isOpened;
+    private final Long issueId;
+    private final boolean isOpened;
 
     public static IssueStateChangeResponse create(Issue issue) {
         return new IssueStateChangeResponse(issue.getId(), issue.isOpened());
