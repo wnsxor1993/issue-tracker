@@ -6,4 +6,3 @@ public class InvalidColorValueRangeException extends BusinessException {
         super(message);
     }
 }
-

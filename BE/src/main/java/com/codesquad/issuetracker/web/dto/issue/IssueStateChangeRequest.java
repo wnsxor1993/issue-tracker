@@ -1,4 +1,4 @@
-package com.codesquad.issuetracker.web.dto;
+package com.codesquad.issuetracker.web.dto.issue;
 
 import lombok.AccessLevel;
 import lombok.NoArgsConstructor;

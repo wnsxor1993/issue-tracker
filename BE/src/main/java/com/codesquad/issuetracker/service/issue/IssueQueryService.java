@@ -1,11 +1,13 @@
 package com.codesquad.issuetracker.service.issue;
 
-import com.codesquad.issuetracker.domain.Comment;
 import com.codesquad.issuetracker.domain.Issue;
-import com.codesquad.issuetracker.domain.IssueAssignee;
-import com.codesquad.issuetracker.domain.IssueLabel;
 import com.codesquad.issuetracker.excption.IssueNotFoundException;
 import com.codesquad.issuetracker.repository.issue.IssueRepository;
+import com.codesquad.issuetracker.service.comment.CommentQueryService;
+import com.codesquad.issuetracker.web.dto.comment.CommentListElement;
+import com.codesquad.issuetracker.web.dto.issue.IssueAssigneeDto;
+import com.codesquad.issuetracker.web.dto.issue.IssueDetailResponse;
+import com.codesquad.issuetracker.web.dto.issue.IssueLabelDto;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -21,39 +23,35 @@ public class IssueQueryService {
 
     private final IssueRepository issueRepository;
 
-    public Issue findIssue(Long issueId) {
+    private final CommentQueryService commentQueryService;
+
+    public Issue findIssueById(Long issueId) {
         return issueRepository.findById(issueId)
-                .orElseThrow(() -> new IssueNotFoundException("일치하는 식별자의 이슈를 찾을 수 없습니다."));
+                .orElseThrow(() -> new IssueNotFoundException("일치하는 식별자의 이슈가 존재하지 않습니다."));
     }
 
     public List<Issue> findIssues(List<Long> issueIds) {
         return issueRepository.findAllById(issueIds);
     }
 
-    public boolean checkIssueExistence(Long issueId) {
-        return issueRepository.existsById(issueId);
+    public IssueDetailResponse findIssueDetail(Long issueId) {
+
+        IssueDetailResponse issueDetailResponse = issueRepository.findIssueDetail(issueId)
+                .orElseThrow(() -> new IssueNotFoundException("일치하는 식별자의 이슈가 존재하지 않습니다."));
+
+        List<IssueAssigneeDto> assigneeDtos = issueRepository.findIssueAssigneeDtosByIssueId(issueId);
+        List<IssueLabelDto> issueLabelDtos = issueRepository.findIssueLabelDtosByIssueId(issueId);
+        List<CommentListElement> commentDtos = commentQueryService.findCommentDtosByIssueId(issueId);
+
+        issueDetailResponse.getAssignees().addAll(assigneeDtos);
+        issueDetailResponse.getLabels().addAll(issueLabelDtos);
+        issueDetailResponse.getComments().addAll(commentDtos);
+
+        return issueDetailResponse;
     }
 
-    public Issue findDetailIssue(Long issueId) {
-        Issue detailIssue = issueRepository.findDetailIssueById(issueId)
+    public Issue findByIdWithAuthorAndMilestone(Long issueId) {
+        return issueRepository.findByIdWithAuthorAndMilestone(issueId)
                 .orElseThrow(() -> new IssueNotFoundException("일치하는 식별자의 이슈를 찾을 수 없습니다."));
-
-
-        List<IssueLabel> issueLabels = detailIssue.getIssueLabels();
-        for (IssueLabel issueLabel : issueLabels) {
-            issueLabel.getLabel();
-        }
-
-        List<IssueAssignee> assignees = detailIssue.getAssignees();
-        for (IssueAssignee assignee : assignees) {
-            assignee.getMember();
-        }
-
-        List<Comment> comments = detailIssue.getComments();
-        for (Comment comment : comments) {
-            comment.getAuthor();
-        }
-
-        return detailIssue;
     }
 }

@@ -1,4 +1,4 @@
-package com.codesquad.issuetracker.web.dto;
+package com.codesquad.issuetracker.web.dto.issue;
 
 import com.codesquad.issuetracker.domain.Issue;
 import lombok.AccessLevel;
@@ -13,18 +13,18 @@ import java.util.stream.Collectors;
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class MultipleIssueStateChangeResponse {
 
-    private List<IssueStateChangeResponse> patchedIssues = new ArrayList<>();
-
-    private MultipleIssueStateChangeResponse(List<IssueStateChangeResponse> patchedIssues) {
-        this.patchedIssues = patchedIssues;
-    }
+    private final List<IssueStateChangeResponse> patchedIssues = new ArrayList<>();
 
     public static MultipleIssueStateChangeResponse create(List<Issue> issues) {
-
         List<IssueStateChangeResponse> patchedIssues = issues.stream()
                 .map(IssueStateChangeResponse::create)
                 .collect(Collectors.toList());
 
         return new MultipleIssueStateChangeResponse(patchedIssues);
     }
+
+    private MultipleIssueStateChangeResponse(List<IssueStateChangeResponse> patchedIssues) {
+        this.patchedIssues.addAll(patchedIssues);
+    }
+
 }

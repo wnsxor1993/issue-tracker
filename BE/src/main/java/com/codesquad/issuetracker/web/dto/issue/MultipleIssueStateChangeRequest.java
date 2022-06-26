@@ -1,4 +1,4 @@
-package com.codesquad.issuetracker.web.dto;
+package com.codesquad.issuetracker.web.dto.issue;
 
 import lombok.AccessLevel;
 import lombok.NoArgsConstructor;
@@ -11,7 +11,7 @@ import java.util.List;
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class MultipleIssueStateChangeRequest {
 
-    private List<Long> issueIds = new ArrayList<>();
+    private final List<Long> issueIds = new ArrayList<>();
     private boolean isOpened;
 
     public List<Long> getIssueIds() {

@@ -1,16 +1,12 @@
 package com.codesquad.issuetracker.service.issue;
 
-import com.codesquad.issuetracker.domain.Issue;
-import com.codesquad.issuetracker.domain.Label;
-import com.codesquad.issuetracker.domain.Member;
-import com.codesquad.issuetracker.domain.Milestone;
+import com.codesquad.issuetracker.domain.*;
 import com.codesquad.issuetracker.excption.IssueNotFoundException;
-import com.codesquad.issuetracker.excption.MemberNotFoundException;
-import com.codesquad.issuetracker.excption.MilestoneNotFoundException;
 import com.codesquad.issuetracker.repository.issue.IssueRepository;
-import com.codesquad.issuetracker.repository.label.LabelRepository;
-import com.codesquad.issuetracker.repository.member.MemberRepository;
-import com.codesquad.issuetracker.repository.milestone.MilestoneRepository;
+import com.codesquad.issuetracker.service.label.LabelQueryService;
+import com.codesquad.issuetracker.service.member.MemberQueryService;
+import com.codesquad.issuetracker.service.milestone.MilestoneQueryService;
+import com.codesquad.issuetracker.web.dto.issue.IssueUpdateRequest;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -25,20 +21,29 @@ import java.util.List;
 public class IssueCommandService {
 
     private final IssueRepository issueRepository;
-    private final MemberRepository memberRepository;
-    private final MilestoneRepository milestoneRepository;
-    private final LabelRepository labelRepository;
+
+    private final IssueQueryService issueQueryService;
+    private final MemberQueryService memberQueryService;
+    private final MilestoneQueryService milestoneQueryService;
+    private final LabelQueryService labelQueryService;
 
     /**
      * 이슈 생성
      */
     public Long createIssue(Long authorId, List<Long> assigneeIds, Long milestondId, List<Long> labelIds, String title, String content) {
-        Member author = findMember(authorId);
-        List<Member> assigneeMembers = memberRepository.findAllById(assigneeIds);
-        Milestone milestone = findMilestone(milestondId);
-        List<Label> labels = labelRepository.findAllById(labelIds);
+        Member author = memberQueryService.findMemberById(authorId);
+        List<Member> assigneeMembers = memberQueryService.findAllById(assigneeIds);
+        Milestone milestone = milestoneQueryService.findMilestoneById(milestondId);
+        List<Label> labels = labelQueryService.findAllById(labelIds);
 
-        Issue issue = Issue.create(author, assigneeMembers, milestone, labels, title, content);
+        Issue issue = Issue.create(title, content, author, milestone);
+
+        List<IssueAssignee> assignees = IssueAssignee.createIssueAssignees(issue, assigneeMembers);
+        List<IssueLabel> issueLabels = IssueLabel.createIssueLabels(issue, labels);
+
+        issue.addIssueAssignees(assignees);
+        issue.addIssueLabels(issueLabels);
+
         issueRepository.save(issue);
 
         log.info("created Issue = {}", issue);
@@ -46,36 +51,40 @@ public class IssueCommandService {
         return issue.getId();
     }
 
-    private Milestone findMilestone(Long milestoneId) {
-        return (milestoneId == null)
-                ? null
-                : milestoneRepository.findById(milestoneId)
-                        .orElseThrow(() -> new MilestoneNotFoundException("일치하는 식별자의 마일스톤이 존재하지 않습니다."));
-    }
-
-    private Member findMember(Long memberId) {
-        return memberRepository.findById(memberId)
-                .orElseThrow(() -> new MemberNotFoundException("일치하는 식별자의 회원이 존재하지 않습니다."));
-    }
-
     public void changeState(Long issueId, boolean isOpened) {
-        Issue issue = findIssue(issueId);
+        Issue issue = issueQueryService.findIssueById(issueId);
         issue.changeIssueState(isOpened);
     }
 
-    private Issue findIssue(Long issueId) {
-        return issueRepository.findById(issueId)
-                .orElseThrow(() -> new IssueNotFoundException("일치하는 식별자의 이슈가 존재하지 않습니다."));
-    }
-
     public void changeStates(List<Long> issueIds, boolean isOpened) {
-        List<Issue> issues = issueRepository.findAllById(issueIds);
-
-        issues.forEach(issue -> issue.changeIssueState(isOpened));
+        issueRepository.updateBulkStates(issueIds, isOpened);
     }
 
-    public void deleteIssue(Long issueId) {
-        issueRepository.deleteById(issueId);
+    public boolean deleteIssue(Long issueId) {
+        Issue issue = issueQueryService.findIssueById(issueId);
+        issueRepository.delete(issue);
+        return true;
+    }
 
+    /**
+     * 이슈 수정
+     */
+    public void updateIssue(Long issueId, IssueUpdateRequest updateRequest) {
+        Issue issue = issueQueryService.findByIdWithAuthorAndMilestone(issueId);
+        Milestone updateMilestone = milestoneQueryService.findMilestoneById(updateRequest.getMilestoneId());
+        List<Label> labels = labelQueryService.findAllById(updateRequest.getLabelIds());
+        List<Member> assigneeMembers = memberQueryService.findAllById(updateRequest.getAssigneeIds());
+
+        issue.changeTitle(updateRequest.getTitle());
+        issue.changeContent(updateRequest.getContent());
+        issue.changeMilestone(updateMilestone);
+
+        List<IssueAssignee> issueAssignees = IssueAssignee.createIssueAssignees(issue, assigneeMembers);
+        issue.removeAssigneesNotIn(issueAssignees);
+        issue.addIssueAssignees(issueAssignees);
+
+        List<IssueLabel> issueLabels = IssueLabel.createIssueLabels(issue, labels);
+        issue.removeIssueLabelsNotIn(issueLabels);
+        issue.addIssueLabels(issueLabels);
     }
 }

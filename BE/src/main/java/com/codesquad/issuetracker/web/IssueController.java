@@ -3,11 +3,14 @@ package com.codesquad.issuetracker.web;
 import com.codesquad.issuetracker.domain.Issue;
 import com.codesquad.issuetracker.service.issue.IssueCommandService;
 import com.codesquad.issuetracker.service.issue.IssueQueryService;
-import com.codesquad.issuetracker.web.dto.*;
+import com.codesquad.issuetracker.web.dto.issue.*;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.constraints.NotNull;
 import java.util.List;
 
 @Slf4j
@@ -24,6 +27,7 @@ public class IssueController {
      * 이슈 생성
      */
     @PostMapping("/issue-tracker/api/issues")
+    @ResponseStatus(HttpStatus.CREATED)
     public IssueCreateResponse create(@RequestBody IssueCreateRequest createRequest) {
         log.info("Issue Create Request = {}", createRequest);
         Long authorId = SAMPLE_MEMBER_ID;
@@ -35,7 +39,7 @@ public class IssueController {
                 createRequest.getLabelIds(),
                 createRequest.getTitle(),
                 createRequest.getContent());
-        
+
         log.info("Created Issue Id = {}", createdIssueId);
         return new IssueCreateResponse(createdIssueId);
     }
@@ -52,10 +56,11 @@ public class IssueController {
     /**
      * 이슈 수정(제목, 본문, 레이블, 마일스톤)
      */
-    @PutMapping("/issue-tracker/api/issues")
-    public IssueUpdateResponse update(@RequestBody IssueUpdateRequest updateRequest) {
-        log.info("Issue Create Request = {}", updateRequest);
-        return null;
+    @PutMapping("/issue-tracker/api/issues/{issueId}")
+    public IssueUpdateResponse update(@PathVariable Long issueId, @RequestBody IssueUpdateRequest updateRequest) {
+        log.info("Issue update Request = {}", updateRequest);
+        issueCommandService.updateIssue(issueId, updateRequest);
+        return new IssueUpdateResponse(issueId);
     }
 
     /**
@@ -64,8 +69,7 @@ public class IssueController {
     @GetMapping("/issue-tracker/api/issues/{issueId}")
     public IssueDetailResponse issueDetail(@PathVariable Long issueId) {
         log.info("Issue Detail Request - issueId = {}", issueId);
-        Issue issue = issueQueryService.findDetailIssue(issueId);
-        return IssueDetailResponse.create(issue);
+        return issueQueryService.findIssueDetail(issueId);
     }
 
     /**
@@ -74,23 +78,21 @@ public class IssueController {
     @PatchMapping("/issue-tracker/api/issues/{issueId}")
     public IssueStateChangeResponse stateChange(@PathVariable Long issueId, @RequestBody IssueStateChangeRequest stateChangeRequest) {
         log.info("Issue StateChange Request = {}", stateChangeRequest);
-        issueCommandService.changeState(issueId, stateChangeRequest.getIsOpened());
-        Issue issue = issueQueryService.findIssue(issueId);
 
-        return IssueStateChangeResponse.create(issue);
+        issueCommandService.changeState(issueId, stateChangeRequest.getIsOpened());
+
+        Issue afterIssue = issueQueryService.findIssueById(issueId);
+        return IssueStateChangeResponse.create(afterIssue);
     }
 
     /**
      * 이슈 삭제
      */
     @DeleteMapping("/issue-tracker/api/issues/{issueId}")
-    public IssueDeleteResponse delete(@PathVariable Long issueId) {
+    @ResponseStatus(HttpStatus.OK)
+    public IssueDeleteResponse delete(@PathVariable @NotNull Long issueId) {
         log.info("Issue Delete Request - issueId = {}", issueId);
-        issueCommandService.deleteIssue(issueId);
-
-        boolean isDeleted = !issueQueryService.checkIssueExistence(issueId);
-        log.info("Is issue deleted? = {}", isDeleted);
-
+        boolean isDeleted = issueCommandService.deleteIssue(issueId);
         return new IssueDeleteResponse(isDeleted);
     }
 
@@ -101,10 +103,9 @@ public class IssueController {
     public MultipleIssueStateChangeResponse multipleStateChange(@RequestBody MultipleIssueStateChangeRequest multipleStateCahngeRequest) {
         log.info("Multiple Issue StateChange Request = {}", multipleStateCahngeRequest);
         issueCommandService.changeStates(multipleStateCahngeRequest.getIssueIds(), multipleStateCahngeRequest.getIsOpened());
-        List<Issue> issues = issueQueryService.findIssues(multipleStateCahngeRequest.getIssueIds());
 
-        return MultipleIssueStateChangeResponse.create(issues);
+        List<Issue> afterIssues = issueQueryService.findIssues(multipleStateCahngeRequest.getIssueIds());
+        return MultipleIssueStateChangeResponse.create(afterIssues);
     }
 
 }
-

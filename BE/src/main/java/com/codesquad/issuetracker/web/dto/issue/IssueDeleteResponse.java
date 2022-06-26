@@ -1,12 +1,8 @@
-package com.codesquad.issuetracker.web.dto;
+package com.codesquad.issuetracker.web.dto.issue;
 
-import lombok.AccessLevel;
-import lombok.NoArgsConstructor;
-
-@NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class IssueDeleteResponse {
 
-    private boolean isDeleted;
+    private final boolean isDeleted;
 
     public IssueDeleteResponse(boolean isDeleted) {
         this.isDeleted = isDeleted;

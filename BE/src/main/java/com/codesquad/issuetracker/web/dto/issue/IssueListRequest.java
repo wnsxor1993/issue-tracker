@@ -1,4 +1,4 @@
-package com.codesquad.issuetracker.web.dto;
+package com.codesquad.issuetracker.web.dto.issue;
 
 import lombok.Getter;
 import lombok.ToString;
@@ -7,7 +7,7 @@ import lombok.ToString;
 @ToString
 public class IssueListRequest {
 
-    private boolean isOpened;
+    private final boolean isOpened;
 
     public IssueListRequest(boolean isOpened) {
         this.isOpened = isOpened;
