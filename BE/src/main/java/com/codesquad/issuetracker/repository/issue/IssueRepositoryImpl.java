@@ -2,21 +2,13 @@ package com.codesquad.issuetracker.repository.issue;
 
 import com.codesquad.issuetracker.domain.Issue;
 import com.codesquad.issuetracker.domain.QMember;
-import com.codesquad.issuetracker.web.dto.comment.CommentListElement;
-import com.codesquad.issuetracker.web.dto.comment.QCommentListElement;
-import com.codesquad.issuetracker.web.dto.issue.IssueAssigneeDto;
-import com.codesquad.issuetracker.web.dto.issue.IssueDetailResponse;
-import com.codesquad.issuetracker.web.dto.issue.QIssueAssigneeDto;
-import com.codesquad.issuetracker.web.dto.issue.QIssueDetailResponse;
-import com.codesquad.issuetracker.web.dto.label.LabelDto;
-import com.codesquad.issuetracker.web.dto.label.QLabelDto;
+import com.codesquad.issuetracker.web.dto.issue.*;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 
 import javax.persistence.EntityManager;
 import java.util.List;
 import java.util.Optional;
 
-import static com.codesquad.issuetracker.domain.QComment.comment;
 import static com.codesquad.issuetracker.domain.QIssue.issue;
 import static com.codesquad.issuetracker.domain.QIssueAssignee.issueAssignee;
 import static com.codesquad.issuetracker.domain.QIssueLabel.issueLabel;
@@ -57,60 +49,9 @@ public class IssueRepositoryImpl implements IssueCustomRepository {
 
     @Override
     public Optional<IssueDetailResponse> findIssueDetail(Long issueId) {
-
-        IssueDetailResponse issueDetailResponse = getIssueDetailResponse(issueId);
-
-        if (issueDetailResponse == null) {
-            return Optional.empty();
-        }
-
-        List<IssueAssigneeDto> assigneeDtos = findIssueAssigneeDtos(issueId);
-        List<LabelDto> labelDtos = findLabelDtos(issueId);
-        List<CommentListElement> commentDtos = findCommentDtos(issueId);
-
-        issueDetailResponse.getAssignees().addAll(assigneeDtos);
-        issueDetailResponse.getLabels().addAll(labelDtos);
-        issueDetailResponse.getComments().addAll(commentDtos);
-
-        return Optional.of(issueDetailResponse);
-    }
-
-    private List<CommentListElement> findCommentDtos(Long issueId) {
-        QMember author = new QMember("author");
-        return queryFactory
-                .select(
-                        new QCommentListElement(
-                                comment.id, author.id, author.name,
-                                comment.content, comment.createdAt, comment.lastModifiedAt))
-                .from(comment)
-                .join(comment.author, author)
-                .where(comment.issue.id.eq(issueId))
-                .fetch();
-    }
-
-    private List<LabelDto> findLabelDtos(Long issueId) {
-        return queryFactory.select(new QLabelDto(label.id, label.name, label.labelColor))
-                .from(issueLabel)
-                .join(issueLabel.label, label)
-                .where(issueLabel.issue.id.eq(issueId))
-                .fetch();
-    }
-
-
-
-    private List<IssueAssigneeDto> findIssueAssigneeDtos(Long issueId) {
-        return queryFactory
-                .select(new QIssueAssigneeDto(member.id, member.name))
-                .from(issueAssignee)
-                .join(issueAssignee.member, member)
-                .where(issueAssignee.issue.id.eq(issueId))
-                .fetch();
-    }
-
-    private IssueDetailResponse getIssueDetailResponse(Long issueId) {
         QMember author = new QMember("author");
 
-        return queryFactory
+        IssueDetailResponse issueDetailResponse = queryFactory
                 .select(
                         new QIssueDetailResponse(
                                 issue.id, author.id, author.name, issue.title,
@@ -122,5 +63,26 @@ public class IssueRepositoryImpl implements IssueCustomRepository {
                 .leftJoin(issue.milestone, milestone)
                 .where(issue.id.eq(issueId))
                 .fetchOne();
+
+        return Optional.ofNullable(issueDetailResponse);
+    }
+
+    @Override
+    public List<IssueLabelDto> findIssueLabelDtosByIssueId(Long issueId) {
+        return queryFactory.select(new QIssueLabelDto(label.id, label.name, label.labelColor))
+                .from(issueLabel)
+                .join(issueLabel.label, label)
+                .where(issueLabel.issue.id.eq(issueId))
+                .fetch();
+    }
+
+    @Override
+    public List<IssueAssigneeDto> findIssueAssigneeDtosByIssueId(Long issueId) {
+        return queryFactory
+                .select(new QIssueAssigneeDto(member.id, member.name))
+                .from(issueAssignee)
+                .join(issueAssignee.member, member)
+                .where(issueAssignee.issue.id.eq(issueId))
+                .fetch();
     }
 }

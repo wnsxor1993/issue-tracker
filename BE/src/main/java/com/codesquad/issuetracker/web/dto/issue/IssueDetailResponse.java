@@ -1,7 +1,6 @@
 package com.codesquad.issuetracker.web.dto.issue;
 
 import com.codesquad.issuetracker.web.dto.comment.CommentListElement;
-import com.codesquad.issuetracker.web.dto.label.LabelDto;
 import com.querydsl.core.annotations.QueryProjection;
 
 import java.time.LocalDateTime;
@@ -21,7 +20,7 @@ public class IssueDetailResponse {
     private boolean isOpened;
     private LocalDateTime createdAt;
     private LocalDateTime lastModifiedAt;
-    private final List<LabelDto> labels = new ArrayList<>();
+    private final List<IssueLabelDto> labels = new ArrayList<>();
     private final List<CommentListElement> comments = new ArrayList<>();
 
     @QueryProjection
@@ -85,7 +84,7 @@ public class IssueDetailResponse {
         return lastModifiedAt;
     }
 
-    public List<LabelDto> getLabels() {
+    public List<IssueLabelDto> getLabels() {
         return labels;
     }
 
