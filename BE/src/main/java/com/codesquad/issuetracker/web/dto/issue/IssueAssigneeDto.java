@@ -6,8 +6,8 @@ import lombok.Getter;
 @Getter
 public class IssueAssigneeDto {
 
-    private Long assigneeId;
-    private String assigneeName;
+    private final Long assigneeId;
+    private final String assigneeName;
 
     @QueryProjection
     public IssueAssigneeDto(Long assigneeId, String assigneeName) {

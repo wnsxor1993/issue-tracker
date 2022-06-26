@@ -18,6 +18,6 @@ public class IssueCreateRequest {
     private String title;
     private String content;
     private Long milestoneId;
-    private List<Long> labelIds = new ArrayList<>();
-    private List<Long> assigneeIds = new ArrayList<>();
+    private final List<Long> labelIds = new ArrayList<>();
+    private final List<Long> assigneeIds = new ArrayList<>();
 }

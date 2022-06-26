@@ -5,10 +5,9 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 @Getter
-@NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class IssueCreateResponse {
 
-    private Long issueId;
+    private final Long issueId;
 
     public IssueCreateResponse(Long issueId) {
         this.issueId = issueId;
