@@ -46,4 +46,24 @@ class IssueLabelTest {
 
         assertThat(issueLabelA).isNotEqualTo(issueLabelB);
     }
+
+    @Test
+    @DisplayName("hasDiffrentIssue 메서드 호출 시, 자신의 이슈와 다른 이슈면 true를 반환한다.")
+    public void hasDifferentIssueTest_True() {
+        IssueLabel issueLabel = new IssueLabel(labelA, issue);
+
+        Issue otherIssue = Issue.create("Other Issue", "content", author, null);
+
+        boolean result = issueLabel.hasDifferentIssue(otherIssue);
+        assertThat(result).isTrue();
+    }
+
+    @Test
+    @DisplayName("hasDiffrentIssue 메서드 호출 시, 자신의 이슈와 동등한 이슈면 false를 반환한다.")
+    public void hasDifferentIssueTest_False() {
+        IssueLabel issueLabel = new IssueLabel(labelA, issue);
+
+        boolean result = issueLabel.hasDifferentIssue(issue);
+        assertThat(result).isFalse();
+    }
 }
