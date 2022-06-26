@@ -30,4 +30,30 @@ public class HashSetTest {
         assertThat(hashSet.size()).isEqualTo(1);
         assertThat(firstElement).isSameAs(strA);
     }
+
+    @Test
+    @DisplayName("hashSet의 contains는 동등한 객체가 set에 있으면 true를 반환한다.")
+    public void containsTest() {
+        String strA = new String("aaa");
+        String strB = new String("aaa");
+
+        hashSet.add(strA);
+
+        boolean containsResult = hashSet.contains(strB);
+
+        assertThat(containsResult).isTrue();
+    }
+
+    @Test
+    @DisplayName("hashSet의 contains는 동등한 객체가 set에 없으면 false를 반환한다.")
+    public void notContainsTest() {
+        String strA = new String("aaa");
+        String strB = new String("bbb");
+
+        hashSet.add(strA);
+
+        boolean containsResult = hashSet.contains(strB);
+
+        assertThat(containsResult).isFalse();
+    }
 }
