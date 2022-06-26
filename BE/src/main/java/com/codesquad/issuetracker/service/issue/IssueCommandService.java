@@ -70,8 +70,7 @@ public class IssueCommandService {
      * 이슈 수정
      */
     public void updateIssue(Long issueId, IssueUpdateRequest updateRequest) {
-        Issue issue = issueRepository.findByIdWithAuthorAndMilestone(issueId)
-                .orElseThrow(() -> new IssueNotFoundException("일치하는 식별자의 이슈를 찾을 수 없습니다."));
+        Issue issue = issueQueryService.findByIdWithAuthorAndMilestone(issueId);
         Milestone updateMilestone = milestoneQueryService.findMilestoneById(updateRequest.getMilestoneId());
         List<Label> labels = labelQueryService.findAllById(updateRequest.getLabelIds());
         List<Member> assigneeMembers = memberQueryService.findAllById(updateRequest.getAssigneeIds());

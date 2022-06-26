@@ -49,4 +49,9 @@ public class IssueQueryService {
 
         return issueDetailResponse;
     }
+
+    public Issue findByIdWithAuthorAndMilestone(Long issueId) {
+        return issueRepository.findByIdWithAuthorAndMilestone(issueId)
+                .orElseThrow(() -> new IssueNotFoundException("일치하는 식별자의 이슈를 찾을 수 없습니다."));
+    }
 }
