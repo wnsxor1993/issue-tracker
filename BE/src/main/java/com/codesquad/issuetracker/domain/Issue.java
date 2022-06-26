@@ -115,7 +115,7 @@ public class Issue extends BaseTimeEntity {
      */
     public void removeIssueLabelsNotIn(List<IssueLabel> otherIssueLabels) {
         this.issueLabels.removeIf(
-                issueLabel -> !issueLabels.contains(issueLabel)
+                issueLabel -> !otherIssueLabels.contains(issueLabel)
         );
     }
 

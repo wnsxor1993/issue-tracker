@@ -2,31 +2,35 @@ package com.codesquad.issuetracker.domain;
 
 import com.codesquad.issuetracker.excption.InvalidIssueAssigneeAddException;
 import com.codesquad.issuetracker.excption.InvalidIssueLabelAddException;
+import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 
+import java.util.List;
 import java.util.Set;
 
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assertions.assertThatThrownBy;
+import static org.assertj.core.api.Assertions.*;
 
+@Slf4j
 class IssueTest {
 
-    private final Member memberA = new Member("memberA", "1234!", "사용자1");
-    private final Member memberB = new Member("memberB", "1234!", "사용자2");
-    private final Label labelA = new Label("labelA", "widwdniw", LabelColor.create("FFFFFF"));
-    private final Label labelB = new Label("labelB", "widwdniw", LabelColor.create("AAAAAA"));
-    private Issue issue;
-    private Set<IssueAssignee> issueAssignees;
-    private Set<IssueLabel> issueLabels;
+    Member memberA = new Member("memberA", "1234!", "사용자1");
+    Member memberB = new Member("memberB", "1234!", "사용자2");
+    Label labelA = new Label("labelA", "widwdniw", LabelColor.create("FFFFFF"));
+    Label labelB = new Label("labelB", "widwdniw", LabelColor.create("AAAAAA"));
+
+    Issue issue = issue = Issue.create("냠냠", "본문", memberA, null);
+
+    Set<IssueAssignee> issueAssignees = issue.getAssignees();
+    Set<IssueLabel> issueLabels = issue.getIssueLabels();
 
 
     @BeforeEach
     void init() {
-        issue = Issue.create("냠냠", "본문", memberA, null);
-        issueAssignees = issue.getAssignees();
-        issueLabels = issue.getIssueLabels();
+        issueAssignees.clear();
+        issueLabels.clear();
     }
 
     @Test
@@ -105,5 +109,98 @@ class IssueTest {
                 .isInstanceOf(InvalidIssueLabelAddException.class);
     }
 
+    @Nested
+    @DisplayName("removeAssigneesNotIn 메서드는")
+    class removeAssigneesNotIn_메서드는 {
 
+        @Nested
+        @DisplayName("기존 이슈 Assignee가 인자에 포함되지 않았을 때")
+        class 기존_이슈_Assignee_가_인자에_포함_안_될_때 {
+
+            IssueAssignee beforeAssignee = new IssueAssignee(memberA, issue);
+            IssueAssignee otherAssignee = new IssueAssignee(memberB, issue);
+            List<IssueAssignee> otherIssueAssignees = List.of(otherAssignee);
+
+            @Test
+            @DisplayName("해당 IssueAssignee를 제거한다.")
+            public void deleteAssignee() {
+                issue.addIssueAssignee(beforeAssignee);
+
+                //when
+                issue.removeAssigneesNotIn(otherIssueAssignees);
+
+                assertThat(issueAssignees.size()).isEqualTo(0);
+                assertThat(issueAssignees).doesNotContain(beforeAssignee);
+            }
+        }
+
+        @Nested
+        @DisplayName("기존 이슈 Assignee가 인자에 포함될 때")
+        class 기존_이슈_Assignee_가_인자에_포함_될_때 {
+
+            IssueAssignee beforeAssignee = new IssueAssignee(memberA, issue);
+            IssueAssignee otherAssignee = new IssueAssignee(memberA, issue);
+            List<IssueAssignee> otherIssueAssignees = List.of(otherAssignee);
+
+            @Test
+            @DisplayName("해당 IssueAssignee를 제거하지 않는다.")
+            public void doesNotDeleteAssignee() {
+                // given
+                issue.addIssueAssignee(beforeAssignee);
+
+                // when
+                issue.removeAssigneesNotIn(otherIssueAssignees);
+
+                // then
+                assertThat(issueAssignees.size()).isEqualTo(1);
+                assertThat(issueAssignees).containsExactly(beforeAssignee);
+            }
+        }
+    }
+
+    @Nested
+    @DisplayName("removeLabelsNotIn 메서드는")
+    class removeLablesNotIn_메서드는 {
+
+        @Nested
+        @DisplayName("기존 이슈 Labels가 인자에 포함되지 않았을 때")
+        class 기존_이슈_Labels_가_인자에_포함_안_될_때 {
+
+            IssueLabel beforeIssueLabel = new IssueLabel(labelA, issue);
+            IssueLabel otherIssueLabel = new IssueLabel(labelB, issue);
+            List<IssueLabel> otherIssueLabels = List.of(otherIssueLabel);
+
+            @Test
+            @DisplayName("해당 IssueLabel를 제거한다.")
+            public void deleteIssueLabel() {
+                issue.addIssueLabel(beforeIssueLabel);
+
+                //when
+                issue.removeIssueLabelsNotIn(otherIssueLabels);
+
+                assertThat(issueLabels.size()).isEqualTo(0);
+                assertThat(issueLabels).doesNotContain(beforeIssueLabel);
+            }
+        }
+
+        @Nested
+        @DisplayName("기존 이슈 Labels가 인자에 포함될 때")
+        class 기존_이슈_Labels_가_인자에_포함_될_때 {
+            IssueLabel beforeIssueLabel = new IssueLabel(labelA, issue);
+            IssueLabel otherIssueLabel = new IssueLabel(labelA, issue);
+            List<IssueLabel> otherIssueLabels = List.of(otherIssueLabel);
+
+            @Test
+            @DisplayName("해당 IssueLabel를 제거하지 않는다.")
+            public void doesNotDeleteIssueLabel() {
+                issue.addIssueLabel(beforeIssueLabel);
+
+                //when
+                issue.removeIssueLabelsNotIn(otherIssueLabels);
+
+                assertThat(issueLabels.size()).isEqualTo(1);
+                assertThat(issueLabels).containsExactly(beforeIssueLabel);
+            }
+        }
+    }
 }
