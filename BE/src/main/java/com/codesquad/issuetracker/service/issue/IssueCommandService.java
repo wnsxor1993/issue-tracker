@@ -60,8 +60,10 @@ public class IssueCommandService {
         issueRepository.updateBulkStates(issueIds, isOpened);
     }
 
-    public void deleteIssue(Long issueId) {
-        issueRepository.deleteById(issueId);
+    public boolean deleteIssue(Long issueId) {
+        Issue issue = issueQueryService.findIssueById(issueId);
+        issueRepository.delete(issue);
+        return true;
     }
 
     /**

@@ -7,8 +7,10 @@ import com.codesquad.issuetracker.web.dto.issue.*;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.constraints.NotNull;
 import java.util.List;
 
 @Slf4j
@@ -87,14 +89,10 @@ public class IssueController {
      * 이슈 삭제
      */
     @DeleteMapping("/issue-tracker/api/issues/{issueId}")
-    @ResponseStatus(HttpStatus.NO_CONTENT)
-    public IssueDeleteResponse delete(@PathVariable Long issueId) {
+    @ResponseStatus(HttpStatus.OK)
+    public IssueDeleteResponse delete(@PathVariable @NotNull Long issueId) {
         log.info("Issue Delete Request - issueId = {}", issueId);
-        issueCommandService.deleteIssue(issueId);
-
-        boolean isDeleted = !issueQueryService.checkIssueExistence(issueId);
-        log.info("Is issue deleted? = {}", isDeleted);
-
+        boolean isDeleted = issueCommandService.deleteIssue(issueId);
         return new IssueDeleteResponse(isDeleted);
     }
 
