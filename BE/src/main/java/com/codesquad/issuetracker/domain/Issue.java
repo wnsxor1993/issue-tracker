@@ -35,7 +35,7 @@ public class Issue extends BaseTimeEntity {
     private Milestone milestone;
 
     @OneToMany(mappedBy = "issue", cascade = CascadeType.ALL, orphanRemoval = true)
-    private final List<IssueLabel> issueLabels = new ArrayList<>();
+    private final Set<IssueLabel> issueLabels = new HashSet<>();
 
     @OneToMany(mappedBy = "issue", cascade = CascadeType.ALL, orphanRemoval = true)
     private final List<Comment> comments = new ArrayList<>();
