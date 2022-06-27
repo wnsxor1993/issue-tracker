@@ -12,7 +12,7 @@ protocol DefaultLoginUsecase {
 //    var responseHandler: (Bool) -> Void {get set}
     var grantResource: Observable<Codable?> { get }
 
-    func execute(handler: @escaping (URL?) -> Void)
+    func execute()
 
 //    func enquireForGrant(handler: @escaping (_ url: URL?) -> Void)
 }

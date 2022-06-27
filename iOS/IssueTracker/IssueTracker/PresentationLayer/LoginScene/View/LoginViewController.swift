@@ -47,6 +47,11 @@ class LoginViewController: UIViewController {
             print(userInfo)
             self.presentNextScene()
         }
+
+        loginVM.gitOAuthPageURL.bind { url in
+            guard let usefulURL = url, UIApplication.shared.canOpenURL(usefulURL) else { return }
+            UIApplication.shared.open(usefulURL)
+        }
     }
 }
 

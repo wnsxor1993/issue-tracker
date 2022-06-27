@@ -22,10 +22,9 @@ final class AppleAuthorizationUsecase: NSObject, DefaultLoginUsecase {
         self.prepareToRequest()
     }
 
-    func execute(handler: @escaping (URL?) -> Void) {
+    func execute() {
         guard let controller = authorizationController else { return }
         controller.performRequests()
-        handler(nil)
     }
 
 //    init(endPoint: EndPoint, presentationAnchor: UIWindow?, observe responseHandler: @escaping (Bool) -> Void) {

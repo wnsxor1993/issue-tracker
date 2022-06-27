@@ -10,6 +10,7 @@ import Foundation
 final class GithubAuthorizationUsecase: DefaultLoginUsecase {
 
     private(set) var endPoint: EndPoint
+    var githubOpenURL: Observable<URL?> = Observable(nil)
     var grantResource: Observable<Codable?> = Observable(nil)
 //    var responseHandler: (Bool) -> Void
 
@@ -18,8 +19,8 @@ final class GithubAuthorizationUsecase: DefaultLoginUsecase {
         self.setNotificationObserver()
     }
 
-    func execute(handler: @escaping (URL?) -> Void) {
-        handler(endPoint.url)
+    func execute() {
+        githubOpenURL.updateValue(value: endPoint.url)
     }
 
 //    init(endPoint: EndPoint, observe responseHandler: @escaping (Bool) -> Void) {

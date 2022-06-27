@@ -13,7 +13,9 @@ final class LoginViewModel {
     private var githubAuthorizationUsecase: DefaultLoginUsecase
     private var appleAuthorizationUsecase: DefaultLoginUsecase
     private var requestUserInfoUsecase: DefaultLoginUsecase
+    
     var userInfo: Observable<UserInfo?> = Observable(nil)
+    var gitOAuthPageURL: Observable<URL?> = Observable(nil)
     
     private var grantResource: GrantResource? {
         didSet{
@@ -22,13 +24,8 @@ final class LoginViewModel {
     }
     
     init() {
-        appleAuthorizationUsecase.grantResource.bind { resource in
-            guard let grantCode = resource as? GrantResource else { return }
-        }
-        
-        githubAuthorizationUsecase.grantResource.bind { resource in
-            guard let grantCode = resource as? GrantResource else { return }
-        }
+        setGithubUsecaseOpenURLBind()
+        setGrantResourceBind()
         
         self.githubAuthorizationUsecase = GithubAuthorizationUsecase()
         self.appleAuthorizationUsecase = AppleAuthorizationUsecase()
@@ -48,8 +45,25 @@ final class LoginViewModel {
 
 private extension LoginViewModel {
     
+    func setGithubUsecaseOpenURLBind() {
+        guard let githubUsecase = githubAuthorizationUsecase as? GithubAuthorizationUsecase else { return }
+        githubUsecase.githubOpenURL.bind { url in
+            self.gitOAuthPageURL.updateValue(value: url)
+        }
+    }
+    
+    func setGrantResourceBind() {
+        appleAuthorizationUsecase.grantResource.bind { resource in
+            guard let grantCode = resource as? GrantResource else { return }
+        }
+        
+        githubAuthorizationUsecase.grantResource.bind { resource in
+            guard let grantCode = resource as? GrantResource else { return }
+        }
+    }
+    
     func enquireForAppleGrant(){
-        appleAuthorizationUsecase.execute { _ in }
+        appleAuthorizationUsecase.execute()
 //        appleAuthorizationUsecase.execute(){[weak self] result in
 //            switch result in {
 //            case .success(let grantResource):
@@ -62,11 +76,7 @@ private extension LoginViewModel {
     }
     
     func enquireForGitHubGrant(){
-        githubAuthorizationUsecase.execute { url in
-            guard let usefulURL = url, UIApplication.shared.canOpenURL(usefulURL) else { return }
-            
-            UIApplication.shared.open(usefulURL)
-        }
+        githubAuthorizationUsecase.execute()
         
 //        githubAuthorizationUsecase.execute(){[weak self] result in
 //            switch result in {
@@ -80,14 +90,6 @@ private extension LoginViewModel {
     }
     
     func enquireForUserInfo(){
-        requestOAuthUserInfoUsecase.execute(bodyParameter: grantResource) {[weak self] result in
-            switch result in {
-            case .success(let userInfo):
-                self?.userInfo.updateValue(value: userInfo)
-            case .failure(let error):
-                //TODO: ERROR HANDELING REQUIRED
-                print(error)
-            }
-        }
+        requestOAuthUserInfoUsecase.execute()
     }
 }
