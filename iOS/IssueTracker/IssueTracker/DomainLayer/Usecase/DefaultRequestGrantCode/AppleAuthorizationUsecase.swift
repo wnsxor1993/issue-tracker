@@ -9,20 +9,28 @@ import AuthenticationServices
 
 final class AppleAuthorizationUsecase: NSObject, DefaultLoginUsecase {
 
-    private(set) var endPoint: EndPoint
+//    private(set) var endPoint: EndPoint
     var responseHandler: (Bool) -> Void
 
     private var presentationAnchor: UIWindow?
     private var authorizationController: ASAuthorizationController?
 
-    init(endPoint: EndPoint, presentationAnchor: UIWindow?, observe responseHandler: @escaping (Bool) -> Void) {
-        self.endPoint = endPoint
+    init(presentationAnchor: UIWindow?, observe responseHandler: @escaping (Bool) -> Void) {
         self.presentationAnchor = presentationAnchor
         self.responseHandler = responseHandler
         super.init()
 
         self.prepareToRequest()
     }
+    
+//    init(endPoint: EndPoint, presentationAnchor: UIWindow?, observe responseHandler: @escaping (Bool) -> Void) {
+//        self.endPoint = endPoint
+//        self.presentationAnchor = presentationAnchor
+//        self.responseHandler = responseHandler
+//        super.init()
+//
+//        self.prepareToRequest()
+//    }
 
     func enquireForGrant(handler: @escaping (URL?) -> Void) {
         guard let controller = authorizationController else { return }

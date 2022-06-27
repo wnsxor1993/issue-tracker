@@ -8,7 +8,7 @@
 import Foundation
 
 protocol DefaultLoginUsecase {
-    var endPoint: EndPoint {get}
+//    var endPoint: EndPoint {get}
     var responseHandler: (Bool) -> Void {get set}
 
     func enquireForGrant(handler: @escaping (_ url: URL?) -> Void)

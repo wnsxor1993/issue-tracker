@@ -26,6 +26,18 @@ final class LoginViewModel {
         self.requestUserInfoUsecase = RequestUserInfoUseCase()
     }
     
+    func enquireGrant(case: OAuthButtonType) {
+        switch case {
+        case .git:
+            enquireForGitHubGrant()
+        case .apple:
+            enquireForAppleGrant()
+        }
+    }
+}
+
+
+private extension LoginViewModel {
     
     func enquireForAppleGrant(){
         requestAppleGrantCodeUseCase.execute(){[weak self] result in
@@ -51,11 +63,6 @@ final class LoginViewModel {
         }
     }
     
-
-}
-
-
-private extension LoginViewModel {
     func enquireForUserInfo(){
         requestOAuthUserInfoUsecase.execute(bodyParameter: grantResource) {[weak self] result in
             switch result in {
