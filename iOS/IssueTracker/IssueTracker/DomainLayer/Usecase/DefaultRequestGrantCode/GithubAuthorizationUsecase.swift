@@ -40,7 +40,7 @@ private extension GithubAuthorizationUsecase {
     }
 
     @objc func didRecieveGrantCode(notification: Notification) {
-        guard var grantCode = notification.userInfo?[NotificationKey.grantCode]as? String else {return}
+        guard let grantCode = notification.userInfo?[NotificationKey.grantCode]as? String else {return}
 
         let grantResource = GrantResource(authorizationCode: grantCode, identityToken: nil)
         self.grantResource.updateValue(value: grantResource)
