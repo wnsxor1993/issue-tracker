@@ -7,7 +7,7 @@
 
 import AuthenticationServices
 
-final class RequestAppleGrantCodeUseCase: NSObject, DefaultRequestGrantCodeUsecase {
+final class AppleAuthorizationUsecase: NSObject, DefaultLoginUsecase {
 
     private(set) var endPoint: EndPoint
     var responseHandler: (Bool) -> Void
@@ -31,7 +31,7 @@ final class RequestAppleGrantCodeUseCase: NSObject, DefaultRequestGrantCodeUseca
     }
 }
 
-private extension RequestAppleGrantCodeUseCase {
+private extension AppleAuthorizationUsecase {
 
     func prepareToRequest() {
         let appleIDProvider = ASAuthorizationAppleIDProvider()
@@ -57,7 +57,7 @@ private extension RequestAppleGrantCodeUseCase {
     }
 }
 
-extension RequestAppleGrantCodeUseCase: ASAuthorizationControllerDelegate {
+extension AppleAuthorizationUsecase: ASAuthorizationControllerDelegate {
 
     func authorizationController(controller: ASAuthorizationController, didCompleteWithAuthorization authorization: ASAuthorization) {
         switch authorization.credential {
@@ -75,7 +75,7 @@ extension RequestAppleGrantCodeUseCase: ASAuthorizationControllerDelegate {
     }
 }
 
-extension RequestAppleGrantCodeUseCase: ASAuthorizationControllerPresentationContextProviding {
+extension AppleAuthorizationUsecase: ASAuthorizationControllerPresentationContextProviding {
 
     func presentationAnchor(for controller: ASAuthorizationController) -> ASPresentationAnchor {
         guard let window = presentationAnchor else { return ASPresentationAnchor() }

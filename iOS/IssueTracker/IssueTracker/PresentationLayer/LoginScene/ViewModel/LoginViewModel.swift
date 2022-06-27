@@ -9,9 +9,9 @@ import Foundation
 
 final class LoginViewModel {
     
-    private var requestGithubGrantCodeUseCase: DefaultRequestGrantCodeUsecase
-    private var requestAppleGrantCodeUseCase: DefaultRequestGrantCodeUsecase
-    private var requestOAuthUserInfoUsecase: DefaultUserInfoUseCase
+    private var githubAuthorizationUsecase: DefaultLoginUsecase
+    private var appleAuthorizationUsecase: DefaultLoginUsecase
+    private var requestUserInfoUsecase: DefaultLoginUsecase
     var userInfo: Observable<UserInfo?> = Observable(nil)
     
     private var grantResource: GrantResource? {
@@ -21,9 +21,9 @@ final class LoginViewModel {
     }
     
     init() {
-        self.requestOAuthUserInfoUsecase = RequestGithubGrantCodeUseCase()
-        self.requestAppleGrantCodeUseCase = RequestAppleGrantCodeUseCase()
-        self.requestOAuthUserInfoUsecase = RequestUserInfoUseCase()
+        self.githubAuthorizationUsecase = GithubAuthorizationUsecase()
+        self.appleAuthorizationUsecase = AppleAuthorizationUsecase()
+        self.requestUserInfoUsecase = RequestUserInfoUseCase()
     }
     
     

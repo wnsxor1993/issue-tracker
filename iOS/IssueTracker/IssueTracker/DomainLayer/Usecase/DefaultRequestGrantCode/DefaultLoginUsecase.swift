@@ -7,7 +7,7 @@
 
 import Foundation
 
-protocol DefaultRequestGrantCodeUsecase {
+protocol DefaultLoginUsecase {
     var endPoint: EndPoint {get}
     var responseHandler: (Bool) -> Void {get set}
 

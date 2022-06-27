@@ -10,8 +10,8 @@ import AuthenticationServices
 
 class LoginViewController: UIViewController {
 
-    private var appleManager: DefaultRequestGrantCodeUsecase?
-    private var githubManager: DefaultRequestGrantCodeUsecase?
+    private var appleManager: DefaultLoginUsecase?
+    private var githubManager: DefaultLoginUsecase?
     let loginVM = LoginViewModel()
 
     private let titleLabel: UILabel = {
@@ -76,11 +76,11 @@ private extension LoginViewController {
 
     func setOAuthManagers() {
         //TODO: OAuth BE 연결되면 presentNextScene 삭제 및 로직 변경 필요
-        appleManager = RequestAppleGrantCodeUseCase(endPoint: EndPoint(urlConfigure: GitURLConfiguration(), method: .POST, body: nil), presentationAnchor: self.view.window) { [weak self] isVerified in
+        appleManager = AppleAuthorizationUsecase(endPoint: EndPoint(urlConfigure: GitURLConfiguration(), method: .POST, body: nil), presentationAnchor: self.view.window) { [weak self] isVerified in
             guard isVerified == true else { return }
             self?.presentNextScene()
         }
-        githubManager = RequestGithubGrantCodeUseCase(endPoint: EndPoint(urlConfigure: GitURLConfiguration(), method: .POST, body: nil)) {[weak self]  isVerified in
+        githubManager = GithubAuthorizationUsecase(endPoint: EndPoint(urlConfigure: GitURLConfiguration(), method: .POST, body: nil)) {[weak self]  isVerified in
             guard isVerified == true else { return }
             self?.presentNextScene()
         }
