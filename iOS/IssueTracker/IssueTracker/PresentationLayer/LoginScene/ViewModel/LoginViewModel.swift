@@ -35,9 +35,9 @@ final class LoginViewModel {
     func enquireGrant(buttonCase: OAuthButtonType) {
         switch buttonCase {
         case .git:
-            enquireForGitHubGrant()
+            githubAuthorizationUsecase.execute()
         case .apple:
-            enquireForAppleGrant()
+            appleAuthorizationUsecase.execute()
         }
     }
 }
@@ -61,8 +61,7 @@ private extension LoginViewModel {
         }
     }
 
-    func enquireForAppleGrant() {
-        appleAuthorizationUsecase.execute()
+//    func enquireForAppleGrant() {
 //        appleAuthorizationUsecase.execute(){[weak self] result in
 //            switch result in {
 //            case .success(let grantResource):
@@ -72,11 +71,9 @@ private extension LoginViewModel {
 //                print(error)
 //            }
 //        }
-    }
+//    }
 
-    func enquireForGitHubGrant() {
-        githubAuthorizationUsecase.execute()
-
+//    func enquireForGitHubGrant() {
 //        githubAuthorizationUsecase.execute(){[weak self] result in
 //            switch result in {
 //            case .success(let grantResource):
@@ -86,7 +83,7 @@ private extension LoginViewModel {
 //                print(error)
 //            }
 //        }
-    }
+//    }
 
     func enquireForUserInfo() {
         requestOAuthUserInfoUsecase.execute()
