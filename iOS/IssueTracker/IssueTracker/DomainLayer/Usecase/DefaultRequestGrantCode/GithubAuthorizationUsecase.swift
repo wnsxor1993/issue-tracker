@@ -10,17 +10,27 @@ import Foundation
 final class GithubAuthorizationUsecase: DefaultLoginUsecase {
 
     private(set) var endPoint: EndPoint
-    var responseHandler: (Bool) -> Void
+    var grantResource: Observable<Codable?> = Observable(nil)
+//    var responseHandler: (Bool) -> Void
 
-    init(endPoint: EndPoint, observe responseHandler: @escaping (Bool) -> Void) {
+    init(endPoint: EndPoint) {
         self.endPoint = endPoint
-        self.responseHandler = responseHandler
         self.setNotificationObserver()
     }
 
-    func enquireForGrant(handler: @escaping (URL?) -> Void) {
+    func execute(handler: @escaping (URL?) -> Void) {
         handler(endPoint.url)
     }
+
+//    init(endPoint: EndPoint, observe responseHandler: @escaping (Bool) -> Void) {
+//        self.endPoint = endPoint
+//        self.responseHandler = responseHandler
+//        self.setNotificationObserver()
+//    }
+
+//    func enquireForGrant(handler: @escaping (URL?) -> Void) {
+//        handler(endPoint.url)
+//    }
 }
 
 private extension GithubAuthorizationUsecase {
@@ -31,22 +41,22 @@ private extension GithubAuthorizationUsecase {
     @objc func didRecieveGrantCode(notification: Notification) {
         guard var grantCode = notification.userInfo?[NotificationKey.grantCode]as? String else {return}
 
-        let endPoint = EndPoint(urlConfigure: GitURLConfiguration(), method: .POST, body: nil)
-        self.requestAPI(with: endPoint)
+        let grantResource = GrantResource(authorizationCode: grantCode, identityToken: nil)
+        self.grantResource.updateValue(value: grantResource)
     }
 
-    func requestAPI(with endPoint: EndPoint) {
-        self.responseHandler(true)
-//        NetworkService.request(endPoint: endPoint, completion: { result in
-//            switch result {
-//            case .success(let data):
-//                // TODO: Decode response data
-//                print(data)
-//                self.responseHandler?(true)
-//            case .failure(let error):
-//                print(error)
-//                self.responseHandler?(false)
-//            }
-//        })
-    }
+//    func requestAPI(with endPoint: EndPoint) {
+//        self.responseHandler(true)
+////        NetworkService.request(endPoint: endPoint, completion: { result in
+////            switch result {
+////            case .success(let data):
+////                // TODO: Decode response data
+////                print(data)
+////                self.responseHandler?(true)
+////            case .failure(let error):
+////                print(error)
+////                self.responseHandler?(false)
+////            }
+////        })
+//    }
 }

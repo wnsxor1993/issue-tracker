@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct GrantResource {
+struct GrantResource: Codable {
     let authorizationCode: String
     let identityToken: String?
 }

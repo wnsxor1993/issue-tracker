@@ -52,7 +52,7 @@ class LoginViewController: UIViewController {
 
 extension LoginViewController: OAuthButtonDelegate {
     func didClick(buttonType: OAuthButtonType) {
-        loginVM.enquireGrant(case: buttonType)
+        loginVM.enquireGrant(buttonCase: buttonType)
 //        guard let githubManager = githubManager, let appleManager = appleManager else {return}
 //
 //        switch buttonType {

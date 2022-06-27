@@ -10,19 +10,24 @@ import AuthenticationServices
 final class AppleAuthorizationUsecase: NSObject, DefaultLoginUsecase {
 
 //    private(set) var endPoint: EndPoint
-    var responseHandler: (Bool) -> Void
+    var grantResource: Observable<Codable?> = Observable(nil)
 
     private var presentationAnchor: UIWindow?
     private var authorizationController: ASAuthorizationController?
 
-    init(presentationAnchor: UIWindow?, observe responseHandler: @escaping (Bool) -> Void) {
+    init(presentationAnchor: UIWindow?) {
         self.presentationAnchor = presentationAnchor
-        self.responseHandler = responseHandler
         super.init()
 
         self.prepareToRequest()
     }
-    
+
+    func execute(handler: @escaping (URL?) -> Void) {
+        guard let controller = authorizationController else { return }
+        controller.performRequests()
+        handler(nil)
+    }
+
 //    init(endPoint: EndPoint, presentationAnchor: UIWindow?, observe responseHandler: @escaping (Bool) -> Void) {
 //        self.endPoint = endPoint
 //        self.presentationAnchor = presentationAnchor
@@ -51,18 +56,6 @@ private extension AppleAuthorizationUsecase {
         controller.presentationContextProvider = self
         authorizationController = controller
     }
-
-    func requestAPI() {
-        NetworkService.request(endPoint: endPoint, completion: { result in
-            switch result {
-            case .success(let data):
-                // TODO: Decode response data
-                self.responseHandler(true)
-            case .failure(let error):
-                self.responseHandler(false)
-            }
-        })
-    }
 }
 
 extension AppleAuthorizationUsecase: ASAuthorizationControllerDelegate {
@@ -71,7 +64,10 @@ extension AppleAuthorizationUsecase: ASAuthorizationControllerDelegate {
         switch authorization.credential {
         case let appleIDCredential as ASAuthorizationAppleIDCredential:
             // TODO: BE API request 호출 클로저 내부에 해당 작업 넣기
-            requestAPI()
+            guard let authorizationCode = appleIDCredential.authorizationCode, let identityToken = appleIDCredential.identityToken, let codeString = String(data: authorizationCode, encoding: .utf8), let tokenString = String(data: identityToken, encoding: .utf8) else { return }
+            let grantResource = GrantResource(authorizationCode: codeString, identityToken: tokenString)
+
+            self.grantResource.updateValue(value: grantResource)
 
         default:
             break
