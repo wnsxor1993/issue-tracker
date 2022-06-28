@@ -11,7 +11,6 @@ final class LoginViewModel {
 
     private var githubAuthorizationUsecase: DefaultLoginUsecase
     private var appleAuthorizationUsecase: DefaultLoginUsecase?
-    private var requestUserInfoUsecase: DefaultLoginUsecase?
 
     var gitOAuthPageURL: Observable<URL?> = Observable(nil)
     var userInfo: Observable<UserInfo?> = Observable(nil)
@@ -22,11 +21,10 @@ final class LoginViewModel {
         }
     }
 
-    init(_ github: DefaultLoginUsecase = GithubAuthorizationUsecase(endPoint: EndPoint(urlConfigure: GitURLConfiguration(), method: .POST, body: nil)), _ apple: DefaultLoginUsecase? = nil,
-        _ requestUserInfo: DefaultLoginUsecase? = nil) {
+    init(_ github: DefaultLoginUsecase = GithubAuthorizationUsecase(endPoint: EndPoint(urlConfigure: GitURLConfiguration(), method: .POST, body: nil)), _ apple: DefaultLoginUsecase? = nil) {
+
         self.githubAuthorizationUsecase = github
         self.appleAuthorizationUsecase = apple
-        self.requestUserInfoUsecase = requestUserInfo
     }
 
     func enquireGrant(buttonCase: OAuthButtonType) {
@@ -42,17 +40,18 @@ final class LoginViewModel {
 private extension LoginViewModel {
 
     func setNotificationObserver() {
-        NotificationCenter.default.addObserver(self, selector: #selector(updateGrantResourceValue(notification:)), name: .recievedGrantResource, object: githubAuthorizationUsecase)
         NotificationCenter.default.addObserver(self, selector: #selector(updateGithubPageURLValue(notification:)), name: .recievedGithubPageURL, object: githubAuthorizationUsecase)
         NotificationCenter.default.addObserver(self, selector: #selector(updateGrantResourceValue(notification:)), name: .recievedGrantResource, object: appleAuthorizationUsecase)
+        NotificationCenter.default.addObserver(self, selector: #selector(updateGrantResourceValue(notification:)), name: .recievedGrantCode, object: nil)
     }
 
     @objc
     func updateGrantResourceValue(notification: Notification) {
-        guard let grantResource = notification.userInfo?[NotificationKey.grantResource]as? GrantResource else {return}
+        guard let grantCode = notification.userInfo?[NotificationKey.grantCode]as? String else {return}
+        let grantResource = GrantResource(authorizationCode: grantCode, identityToken: nil)
         self.grantResource = grantResource
     }
-    
+
     @objc
     func updateGithubPageURLValue(notification: Notification) {
         guard let pageURL = notification.userInfo?[NotificationKey.githubPageURL]as? URL else {return}
@@ -84,6 +83,6 @@ private extension LoginViewModel {
 //    }
 
     func enquireForUserInfo() {
-//        requestOAuthUserInfoUsecase.execute()
+        requestOAuthUserInfoUsecase.execute()
     }
 }

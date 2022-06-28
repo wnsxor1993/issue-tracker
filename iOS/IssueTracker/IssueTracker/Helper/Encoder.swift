@@ -7,8 +7,18 @@
 
 import Foundation
 
-struct Encoder {
-    static func encode () {
+struct Encoder <T: Encodable> {
 
+    typealias Model = T
+
+    func encode(model: Model) -> Data? {
+        do {
+            let encodedData = try JSONEncoder().encode(model)
+            return encodedData
+        } catch {
+            print(NetworkError.encodingError(error))
+            return nil
+        }
     }
+
 }

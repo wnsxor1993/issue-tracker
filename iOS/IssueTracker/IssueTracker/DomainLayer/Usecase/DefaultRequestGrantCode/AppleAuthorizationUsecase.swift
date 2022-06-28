@@ -9,7 +9,8 @@ import AuthenticationServices
 
 final class AppleAuthorizationUsecase: NSObject, DefaultLoginUsecase {
 
-//    private(set) var endPoint: EndPoint
+    var requestUserInfoUsecase: DefaultRequestUserInfoUsecase?
+    // private(set) var endPoint: EndPoint
     private var presentationAnchor: UIWindow?
     private var authorizationController: ASAuthorizationController?
 

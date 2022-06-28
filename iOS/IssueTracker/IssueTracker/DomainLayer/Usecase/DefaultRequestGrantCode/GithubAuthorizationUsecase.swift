@@ -10,41 +10,27 @@ import Foundation
 final class GithubAuthorizationUsecase: DefaultLoginUsecase {
 
     private(set) var endPoint: EndPoint
+    var requestUserInfoUsecase: DefaultRequestUserInfoUsecase?
 
     init(endPoint: EndPoint) {
         self.endPoint = endPoint
-        self.setNotificationObserver()
     }
 
     func execute() {
         NotificationCenter.default.post(name: .recievedGithubPageURL, object: self, userInfo: [NotificationKey.githubPageURL: endPoint.url])
     }
 
-//    func execute(completion: ) {
-//        githubOpenURL.updateValue(value: endPoint.url)
-//    }
-
-//    init(endPoint: EndPoint, observe responseHandler: @escaping (Bool) -> Void) {
-//        self.endPoint = endPoint
-//        self.responseHandler = responseHandler
-//        self.setNotificationObserver()
-//    }
-
-//    func enquireForGrant(handler: @escaping (URL?) -> Void) {
-//        handler(endPoint.url)
-//    }
+    func setRequestUserInfo(_ grantResource: GrantResource) {
+        guard let data = encodeModel(model: grantResource) else {return}
+        self.requestUserInfoUsecase = RequestUserInfoUsecase(userInfoRepository: UserInfoRepository(endPoint: EndPoint(urlConfigure: UserInfoURLConfiguration(), method: .POST, body: data)))
+    }
 }
 
 private extension GithubAuthorizationUsecase {
-    func setNotificationObserver() {
-        NotificationCenter.default.addObserver(self, selector: #selector(didRecieveGrantCode(notification:)), name: .recievedGrantCode, object: nil)
-    }
 
-    @objc func didRecieveGrantCode(notification: Notification) {
-        guard let grantCode = notification.userInfo?[NotificationKey.grantCode]as? String else {return}
-
-        let grantResource = GrantResource(authorizationCode: grantCode, identityToken: nil)
-        NotificationCenter.default.post(name: .recievedGrantResource, object: self, userInfo: [NotificationKey.grantResource: grantResource])
+    func encodeModel(model: GrantResource) -> Data? {
+        let encoder = Encoder<GrantResource>()
+        return encoder.encode(model: model)
     }
 
 //    func requestAPI(with endPoint: EndPoint) {

@@ -8,6 +8,6 @@
 import Foundation
 
 protocol DefaultLoginUsecase {
-
     func execute()
+    var requestUserInfoUsecase: DefaultRequestUserInfoUsecase? {get}
 }
