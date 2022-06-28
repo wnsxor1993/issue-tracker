@@ -9,10 +9,10 @@ import AuthenticationServices
 
 final class AppleAuthorizationUsecase: NSObject, DefaultLoginUsecase {
 
-    var requestUserInfoUsecase: DefaultRequestUserInfoUsecase?
     // private(set) var endPoint: EndPoint
     private var presentationAnchor: UIWindow?
     private var authorizationController: ASAuthorizationController?
+    var requestUserInfoUsecase: DefaultRequestUserInfoUsecase?
 
     init(presentationAnchor: UIWindow?) {
         self.presentationAnchor = presentationAnchor
@@ -26,14 +26,10 @@ final class AppleAuthorizationUsecase: NSObject, DefaultLoginUsecase {
         controller.performRequests()
     }
 
-//    init(endPoint: EndPoint, presentationAnchor: UIWindow?, observe responseHandler: @escaping (Bool) -> Void) {
-//        self.endPoint = endPoint
-//        self.presentationAnchor = presentationAnchor
-//        self.responseHandler = responseHandler
-//        super.init()
-//
-//        self.prepareToRequest()
-//    }
+    func setRequestUserInfo(_ grantResource: DefaultGrantResource) {
+        guard let resource =  grantResource as? AppleGrantResource, let data = encodeModel(model: resource) else {return}
+        self.requestUserInfoUsecase = RequestUserInfoUsecase(userInfoRepository: UserInfoRepository(endPoint: EndPoint(urlConfigure: UserInfoURLConfiguration(), method: .POST, body: data)))
+    }
 
     func enquireForGrant(handler: @escaping (URL?) -> Void) {
         guard let controller = authorizationController else { return }
@@ -54,6 +50,12 @@ private extension AppleAuthorizationUsecase {
         controller.presentationContextProvider = self
         authorizationController = controller
     }
+
+    func encodeModel(model: AppleGrantResource) -> Data? {
+        let encoder = Encoder<AppleGrantResource>()
+        return encoder.encode(model: model)
+    }
+
 }
 
 extension AppleAuthorizationUsecase: ASAuthorizationControllerDelegate {
@@ -63,7 +65,7 @@ extension AppleAuthorizationUsecase: ASAuthorizationControllerDelegate {
         case let appleIDCredential as ASAuthorizationAppleIDCredential:
             // TODO: BE API request 호출 클로저 내부에 해당 작업 넣기
             guard let authorizationCode = appleIDCredential.authorizationCode, let identityToken = appleIDCredential.identityToken, let codeString = String(data: authorizationCode, encoding: .utf8), let tokenString = String(data: identityToken, encoding: .utf8) else { return }
-            let grantResource = GrantResource(authorizationCode: codeString, identityToken: tokenString)
+            let grantResource = AppleGrantResource(authorizationCode: codeString, identityToken: tokenString)
 
             NotificationCenter.default.post(name: .recievedGrantResource, object: self, userInfo: [NotificationKey.grantResource: grantResource])
 

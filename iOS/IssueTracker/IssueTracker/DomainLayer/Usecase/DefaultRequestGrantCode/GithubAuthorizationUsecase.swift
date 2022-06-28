@@ -20,16 +20,16 @@ final class GithubAuthorizationUsecase: DefaultLoginUsecase {
         NotificationCenter.default.post(name: .recievedGithubPageURL, object: self, userInfo: [NotificationKey.githubPageURL: endPoint.url])
     }
 
-    func setRequestUserInfo(_ grantResource: GrantResource) {
-        guard let data = encodeModel(model: grantResource) else {return}
+    func setRequestUserInfo(_ grantResource: DefaultGrantResource) {
+        guard let resource =  grantResource as? GitHubGrantResource, let data = encodeModel(model: resource) else {return}
         self.requestUserInfoUsecase = RequestUserInfoUsecase(userInfoRepository: UserInfoRepository(endPoint: EndPoint(urlConfigure: UserInfoURLConfiguration(), method: .POST, body: data)))
     }
 }
 
 private extension GithubAuthorizationUsecase {
 
-    func encodeModel(model: GrantResource) -> Data? {
-        let encoder = Encoder<GrantResource>()
+    func encodeModel(model: GitHubGrantResource) -> Data? {
+        let encoder = Encoder<GitHubGrantResource>()
         return encoder.encode(model: model)
     }
 

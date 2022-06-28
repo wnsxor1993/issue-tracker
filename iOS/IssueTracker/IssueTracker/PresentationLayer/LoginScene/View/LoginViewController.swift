@@ -10,7 +10,7 @@ import AuthenticationServices
 
 class LoginViewController: UIViewController {
 
-    let loginVM = LoginViewModel()
+    var loginVM: LoginViewModel?
 
     private let titleLabel: UILabel = {
         let label = UILabel()
@@ -38,6 +38,7 @@ class LoginViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .issueTrackerGray1
+        setViewModel()
         setViewsConstraint()
         setLoginViewModelBinding()
         oauthLoginView.delegate = self
@@ -46,35 +47,25 @@ class LoginViewController: UIViewController {
 }
 
 extension LoginViewController: OAuthButtonDelegate {
-    func didClick(buttonType: OAuthButtonType) {
-        loginVM.enquireGrant(buttonCase: buttonType)
-//        guard let githubManager = githubManager, let appleManager = appleManager else {return}
-//
-//        switch buttonType {
-//        case .git:
-//            githubManager.enquireForGrant { url in
-//                guard let url = url else {return }
-//                if UIApplication.shared.canOpenURL(url) {
-//                    UIApplication.shared.open(url)
-//                }
-//            }
-//
-//        case .apple:
-//            appleManager.enquireForGrant {_ in}
-//        }
+    func didClick(buttonType: OAuth) {
+        loginVM?.enquireGrant(buttonCase: buttonType)
     }
 }
 
 private extension LoginViewController {
 
+    func setViewModel() {
+        self.loginVM = LoginViewModel(nil, AppleAuthorizationUsecase(presentationAnchor: self.view.window))
+    }
+
     func setLoginViewModelBinding() {
-        loginVM.userInfo.bind { info in
+        loginVM?.userInfo.bind { info in
             guard let userInfo = info else { return }
             print(userInfo)
             self.presentNextScene()
         }
 
-        loginVM.gitOAuthPageURL.bind { url in
+        loginVM?.gitOAuthPageURL.bind { url in
             guard let usefulURL = url, UIApplication.shared.canOpenURL(usefulURL) else { return }
             UIApplication.shared.open(usefulURL)
         }

@@ -42,7 +42,7 @@
 		D291537C285B6B6500B5CDA8 /* NetworkError.swift in Sources */ = {isa = PBXBuildFile; fileRef = D291537B285B6B6500B5CDA8 /* NetworkError.swift */; };
 		D291537E285B6D7F00B5CDA8 /* AppleAuthorizationUsecase.swift in Sources */ = {isa = PBXBuildFile; fileRef = D291537D285B6D7F00B5CDA8 /* AppleAuthorizationUsecase.swift */; };
 		D2915381285B740500B5CDA8 /* DefaultLoginUsecase.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2915380285B740500B5CDA8 /* DefaultLoginUsecase.swift */; };
-		D2915385286013DB00B5CDA8 /* OAuthButtonType.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2915384286013DB00B5CDA8 /* OAuthButtonType.swift */; };
+		D2915385286013DB00B5CDA8 /* OAuth.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2915384286013DB00B5CDA8 /* OAuth.swift */; };
 		D2A99973286159ED00910F7D /* IssueAddViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2A99972286159ED00910F7D /* IssueAddViewController.swift */; };
 		D2A9997528615F3600910F7D /* CommentContainerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2A9997428615F3600910F7D /* CommentContainerView.swift */; };
 		D2A99977286160BF00910F7D /* DividedLineView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2A99976286160BF00910F7D /* DividedLineView.swift */; };
@@ -105,7 +105,7 @@
 		D291537B285B6B6500B5CDA8 /* NetworkError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkError.swift; sourceTree = "<group>"; };
 		D291537D285B6D7F00B5CDA8 /* AppleAuthorizationUsecase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppleAuthorizationUsecase.swift; sourceTree = "<group>"; };
 		D2915380285B740500B5CDA8 /* DefaultLoginUsecase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultLoginUsecase.swift; sourceTree = "<group>"; };
-		D2915384286013DB00B5CDA8 /* OAuthButtonType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OAuthButtonType.swift; sourceTree = "<group>"; };
+		D2915384286013DB00B5CDA8 /* OAuth.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OAuth.swift; sourceTree = "<group>"; };
 		D2A99972286159ED00910F7D /* IssueAddViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IssueAddViewController.swift; sourceTree = "<group>"; };
 		D2A9997428615F3600910F7D /* CommentContainerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentContainerView.swift; sourceTree = "<group>"; };
 		D2A99976286160BF00910F7D /* DividedLineView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DividedLineView.swift; sourceTree = "<group>"; };
@@ -302,7 +302,7 @@
 		D2915383286013D400B5CDA8 /* EnumTypes */ = {
 			isa = PBXGroup;
 			children = (
-				D2915384286013DB00B5CDA8 /* OAuthButtonType.swift */,
+				D2915384286013DB00B5CDA8 /* OAuth.swift */,
 			);
 			path = EnumTypes;
 			sourceTree = "<group>";
@@ -668,7 +668,7 @@
 				B7A56DA02862B8B300EA639D /* IssueAddButton.swift in Sources */,
 				B7A56D932861835B00EA639D /* TableViewDataSource.swift in Sources */,
 				D2D5264C285850A100581C88 /* LoginInputView.swift in Sources */,
-				D2915385286013DB00B5CDA8 /* OAuthButtonType.swift in Sources */,
+				D2915385286013DB00B5CDA8 /* OAuth.swift in Sources */,
 				D2A9998B2864055400910F7D /* CommentTitleContainerView.swift in Sources */,
 				B7A836F3285B32C900A06C77 /* GitURLConfiguration.swift in Sources */,
 				D2D5264E2858557700581C88 /* UIView+.swift in Sources */,

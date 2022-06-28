@@ -6,31 +6,33 @@
 //
 
 import Foundation
+import UIKit
 
 final class LoginViewModel {
 
-    private var githubAuthorizationUsecase: DefaultLoginUsecase
+    private var githubAuthorizationUsecase: DefaultLoginUsecase?
     private var appleAuthorizationUsecase: DefaultLoginUsecase?
 
     var gitOAuthPageURL: Observable<URL?> = Observable(nil)
     var userInfo: Observable<UserInfo?> = Observable(nil)
 
-    private var grantResource: GrantResource? {
+    private var grantResource: DefaultGrantResource? {
         didSet {
-            enquireForUserInfo()
+            guard let resource = grantResource else {return}
+            enquireForUserInfo(resource)
         }
     }
 
-    init(_ github: DefaultLoginUsecase = GithubAuthorizationUsecase(endPoint: EndPoint(urlConfigure: GitURLConfiguration(), method: .POST, body: nil)), _ apple: DefaultLoginUsecase? = nil) {
+    init(_ github: DefaultLoginUsecase? = GithubAuthorizationUsecase(endPoint: EndPoint(urlConfigure: GitURLConfiguration(), method: .POST, body: nil)), _ apple: DefaultLoginUsecase) {
 
         self.githubAuthorizationUsecase = github
         self.appleAuthorizationUsecase = apple
     }
 
-    func enquireGrant(buttonCase: OAuthButtonType) {
+    func enquireGrant(buttonCase: OAuth) {
         switch buttonCase {
         case .git:
-            githubAuthorizationUsecase.execute()
+            githubAuthorizationUsecase?.execute()
         case .apple:
             appleAuthorizationUsecase?.execute()
         }
@@ -41,14 +43,20 @@ private extension LoginViewModel {
 
     func setNotificationObserver() {
         NotificationCenter.default.addObserver(self, selector: #selector(updateGithubPageURLValue(notification:)), name: .recievedGithubPageURL, object: githubAuthorizationUsecase)
-        NotificationCenter.default.addObserver(self, selector: #selector(updateGrantResourceValue(notification:)), name: .recievedGrantResource, object: appleAuthorizationUsecase)
-        NotificationCenter.default.addObserver(self, selector: #selector(updateGrantResourceValue(notification:)), name: .recievedGrantCode, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(updateAppleGrantResourceValue(notification:)), name: .recievedGrantResource, object: appleAuthorizationUsecase)
+        NotificationCenter.default.addObserver(self, selector: #selector(updateGithubGrantResourceValue(notification:)), name: .recievedGrantCode, object: nil)
     }
 
     @objc
-    func updateGrantResourceValue(notification: Notification) {
+    func updateGithubGrantResourceValue(notification: Notification) {
         guard let grantCode = notification.userInfo?[NotificationKey.grantCode]as? String else {return}
-        let grantResource = GrantResource(authorizationCode: grantCode, identityToken: nil)
+        let grantResource = GitHubGrantResource(authorizationCode: grantCode, identityToken: nil)
+        self.grantResource = grantResource
+    }
+
+    @objc
+    func updateAppleGrantResourceValue(notification: Notification) {
+        guard let grantResource = notification.userInfo?[NotificationKey.grantCode]as? AppleGrantResource else {return}
         self.grantResource = grantResource
     }
 
@@ -58,31 +66,14 @@ private extension LoginViewModel {
         self.gitOAuthPageURL.updateValue(value: pageURL)
     }
 
-//    func enquireForAppleGrant() {
-//        appleAuthorizationUsecase.execute(){[weak self] result in
-//            switch result in {
-//            case .success(let grantResource):
-//                self?.grantResource = grantResource
-//            case .failure(let error):
-//                //TODO: ERROR HANDELING REQUIRED
-//                print(error)
-//            }
-//        }
-//    }
-
-//    func enquireForGitHubGrant() {
-//        githubAuthorizationUsecase.execute(){[weak self] result in
-//            switch result in {
-//            case .success(let grantResource):
-//                self?.grantResource = grantResource
-//            case .failure(let error):
-//                //TODO: ERROR HANDELING REQUIRED
-//                print(error)
-//            }
-//        }
-//    }
-
-    func enquireForUserInfo() {
-        requestOAuthUserInfoUsecase.execute()
+    func enquireForUserInfo(_ grantResource: DefaultGrantResource) {
+        switch grantResource {
+        case is GitHubGrantResource:
+            print(grantResource)
+        case is AppleGrantResource:
+            print(grantResource)
+        default:
+            return
+        }
     }
 }
