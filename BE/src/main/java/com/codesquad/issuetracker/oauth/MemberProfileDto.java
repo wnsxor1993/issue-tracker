@@ -1,5 +1,6 @@
     package com.codesquad.issuetracker.oauth;
 
+import com.codesquad.issuetracker.domain.Member;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.ToString;
@@ -19,5 +20,14 @@ public class MemberProfileDto {
         this.resourceServerLoginId = resourceServerLoginId;
         this.name = name;
         this.imageUrl = imageUrl;
+    }
+
+    public Member toEntity() {
+        return Member.builder()
+                .resourceServerId(resourceServerId)
+                .resourceServerLoginId(resourceServerLoginId)
+                .name(name)
+                .imageUrl(imageUrl)
+                .build();
     }
 }

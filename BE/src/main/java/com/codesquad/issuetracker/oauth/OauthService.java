@@ -1,6 +1,9 @@
 package com.codesquad.issuetracker.oauth;
 
 import com.codesquad.issuetracker.excption.OauthProviderNotFoundException;
+import com.codesquad.issuetracker.service.member.MemberCommandService;
+import com.codesquad.issuetracker.service.member.MemberQueryService;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.MediaType;
@@ -17,12 +20,13 @@ import java.util.Map;
 
 @Slf4j
 @Service
+@RequiredArgsConstructor
 public class OauthService {
+
     private final InMemoryProviderRepository inMemoryProviderRepository;
 
-    public OauthService(InMemoryProviderRepository inMemoryProviderRepository) {
-        this.inMemoryProviderRepository = inMemoryProviderRepository;
-    }
+    private final MemberCommandService memberCommandService;
+    private final MemberQueryService memberQueryService;
 
     public RedirectView requestCode(String providerName, RedirectAttributes redirectAttributes) {
         OauthProvider oauthProvider = findProvider(providerName);
@@ -48,7 +52,11 @@ public class OauthService {
         MemberProfileDto memberProfileDto = getMemberProfile(providerName, tokenDto, provider);
         log.info("memberProfile : {}", memberProfileDto);
 
-        // TODO 유저 DB에 저장
+        // 유저 DB에 저장
+        Long memberId = memberCommandService.saveOrUpdate(memberProfileDto);
+
+        //TODO: jwt access Token, jwt refresh Token 발행
+
         return null;
     }
 
