@@ -10,9 +10,6 @@ import Foundation
 final class GithubAuthorizationUsecase: DefaultLoginUsecase {
 
     private(set) var endPoint: EndPoint
-    var githubOpenURL: Observable<URL?> = Observable(nil)
-    var grantResource: Observable<Codable?> = Observable(nil)
-//  var responseHandler: (Bool) -> Void
 
     init(endPoint: EndPoint) {
         self.endPoint = endPoint
@@ -20,7 +17,7 @@ final class GithubAuthorizationUsecase: DefaultLoginUsecase {
     }
 
     func execute() {
-        githubOpenURL.updateValue(value: endPoint.url)
+        NotificationCenter.default.post(name: .recievedGithubPageURL, object: self, userInfo: [NotificationKey.githubPageURL: endPoint.url])
     }
 
 //    func execute(completion: ) {
@@ -47,7 +44,7 @@ private extension GithubAuthorizationUsecase {
         guard let grantCode = notification.userInfo?[NotificationKey.grantCode]as? String else {return}
 
         let grantResource = GrantResource(authorizationCode: grantCode, identityToken: nil)
-        self.grantResource.updateValue(value: grantResource)
+        NotificationCenter.default.post(name: .recievedGrantResource, object: self, userInfo: [NotificationKey.grantResource: grantResource])
     }
 
 //    func requestAPI(with endPoint: EndPoint) {

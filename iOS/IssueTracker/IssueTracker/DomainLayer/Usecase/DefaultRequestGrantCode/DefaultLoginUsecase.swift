@@ -8,12 +8,6 @@
 import Foundation
 
 protocol DefaultLoginUsecase {
-//    var endPoint: EndPoint {get}
-//    var responseHandler: (Bool) -> Void {get set}
-    var grantResource: Observable<Codable?> { get }
 
     func execute()
-
-//    var requestUserInfoUseCase: DefaultUserInfoUseCase
-//    func enquireForGrant(handler: @escaping (_ url: URL?) -> Void)
 }

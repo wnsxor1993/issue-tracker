@@ -10,8 +10,6 @@ import AuthenticationServices
 final class AppleAuthorizationUsecase: NSObject, DefaultLoginUsecase {
 
 //    private(set) var endPoint: EndPoint
-    var grantResource: Observable<Codable?> = Observable(nil)
-
     private var presentationAnchor: UIWindow?
     private var authorizationController: ASAuthorizationController?
 
@@ -66,7 +64,7 @@ extension AppleAuthorizationUsecase: ASAuthorizationControllerDelegate {
             guard let authorizationCode = appleIDCredential.authorizationCode, let identityToken = appleIDCredential.identityToken, let codeString = String(data: authorizationCode, encoding: .utf8), let tokenString = String(data: identityToken, encoding: .utf8) else { return }
             let grantResource = GrantResource(authorizationCode: codeString, identityToken: tokenString)
 
-            self.grantResource.updateValue(value: grantResource)
+            NotificationCenter.default.post(name: .recievedGrantResource, object: self, userInfo: [NotificationKey.grantResource: grantResource])
 
         default:
             break
