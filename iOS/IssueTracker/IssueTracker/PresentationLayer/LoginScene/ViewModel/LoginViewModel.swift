@@ -43,7 +43,7 @@ private extension LoginViewModel {
 
     func setNotificationObserver() {
         NotificationCenter.default.addObserver(self, selector: #selector(updateGrantResourceValue(notification:)), name: .recievedGrantResource, object: githubAuthorizationUsecase)
-        NotificationCenter.default.addObserver(self, selector: #selector(updateGrantResourceValue(notification:)), name: .recievedGithubPageURL, object: githubAuthorizationUsecase)
+        NotificationCenter.default.addObserver(self, selector: #selector(updateGithubPageURLValue(notification:)), name: .recievedGithubPageURL, object: githubAuthorizationUsecase)
         NotificationCenter.default.addObserver(self, selector: #selector(updateGrantResourceValue(notification:)), name: .recievedGrantResource, object: appleAuthorizationUsecase)
     }
 
@@ -52,7 +52,7 @@ private extension LoginViewModel {
         guard let grantResource = notification.userInfo?[NotificationKey.grantResource]as? GrantResource else {return}
         self.grantResource = grantResource
     }
-
+    
     @objc
     func updateGithubPageURLValue(notification: Notification) {
         guard let pageURL = notification.userInfo?[NotificationKey.githubPageURL]as? URL else {return}
