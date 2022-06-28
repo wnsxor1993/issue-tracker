@@ -10,8 +10,9 @@ public class OauthAdapter {
     public static Map<String, OauthProvider> convertToProviders(OauthProperties properties) {
         Map<String, OauthProvider> oauthProvider = new HashMap<>();
 
-        properties.getUserProperties().forEach((key, value) -> oauthProvider.put(key,
-                new OauthProvider(value, properties.getProviderProperties().get(key))));
+        properties.getUser()
+                .forEach((key, value) ->
+                        oauthProvider.put(key, new OauthProvider(value, properties.getProvider().get(key))));
         return oauthProvider;
     }
 }
