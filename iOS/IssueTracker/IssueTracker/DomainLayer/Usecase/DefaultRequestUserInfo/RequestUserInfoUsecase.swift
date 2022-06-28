@@ -7,7 +7,7 @@
 
 import Foundation
 
-final class RequestUserInfoUsecase {
+final class RequestUserInfoUsecase: DefaultRequestUserInfoUsecase {
 
     var userInfoRepository: DefaultUserInfoRepository?
 
@@ -16,7 +16,13 @@ final class RequestUserInfoUsecase {
     }
 
     func execute(completion: @escaping (UserInfo?) -> Void) {
-
+        userInfoRepository?.fetchUserInfo(completion: { userInfo in
+            guard let userInfo = userInfo else {
+                completion(nil)
+                return
+            }
+            completion(userInfo)
+        })
     }
 
 }

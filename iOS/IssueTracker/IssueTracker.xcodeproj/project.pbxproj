@@ -26,6 +26,7 @@
 		B7A56DC0286A7E1200EA639D /* Decoder.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7A56DBF286A7E1200EA639D /* Decoder.swift */; };
 		B7A56DC3286A7E2500EA639D /* Encoder.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7A56DC2286A7E2500EA639D /* Encoder.swift */; };
 		B7A56DC5286A937600EA639D /* UserInfoURLConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7A56DC4286A937600EA639D /* UserInfoURLConfiguration.swift */; };
+		B7A56DC7286A98DA00EA639D /* DefaultRequestUserInfoUsecase.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7A56DC6286A98DA00EA639D /* DefaultRequestUserInfoUsecase.swift */; };
 		B7A836EE285B319500A06C77 /* Bundle+.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7A836ED285B319500A06C77 /* Bundle+.swift */; };
 		B7A836F0285B322000A06C77 /* URLConfigurable.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7A836EF285B322000A06C77 /* URLConfigurable.swift */; };
 		B7A836F3285B32C900A06C77 /* GitURLConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7A836F2285B32C900A06C77 /* GitURLConfiguration.swift */; };
@@ -88,6 +89,7 @@
 		B7A56DBF286A7E1200EA639D /* Decoder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Decoder.swift; sourceTree = "<group>"; };
 		B7A56DC2286A7E2500EA639D /* Encoder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Encoder.swift; sourceTree = "<group>"; };
 		B7A56DC4286A937600EA639D /* UserInfoURLConfiguration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInfoURLConfiguration.swift; sourceTree = "<group>"; };
+		B7A56DC6286A98DA00EA639D /* DefaultRequestUserInfoUsecase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultRequestUserInfoUsecase.swift; sourceTree = "<group>"; };
 		B7A836ED285B319500A06C77 /* Bundle+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Bundle+.swift"; sourceTree = "<group>"; };
 		B7A836EF285B322000A06C77 /* URLConfigurable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLConfigurable.swift; sourceTree = "<group>"; };
 		B7A836F2285B32C900A06C77 /* GitURLConfiguration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GitURLConfiguration.swift; sourceTree = "<group>"; };
@@ -202,6 +204,15 @@
 				B7A56DBD286A77FA00EA639D /* UserInfoRepository.swift */,
 			);
 			path = DefaultUserInfoRepository;
+			sourceTree = "<group>";
+		};
+		B7A56DC8286A98DF00EA639D /* DefaultRequestUserInfo */ = {
+			isa = PBXGroup;
+			children = (
+				B7A56DC6286A98DA00EA639D /* DefaultRequestUserInfoUsecase.swift */,
+				B7A56DB7286A71E900EA639D /* RequestUserInfoUsecase.swift */,
+			);
+			path = DefaultRequestUserInfo;
 			sourceTree = "<group>";
 		};
 		B7A836EC285B30EA00A06C77 /* Protocol */ = {
@@ -344,8 +355,8 @@
 		D2A999832862F58D00910F7D /* Usecase */ = {
 			isa = PBXGroup;
 			children = (
+				B7A56DC8286A98DF00EA639D /* DefaultRequestUserInfo */,
 				D291537F285B72E200B5CDA8 /* DefaultRequestGrantCode */,
-				B7A56DB7286A71E900EA639D /* RequestUserInfoUsecase.swift */,
 			);
 			path = Usecase;
 			sourceTree = "<group>";
@@ -615,6 +626,7 @@
 				B7A56DB8286A71E900EA639D /* RequestUserInfoUsecase.swift in Sources */,
 				B7A56D9B2861C5E600EA639D /* IssueCardDTO.swift in Sources */,
 				B7A836F9285B392800A06C77 /* EndPointable.swift in Sources */,
+				B7A56DC7286A98DA00EA639D /* DefaultRequestUserInfoUsecase.swift in Sources */,
 				D2A9999028655CE200910F7D /* UserInfo.swift in Sources */,
 				D2A99973286159ED00910F7D /* IssueAddViewController.swift in Sources */,
 				D2A9997B28618D0E00910F7D /* ListCell.swift in Sources */,
