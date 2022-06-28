@@ -55,7 +55,7 @@ extension LoginViewController: OAuthButtonDelegate {
 private extension LoginViewController {
 
     func setViewModel() {
-        self.loginVM = LoginViewModel(nil, AppleAuthorizationUsecase(presentationAnchor: self.view.window))
+        self.loginVM = LoginViewModel(AppleAuthorizationUsecase(presentationAnchor: self.view.window))
     }
 
     func setLoginViewModelBinding() {

@@ -23,10 +23,14 @@ final class LoginViewModel {
         }
     }
 
-    init(_ github: DefaultLoginUsecase? = GithubAuthorizationUsecase(endPoint: EndPoint(urlConfigure: GitURLConfiguration(), method: .POST, body: nil)), _ apple: DefaultLoginUsecase) {
-
+    init(_ github: DefaultLoginUsecase?, _ apple: DefaultLoginUsecase) {
         self.githubAuthorizationUsecase = github
         self.appleAuthorizationUsecase = apple
+        setNotificationObserver()
+    }
+
+    convenience init(_ apple: DefaultLoginUsecase) {
+        self.init(GithubAuthorizationUsecase(endPoint: EndPoint(urlConfigure: GitURLConfiguration(), method: .POST, body: nil)), apple)
     }
 
     func enquireGrant(buttonCase: OAuth) {
