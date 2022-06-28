@@ -2,6 +2,7 @@ package com.codesquad.issuetracker.oauth;
 
 import com.codesquad.issuetracker.excption.OauthProviderNotFoundException;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Service;
 import org.springframework.util.LinkedMultiValueMap;
@@ -12,6 +13,7 @@ import org.springframework.web.servlet.view.RedirectView;
 
 import java.nio.charset.StandardCharsets;
 import java.util.Collections;
+import java.util.Map;
 
 @Slf4j
 @Service
@@ -42,10 +44,10 @@ public class OauthService {
         // access token 가져오기
         OauthTokenDto tokenDto = getToken(code, provider);
 
-        log.info("access token : {}", tokenDto);
+        // 사용자 정보를 리소스서버에 요청해서 가져오고 바인딩
+        MemberProfileDto memberProfileDto = getMemberProfile(providerName, tokenDto, provider);
+        log.info("memberProfile : {}", memberProfileDto);
 
-
-        // TODO 유저 정보 가져오기
         // TODO 유저 DB에 저장
         return null;
     }
@@ -72,5 +74,21 @@ public class OauthService {
         formData.add("grant_type", "authorization_code");
         formData.add("redirect_uri", provider.getRedirectUrl());
         return formData;
+    }
+
+    private MemberProfileDto getMemberProfile(String providerName, OauthTokenDto tokenDto, OauthProvider provider) {
+        Map<String, Object> memberAttributes = getMemberAttribute(provider, tokenDto);
+        return OauthAttribute.extract(providerName, memberAttributes);
+    }
+
+    // 리소스 서버에서 유저 정보 map으로 가져오기
+    private Map<String, Object> getMemberAttribute(OauthProvider provider, OauthTokenDto tokenDto) {
+        return WebClient.create()
+                .get()
+                .uri(provider.getUserInfoUrl())
+                .headers(header -> header.setBearerAuth(tokenDto.getAccessToken()))
+                .retrieve()
+                .bodyToMono(new ParameterizedTypeReference<Map<String, Object>>() {})
+                .block();
     }
 }
