@@ -2,6 +2,7 @@ package com.codesquad.issuetracker.oauth;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Optional;
 
 public class InMemoryProviderRepository {
 
@@ -11,7 +12,9 @@ public class InMemoryProviderRepository {
         this.providers.putAll(providers);
     }
 
-    public OauthProvider findByProviderName(String name) {
-        return providers.get(name);
+    public Optional<OauthProvider> findByProviderName(String name) {
+        OauthProvider oauthProvider = providers.get(name);
+
+        return Optional.ofNullable(oauthProvider);
     }
 }
