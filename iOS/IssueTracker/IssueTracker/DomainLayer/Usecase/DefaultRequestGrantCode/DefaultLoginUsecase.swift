@@ -14,5 +14,6 @@ protocol DefaultLoginUsecase {
 
     func execute()
 
+//    var requestUserInfoUseCase: DefaultUserInfoUseCase
 //    func enquireForGrant(handler: @escaping (_ url: URL?) -> Void)
 }

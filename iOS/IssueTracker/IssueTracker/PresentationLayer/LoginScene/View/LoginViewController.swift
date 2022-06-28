@@ -39,19 +39,9 @@ class LoginViewController: UIViewController {
         super.viewDidLoad()
         view.backgroundColor = .issueTrackerGray1
         setViewsConstraint()
-//        setOAuthManagers()
+        setLoginViewModelBinding()
         oauthLoginView.delegate = self
 
-        loginVM.userInfo.bind { info in
-            guard let userInfo = info else { return }
-            print(userInfo)
-            self.presentNextScene()
-        }
-
-        loginVM.gitOAuthPageURL.bind { url in
-            guard let usefulURL = url, UIApplication.shared.canOpenURL(usefulURL) else { return }
-            UIApplication.shared.open(usefulURL)
-        }
     }
 }
 
@@ -77,17 +67,18 @@ extension LoginViewController: OAuthButtonDelegate {
 
 private extension LoginViewController {
 
-//    func setOAuthManagers() {
-//        //TODO: OAuth BE 연결되면 presentNextScene 삭제 및 로직 변경 필요
-//        appleManager = AppleAuthorizationUsecase(endPoint: EndPoint(urlConfigure: GitURLConfiguration(), method: .POST, body: nil), presentationAnchor: self.view.window) { [weak self] isVerified in
-//            guard isVerified == true else { return }
-//            self?.presentNextScene()
-//        }
-//        githubManager = GithubAuthorizationUsecase(endPoint: EndPoint(urlConfigure: GitURLConfiguration(), method: .POST, body: nil)) {[weak self]  isVerified in
-//            guard isVerified == true else { return }
-//            self?.presentNextScene()
-//        }
-//    }
+    func setLoginViewModelBinding() {
+        loginVM.userInfo.bind { info in
+            guard let userInfo = info else { return }
+            print(userInfo)
+            self.presentNextScene()
+        }
+
+        loginVM.gitOAuthPageURL.bind { url in
+            guard let usefulURL = url, UIApplication.shared.canOpenURL(usefulURL) else { return }
+            UIApplication.shared.open(usefulURL)
+        }
+    }
 
     func presentNextScene() {
         let nextViewController = TabBarViewController()

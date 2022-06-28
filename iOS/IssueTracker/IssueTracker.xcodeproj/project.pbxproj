@@ -20,6 +20,12 @@
 		B7A56D9D2861C79D00EA639D /* SelectionLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7A56D9C2861C79D00EA639D /* SelectionLabel.swift */; };
 		B7A56DA02862B8B300EA639D /* IssueAddButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7A56D9F2862B8B300EA639D /* IssueAddButton.swift */; };
 		B7A56DA8286470CF00EA639D /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7A56DA7286470CF00EA639D /* LoginViewModel.swift */; };
+		B7A56DB8286A71E900EA639D /* RequestUserInfoUsecase.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7A56DB7286A71E900EA639D /* RequestUserInfoUsecase.swift */; };
+		B7A56DBC286A73CA00EA639D /* DefaultUserInfoRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7A56DBB286A73CA00EA639D /* DefaultUserInfoRepository.swift */; };
+		B7A56DBE286A77FA00EA639D /* UserInfoRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7A56DBD286A77FA00EA639D /* UserInfoRepository.swift */; };
+		B7A56DC0286A7E1200EA639D /* Decoder.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7A56DBF286A7E1200EA639D /* Decoder.swift */; };
+		B7A56DC3286A7E2500EA639D /* Encoder.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7A56DC2286A7E2500EA639D /* Encoder.swift */; };
+		B7A56DC5286A937600EA639D /* UserInfoURLConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7A56DC4286A937600EA639D /* UserInfoURLConfiguration.swift */; };
 		B7A836EE285B319500A06C77 /* Bundle+.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7A836ED285B319500A06C77 /* Bundle+.swift */; };
 		B7A836F0285B322000A06C77 /* URLConfigurable.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7A836EF285B322000A06C77 /* URLConfigurable.swift */; };
 		B7A836F3285B32C900A06C77 /* GitURLConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7A836F2285B32C900A06C77 /* GitURLConfiguration.swift */; };
@@ -76,6 +82,12 @@
 		B7A56D9C2861C79D00EA639D /* SelectionLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectionLabel.swift; sourceTree = "<group>"; };
 		B7A56D9F2862B8B300EA639D /* IssueAddButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IssueAddButton.swift; sourceTree = "<group>"; };
 		B7A56DA7286470CF00EA639D /* LoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
+		B7A56DB7286A71E900EA639D /* RequestUserInfoUsecase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestUserInfoUsecase.swift; sourceTree = "<group>"; };
+		B7A56DBB286A73CA00EA639D /* DefaultUserInfoRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultUserInfoRepository.swift; sourceTree = "<group>"; };
+		B7A56DBD286A77FA00EA639D /* UserInfoRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInfoRepository.swift; sourceTree = "<group>"; };
+		B7A56DBF286A7E1200EA639D /* Decoder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Decoder.swift; sourceTree = "<group>"; };
+		B7A56DC2286A7E2500EA639D /* Encoder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Encoder.swift; sourceTree = "<group>"; };
+		B7A56DC4286A937600EA639D /* UserInfoURLConfiguration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInfoURLConfiguration.swift; sourceTree = "<group>"; };
 		B7A836ED285B319500A06C77 /* Bundle+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Bundle+.swift"; sourceTree = "<group>"; };
 		B7A836EF285B322000A06C77 /* URLConfigurable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLConfigurable.swift; sourceTree = "<group>"; };
 		B7A836F2285B32C900A06C77 /* GitURLConfiguration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GitURLConfiguration.swift; sourceTree = "<group>"; };
@@ -175,6 +187,23 @@
 			path = ViewModel;
 			sourceTree = "<group>";
 		};
+		B7A56DB9286A73A900EA639D /* Repository */ = {
+			isa = PBXGroup;
+			children = (
+				B7A56DBA286A73BE00EA639D /* DefaultUserInfoRepository */,
+			);
+			path = Repository;
+			sourceTree = "<group>";
+		};
+		B7A56DBA286A73BE00EA639D /* DefaultUserInfoRepository */ = {
+			isa = PBXGroup;
+			children = (
+				B7A56DBB286A73CA00EA639D /* DefaultUserInfoRepository.swift */,
+				B7A56DBD286A77FA00EA639D /* UserInfoRepository.swift */,
+			);
+			path = DefaultUserInfoRepository;
+			sourceTree = "<group>";
+		};
 		B7A836EC285B30EA00A06C77 /* Protocol */ = {
 			isa = PBXGroup;
 			children = (
@@ -188,6 +217,7 @@
 			isa = PBXGroup;
 			children = (
 				B7A836F2285B32C900A06C77 /* GitURLConfiguration.swift */,
+				B7A56DC4286A937600EA639D /* UserInfoURLConfiguration.swift */,
 				B7A836EC285B30EA00A06C77 /* Protocol */,
 			);
 			path = URLComponent;
@@ -197,6 +227,7 @@
 			isa = PBXGroup;
 			children = (
 				B7A836FC285B3A1200A06C77 /* EndPoint.swift */,
+				B7A836F8285B392800A06C77 /* EndPointable.swift */,
 				B7A836F7285B391700A06C77 /* Protocol */,
 			);
 			path = EndPoint;
@@ -205,7 +236,6 @@
 		B7A836F7285B391700A06C77 /* Protocol */ = {
 			isa = PBXGroup;
 			children = (
-				B7A836F8285B392800A06C77 /* EndPointable.swift */,
 				B7A836FA285B39B500A06C77 /* HTTPPackageable.swift */,
 			);
 			path = Protocol;
@@ -277,8 +307,9 @@
 		D2A9997D2862B55E00910F7D /* DataLayer */ = {
 			isa = PBXGroup;
 			children = (
-				B7E58B6928584D0C004C6BE6 /* Network */,
 				D2A999802862F4F900910F7D /* DTO */,
+				B7A56DB9286A73A900EA639D /* Repository */,
+				B7E58B6928584D0C004C6BE6 /* Network */,
 			);
 			path = DataLayer;
 			sourceTree = "<group>";
@@ -314,6 +345,7 @@
 			isa = PBXGroup;
 			children = (
 				D291537F285B72E200B5CDA8 /* DefaultRequestGrantCode */,
+				B7A56DB7286A71E900EA639D /* RequestUserInfoUsecase.swift */,
 			);
 			path = Usecase;
 			sourceTree = "<group>";
@@ -373,6 +405,8 @@
 			isa = PBXGroup;
 			children = (
 				D2A9998D2865584700910F7D /* Observable.swift */,
+				B7A56DBF286A7E1200EA639D /* Decoder.swift */,
+				B7A56DC2286A7E2500EA639D /* Encoder.swift */,
 			);
 			path = Helper;
 			sourceTree = "<group>";
@@ -577,6 +611,8 @@
 				B7E58B6F28586FCE004C6BE6 /* NetworkService.swift in Sources */,
 				D2B7506C2856FCBE0078067A /* LoginViewController.swift in Sources */,
 				D291537C285B6B6500B5CDA8 /* NetworkError.swift in Sources */,
+				B7A56DC3286A7E2500EA639D /* Encoder.swift in Sources */,
+				B7A56DB8286A71E900EA639D /* RequestUserInfoUsecase.swift in Sources */,
 				B7A56D9B2861C5E600EA639D /* IssueCardDTO.swift in Sources */,
 				B7A836F9285B392800A06C77 /* EndPointable.swift in Sources */,
 				D2A9999028655CE200910F7D /* UserInfo.swift in Sources */,
@@ -585,6 +621,7 @@
 				B724DC92286058C3007DAC1A /* TabBarViewController.swift in Sources */,
 				B7E58B7128587013004C6BE6 /* HTTPMethod.swift in Sources */,
 				D291537A285B6B3300B5CDA8 /* NetworkServiceable.swift in Sources */,
+				B7A56DBC286A73CA00EA639D /* DefaultUserInfoRepository.swift in Sources */,
 				B7A836FD285B3A1200A06C77 /* EndPoint.swift in Sources */,
 				B7A56D9728618F6800EA639D /* UIFont+.swift in Sources */,
 				B7A56D992861913300EA639D /* BadgeLabel.swift in Sources */,
@@ -605,14 +642,17 @@
 				B7A836F5285B330900A06C77 /* Authenticable.swift in Sources */,
 				D291537E285B6D7F00B5CDA8 /* AppleAuthorizationUsecase.swift in Sources */,
 				B7A56D9528618E0900EA639D /* IssuseCardCell.swift in Sources */,
+				B7A56DC0286A7E1200EA639D /* Decoder.swift in Sources */,
 				B724DC9528605915007DAC1A /* HomeViewController.swift in Sources */,
 				D2A9998E2865584700910F7D /* Observable.swift in Sources */,
 				B7A836F0285B322000A06C77 /* URLConfigurable.swift in Sources */,
 				D2A9997F2862BE9500910F7D /* IssueAddListEntity.swift in Sources */,
 				D2915381285B740500B5CDA8 /* DefaultLoginUsecase.swift in Sources */,
+				B7A56DC5286A937600EA639D /* UserInfoURLConfiguration.swift in Sources */,
 				B7A836EE285B319500A06C77 /* Bundle+.swift in Sources */,
 				B7A83710285C1A1300A06C77 /* GithubAuthorizationUsecase.swift in Sources */,
 				B7A56D9D2861C79D00EA639D /* SelectionLabel.swift in Sources */,
+				B7A56DBE286A77FA00EA639D /* UserInfoRepository.swift in Sources */,
 				B7A56DA02862B8B300EA639D /* IssueAddButton.swift in Sources */,
 				B7A56D932861835B00EA639D /* TableViewDataSource.swift in Sources */,
 				D2D5264C285850A100581C88 /* LoginInputView.swift in Sources */,

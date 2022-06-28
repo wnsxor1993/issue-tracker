@@ -28,7 +28,7 @@ struct EndPoint: EndPointable, HTTPPackageable {
 
     var url: URL {
         var components = URLComponents()
-        components.scheme = "https"
+        components.scheme = urlConfigure.scheme
         components.host = urlConfigure.host
         components.path = urlConfigure.path
         components.queryItems = queryItems

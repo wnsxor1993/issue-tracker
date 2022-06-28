@@ -12,7 +12,7 @@ final class GithubAuthorizationUsecase: DefaultLoginUsecase {
     private(set) var endPoint: EndPoint
     var githubOpenURL: Observable<URL?> = Observable(nil)
     var grantResource: Observable<Codable?> = Observable(nil)
-//    var responseHandler: (Bool) -> Void
+//  var responseHandler: (Bool) -> Void
 
     init(endPoint: EndPoint) {
         self.endPoint = endPoint
@@ -22,6 +22,10 @@ final class GithubAuthorizationUsecase: DefaultLoginUsecase {
     func execute() {
         githubOpenURL.updateValue(value: endPoint.url)
     }
+
+//    func execute(completion: ) {
+//        githubOpenURL.updateValue(value: endPoint.url)
+//    }
 
 //    init(endPoint: EndPoint, observe responseHandler: @escaping (Bool) -> Void) {
 //        self.endPoint = endPoint

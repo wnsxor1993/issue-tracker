@@ -9,6 +9,7 @@ import Foundation
 
 struct GitURLConfiguration: Authenticatable {
 
+    var scheme = "https"
     var host = "github.com"
     var path = "/login/oauth/authorize"
 

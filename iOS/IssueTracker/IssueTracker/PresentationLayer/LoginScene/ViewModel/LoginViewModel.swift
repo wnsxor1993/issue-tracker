@@ -6,13 +6,12 @@
 //
 
 import Foundation
-import UIKit
 
 final class LoginViewModel {
 
     private var githubAuthorizationUsecase: DefaultLoginUsecase
-    private var appleAuthorizationUsecase: DefaultLoginUsecase
-    private var requestUserInfoUsecase: DefaultLoginUsecase
+    private var appleAuthorizationUsecase: DefaultLoginUsecase?
+    private var requestUserInfoUsecase: DefaultLoginUsecase?
 
     var userInfo: Observable<UserInfo?> = Observable(nil)
     var gitOAuthPageURL: Observable<URL?> = Observable(nil)
@@ -23,13 +22,13 @@ final class LoginViewModel {
         }
     }
 
-    init() {
+    init(_ github: DefaultLoginUsecase = GithubAuthorizationUsecase(endPoint: EndPoint(urlConfigure: GitURLConfiguration(), method: .POST, body: nil)), _ apple: DefaultLoginUsecase? = nil,
+        _ requestUserInfo: DefaultLoginUsecase? = nil) {
+        self.githubAuthorizationUsecase = github
+        self.appleAuthorizationUsecase = apple
+        self.requestUserInfoUsecase = requestUserInfo
         setGithubUsecaseOpenURLBind()
         setGrantResourceBind()
-
-        self.githubAuthorizationUsecase = GithubAuthorizationUsecase()
-        self.appleAuthorizationUsecase = AppleAuthorizationUsecase()
-        self.requestUserInfoUsecase = RequestUserInfoUseCase()
     }
 
     func enquireGrant(buttonCase: OAuthButtonType) {
@@ -37,7 +36,7 @@ final class LoginViewModel {
         case .git:
             githubAuthorizationUsecase.execute()
         case .apple:
-            appleAuthorizationUsecase.execute()
+            appleAuthorizationUsecase?.execute()
         }
     }
 }
@@ -46,19 +45,22 @@ private extension LoginViewModel {
 
     func setGithubUsecaseOpenURLBind() {
         guard let githubUsecase = githubAuthorizationUsecase as? GithubAuthorizationUsecase else { return }
-        githubUsecase.githubOpenURL.bind { url in
-            self.gitOAuthPageURL.updateValue(value: url)
-        }
+        githubUsecase.execute()
+
+        //        githubUsecase.githubOpenURL.bind { url in
+//            self.gitOAuthPageURL.updateValue(value: url)
+//        }
     }
 
     func setGrantResourceBind() {
-        appleAuthorizationUsecase.grantResource.bind { resource in
+        appleAuthorizationUsecase?.grantResource.bind { resource in
             guard let grantCode = resource as? GrantResource else { return }
         }
 
         githubAuthorizationUsecase.grantResource.bind { resource in
             guard let grantCode = resource as? GrantResource else { return }
         }
+
     }
 
 //    func enquireForAppleGrant() {
@@ -86,6 +88,6 @@ private extension LoginViewModel {
 //    }
 
     func enquireForUserInfo() {
-        requestOAuthUserInfoUsecase.execute()
+//        requestOAuthUserInfoUsecase.execute()
     }
 }
