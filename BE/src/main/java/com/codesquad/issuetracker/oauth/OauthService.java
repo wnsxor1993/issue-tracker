@@ -27,6 +27,7 @@ public class OauthService {
 
     private final MemberCommandService memberCommandService;
     private final MemberQueryService memberQueryService;
+    private final JwtTokenProvider jwtTokenProvider;
 
     public RedirectView requestCode(String providerName, RedirectAttributes redirectAttributes) {
         OauthProvider oauthProvider = findProvider(providerName);
@@ -55,9 +56,11 @@ public class OauthService {
         // 유저 DB에 저장
         Long memberId = memberCommandService.saveOrUpdate(memberProfileDto);
 
-        //TODO: jwt access Token, jwt refresh Token 발행
+        // jwt access Token, jwt refresh Token 발행
+        String jwtAccessToken = jwtTokenProvider.createAccessToken(String.valueOf(memberId));
+        String jwrRefreshToken = jwtTokenProvider.createRefreshToken();
 
-        return new LoginResponse(true);
+        return new LoginResponse(jwtAccessToken, jwrRefreshToken);
     }
 
     private OauthTokenDto getToken(String code, OauthProvider provider) {
