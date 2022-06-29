@@ -62,7 +62,9 @@ private extension LoginViewController {
         loginVM?.tokenInfo.bind { info in
             guard let tokenInfo = info else { return }
             // 다음 VC에 전달 필요 or Userdefault 저장
-            self.presentNextScene()
+            DispatchQueue.main.async {
+                self.presentNextScene()
+            }
         }
 
         loginVM?.gitOAuthPageURL.bind { url in
