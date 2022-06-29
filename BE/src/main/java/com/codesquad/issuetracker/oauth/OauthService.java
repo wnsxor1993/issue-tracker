@@ -57,7 +57,7 @@ public class OauthService {
 
         //TODO: jwt access Token, jwt refresh Token 발행
 
-        return null;
+        return new LoginResponse(true);
     }
 
     private OauthTokenDto getToken(String code, OauthProvider provider) {
