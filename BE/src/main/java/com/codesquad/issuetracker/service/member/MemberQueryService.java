@@ -27,4 +27,9 @@ public class MemberQueryService {
     public List<Member> findAllById(List<Long> memberIds) {
         return memberRepository.findAllById(memberIds);
     }
+
+    public Member findMemberByResourceServerIdNullAble(String resourceServerId) {
+        return memberRepository.findMemberByResourceServerId(resourceServerId)
+                .orElse(null);
+    }
 }
