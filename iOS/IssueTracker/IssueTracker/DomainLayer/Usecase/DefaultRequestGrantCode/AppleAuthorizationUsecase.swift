@@ -28,7 +28,7 @@ final class AppleAuthorizationUsecase: NSObject, DefaultLoginUsecase {
 
     func setRequestUserInfo(_ grantResource: DefaultGrantResource) {
         guard let resource =  grantResource as? AppleGrantResource, let data = encodeModel(model: resource) else {return}
-        self.requestUserInfoUsecase = RequestUserInfoUsecase(userInfoRepository: UserInfoRepository(endPoint: EndPoint(urlConfigure: UserInfoURLConfiguration(), method: .POST, body: data)))
+        self.requestUserInfoUsecase = RequestUserInfoUsecase(userInfoRepository: UserInfoRepository(endPoint: EndPoint(urlConfigure: TokenURLConfiguration(), method: .POST, body: data)))
     }
 
     func enquireForGrant(handler: @escaping (URL?) -> Void) {
@@ -65,10 +65,8 @@ extension AppleAuthorizationUsecase: ASAuthorizationControllerDelegate {
         case let appleIDCredential as ASAuthorizationAppleIDCredential:
             // TODO: BE API request 호출 클로저 내부에 해당 작업 넣기
             guard let authorizationCode = appleIDCredential.authorizationCode, let identityToken = appleIDCredential.identityToken, let codeString = String(data: authorizationCode, encoding: .utf8), let tokenString = String(data: identityToken, encoding: .utf8) else { return }
-            let grantResource = AppleGrantResource(authorizationCode: codeString, identityToken: tokenString)
-
+            let grantResource = AppleGrantResource(code: codeString, identityToken: tokenString)
             NotificationCenter.default.post(name: .recievedGrantResource, object: self, userInfo: [NotificationKey.grantResource: grantResource])
-
         default:
             break
         }

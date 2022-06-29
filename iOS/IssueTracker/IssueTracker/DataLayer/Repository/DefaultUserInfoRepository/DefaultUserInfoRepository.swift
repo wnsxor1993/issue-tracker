@@ -9,5 +9,5 @@ import Foundation
 
 protocol DefaultUserInfoRepository {
     var endPoint: EndPoint {get}
-    func fetchUserInfo(completion: @escaping (UserInfo?) -> Void)
+    func fetchUserInfo(completion: @escaping (TokenInfo?) -> Void)
 }

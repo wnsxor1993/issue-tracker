@@ -25,7 +25,7 @@
 		B7A56DBE286A77FA00EA639D /* UserInfoRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7A56DBD286A77FA00EA639D /* UserInfoRepository.swift */; };
 		B7A56DC0286A7E1200EA639D /* Decoder.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7A56DBF286A7E1200EA639D /* Decoder.swift */; };
 		B7A56DC3286A7E2500EA639D /* Encoder.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7A56DC2286A7E2500EA639D /* Encoder.swift */; };
-		B7A56DC5286A937600EA639D /* UserInfoURLConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7A56DC4286A937600EA639D /* UserInfoURLConfiguration.swift */; };
+		B7A56DC5286A937600EA639D /* TokenURLConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7A56DC4286A937600EA639D /* TokenURLConfiguration.swift */; };
 		B7A56DC7286A98DA00EA639D /* DefaultRequestUserInfoUsecase.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7A56DC6286A98DA00EA639D /* DefaultRequestUserInfoUsecase.swift */; };
 		B7A836EE285B319500A06C77 /* Bundle+.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7A836ED285B319500A06C77 /* Bundle+.swift */; };
 		B7A836F0285B322000A06C77 /* URLConfigurable.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7A836EF285B322000A06C77 /* URLConfigurable.swift */; };
@@ -50,7 +50,7 @@
 		D2A9997F2862BE9500910F7D /* IssueAddListEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2A9997E2862BE9500910F7D /* IssueAddListEntity.swift */; };
 		D2A9998B2864055400910F7D /* CommentTitleContainerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2A9998A2864055400910F7D /* CommentTitleContainerView.swift */; };
 		D2A9998E2865584700910F7D /* Observable.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2A9998D2865584700910F7D /* Observable.swift */; };
-		D2A9999028655CE200910F7D /* UserInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2A9998F28655CE200910F7D /* UserInfo.swift */; };
+		D2A9999028655CE200910F7D /* TokenInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2A9998F28655CE200910F7D /* TokenInfo.swift */; };
 		D2A9999228655D0900910F7D /* GrantResource.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2A9999128655D0900910F7D /* GrantResource.swift */; };
 		D2B750682856FCBE0078067A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2B750672856FCBE0078067A /* AppDelegate.swift */; };
 		D2B7506A2856FCBE0078067A /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2B750692856FCBE0078067A /* SceneDelegate.swift */; };
@@ -87,7 +87,7 @@
 		B7A56DBD286A77FA00EA639D /* UserInfoRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInfoRepository.swift; sourceTree = "<group>"; };
 		B7A56DBF286A7E1200EA639D /* Decoder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Decoder.swift; sourceTree = "<group>"; };
 		B7A56DC2286A7E2500EA639D /* Encoder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Encoder.swift; sourceTree = "<group>"; };
-		B7A56DC4286A937600EA639D /* UserInfoURLConfiguration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInfoURLConfiguration.swift; sourceTree = "<group>"; };
+		B7A56DC4286A937600EA639D /* TokenURLConfiguration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TokenURLConfiguration.swift; sourceTree = "<group>"; };
 		B7A56DC6286A98DA00EA639D /* DefaultRequestUserInfoUsecase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultRequestUserInfoUsecase.swift; sourceTree = "<group>"; };
 		B7A836ED285B319500A06C77 /* Bundle+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Bundle+.swift"; sourceTree = "<group>"; };
 		B7A836EF285B322000A06C77 /* URLConfigurable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLConfigurable.swift; sourceTree = "<group>"; };
@@ -112,7 +112,7 @@
 		D2A9997E2862BE9500910F7D /* IssueAddListEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IssueAddListEntity.swift; sourceTree = "<group>"; };
 		D2A9998A2864055400910F7D /* CommentTitleContainerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentTitleContainerView.swift; sourceTree = "<group>"; };
 		D2A9998D2865584700910F7D /* Observable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Observable.swift; sourceTree = "<group>"; };
-		D2A9998F28655CE200910F7D /* UserInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInfo.swift; sourceTree = "<group>"; };
+		D2A9998F28655CE200910F7D /* TokenInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TokenInfo.swift; sourceTree = "<group>"; };
 		D2A9999128655D0900910F7D /* GrantResource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GrantResource.swift; sourceTree = "<group>"; };
 		D2B750642856FCBE0078067A /* IssueTracker.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = IssueTracker.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D2B750672856FCBE0078067A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -225,7 +225,7 @@
 			isa = PBXGroup;
 			children = (
 				B7A836F2285B32C900A06C77 /* GitURLConfiguration.swift */,
-				B7A56DC4286A937600EA639D /* UserInfoURLConfiguration.swift */,
+				B7A56DC4286A937600EA639D /* TokenURLConfiguration.swift */,
 				B7A836EC285B30EA00A06C77 /* Protocol */,
 			);
 			path = URLComponent;
@@ -334,7 +334,7 @@
 			isa = PBXGroup;
 			children = (
 				D2A9997E2862BE9500910F7D /* IssueAddListEntity.swift */,
-				D2A9998F28655CE200910F7D /* UserInfo.swift */,
+				D2A9998F28655CE200910F7D /* TokenInfo.swift */,
 				D2A9999128655D0900910F7D /* GrantResource.swift */,
 			);
 			path = Entity;
@@ -624,7 +624,7 @@
 				B7A56D9B2861C5E600EA639D /* IssueCardDTO.swift in Sources */,
 				B7A836F9285B392800A06C77 /* EndPointable.swift in Sources */,
 				B7A56DC7286A98DA00EA639D /* DefaultRequestUserInfoUsecase.swift in Sources */,
-				D2A9999028655CE200910F7D /* UserInfo.swift in Sources */,
+				D2A9999028655CE200910F7D /* TokenInfo.swift in Sources */,
 				D2A99973286159ED00910F7D /* IssueAddViewController.swift in Sources */,
 				D2A9997B28618D0E00910F7D /* ListCell.swift in Sources */,
 				B724DC92286058C3007DAC1A /* TabBarViewController.swift in Sources */,
@@ -656,7 +656,7 @@
 				B7A836F0285B322000A06C77 /* URLConfigurable.swift in Sources */,
 				D2A9997F2862BE9500910F7D /* IssueAddListEntity.swift in Sources */,
 				D2915381285B740500B5CDA8 /* DefaultLoginUsecase.swift in Sources */,
-				B7A56DC5286A937600EA639D /* UserInfoURLConfiguration.swift in Sources */,
+				B7A56DC5286A937600EA639D /* TokenURLConfiguration.swift in Sources */,
 				B7A836EE285B319500A06C77 /* Bundle+.swift in Sources */,
 				B7A83710285C1A1300A06C77 /* GithubAuthorizationUsecase.swift in Sources */,
 				B7A56D9D2861C79D00EA639D /* SelectionLabel.swift in Sources */,

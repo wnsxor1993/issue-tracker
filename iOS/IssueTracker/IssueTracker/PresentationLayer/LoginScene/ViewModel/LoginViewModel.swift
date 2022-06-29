@@ -14,7 +14,7 @@ final class LoginViewModel {
     private var appleAuthorizationUsecase: DefaultLoginUsecase?
 
     var gitOAuthPageURL: Observable<URL?> = Observable(nil)
-    var userInfo: Observable<UserInfo?> = Observable(nil)
+    var userInfo: Observable<TokenInfo?> = Observable(nil)
 
     private var grantResource: DefaultGrantResource? {
         didSet {
@@ -30,7 +30,7 @@ final class LoginViewModel {
     }
 
     convenience init(_ apple: DefaultLoginUsecase) {
-        self.init(GithubAuthorizationUsecase(endPoint: EndPoint(urlConfigure: GitURLConfiguration(), method: .POST, body: nil)), apple)
+        self.init(GithubAuthorizationUsecase(), apple)
     }
 
     func enquireGrant(buttonCase: OAuth) {
@@ -54,7 +54,7 @@ private extension LoginViewModel {
     @objc
     func updateGithubGrantResourceValue(notification: Notification) {
         guard let grantCode = notification.userInfo?[NotificationKey.grantCode]as? String else {return}
-        let grantResource = GitHubGrantResource(authorizationCode: grantCode, identityToken: nil)
+        let grantResource = GitHubGrantResource(code: grantCode, identityToken: nil)
         self.grantResource = grantResource
     }
 
@@ -73,9 +73,14 @@ private extension LoginViewModel {
     func enquireForUserInfo(_ grantResource: DefaultGrantResource) {
         switch grantResource {
         case is GitHubGrantResource:
-            print(grantResource)
+            githubAuthorizationUsecase?.setRequestUserInfo(grantResource)
+            githubAuthorizationUsecase?.requestUserInfoUsecase?.userInfoRepository?.fetchUserInfo(completion: { userInfo in
+                guard let userInfo = userInfo else {return}
+                self.userInfo.updateValue(value: userInfo)
+            })
         case is AppleGrantResource:
-            print(grantResource)
+            // TODO: [미구현]
+            break
         default:
             return
         }

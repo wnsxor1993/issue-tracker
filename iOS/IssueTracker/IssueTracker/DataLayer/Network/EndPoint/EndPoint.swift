@@ -22,7 +22,7 @@ struct EndPoint: EndPointable, HTTPPackageable {
     }
 
     var queryItems: [URLQueryItem]? {
-        //TODO: Issue card 정보 불러올때 사용예정 [미구현]
+        // TODO: Issue card 정보 불러올때 사용예정 [미구현]
         return nil
     }
 

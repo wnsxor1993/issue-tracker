@@ -11,11 +11,11 @@ final class RequestUserInfoUsecase: DefaultRequestUserInfoUsecase {
 
     var userInfoRepository: DefaultUserInfoRepository?
 
-    init(userInfoRepository: DefaultUserInfoRepository? = UserInfoRepository(endPoint: EndPoint(urlConfigure: UserInfoURLConfiguration(), method: .POST, body: nil))) {
+    init(userInfoRepository: DefaultUserInfoRepository? = UserInfoRepository(endPoint: EndPoint(urlConfigure: TokenURLConfiguration(), method: .POST, body: nil))) {
         self.userInfoRepository = userInfoRepository
     }
 
-    func execute(completion: @escaping (UserInfo?) -> Void) {
+    func execute(completion: @escaping (TokenInfo?) -> Void) {
         userInfoRepository?.fetchUserInfo(completion: { userInfo in
             guard let userInfo = userInfo else {
                 completion(nil)

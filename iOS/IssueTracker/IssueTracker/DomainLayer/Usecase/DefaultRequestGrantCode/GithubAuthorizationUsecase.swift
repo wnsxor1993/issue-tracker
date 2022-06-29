@@ -9,20 +9,22 @@ import Foundation
 
 final class GithubAuthorizationUsecase: DefaultLoginUsecase {
 
-    private(set) var endPoint: EndPoint
     var requestUserInfoUsecase: DefaultRequestUserInfoUsecase?
 
-    init(endPoint: EndPoint) {
-        self.endPoint = endPoint
-    }
-
     func execute() {
-        NotificationCenter.default.post(name: .recievedGithubPageURL, object: self, userInfo: [NotificationKey.githubPageURL: endPoint.url])
+        NetworkService.requestURL(endPoint: EndPoint(urlConfigure: GitURLConfiguration(), method: .GET, body: nil)) { result in
+            switch result {
+            case .success(let url):
+                NotificationCenter.default.post(name: .recievedGithubPageURL, object: self, userInfo: [NotificationKey.githubPageURL: url])
+            case .failure(let error):
+                print(error)
+            }
+        }
     }
 
     func setRequestUserInfo(_ grantResource: DefaultGrantResource) {
         guard let resource =  grantResource as? GitHubGrantResource, let data = encodeModel(model: resource) else {return}
-        self.requestUserInfoUsecase = RequestUserInfoUsecase(userInfoRepository: UserInfoRepository(endPoint: EndPoint(urlConfigure: UserInfoURLConfiguration(), method: .POST, body: data)))
+        self.requestUserInfoUsecase = RequestUserInfoUsecase(userInfoRepository: UserInfoRepository(endPoint: EndPoint(urlConfigure: TokenURLConfiguration(), method: .POST, body: data)))
     }
 }
 
