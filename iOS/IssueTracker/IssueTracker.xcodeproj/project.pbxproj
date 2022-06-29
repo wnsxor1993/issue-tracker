@@ -30,7 +30,6 @@
 		B7A836EE285B319500A06C77 /* Bundle+.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7A836ED285B319500A06C77 /* Bundle+.swift */; };
 		B7A836F0285B322000A06C77 /* URLConfigurable.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7A836EF285B322000A06C77 /* URLConfigurable.swift */; };
 		B7A836F3285B32C900A06C77 /* GitURLConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7A836F2285B32C900A06C77 /* GitURLConfiguration.swift */; };
-		B7A836F5285B330900A06C77 /* Authenticable.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7A836F4285B330900A06C77 /* Authenticable.swift */; };
 		B7A836F9285B392800A06C77 /* EndPointable.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7A836F8285B392800A06C77 /* EndPointable.swift */; };
 		B7A836FB285B39B500A06C77 /* HTTPPackageable.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7A836FA285B39B500A06C77 /* HTTPPackageable.swift */; };
 		B7A836FD285B3A1200A06C77 /* EndPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7A836FC285B3A1200A06C77 /* EndPoint.swift */; };
@@ -93,7 +92,6 @@
 		B7A836ED285B319500A06C77 /* Bundle+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Bundle+.swift"; sourceTree = "<group>"; };
 		B7A836EF285B322000A06C77 /* URLConfigurable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLConfigurable.swift; sourceTree = "<group>"; };
 		B7A836F2285B32C900A06C77 /* GitURLConfiguration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GitURLConfiguration.swift; sourceTree = "<group>"; };
-		B7A836F4285B330900A06C77 /* Authenticable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Authenticable.swift; sourceTree = "<group>"; };
 		B7A836F8285B392800A06C77 /* EndPointable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EndPointable.swift; sourceTree = "<group>"; };
 		B7A836FA285B39B500A06C77 /* HTTPPackageable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPPackageable.swift; sourceTree = "<group>"; };
 		B7A836FC285B3A1200A06C77 /* EndPoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EndPoint.swift; sourceTree = "<group>"; };
@@ -219,7 +217,6 @@
 			isa = PBXGroup;
 			children = (
 				B7A836EF285B322000A06C77 /* URLConfigurable.swift */,
-				B7A836F4285B330900A06C77 /* Authenticable.swift */,
 			);
 			path = Protocol;
 			sourceTree = "<group>";
@@ -651,7 +648,6 @@
 				D2A9999228655D0900910F7D /* GrantResource.swift in Sources */,
 				D2A9997528615F3600910F7D /* CommentContainerView.swift in Sources */,
 				D2A99977286160BF00910F7D /* DividedLineView.swift in Sources */,
-				B7A836F5285B330900A06C77 /* Authenticable.swift in Sources */,
 				D291537E285B6D7F00B5CDA8 /* AppleAuthorizationUsecase.swift in Sources */,
 				B7A56D9528618E0900EA639D /* IssuseCardCell.swift in Sources */,
 				B7A56DC0286A7E1200EA639D /* Decoder.swift in Sources */,
