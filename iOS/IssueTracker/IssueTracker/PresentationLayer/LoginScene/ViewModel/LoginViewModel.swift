@@ -14,7 +14,7 @@ final class LoginViewModel {
     private var appleAuthorizationUsecase: DefaultLoginUsecase?
 
     var gitOAuthPageURL: Observable<URL?> = Observable(nil)
-    var userInfo: Observable<TokenInfo?> = Observable(nil)
+    var tokenInfo: Observable<TokenInfo?> = Observable(nil)
 
     private var grantResource: DefaultGrantResource? {
         didSet {
@@ -76,7 +76,7 @@ private extension LoginViewModel {
             githubAuthorizationUsecase?.setRequestUserInfo(grantResource)
             githubAuthorizationUsecase?.requestUserInfoUsecase?.userInfoRepository?.fetchUserInfo(completion: { userInfo in
                 guard let userInfo = userInfo else {return}
-                self.userInfo.updateValue(value: userInfo)
+                self.tokenInfo.updateValue(value: userInfo)
             })
         case is AppleGrantResource:
             // TODO: [미구현]
