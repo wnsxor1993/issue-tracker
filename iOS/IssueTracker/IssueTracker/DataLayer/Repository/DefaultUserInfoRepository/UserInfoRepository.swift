@@ -15,11 +15,11 @@ final class UserInfoRepository: DefaultUserInfoRepository {
         self.endPoint = endPoint
     }
 
-    func fetchUserInfo(completion: @escaping (UserInfo?) -> Void) {
+    func fetchUserInfo(completion: @escaping (TokenInfo?) -> Void) {
         NetworkService.request(endPoint: endPoint) { result in
             switch result {
             case .success(let data):
-                let decoder = Decoder<UserInfo>()
+                let decoder = Decoder<TokenInfo>()
                 let userInfo = decoder.decode(data: data)
                 completion(userInfo)
             case .failure:

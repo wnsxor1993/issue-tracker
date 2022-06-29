@@ -7,8 +7,8 @@
 
 import Foundation
 
-struct UserInfoURLConfiguration: URLConfigurable {
+struct TokenURLConfiguration: URLConfigurable {
     var scheme: String = "http"
-    var host: String = "http://3.38.98.51"
-    var path: String = ""
+    var host: String = "3.38.98.51"
+    var path: String = "/login/oauth/github"
 }

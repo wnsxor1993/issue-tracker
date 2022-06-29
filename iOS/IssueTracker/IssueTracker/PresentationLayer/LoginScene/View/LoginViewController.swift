@@ -66,8 +66,10 @@ private extension LoginViewController {
         }
 
         loginVM?.gitOAuthPageURL.bind { url in
-            guard let usefulURL = url, UIApplication.shared.canOpenURL(usefulURL) else { return }
-            UIApplication.shared.open(usefulURL)
+            DispatchQueue.main.async {
+                guard let usefulURL = url, UIApplication.shared.canOpenURL(usefulURL) else { return }
+                UIApplication.shared.open(usefulURL)
+            }
         }
     }
 
