@@ -10,9 +10,7 @@ import AuthenticationServices
 
 class LoginViewController: UIViewController {
 
-    private var appleManager: DefaultRequestGrantCodeUsecase?
-    private var githubManager: DefaultRequestGrantCodeUsecase?
-    let loginVM = LoginViewModel()
+    var loginVM: LoginViewModel?
 
     private let titleLabel: UILabel = {
         let label = UILabel()
@@ -40,49 +38,36 @@ class LoginViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .issueTrackerGray1
+        setViewModel()
         setViewsConstraint()
-        setOAuthManagers()
+        setLoginViewModelBinding()
         oauthLoginView.delegate = self
-        
-        loginVM.userInfo.bind { info in
-            guard let userInfo = info else { return }
-            print(userInfo)
-            self.presentNextScene()
-        }
+
     }
 }
 
 extension LoginViewController: OAuthButtonDelegate {
-    func didClick(buttonType: OAuthButtonType) {
-
-        guard let githubManager = githubManager, let appleManager = appleManager else {return}
-
-        switch buttonType {
-        case .git:
-            githubManager.enquireForGrant { url in
-                guard let url = url else {return }
-                if UIApplication.shared.canOpenURL(url) {
-                    UIApplication.shared.open(url)
-                }
-            }
-
-        case .apple:
-            appleManager.enquireForGrant {_ in}
-        }
+    func didClick(buttonType: OAuth) {
+        loginVM?.enquireGrant(buttonCase: buttonType)
     }
 }
 
 private extension LoginViewController {
 
-    func setOAuthManagers() {
-        //TODO: OAuth BE 연결되면 presentNextScene 삭제 및 로직 변경 필요
-        appleManager = RequestAppleGrantCodeUseCase(endPoint: EndPoint(urlConfigure: GitURLConfiguration(), method: .POST, body: nil), presentationAnchor: self.view.window) { [weak self] isVerified in
-            guard isVerified == true else { return }
-            self?.presentNextScene()
+    func setViewModel() {
+        self.loginVM = LoginViewModel(AppleAuthorizationUsecase(presentationAnchor: self.view.window))
+    }
+
+    func setLoginViewModelBinding() {
+        loginVM?.userInfo.bind { info in
+            guard let userInfo = info else { return }
+            print(userInfo)
+            self.presentNextScene()
         }
-        githubManager = RequestGithubGrantCodeUseCase(endPoint: EndPoint(urlConfigure: GitURLConfiguration(), method: .POST, body: nil)) {[weak self]  isVerified in
-            guard isVerified == true else { return }
-            self?.presentNextScene()
+
+        loginVM?.gitOAuthPageURL.bind { url in
+            guard let usefulURL = url, UIApplication.shared.canOpenURL(usefulURL) else { return }
+            UIApplication.shared.open(usefulURL)
         }
     }
 

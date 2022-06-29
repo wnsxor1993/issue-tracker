@@ -7,21 +7,28 @@
 
 import AuthenticationServices
 
-final class RequestAppleGrantCodeUseCase: NSObject, DefaultRequestGrantCodeUsecase {
+final class AppleAuthorizationUsecase: NSObject, DefaultLoginUsecase {
 
-    private(set) var endPoint: EndPoint
-    var responseHandler: (Bool) -> Void
-
+    // private(set) var endPoint: EndPoint
     private var presentationAnchor: UIWindow?
     private var authorizationController: ASAuthorizationController?
+    var requestUserInfoUsecase: DefaultRequestUserInfoUsecase?
 
-    init(endPoint: EndPoint, presentationAnchor: UIWindow?, observe responseHandler: @escaping (Bool) -> Void) {
-        self.endPoint = endPoint
+    init(presentationAnchor: UIWindow?) {
         self.presentationAnchor = presentationAnchor
-        self.responseHandler = responseHandler
         super.init()
 
         self.prepareToRequest()
+    }
+
+    func execute() {
+        guard let controller = authorizationController else { return }
+        controller.performRequests()
+    }
+
+    func setRequestUserInfo(_ grantResource: DefaultGrantResource) {
+        guard let resource =  grantResource as? AppleGrantResource, let data = encodeModel(model: resource) else {return}
+        self.requestUserInfoUsecase = RequestUserInfoUsecase(userInfoRepository: UserInfoRepository(endPoint: EndPoint(urlConfigure: UserInfoURLConfiguration(), method: .POST, body: data)))
     }
 
     func enquireForGrant(handler: @escaping (URL?) -> Void) {
@@ -31,7 +38,7 @@ final class RequestAppleGrantCodeUseCase: NSObject, DefaultRequestGrantCodeUseca
     }
 }
 
-private extension RequestAppleGrantCodeUseCase {
+private extension AppleAuthorizationUsecase {
 
     func prepareToRequest() {
         let appleIDProvider = ASAuthorizationAppleIDProvider()
@@ -44,26 +51,23 @@ private extension RequestAppleGrantCodeUseCase {
         authorizationController = controller
     }
 
-    func requestAPI() {
-        NetworkService.request(endPoint: endPoint, completion: { result in
-            switch result {
-            case .success(let data):
-                // TODO: Decode response data
-                self.responseHandler(true)
-            case .failure(let error):
-                self.responseHandler(false)
-            }
-        })
+    func encodeModel(model: AppleGrantResource) -> Data? {
+        let encoder = Encoder<AppleGrantResource>()
+        return encoder.encode(model: model)
     }
+
 }
 
-extension RequestAppleGrantCodeUseCase: ASAuthorizationControllerDelegate {
+extension AppleAuthorizationUsecase: ASAuthorizationControllerDelegate {
 
     func authorizationController(controller: ASAuthorizationController, didCompleteWithAuthorization authorization: ASAuthorization) {
         switch authorization.credential {
         case let appleIDCredential as ASAuthorizationAppleIDCredential:
             // TODO: BE API request 호출 클로저 내부에 해당 작업 넣기
-            requestAPI()
+            guard let authorizationCode = appleIDCredential.authorizationCode, let identityToken = appleIDCredential.identityToken, let codeString = String(data: authorizationCode, encoding: .utf8), let tokenString = String(data: identityToken, encoding: .utf8) else { return }
+            let grantResource = AppleGrantResource(authorizationCode: codeString, identityToken: tokenString)
+
+            NotificationCenter.default.post(name: .recievedGrantResource, object: self, userInfo: [NotificationKey.grantResource: grantResource])
 
         default:
             break
@@ -75,7 +79,7 @@ extension RequestAppleGrantCodeUseCase: ASAuthorizationControllerDelegate {
     }
 }
 
-extension RequestAppleGrantCodeUseCase: ASAuthorizationControllerPresentationContextProviding {
+extension AppleAuthorizationUsecase: ASAuthorizationControllerPresentationContextProviding {
 
     func presentationAnchor(for controller: ASAuthorizationController) -> ASPresentationAnchor {
         guard let window = presentationAnchor else { return ASPresentationAnchor() }

@@ -9,7 +9,7 @@ import UIKit
 
 class OAuthLoginButton: UIButton {
 
-    private(set) var oauthButtonType: OAuthButtonType?
+    private(set) var oauthButtonType: OAuth?
 
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -21,7 +21,7 @@ class OAuthLoginButton: UIButton {
         fatalError()
     }
 
-    func configureOAuthButton(with buttonType: OAuthButtonType) {
+    func configureOAuthButton(with buttonType: OAuth) {
         self.oauthButtonType = buttonType
         let image = UIImage(named: buttonType.image)?.resizeWithHeighScale(height: 24)
         self.setTitle(buttonType.title, for: .normal)
