@@ -30,7 +30,7 @@ struct NetworkService: NetworkServiceable {
             }
             completion(.success(url))
         }.resume()
-        
+
     }
 
     static func request(endPoint: EndPoint, completion: @escaping CompletionHandler) {

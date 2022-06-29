@@ -22,8 +22,8 @@ struct EndPoint: EndPointable, HTTPPackageable {
     }
 
     var queryItems: [URLQueryItem]? {
-        guard let authenticatable =  urlConfigure as? Authenticatable, let clientID = authenticatable.clientID else {return nil}
-        return [URLQueryItem(name: "client_id", value: "\(clientID)")]
+        //TODO: Issue card 정보 불러올때 사용예정 [미구현]
+        return nil
     }
 
     var url: URL {
