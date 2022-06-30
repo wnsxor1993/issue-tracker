@@ -8,7 +8,5 @@
 import Foundation
 
 struct GitURLConfiguration: URLConfigurable {
-    var scheme = "http"
-    var host = "3.38.98.51"
     var path = "/login/code/github"
 }
