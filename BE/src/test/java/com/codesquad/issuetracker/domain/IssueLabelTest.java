@@ -11,7 +11,7 @@ class IssueLabelTest {
 
     private final Label labelA = new Label("labelA", "widwdniw", LabelColor.create("FFFFFF"));
     private final Label labelB = new Label("labelB", "widwdniw", LabelColor.create("AAAAAA"));
-    private final Member author = new Member("test", "1234", "github");
+    private final Member author = new Member("tttt", "testMember", "테스트 유저", "https://avatars.githubusercontent.com/u/88282356?v=4)");
 
     private Issue issue;
 

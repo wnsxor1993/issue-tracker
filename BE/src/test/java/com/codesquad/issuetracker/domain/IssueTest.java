@@ -16,8 +16,8 @@ import static org.assertj.core.api.Assertions.*;
 @Slf4j
 class IssueTest {
 
-    Member memberA = new Member("memberA", "1234!", "사용자1");
-    Member memberB = new Member("memberB", "1234!", "사용자2");
+    Member memberA = new Member("memberA", "1234!", "사용자1", "aaa");
+    Member memberB = new Member("memberB", "1234!", "사용자2", "bbb");
     Label labelA = new Label("labelA", "widwdniw", LabelColor.create("FFFFFF"));
     Label labelB = new Label("labelB", "widwdniw", LabelColor.create("AAAAAA"));
 
