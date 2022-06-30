@@ -32,11 +32,23 @@ struct IssueCard: Codable {
 struct Label: Codable {
     let labelID: Int?
     let labelName, labelColor: String
-    let lableID: Int?
 
     enum CodingKeys: String, CodingKey {
         case labelID = "labelId"
         case labelName, labelColor
-        case lableID = "lableId"
+    }
+}
+
+extension IssueCard {
+
+    func toDomain() -> IssueCardEntity {
+        return .init(id: issueID, title: title, content: content, isSelected: false, mileStone: milestoneName, labels: labels.map { $0.toDomain() })
+    }
+}
+
+extension Label {
+
+    func toDomain() -> LabelEntity {
+        return .init(id: labelID, labelName: labelName, labelColor: labelColor)
     }
 }

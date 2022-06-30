@@ -17,7 +17,7 @@ struct IssueCardEntity: Identifiable {
 }
 
 struct LabelEntity: Identifiable {
-    let id: Int
+    let id: Int?
     let labelName: String
     let labelColor: String
 }
