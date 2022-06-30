@@ -7,7 +7,7 @@ import javax.persistence.*;
 @Entity
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-@ToString
+@ToString(of = {"of", "resourceServerId", "resourceServerLoginId", "name", "imageUrl"})
 public class Member {
 
     @Id
