@@ -41,8 +41,9 @@
 		B7E58B6D2858505A004C6BE6 /* ClientKey.plist in Resources */ = {isa = PBXBuildFile; fileRef = B7E58B6C2858505A004C6BE6 /* ClientKey.plist */; };
 		B7E58B6F28586FCE004C6BE6 /* NetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7E58B6E28586FCE004C6BE6 /* NetworkService.swift */; };
 		B7E58B7128587013004C6BE6 /* HTTPMethod.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7E58B7028587013004C6BE6 /* HTTPMethod.swift */; };
-		D2861E81286D826600E544A5 /* DefaultIssueCardUsecase.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2861E80286D826600E544A5 /* DefaultIssueCardUsecase.swift */; };
-		D2861E83286D82D900E544A5 /* FetchIssueCardUsecase.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2861E82286D82D900E544A5 /* FetchIssueCardUsecase.swift */; };
+		D2861E81286D826600E544A5 /* FetchIssueCardUsecase.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2861E80286D826600E544A5 /* FetchIssueCardUsecase.swift */; };
+		D2861E83286D82D900E544A5 /* FetchOpenIssueCardUsecase.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2861E82286D82D900E544A5 /* FetchOpenIssueCardUsecase.swift */; };
+		D2861E86286D882000E544A5 /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2861E85286D882000E544A5 /* HomeViewModel.swift */; };
 		D291537A285B6B3300B5CDA8 /* NetworkServiceable.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2915379285B6B3300B5CDA8 /* NetworkServiceable.swift */; };
 		D291537C285B6B6500B5CDA8 /* NetworkError.swift in Sources */ = {isa = PBXBuildFile; fileRef = D291537B285B6B6500B5CDA8 /* NetworkError.swift */; };
 		D291537E285B6D7F00B5CDA8 /* AppleAuthorizationUsecase.swift in Sources */ = {isa = PBXBuildFile; fileRef = D291537D285B6D7F00B5CDA8 /* AppleAuthorizationUsecase.swift */; };
@@ -109,8 +110,9 @@
 		B7E58B6C2858505A004C6BE6 /* ClientKey.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = ClientKey.plist; sourceTree = "<group>"; };
 		B7E58B6E28586FCE004C6BE6 /* NetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkService.swift; sourceTree = "<group>"; };
 		B7E58B7028587013004C6BE6 /* HTTPMethod.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPMethod.swift; sourceTree = "<group>"; };
-		D2861E80286D826600E544A5 /* DefaultIssueCardUsecase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultIssueCardUsecase.swift; sourceTree = "<group>"; };
-		D2861E82286D82D900E544A5 /* FetchIssueCardUsecase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FetchIssueCardUsecase.swift; sourceTree = "<group>"; };
+		D2861E80286D826600E544A5 /* FetchIssueCardUsecase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FetchIssueCardUsecase.swift; sourceTree = "<group>"; };
+		D2861E82286D82D900E544A5 /* FetchOpenIssueCardUsecase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FetchOpenIssueCardUsecase.swift; sourceTree = "<group>"; };
+		D2861E85286D882000E544A5 /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
 		D2915379285B6B3300B5CDA8 /* NetworkServiceable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkServiceable.swift; sourceTree = "<group>"; };
 		D291537B285B6B6500B5CDA8 /* NetworkError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkError.swift; sourceTree = "<group>"; };
 		D291537D285B6D7F00B5CDA8 /* AppleAuthorizationUsecase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppleAuthorizationUsecase.swift; sourceTree = "<group>"; };
@@ -175,6 +177,7 @@
 		B724DC9328605902007DAC1A /* HomeScene */ = {
 			isa = PBXGroup;
 			children = (
+				D2861E84286D880700E544A5 /* ViewModel */,
 				D2A999872862F70100910F7D /* View */,
 			);
 			path = HomeScene;
@@ -286,10 +289,18 @@
 		D2861E7F286D823200E544A5 /* DefatultIssueCard */ = {
 			isa = PBXGroup;
 			children = (
-				D2861E80286D826600E544A5 /* DefaultIssueCardUsecase.swift */,
-				D2861E82286D82D900E544A5 /* FetchIssueCardUsecase.swift */,
+				D2861E80286D826600E544A5 /* FetchIssueCardUsecase.swift */,
+				D2861E82286D82D900E544A5 /* FetchOpenIssueCardUsecase.swift */,
 			);
 			path = DefatultIssueCard;
+			sourceTree = "<group>";
+		};
+		D2861E84286D880700E544A5 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				D2861E85286D882000E544A5 /* HomeViewModel.swift */,
+			);
+			path = ViewModel;
 			sourceTree = "<group>";
 		};
 		D2915377285B436000B5CDA8 /* Service */ = {
@@ -665,7 +676,7 @@
 				B7E58B7128587013004C6BE6 /* HTTPMethod.swift in Sources */,
 				D291537A285B6B3300B5CDA8 /* NetworkServiceable.swift in Sources */,
 				B7A56DBC286A73CA00EA639D /* DefaultUserInfoRepository.swift in Sources */,
-				D2861E83286D82D900E544A5 /* FetchIssueCardUsecase.swift in Sources */,
+				D2861E83286D82D900E544A5 /* FetchOpenIssueCardUsecase.swift in Sources */,
 				B7A836FD285B3A1200A06C77 /* EndPoint.swift in Sources */,
 				B7A56D9728618F6800EA639D /* UIFont+.swift in Sources */,
 				B7A56D992861913300EA639D /* BadgeLabel.swift in Sources */,
@@ -692,6 +703,7 @@
 				D2A9998E2865584700910F7D /* Observable.swift in Sources */,
 				B7A836F0285B322000A06C77 /* URLConfigurable.swift in Sources */,
 				D2A9997F2862BE9500910F7D /* IssueAddListEntity.swift in Sources */,
+				D2861E86286D882000E544A5 /* HomeViewModel.swift in Sources */,
 				B7AB7E46286D73490051095E /* FetchOpenIssueListURLConfiguration.swift in Sources */,
 				D2915381285B740500B5CDA8 /* DefaultLoginUsecase.swift in Sources */,
 				B7A56DC5286A937600EA639D /* TokenURLConfiguration.swift in Sources */,
@@ -705,7 +717,7 @@
 				D2D5264C285850A100581C88 /* LoginInputView.swift in Sources */,
 				D2915385286013DB00B5CDA8 /* OAuth.swift in Sources */,
 				D2A9998B2864055400910F7D /* CommentTitleContainerView.swift in Sources */,
-				D2861E81286D826600E544A5 /* DefaultIssueCardUsecase.swift in Sources */,
+				D2861E81286D826600E544A5 /* FetchIssueCardUsecase.swift in Sources */,
 				B7A836F3285B32C900A06C77 /* GitURLConfiguration.swift in Sources */,
 				D2D5264E2858557700581C88 /* UIView+.swift in Sources */,
 			);

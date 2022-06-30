@@ -11,7 +11,7 @@ final class FetchIssueCardRepository: DefaultIssueCardRepository {
 
     var endPoint: EndPoint
 
-    init(endPoint: EndPoint) {
+    init(endPoint: EndPoint = EndPoint(urlConfigure: FetchOpenIssueListURLConfiguration(), method: .GET, body: nil)) {
         self.endPoint = endPoint
     }
 

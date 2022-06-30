@@ -12,11 +12,16 @@ class HomeViewController: UIViewController {
     private var homeTableView: UITableView?
     private var dataSource: TableViewDataSource<IssueCardEntity, IssuseCardCell>?
     private var issueCreateButton: IssueAddButton?
+    
+    let homeVM = HomeViewModel()
 
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .secondarySystemBackground
         configureDisplay()
+        homeVM.issueCards.bind { issueCards in
+            // 관련 작업
+        }
     }
 
     override func viewWillAppear(_ animated: Bool) {
