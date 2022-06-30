@@ -107,10 +107,10 @@ class IssuseCardCell: UITableViewCell {
 
 extension IssuseCardCell {
 
-    func configure(model: IssueCardDTO) {
+    func configure(model: IssueCardEntity) {
         title.text = model.title
         content.text =  model.content
-        selectionImageView.isSelected =  model.isSelected
+        selectionImageView.isSelected = model.isSelected
         mileStoneLabel.text =  model.mileStone
         model.labels.forEach({
             let badgeLabel = BadgeLabel()

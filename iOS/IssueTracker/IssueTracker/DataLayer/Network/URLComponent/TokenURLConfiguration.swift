@@ -8,5 +8,6 @@
 import Foundation
 
 struct TokenURLConfiguration: URLConfigurable {
+    var queryItem: [URLQueryItem]?
     var path: String = "/login/oauth/github"
 }
