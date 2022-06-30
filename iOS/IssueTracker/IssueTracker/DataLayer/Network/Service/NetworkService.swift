@@ -9,6 +9,30 @@ import Foundation
 
 struct NetworkService: NetworkServiceable {
 
+    static func requestURL(endPoint: EndPoint, completion: @escaping (Result<URL, NetworkError>) -> Void) {
+        var urlRequest = URLRequest(url: endPoint.url)
+        urlRequest.httpMethod = endPoint.mehtod.rawValue
+        urlRequest.setValue(endPoint.headerValue, forHTTPHeaderField: endPoint.headerType)
+        urlRequest.httpBody = endPoint.body
+
+        URLSession.shared.dataTask(with: urlRequest) { (_, response, error) in
+
+            guard let httpResponse = response as? HTTPURLResponse else {return}
+
+            if let error = error {
+                completion(.failure(.transportError(error)))
+                return
+            }
+
+            guard let url = httpResponse.url, (200...299).contains(httpResponse.statusCode) else {
+                completion(.failure(.serverError(statusCode: httpResponse.statusCode)))
+                return
+            }
+            completion(.success(url))
+        }.resume()
+
+    }
+
     static func request(endPoint: EndPoint, completion: @escaping CompletionHandler) {
         var urlRequest = URLRequest(url: endPoint.url)
         urlRequest.httpMethod = endPoint.mehtod.rawValue
@@ -16,13 +40,16 @@ struct NetworkService: NetworkServiceable {
         urlRequest.httpBody = endPoint.body
 
         URLSession.shared.dataTask(with: urlRequest) { (data, response, error) in
+
+            guard let httpResponse = response as? HTTPURLResponse else {return}
+
             if let error = error {
                 completion(.failure(.transportError(error)))
                 return
             }
 
-            if let response = response as? HTTPURLResponse, !(200...299).contains(response.statusCode) {
-                completion(.failure(.serverError(statusCode: response.statusCode)))
+            guard (200...299).contains(httpResponse.statusCode) else {
+                completion(.failure(.serverError(statusCode: httpResponse.statusCode)))
                 return
             }
 
@@ -35,4 +62,5 @@ struct NetworkService: NetworkServiceable {
 
         }.resume()
     }
+
 }

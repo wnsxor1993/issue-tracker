@@ -9,8 +9,12 @@ import Foundation
 
 extension Notification.Name {
     static let recievedGrantCode = Notification.Name("RecievedGrantCode")
+    static let recievedGrantResource = Notification.Name("RecievedGrantResource")
+    static let recievedGithubPageURL = Notification.Name("RecievedGithubPageURL")
 }
 
 enum NotificationKey {
     case grantCode
+    case grantResource
+    case githubPageURL
 }
