@@ -23,13 +23,13 @@ final class LoginViewModel {
         }
     }
 
-    init(_ github: DefaultLoginUsecase?, _ apple: DefaultLoginUsecase) {
+    init(_ github: DefaultLoginUsecase?, _ apple: DefaultLoginUsecase?) {
         self.githubAuthorizationUsecase = github
         self.appleAuthorizationUsecase = apple
         setNotificationObserver()
     }
 
-    convenience init(_ apple: DefaultLoginUsecase) {
+    convenience init(_ apple: DefaultLoginUsecase?) {
         self.init(GithubAuthorizationUsecase(), apple)
     }
 
