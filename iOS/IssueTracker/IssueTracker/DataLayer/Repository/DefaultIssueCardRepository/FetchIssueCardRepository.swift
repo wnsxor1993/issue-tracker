@@ -17,7 +17,6 @@ final class FetchIssueCardRepository: DefaultIssueCardRepository {
 
     func fetchIssueCard(completion: @escaping (Empty?) -> Void) {
         NetworkService.request(endPoint: endPoint) { result in
-            print(self.endPoint.url)
             switch result {
             case .success(let data):
                 let decoder = Decoder<Empty>()

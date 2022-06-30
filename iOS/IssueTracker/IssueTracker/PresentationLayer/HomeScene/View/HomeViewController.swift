@@ -12,16 +12,14 @@ class HomeViewController: UIViewController {
     private var homeTableView: UITableView?
     private var dataSource: TableViewDataSource<IssueCardEntity, IssuseCardCell>?
     private var issueCreateButton: IssueAddButton?
-    
+
     let homeVM = HomeViewModel()
 
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .secondarySystemBackground
         configureDisplay()
-        homeVM.issueCards.bind { issueCards in
-            // 관련 작업
-        }
+        setDataBinding()
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -36,7 +34,6 @@ private extension HomeViewController {
         setNavigation()
         setTableView()
         setDataSource()
-        setDataBinding()
         setAddButton()
         setConstraints()
     }
@@ -63,18 +60,7 @@ private extension HomeViewController {
     }
 
     func setDataSource() {
-//
-//        let labels1 = [Label(id: 2, labelName: "이것의 끝은 어디인가", labelColor: "#020070"), Label(id: 3, labelName: "북치고 장구치기 낄낄", labelColor: "#FF3B30")]
-//
-//        let labels2 = [Label(id: 2, labelName: "이것의 끝은 어디인가", labelColor: "#020070"), Label(id: 3, labelName: "북치고 장구치기 낄낄", labelColor: "#FF3B30"), Label(id: 3, labelName: "이것의 끝은 dddd어디인가", labelColor: "#020070"), Label(id: 3, labelName: "북치고 장구치기 낄낄", labelColor: "#FF3B30"), Label(id: 4, labelName: "이것의 끝은 어디ds인가", labelColor: "#020070"), Label(id: 3, labelName: "북치고 장구치기 낄낄", labelColor: "#FF3B30")]
-//
-        let mockEntity = IssueCardEntity(id: 2, title: "dasd", content: "Asdd", isSelected: false, mileStone: "asdsad", labels: [LabelEntity(id: 2, labelName: "dsd", labelColor: "asdasd")])
-//
-//        let mockEntity2 = IssueCardDTO(id: 2, title: "야호", content: "이건 우리안의 소리  연결고리연결고리연결고리연결고리연결고리연결고리 이건 우리안의 소리 ", isSelected: true, mileStone: nil, labels: labels2)
-//
-        var testData = [mockEntity]
-
-        let dataSource = TableViewDataSource(testData, reuseIdentifier: IssuseCardCell.id, cellConfigurator: { (model: IssueCardEntity, cell: IssuseCardCell) in
+        let dataSource = TableViewDataSource(homeVM.issueCards.value, reuseIdentifier: IssuseCardCell.id, cellConfigurator: { (model: IssueCardEntity, cell: IssuseCardCell) in
             cell.configure(model: model)
         })
 
@@ -83,7 +69,15 @@ private extension HomeViewController {
     }
 
     func setDataBinding() {
-        // MARK: TO BE IMPLEMENTED WITH VIEWMODEL
+        homeVM.issueCards.bind {[weak self] issueCards in
+
+            guard let issueCards = issueCards else {return}
+            self?.dataSource?.updateData(issueCards)
+            DispatchQueue.main.async {
+                self?.homeTableView?.reloadData()
+            }
+        }
+        homeVM.fetchIssueCards()
     }
 
     func setAddButton() {
