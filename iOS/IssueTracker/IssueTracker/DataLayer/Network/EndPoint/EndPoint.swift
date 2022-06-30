@@ -21,11 +21,6 @@ struct EndPoint: EndPointable, HTTPPackageable {
         self.body = body
     }
 
-    var queryItems: [URLQueryItem]? {
-        // TODO: Issue card 정보 불러올때 사용예정 [미구현]
-        return nil
-    }
-
     var url: URL {
         var components = URLComponents()
         components.scheme = urlConfigure.scheme
