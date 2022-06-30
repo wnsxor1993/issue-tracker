@@ -8,7 +8,10 @@
 import Foundation
 
 protocol URLConfigurable {
+    var scheme: String {get}
+    var host: String {get}
     var path: String {get}
+    var queryItem: [URLQueryItem]? {get}
 }
 
 extension URLConfigurable {

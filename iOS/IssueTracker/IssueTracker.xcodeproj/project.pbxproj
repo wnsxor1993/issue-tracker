@@ -16,7 +16,7 @@
 		B7A56D9528618E0900EA639D /* IssuseCardCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7A56D9428618E0900EA639D /* IssuseCardCell.swift */; };
 		B7A56D9728618F6800EA639D /* UIFont+.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7A56D9628618F6800EA639D /* UIFont+.swift */; };
 		B7A56D992861913300EA639D /* BadgeLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7A56D982861913300EA639D /* BadgeLabel.swift */; };
-		B7A56D9B2861C5E600EA639D /* IssueCardDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7A56D9A2861C5E600EA639D /* IssueCardDTO.swift */; };
+		B7A56D9B2861C5E600EA639D /* IssueCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7A56D9A2861C5E600EA639D /* IssueCard.swift */; };
 		B7A56D9D2861C79D00EA639D /* SelectionLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7A56D9C2861C79D00EA639D /* SelectionLabel.swift */; };
 		B7A56DA02862B8B300EA639D /* IssueAddButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7A56D9F2862B8B300EA639D /* IssueAddButton.swift */; };
 		B7A56DA8286470CF00EA639D /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7A56DA7286470CF00EA639D /* LoginViewModel.swift */; };
@@ -34,6 +34,10 @@
 		B7A836FB285B39B500A06C77 /* HTTPPackageable.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7A836FA285B39B500A06C77 /* HTTPPackageable.swift */; };
 		B7A836FD285B3A1200A06C77 /* EndPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7A836FC285B3A1200A06C77 /* EndPoint.swift */; };
 		B7A83710285C1A1300A06C77 /* GithubAuthorizationUsecase.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7A8370F285C1A1300A06C77 /* GithubAuthorizationUsecase.swift */; };
+		B7AB7E3F286D6F730051095E /* IssueCardEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7AB7E3E286D6F730051095E /* IssueCardEntity.swift */; };
+		B7AB7E42286D70360051095E /* DefaultIssueCardRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7AB7E41286D70360051095E /* DefaultIssueCardRepository.swift */; };
+		B7AB7E44286D70510051095E /* FetchIssueCardRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7AB7E43286D70510051095E /* FetchIssueCardRepository.swift */; };
+		B7AB7E46286D73490051095E /* FetchOpenIssueListURLConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7AB7E45286D73490051095E /* FetchOpenIssueListURLConfiguration.swift */; };
 		B7E58B6D2858505A004C6BE6 /* ClientKey.plist in Resources */ = {isa = PBXBuildFile; fileRef = B7E58B6C2858505A004C6BE6 /* ClientKey.plist */; };
 		B7E58B6F28586FCE004C6BE6 /* NetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7E58B6E28586FCE004C6BE6 /* NetworkService.swift */; };
 		B7E58B7128587013004C6BE6 /* HTTPMethod.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7E58B7028587013004C6BE6 /* HTTPMethod.swift */; };
@@ -78,7 +82,7 @@
 		B7A56D9428618E0900EA639D /* IssuseCardCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IssuseCardCell.swift; sourceTree = "<group>"; };
 		B7A56D9628618F6800EA639D /* UIFont+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIFont+.swift"; sourceTree = "<group>"; };
 		B7A56D982861913300EA639D /* BadgeLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BadgeLabel.swift; sourceTree = "<group>"; };
-		B7A56D9A2861C5E600EA639D /* IssueCardDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IssueCardDTO.swift; sourceTree = "<group>"; };
+		B7A56D9A2861C5E600EA639D /* IssueCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IssueCard.swift; sourceTree = "<group>"; };
 		B7A56D9C2861C79D00EA639D /* SelectionLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectionLabel.swift; sourceTree = "<group>"; };
 		B7A56D9F2862B8B300EA639D /* IssueAddButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IssueAddButton.swift; sourceTree = "<group>"; };
 		B7A56DA7286470CF00EA639D /* LoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
@@ -96,6 +100,10 @@
 		B7A836FA285B39B500A06C77 /* HTTPPackageable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPPackageable.swift; sourceTree = "<group>"; };
 		B7A836FC285B3A1200A06C77 /* EndPoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EndPoint.swift; sourceTree = "<group>"; };
 		B7A8370F285C1A1300A06C77 /* GithubAuthorizationUsecase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GithubAuthorizationUsecase.swift; sourceTree = "<group>"; };
+		B7AB7E3E286D6F730051095E /* IssueCardEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IssueCardEntity.swift; sourceTree = "<group>"; };
+		B7AB7E41286D70360051095E /* DefaultIssueCardRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultIssueCardRepository.swift; sourceTree = "<group>"; };
+		B7AB7E43286D70510051095E /* FetchIssueCardRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FetchIssueCardRepository.swift; sourceTree = "<group>"; };
+		B7AB7E45286D73490051095E /* FetchOpenIssueListURLConfiguration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FetchOpenIssueListURLConfiguration.swift; sourceTree = "<group>"; };
 		B7E58B6C2858505A004C6BE6 /* ClientKey.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = ClientKey.plist; sourceTree = "<group>"; };
 		B7E58B6E28586FCE004C6BE6 /* NetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkService.swift; sourceTree = "<group>"; };
 		B7E58B7028587013004C6BE6 /* HTTPMethod.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPMethod.swift; sourceTree = "<group>"; };
@@ -190,6 +198,7 @@
 		B7A56DB9286A73A900EA639D /* Repository */ = {
 			isa = PBXGroup;
 			children = (
+				B7AB7E40286D70090051095E /* DefaultIssueCardRepository */,
 				B7A56DBA286A73BE00EA639D /* DefaultUserInfoRepository */,
 			);
 			path = Repository;
@@ -226,6 +235,7 @@
 			children = (
 				B7A836F2285B32C900A06C77 /* GitURLConfiguration.swift */,
 				B7A56DC4286A937600EA639D /* TokenURLConfiguration.swift */,
+				B7AB7E45286D73490051095E /* FetchOpenIssueListURLConfiguration.swift */,
 				B7A836EC285B30EA00A06C77 /* Protocol */,
 			);
 			path = URLComponent;
@@ -247,6 +257,15 @@
 				B7A836FA285B39B500A06C77 /* HTTPPackageable.swift */,
 			);
 			path = Protocol;
+			sourceTree = "<group>";
+		};
+		B7AB7E40286D70090051095E /* DefaultIssueCardRepository */ = {
+			isa = PBXGroup;
+			children = (
+				B7AB7E41286D70360051095E /* DefaultIssueCardRepository.swift */,
+				B7AB7E43286D70510051095E /* FetchIssueCardRepository.swift */,
+			);
+			path = DefaultIssueCardRepository;
 			sourceTree = "<group>";
 		};
 		B7E58B6928584D0C004C6BE6 /* Network */ = {
@@ -325,7 +344,7 @@
 		D2A999802862F4F900910F7D /* DTO */ = {
 			isa = PBXGroup;
 			children = (
-				B7A56D9A2861C5E600EA639D /* IssueCardDTO.swift */,
+				B7A56D9A2861C5E600EA639D /* IssueCard.swift */,
 			);
 			path = DTO;
 			sourceTree = "<group>";
@@ -336,6 +355,7 @@
 				D2A9997E2862BE9500910F7D /* IssueAddListEntity.swift */,
 				D2A9998F28655CE200910F7D /* TokenInfo.swift */,
 				D2A9999128655D0900910F7D /* GrantResource.swift */,
+				B7AB7E3E286D6F730051095E /* IssueCardEntity.swift */,
 			);
 			path = Entity;
 			sourceTree = "<group>";
@@ -621,7 +641,7 @@
 				D291537C285B6B6500B5CDA8 /* NetworkError.swift in Sources */,
 				B7A56DC3286A7E2500EA639D /* Encoder.swift in Sources */,
 				B7A56DB8286A71E900EA639D /* RequestUserInfoUsecase.swift in Sources */,
-				B7A56D9B2861C5E600EA639D /* IssueCardDTO.swift in Sources */,
+				B7A56D9B2861C5E600EA639D /* IssueCard.swift in Sources */,
 				B7A836F9285B392800A06C77 /* EndPointable.swift in Sources */,
 				B7A56DC7286A98DA00EA639D /* DefaultRequestUserInfoUsecase.swift in Sources */,
 				D2A9999028655CE200910F7D /* TokenInfo.swift in Sources */,
@@ -641,9 +661,11 @@
 				D2D5265E2858D98400581C88 /* OAuthLoginButton.swift in Sources */,
 				D2D526632859A65600581C88 /* OAuthButtonDelegate.swift in Sources */,
 				D2B7506A2856FCBE0078067A /* SceneDelegate.swift in Sources */,
+				B7AB7E3F286D6F730051095E /* IssueCardEntity.swift in Sources */,
 				B71A0A032859B8FF0030D3ED /* NotificationCenter.swift in Sources */,
 				D2D526592858CF5000581C88 /* UIImage+.swift in Sources */,
 				D2D526612858DF7B00581C88 /* UIColor+.swift in Sources */,
+				B7AB7E42286D70360051095E /* DefaultIssueCardRepository.swift in Sources */,
 				B7A56DA8286470CF00EA639D /* LoginViewModel.swift in Sources */,
 				D2A9999228655D0900910F7D /* GrantResource.swift in Sources */,
 				D2A9997528615F3600910F7D /* CommentContainerView.swift in Sources */,
@@ -655,10 +677,12 @@
 				D2A9998E2865584700910F7D /* Observable.swift in Sources */,
 				B7A836F0285B322000A06C77 /* URLConfigurable.swift in Sources */,
 				D2A9997F2862BE9500910F7D /* IssueAddListEntity.swift in Sources */,
+				B7AB7E46286D73490051095E /* FetchOpenIssueListURLConfiguration.swift in Sources */,
 				D2915381285B740500B5CDA8 /* DefaultLoginUsecase.swift in Sources */,
 				B7A56DC5286A937600EA639D /* TokenURLConfiguration.swift in Sources */,
 				B7A836EE285B319500A06C77 /* Bundle+.swift in Sources */,
 				B7A83710285C1A1300A06C77 /* GithubAuthorizationUsecase.swift in Sources */,
+				B7AB7E44286D70510051095E /* FetchIssueCardRepository.swift in Sources */,
 				B7A56D9D2861C79D00EA639D /* SelectionLabel.swift in Sources */,
 				B7A56DBE286A77FA00EA639D /* UserInfoRepository.swift in Sources */,
 				B7A56DA02862B8B300EA639D /* IssueAddButton.swift in Sources */,

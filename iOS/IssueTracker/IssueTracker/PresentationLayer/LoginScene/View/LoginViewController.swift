@@ -42,7 +42,6 @@ class LoginViewController: UIViewController {
         setViewsConstraint()
         setLoginViewModelBinding()
         oauthLoginView.delegate = self
-
     }
 }
 

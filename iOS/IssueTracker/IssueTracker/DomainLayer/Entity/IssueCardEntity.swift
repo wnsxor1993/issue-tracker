@@ -1,22 +1,22 @@
 //
-//  IssueCard.swift
+//  IssueCardEntity.swift
 //  IssueTracker
 //
-//  Created by Kai Kim on 2022/06/21.
+//  Created by Kai Kim on 2022/06/30.
 //
 
 import Foundation
 
-struct IssueCardDTO: Identifiable {
+struct IssueCardEntity: Identifiable {
     let id: Int
     let title: String
     let content: String
     let isSelected: Bool
     let mileStone: String?
-    let labels: [Label]
+    let labels: [LabelEntity]
 }
 
-struct Label: Identifiable {
+struct LabelEntity: Identifiable {
     let id: Int
     let labelName: String
     let labelColor: String

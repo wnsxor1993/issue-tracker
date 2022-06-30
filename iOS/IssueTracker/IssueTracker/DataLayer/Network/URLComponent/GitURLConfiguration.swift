@@ -8,5 +8,6 @@
 import Foundation
 
 struct GitURLConfiguration: URLConfigurable {
+    var queryItem: [URLQueryItem]?
     var path = "/login/code/github"
 }

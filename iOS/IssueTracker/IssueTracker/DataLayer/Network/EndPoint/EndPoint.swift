@@ -31,7 +31,7 @@ struct EndPoint: EndPointable, HTTPPackageable {
         components.scheme = urlConfigure.scheme
         components.host = urlConfigure.host
         components.path = urlConfigure.path
-        components.queryItems = queryItems
+        components.queryItems = urlConfigure.queryItem
         guard let url = components.url else {
             preconditionFailure("Invalid URL components: \(components)"
             )}
