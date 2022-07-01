@@ -10,7 +10,6 @@ import javax.persistence.Embeddable;
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @EqualsAndHashCode
-@ToString
 public class LabelColor {
 
     private static final int COLOR_RADIX = 16;
@@ -71,4 +70,11 @@ public class LabelColor {
         return String.format(COLOR_CODE_FORMAT, colorValue);
     }
 
+    @Override
+    public String toString() {
+        return "LabelColor{" +
+                "colorValue=" + colorValue +
+                ", colorCode=" + getColorCode() +
+                '}';
+    }
 }

@@ -8,8 +8,8 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 class IssueAssigneeTest {
 
-    private final Member memberA = new Member("memberA", "1234!", "사용자1");
-    private final Member memberB = new Member("memberB", "1234!", "사용자2");
+    private final Member memberA = new Member("memberA", "membera1111", "사용자1", "https://i.picsum.photos/id/805/600/600.jpg?hmac=HHttHmXVsB7dhFuTQT7UCSMXMHNUGnTqZG0KnNvVyjY");
+    private final Member memberB = new Member("memberB", "memberb2222", "사용자2", "https://images.unsplash.com/photo-1656346079355-47b7dc576812?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=MnwxfDB8MXxyYW5kb218MHx8fHx8fHx8MTY1NjU1NzY0Mw&ixlib=rb-1.2.1&q=80&w=1080");
     private Issue issue;
 
     @BeforeEach
