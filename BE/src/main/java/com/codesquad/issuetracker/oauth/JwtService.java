@@ -9,14 +9,20 @@ import java.util.Date;
 import java.util.Random;
 
 @Component
-public class JwtTokenProvider {
+public class JwtService {
 
-    @Value("${jwt.access-token.expire-length:10000}")
-    private long accessTokenValidityInMilliseconds;
-    @Value("${jwt.refresh-token.expire-length:10000}")
-    private long refreshTokenValidityInMilliseconds;
-    @Value("${jwt.token.secret-key}")
-    private String secretKey;
+    private final long accessTokenValidityInMilliseconds;
+    private final long refreshTokenValidityInMilliseconds;
+    private final String secretKey;
+
+    public JwtService(
+            @Value("${jwt.access-token.expire-length:10000}") long accessTokenValidityInMilliseconds,
+            @Value("${jwt.refresh-token.expire-length:10000}") long refreshTokenValidityInMilliseconds,
+            @Value("${jwt.token.secret-key}") String secretKey) {
+        this.accessTokenValidityInMilliseconds = accessTokenValidityInMilliseconds;
+        this.refreshTokenValidityInMilliseconds = refreshTokenValidityInMilliseconds;
+        this.secretKey = secretKey;
+    }
 
     public String createAccessToken(String payload) {
         return createToken(payload, accessTokenValidityInMilliseconds);
