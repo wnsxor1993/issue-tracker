@@ -7,7 +7,17 @@
 
 import Foundation
 
-struct GrantResource {
-    let authorizationCode: String
+protocol DefaultGrantResource: Codable {
+    var code: String {get}
+    var identityToken: String? {get}
+}
+
+struct AppleGrantResource: DefaultGrantResource {
+    let code: String
+    let identityToken: String?
+}
+
+struct GitHubGrantResource: DefaultGrantResource {
+    let code: String
     let identityToken: String?
 }

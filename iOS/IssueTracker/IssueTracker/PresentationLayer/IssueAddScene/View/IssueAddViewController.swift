@@ -69,7 +69,7 @@ private extension IssueAddViewController {
         let milestone = IssueAddListEntity(title: "마일스톤", selectedValue: nil)
         let assignee = IssueAddListEntity(title: "담당자", selectedValue: nil)
         let models = [label, milestone, assignee]
-        
+
         let dataSource = TableViewDataSource(models, reuseIdentifier: ListCell.cellIdentifier, cellConfigurator: { (model: IssueAddListEntity, cell: ListCell) in
             cell.configureCellText(title: model.title, value: model.selectedValue)
         })

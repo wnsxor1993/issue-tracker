@@ -7,7 +7,7 @@
 
 import Foundation
 
-enum OAuthButtonType {
+enum OAuth {
     case git
     case apple
 
