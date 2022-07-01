@@ -7,9 +7,9 @@
 
 import Foundation
 
-final class GithubAuthorizationUsecase: DefaultLoginUsecase {
+final class GithubLoginUsecase: LoginUsecase {
 
-    var requestUserInfoUsecase: DefaultRequestUserInfoUsecase?
+    var requestUserInfoUsecase: RequestTokenInfoUsecase?
 
     func execute() {
         NetworkService.requestURL(endPoint: EndPoint(urlConfigure: GitURLConfiguration(), method: .GET, body: nil)) { result in
@@ -24,29 +24,14 @@ final class GithubAuthorizationUsecase: DefaultLoginUsecase {
 
     func setRequestUserInfo(_ grantResource: DefaultGrantResource) {
         guard let resource =  grantResource as? GitHubGrantResource, let data = encodeModel(model: resource) else {return}
-        self.requestUserInfoUsecase = RequestUserInfoUsecase(userInfoRepository: UserInfoRepository(endPoint: EndPoint(urlConfigure: TokenURLConfiguration(), method: .POST, body: data)))
+        self.requestUserInfoUsecase = DefaultRequestTokenInfoUsecase(userInfoRepository: DefaultRequestTokenInfoRepository(endPoint: EndPoint(urlConfigure: TokenURLConfiguration(), method: .POST, body: data)))
     }
 }
 
-private extension GithubAuthorizationUsecase {
+private extension GithubLoginUsecase {
 
     func encodeModel(model: GitHubGrantResource) -> Data? {
         let encoder = Encoder<GitHubGrantResource>()
         return encoder.encode(model: model)
     }
-
-//    func requestAPI(with endPoint: EndPoint) {
-//        self.responseHandler(true)
-////        NetworkService.request(endPoint: endPoint, completion: { result in
-////            switch result {
-////            case .success(let data):
-////                // TODO: Decode response data
-////                print(data)
-////                self.responseHandler?(true)
-////            case .failure(let error):
-////                print(error)
-////                self.responseHandler?(false)
-////            }
-////        })
-//    }
 }

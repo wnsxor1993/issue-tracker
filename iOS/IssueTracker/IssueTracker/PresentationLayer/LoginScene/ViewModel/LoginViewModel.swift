@@ -10,8 +10,8 @@ import UIKit
 
 final class LoginViewModel {
 
-    private var githubAuthorizationUsecase: DefaultLoginUsecase?
-    private var appleAuthorizationUsecase: DefaultLoginUsecase?
+    private var githubAuthorizationUsecase: LoginUsecase?
+    private var appleAuthorizationUsecase: LoginUsecase?
 
     var gitOAuthPageURL: Observable<URL?> = Observable(nil)
     var tokenInfo: Observable<TokenInfo?> = Observable(nil)
@@ -23,14 +23,14 @@ final class LoginViewModel {
         }
     }
 
-    init(_ github: DefaultLoginUsecase?, _ apple: DefaultLoginUsecase?) {
+    init(_ github: LoginUsecase?, _ apple: LoginUsecase?) {
         self.githubAuthorizationUsecase = github
         self.appleAuthorizationUsecase = apple
         setNotificationObserver()
     }
 
-    convenience init(_ apple: DefaultLoginUsecase?) {
-        self.init(GithubAuthorizationUsecase(), apple)
+    convenience init(_ apple: LoginUsecase?) {
+        self.init(GithubLoginUsecase(), apple)
     }
 
     func enquireGrant(buttonCase: OAuth) {
@@ -74,7 +74,7 @@ private extension LoginViewModel {
         switch grantResource {
         case is GitHubGrantResource:
             githubAuthorizationUsecase?.setRequestUserInfo(grantResource)
-            githubAuthorizationUsecase?.requestUserInfoUsecase?.userInfoRepository?.fetchUserInfo(completion: { userInfo in
+            githubAuthorizationUsecase?.requestUserInfoUsecase?.tokenInfoRepository?.fetchTokenInfo(completion: { userInfo in
                 guard let userInfo = userInfo else {return}
                 self.tokenInfo.updateValue(value: userInfo)
             })

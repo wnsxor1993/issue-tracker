@@ -7,7 +7,7 @@
 
 import Foundation
 
-protocol DefaultRequestUserInfoUsecase {
-    var userInfoRepository: DefaultUserInfoRepository? {get}
+protocol RequestTokenInfoUsecase {
+    var tokenInfoRepository: TokenInfoRepository? {get}
     func execute(completion: @escaping (TokenInfo?) -> Void)
 }

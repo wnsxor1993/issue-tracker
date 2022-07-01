@@ -7,11 +7,11 @@
 
 import Foundation
 
-final class FetchOpenIssueCardUsecase: FetchIssueCardUsecase {
+final class ViewFilteredIssueCardUsecase: ViewIssueCardUsecase {
 
-    private(set) var fetchIssueCardRepository: DefaultIssueCardRepository
+    private(set) var fetchIssueCardRepository: ViewIssueCardRepository
 
-    init(repository: DefaultIssueCardRepository = FetchIssueCardRepository()) {
+    init(repository: ViewIssueCardRepository = ViewFilteredIssueCardRepository()) {
         self.fetchIssueCardRepository = repository
     }
 

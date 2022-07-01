@@ -9,11 +9,11 @@ import Foundation
 
 final class HomeViewModel {
 
-    private var fetchOpenIssueCardUsecase: FetchIssueCardUsecase
+    private var fetchOpenIssueCardUsecase: ViewIssueCardUsecase
 
     var issueCards: Observable<[IssueCardEntity]?> = Observable(nil)
 
-    init(fetchIssueUsecase: FetchIssueCardUsecase = FetchOpenIssueCardUsecase()) {
+    init(fetchIssueUsecase: ViewIssueCardUsecase = ViewFilteredIssueCardUsecase()) {
         self.fetchOpenIssueCardUsecase = fetchIssueUsecase
     }
 

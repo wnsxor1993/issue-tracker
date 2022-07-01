@@ -7,7 +7,7 @@
 
 import Foundation
 
-final class UserInfoRepository: DefaultUserInfoRepository {
+final class DefaultRequestTokenInfoRepository: RequestTokenInfoRepository {
 
     var endPoint: EndPoint
 
@@ -15,7 +15,7 @@ final class UserInfoRepository: DefaultUserInfoRepository {
         self.endPoint = endPoint
     }
 
-    func fetchUserInfo(completion: @escaping (TokenInfo?) -> Void) {
+    func fetchTokenInfo(completion: @escaping (TokenInfo?) -> Void) {
         NetworkService.request(endPoint: endPoint) { result in
             switch result {
             case .success(let data):

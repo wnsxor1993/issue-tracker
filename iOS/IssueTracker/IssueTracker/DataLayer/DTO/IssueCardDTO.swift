@@ -8,17 +8,17 @@
 import Foundation
 
 // MARK: - Empty
-struct Empty: Codable {
-    let issues: [IssueCard]
+struct IssueCardArrayDTO: Codable {
+    let issues: [IssueCardDTO]
 }
 
 // MARK: - Issue
-struct IssueCard: Codable {
+struct IssueCardDTO: Codable {
     let issueID: Int
     let title, content: String
     let milestoneID: Int
     let milestoneName: String
-    let labels: [Label]
+    let labels: [LabelDTO]
 
     enum CodingKeys: String, CodingKey {
         case issueID = "issueId"
@@ -29,7 +29,7 @@ struct IssueCard: Codable {
 }
 
 // MARK: - Label
-struct Label: Codable {
+struct LabelDTO: Codable {
     let labelID: Int?
     let labelName, labelColor: String
 
@@ -39,14 +39,14 @@ struct Label: Codable {
     }
 }
 
-extension IssueCard {
+extension IssueCardDTO {
 
     func toDomain() -> IssueCardEntity {
         return .init(id: issueID, title: title, content: content, isSelected: false, mileStone: milestoneName, labels: labels.map { $0.toDomain() })
     }
 }
 
-extension Label {
+extension LabelDTO {
 
     func toDomain() -> LabelEntity {
         return .init(id: labelID, labelName: labelName, labelColor: labelColor)

@@ -7,7 +7,7 @@
 
 import Foundation
 
-final class FetchIssueCardRepository: DefaultIssueCardRepository {
+final class ViewFilteredIssueCardRepository: ViewIssueCardRepository {
 
     var endPoint: EndPoint
 
@@ -15,11 +15,11 @@ final class FetchIssueCardRepository: DefaultIssueCardRepository {
         self.endPoint = endPoint
     }
 
-    func fetchIssueCard(completion: @escaping (Empty?) -> Void) {
+    func fetchIssueCard(completion: @escaping (IssueCardArrayDTO?) -> Void) {
         NetworkService.request(endPoint: endPoint) { result in
             switch result {
             case .success(let data):
-                let decoder = Decoder<Empty>()
+                let decoder = Decoder<IssueCardArrayDTO>()
                 let issuecards =  decoder.decode(data: data)
                 completion(issuecards)
             case .failure(let error):

@@ -7,7 +7,7 @@
 
 import Foundation
 
-protocol DefaultUserInfoRepository {
+protocol RequestTokenInfoRepository {
     var endPoint: EndPoint {get}
-    func fetchUserInfo(completion: @escaping (TokenInfo?) -> Void)
+    func fetchTokenInfo(completion: @escaping (TokenInfo?) -> Void)
 }

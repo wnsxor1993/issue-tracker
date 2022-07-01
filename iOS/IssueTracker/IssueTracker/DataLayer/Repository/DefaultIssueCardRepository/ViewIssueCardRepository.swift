@@ -7,7 +7,7 @@
 
 import Foundation
 
-protocol DefaultIssueCardRepository {
+protocol ViewIssueCardRepository {
     var endPoint: EndPoint {get}
-    func fetchIssueCard(completion: @escaping (Empty?) -> Void)
+    func fetchIssueCard(completion: @escaping (IssueCardArrayDTO?) -> Void)
 }

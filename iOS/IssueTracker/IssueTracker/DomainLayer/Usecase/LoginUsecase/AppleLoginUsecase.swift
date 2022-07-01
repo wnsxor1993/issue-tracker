@@ -7,12 +7,12 @@
 
 import AuthenticationServices
 
-final class AppleAuthorizationUsecase: NSObject, DefaultLoginUsecase {
+final class AppleLoginUsecase: NSObject, LoginUsecase {
 
     // private(set) var endPoint: EndPoint
     private var presentationAnchor: UIWindow?
     private var authorizationController: ASAuthorizationController?
-    var requestUserInfoUsecase: DefaultRequestUserInfoUsecase?
+    var requestUserInfoUsecase: RequestTokenInfoUsecase?
 
     init(presentationAnchor: UIWindow?) {
         self.presentationAnchor = presentationAnchor
@@ -28,7 +28,7 @@ final class AppleAuthorizationUsecase: NSObject, DefaultLoginUsecase {
 
     func setRequestUserInfo(_ grantResource: DefaultGrantResource) {
         guard let resource =  grantResource as? AppleGrantResource, let data = encodeModel(model: resource) else {return}
-        self.requestUserInfoUsecase = RequestUserInfoUsecase(userInfoRepository: UserInfoRepository(endPoint: EndPoint(urlConfigure: TokenURLConfiguration(), method: .POST, body: data)))
+        self.requestUserInfoUsecase = DefaultRequestTokenInfoUsecase(userInfoRepository: DefaultRequestTokenInfoRepository(endPoint: EndPoint(urlConfigure: TokenURLConfiguration(), method: .POST, body: data)))
     }
 
     func enquireForGrant(handler: @escaping (URL?) -> Void) {
@@ -38,7 +38,7 @@ final class AppleAuthorizationUsecase: NSObject, DefaultLoginUsecase {
     }
 }
 
-private extension AppleAuthorizationUsecase {
+private extension AppleLoginUsecase {
 
     func prepareToRequest() {
         let appleIDProvider = ASAuthorizationAppleIDProvider()
@@ -58,7 +58,7 @@ private extension AppleAuthorizationUsecase {
 
 }
 
-extension AppleAuthorizationUsecase: ASAuthorizationControllerDelegate {
+extension AppleLoginUsecase: ASAuthorizationControllerDelegate {
 
     func authorizationController(controller: ASAuthorizationController, didCompleteWithAuthorization authorization: ASAuthorization) {
         switch authorization.credential {
@@ -77,7 +77,7 @@ extension AppleAuthorizationUsecase: ASAuthorizationControllerDelegate {
     }
 }
 
-extension AppleAuthorizationUsecase: ASAuthorizationControllerPresentationContextProviding {
+extension AppleLoginUsecase: ASAuthorizationControllerPresentationContextProviding {
 
     func presentationAnchor(for controller: ASAuthorizationController) -> ASPresentationAnchor {
         guard let window = presentationAnchor else { return ASPresentationAnchor() }

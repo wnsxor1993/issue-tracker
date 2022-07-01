@@ -7,9 +7,9 @@
 
 import Foundation
 
-protocol DefaultLoginUsecase {
+protocol LoginUsecase {
 
-    var requestUserInfoUsecase: DefaultRequestUserInfoUsecase? {get}
+    var requestUserInfoUsecase: RequestTokenInfoUsecase? {get}
     func execute()
     func setRequestUserInfo(_ grantResource: DefaultGrantResource)
 }
