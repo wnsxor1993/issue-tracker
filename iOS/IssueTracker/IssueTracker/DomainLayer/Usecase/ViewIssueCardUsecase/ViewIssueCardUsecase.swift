@@ -9,6 +9,6 @@ import Foundation
 
 protocol ViewIssueCardUsecase {
 
-    var fetchIssueCardRepository: DefaultIssueCardRepository { get }
+    var fetchIssueCardRepository: ViewIssueCardRepository { get }
     func execute(completion: @escaping ([IssueCardEntity]) -> Void)
 }

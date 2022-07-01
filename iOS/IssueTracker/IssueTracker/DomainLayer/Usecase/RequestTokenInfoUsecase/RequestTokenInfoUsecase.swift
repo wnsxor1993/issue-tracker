@@ -8,6 +8,6 @@
 import Foundation
 
 protocol RequestTokenInfoUsecase {
-    var tokenInfoRepository: TokenInfoRepository? {get}
+    var tokenInfoRepository: RequestTokenInfoRepository? {get}
     func execute(completion: @escaping (TokenInfo?) -> Void)
 }
