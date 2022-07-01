@@ -2,7 +2,9 @@ package com.codesquad.issuetracker.repository.issue;
 
 import com.codesquad.issuetracker.domain.Issue;
 import com.codesquad.issuetracker.domain.QMember;
+import com.codesquad.issuetracker.dto.IssueSearchCondition;
 import com.codesquad.issuetracker.web.dto.issue.*;
+import com.querydsl.core.types.dsl.BooleanExpression;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 
 import javax.persistence.EntityManager;
@@ -84,5 +86,24 @@ public class IssueRepositoryImpl implements IssueCustomRepository {
                 .join(issueAssignee.member, member)
                 .where(issueAssignee.issue.id.eq(issueId))
                 .fetch();
+    }
+
+    @Override
+    public List<IssueListElement> searchIssueList(IssueSearchCondition issueSearchCondition) {
+        QMember author = new QMember("author");
+        return queryFactory
+                .select(new QIssueListElement(
+                        issue.id, issue.title, issue.content, milestone.id, milestone.title))
+                .from(issue)
+                .join(issue.author, author)
+                .join(issue.milestone, milestone)
+                .where(isOpenedEq(issueSearchCondition.getIsOpened()))
+                .fetch();
+    }
+
+    private BooleanExpression isOpenedEq(Boolean isOpenedCondition) {
+        return (isOpenedCondition == null)
+                ? null
+                : issue.isOpened.eq(isOpenedCondition);
     }
 }
